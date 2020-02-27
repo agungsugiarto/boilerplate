@@ -15,5 +15,20 @@
         "codeigniter4/translations" : "v4.0.0-rc.3"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "agungsugiarto\\boilerplate\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ModuleTests\\Support\\": "tests/_support"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+          "composer dump-autoload"
+        ]
+    }
 }
