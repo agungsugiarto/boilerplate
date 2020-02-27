@@ -5,7 +5,7 @@ use agungsugiarto\boilerplate\Models\MenuModel;
 if (!function_exists('menu')) {
     /**
      * Helpers for build menu.
-     * 
+     *
      * @return array
      */
     function menu()
@@ -29,7 +29,7 @@ if (!function_exists('menu')) {
         //     $data = parse((new MenuModel())->orderBy('sequence', 'asc')->findAll(), 0);
         //     cache()->save('menu', $data, 300);
         // }
-        // return $found;        
+        // return $found;
         return parse((new MenuModel())->orderBy('sequence', 'asc')->findAll(), 0);
     }
 }

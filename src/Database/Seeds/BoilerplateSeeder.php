@@ -2,21 +2,21 @@
 
 namespace agungsugiarto\boilerplate\Database\Seeds;
 
-use CodeIgniter\Database\Seeder;
 use CodeIgniter\Config\Services;
+use CodeIgniter\Database\Seeder;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
 class BoilerplateSeeder extends Seeder
 {
     /**
-	 * @var Authorize 
-	 */
+     * @var Authorize
+     */
     protected $authorize;
 
     /**
-	 * @var Users
-	 */
+     * @var Users
+     */
     protected $users;
 
     public function __construct()
@@ -28,14 +28,14 @@ class BoilerplateSeeder extends Seeder
     public function run()
     {
         // User
-        $this->users->save( new User([
+        $this->users->save(new User([
             'email'    => 'admin@admin.com',
             'username' => 'admin',
             'password' => 'super-admin',
             'active'   => '1',
         ]));
 
-        $this->users->save( new User([
+        $this->users->save(new User([
             'email'    => 'user@user.com',
             'username' => 'user',
             'password' => 'super-user',
@@ -60,7 +60,6 @@ class BoilerplateSeeder extends Seeder
         // Assign Role to user
         $this->authorize->addUserToGroup(1, 1);
         $this->authorize->addUserToGroup(2, 2);
-
     }
 
     public function down()

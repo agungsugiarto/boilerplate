@@ -6,17 +6,16 @@ use CodeIgniter\Config\BaseConfig;
 
 class Boilerplate extends BaseConfig
 {
-    
-	//--------------------------------------------------------------------------
-	// App name
     //--------------------------------------------------------------------------
-    
+    // App name
+    //--------------------------------------------------------------------------
+
     public $appName = 'Boilerplate';
 
     //--------------------------------------------------------------------------
-	// Dashboard controller
+    // Dashboard controller
     //--------------------------------------------------------------------------
-    
+
     // public $dashboard = [
     //     'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     //     'controller' => '',
@@ -30,15 +29,15 @@ class Boilerplate extends BaseConfig
     //--------------------------------------------------------------------------
 
     public $i18n = 'Indonesian';
-    
+
     //--------------------------------------------------------------------------
     // Theme boilerplate
     //
-    // BG: blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, 
+    // BG: blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan,
     //     gray, gray-dark, black
     // Type: dark, light
     // Shadow: 0-4
-    // 
+    //
     //--------------------------------------------------------------------------
 
     public $theme = [
@@ -49,7 +48,7 @@ class Boilerplate extends BaseConfig
             'user'   => [
                 'visible' => true,
                 'shadow'  => 0,
-            ]
+            ],
         ],
         'sidebar' => [
             'type'    => 'dark',
@@ -67,12 +66,12 @@ class Boilerplate extends BaseConfig
                     'icon'   => '<i class="fas fa-fire"></i>',
                     'text'   => '<strong>BO</strong>ilerplate',
                     'shadow' => 0,
-                ]
+                ],
             ],
             'user' => [
                 'visible' => true,
                 'shadow'  => 2,
-            ]
+            ],
         ],
         'footer' => [
             'fixed'      => true,

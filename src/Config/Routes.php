@@ -1,16 +1,15 @@
 <?php
 
-$routes->group('dashboard', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], function($routes) {
+$routes->group('dashboard', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], function ($routes) {
     $routes->get('/', 'MenuController::index');
     // do your own routes
 });
 
-
-$routes->group('admin', function($routes) {
+$routes->group('admin', function ($routes) {
     /**
-     * User routes
+     * User routes.
      **/
-    $routes->group('user', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function($routes) {
+    $routes->group('user', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function ($routes) {
         $routes->get('/', 'UserController::index');
         $routes->get('show', 'UserController::show');
         $routes->get('create', 'UserController::create');
@@ -20,9 +19,9 @@ $routes->group('admin', function($routes) {
     });
 
     /**
-     * Permission routes
+     * Permission routes.
      */
-    $routes->group('permission', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function($routes) {
+    $routes->group('permission', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function ($routes) {
         $routes->get('/', 'PermissionController::index');
         $routes->get('show', 'PermissionController::show');
         $routes->post('create', 'PermissionController::create');
@@ -32,9 +31,9 @@ $routes->group('admin', function($routes) {
     });
 
     /**
-     * Role routes
+     * Role routes.
      */
-    $routes->group('role', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function($routes) {
+    $routes->group('role', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function ($routes) {
         $routes->get('/', 'RoleController::index');
         $routes->post('datatable', 'RoleController::datatable');
         $routes->get('show', 'RoleController::show');
@@ -45,10 +44,9 @@ $routes->group('admin', function($routes) {
     });
 
     /**
-     * Role routes
+     * Role routes.
      */
-    $routes->group('menu', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function($routes) {
+    $routes->group('menu', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function ($routes) {
         $routes->get('/', 'MenuController::index');
     });
 });
-
