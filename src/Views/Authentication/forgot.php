@@ -10,7 +10,7 @@
       <?= csrf_field() ?>
       <div class="input-group mb-3">
         <input type="email" name="email"
-          class="form-control <?php if(session('errors.email')) : ?>is-invalid<?php endif ?>"
+          class="form-control <?php if (session('errors.email')) { ?>is-invalid<?php } ?>"
           placeholder="<?=lang('Auth.email')?>">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -32,11 +32,11 @@
     <p class="mt-3 mb-1">
       <a href="<?= route_to('login') ?>"><?=lang('Auth.signIn')?></a>
     </p>
-    <?php if ($config->allowRegistration) : ?>
+    <?php if ($config->allowRegistration) { ?>
     <p class="mb-0">
       <a href="<?= route_to('register') ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
     </p>
-    <?php endif; ?>
+    <?php } ?>
   </div>
   <!-- /.login-card-body -->
 </div>

@@ -4,9 +4,9 @@
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">
                     <?= $title ?>
-                    <?php if (isset($subtitle)) : ?>
+                    <?php if (isset($subtitle)) { ?>
                         <small class="font-weight-light ml-1 text-md"><?= $subtitle ?></small>
-                    <?php endif ?>
+                    <?php } ?>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -16,17 +16,17 @@
                             <?= 'Home' ?>
                         </a>
                     </li>
-                    <?php if (isset($breadcrumb)) : ?>
-                        <?php foreach ($breadcrumb as $label => $route) : ?>
-                        <?php if (is_numeric($label)) : ?>
+                    <?php if (isset($breadcrumb)) { ?>
+                        <?php foreach ($breadcrumb as $label => $route) { ?>
+                        <?php if (is_numeric($label)) { ?>
                             <li class="breadcrumb-item active"><?= $route ?></li>
-                        <?php elseif (is_array($route)) : ?>
+                        <?php } elseif (is_array($route)) { ?>
                             <li class="breadcrumb-item"><a href="<?= base_url($route[0], $route[1]) ?>"><?= $label ?></a></li>
-                        <?php else : ?>
+                        <?php } else { ?>
                             <li class="breadcrumb-item"><a href="<?= base_url($route) ?>"><?= $label ?></a></li>
-                        <?php endif ?>
-                        <?php endforeach ?>
-                    <?php endif ?>
+                        <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
                 </ol>
             </div>
         </div>

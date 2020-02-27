@@ -9,7 +9,7 @@
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
-        <?php if (config('Boilerplate')->theme['navbar']['user']['visible']) : ?>
+        <?php if (config('Boilerplate')->theme['navbar']['user']['visible']) { ?>
         <li class="nav-item">
             <a href="<?= route_to('/') ?>" class="nav-link d-flex align-items-center">
                 <img src="http://localhost/adminlte3/dist/img/user2-160x160.jpg"
@@ -18,7 +18,7 @@
                 <?= user()->username ?>
             </a>
         </li>
-        <?php endif ?>
+        <?php } ?>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fa fa-power-off"></i>

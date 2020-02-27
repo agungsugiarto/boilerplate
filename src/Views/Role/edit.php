@@ -27,7 +27,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) : ?>is-invalid<?php endif ?>" value="<?= old('name') ?>" placeholder="Name for role">
+                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role">
                                         <div class="invalid-feedback">
                                             <?= session('error.name') ?>
                                         </div>
@@ -41,7 +41,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <textarea class="form-control <?php if (session('error.description')) : ?>is-invalid<?php endif ?>" name="description" value="<?= old('description') ?>" placeholder="Description for role"></textarea>
+                                        <textarea class="form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" name="description" value="<?= old('description') ?>" placeholder="Description for role"></textarea>
                                         <div class="invalid-feedback">
                                             <?= session('error.description') ?>
                                         </div>
@@ -53,13 +53,13 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <select multiple="multiple" name="permission[]" title="permission[]">
-                                            <?php foreach($data as $d) : ?>
+                                            <?php foreach ($data as $d) { ?>
                                                 <option value="<?= $d['id'] ?>"><?= $d['name'] ?></option>
-                                            <?php endforeach ?>
+                                            <?php } ?>
                                         </select>
-                                        <?php if (session('error.permission')) : ?>
+                                        <?php if (session('error.permission')) { ?>
                                              <?= session('error.permission') ?>
-                                        <?php endif ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

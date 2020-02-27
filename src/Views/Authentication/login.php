@@ -7,10 +7,10 @@
     <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
     <form action="<?= route_to('login') ?>" method="post">
       <?= csrf_field() ?>
-      <?php if ($config->validFields === ['email']): ?>
+      <?php if ($config->validFields === ['email']) { ?>
       <div class="input-group mb-3">
         <input type="email" name="login"
-          class="form-control <?php if ( session('error.login') || session('errors.login') ) : ?>is-invalid<?php endif ?>"
+          class="form-control <?php if (session('error.login') || session('errors.login')) { ?>is-invalid<?php } ?>"
           placeholder="<?=lang('Auth.email')?>" value="<?= old('login') ?>" autocomplete="off">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -21,10 +21,10 @@
           <?= session('errors.login') ?>
         </div>
       </div>
-      <?php else: ?>
+      <?php } else { ?>
       <div class="input-group mb-3">
         <input type="text" name="login"
-          class="form-control <?php if (session('error.login') || session('errors.login')) : ?>is-invalid<?php endif ?>"
+          class="form-control <?php if (session('error.login') || session('errors.login')) { ?>is-invalid<?php } ?>"
           placeholder="<?=lang('Auth.emailOrUsername')?>" value="<?= old('login') ?>" autocomplete="off">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -35,10 +35,10 @@
           <?= session('errors.login') ?>
         </div>
       </div>
-      <?php endif; ?>
+      <?php } ?>
       <div class="input-group mb-3">
         <input type="password" name="password"
-          class="form-control <?php if(session('errors.password')) : ?>is-invalid<?php endif ?>"
+          class="form-control <?php if (session('errors.password')) { ?>is-invalid<?php } ?>"
           placeholder="<?=lang('Auth.password')?>">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="row">
-        <?php if ($config->allowRemembering): ?>
+        <?php if ($config->allowRemembering) { ?>
         <div class="col-8">
           <div class="icheck-primary">
             <input type="checkbox" id="remember">
@@ -59,7 +59,7 @@
             </label>
           </div>
         </div>
-        <?php endif; ?>
+        <?php } ?>
         <!-- /.col -->
         <div class="col-4">
           <button type="submit" class="btn btn-primary btn-block">Sign In</button>
@@ -71,11 +71,11 @@
     <p class="mb-1">
       <a href="<?= route_to('forgot') ?>"><?=lang('Auth.forgotYourPassword')?></a>
     </p>
-    <?php if ($config->allowRegistration) : ?>
+    <?php if ($config->allowRegistration) { ?>
     <p class="mb-0">
       <a href="<?= route_to('register') ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
     </p>
-    <?php endif; ?>
+    <?php } ?>
   </div>
   <!-- /.login-card-body -->
 </div>

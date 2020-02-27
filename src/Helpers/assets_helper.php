@@ -3,8 +3,9 @@
 if (!function_exists('assets')) {
     /**
      * Helpers for load assets.
-     * 
+     *
      * @param $file
+     *
      * @return string
      */
     function assets(string $file): string
@@ -21,7 +22,7 @@ if (!function_exists('assets')) {
 
         $filename = array_shift($parts);
 
-        $existing = get_filenames(ROOTPATH ."public/assets/{$path}");
+        $existing = get_filenames(ROOTPATH."public/assets/{$path}");
 
         $found = '';
         foreach ($existing as $exFile) {
