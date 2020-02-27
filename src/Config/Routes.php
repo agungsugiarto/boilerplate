@@ -8,11 +8,6 @@ $routes->group('dashboard', ['namespace' => 'agungsugiarto\boilerplate\Controlle
 
 $routes->group('admin', function($routes) {
     /**
-     * Dashbaord routes
-     */
-    // $routes->get('/', 'DashboardController::index');
-
-    /**
      * User routes
      **/
     $routes->group('user', ['namespace' => 'agungsugiarto\boilerplate\Controllers\Users'], ['filter' => 'role:admin'], function($routes) {
