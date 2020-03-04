@@ -9,26 +9,29 @@
                     <?php } ?>
                 </h1>
             </div>
+            <?php if (current_url() != '/' ) { ?>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right text-sm">
-                    <li class="breadcrumb-item">
-                        <a href="<?= route_to('#') ?>">
-                            <?= 'Home' ?>
-                        </a>
-                    </li>
-                    <?php if (isset($breadcrumb)) { ?>
-                        <?php foreach ($breadcrumb as $label => $route) { ?>
-                        <?php if (is_numeric($label)) { ?>
-                            <li class="breadcrumb-item active"><?= $route ?></li>
-                        <?php } elseif (is_array($route)) { ?>
-                            <li class="breadcrumb-item"><a href="<?= base_url($route[0], $route[1]) ?>"><?= $label ?></a></li>
-                        <?php } else { ?>
-                            <li class="breadcrumb-item"><a href="<?= base_url($route) ?>"><?= $label ?></a></li>
+                    <?php $path = explode('/', uri_string()) ?>
+                    <?php if (count($path) > 1) { ?>
+                        <li class="breadcrumb-item">
+                            <a href="<?= route_to('#') ?>">
+                                dashboard
+                            </a>
+                        </li>
+                        <?php for ($i = 0; $i < count($path); $i++) { ?>
+                            <?php if ($i == count($path) - 1) { ?>
+                                <li class="breadcrumb-item active"><?= $path[$i] ?></li>
+                            <?php } else { ?>
+                                <li class="breadcrumb-item"><a href="<?= base_url($path[$i]) ?>"><?= $path[$i] ?></a></li>
+                            <?php } ?>
                         <?php } ?>
-                        <?php } ?>
+                    <?php } else { ?>
+                        <li class="breadcrumb-item"><a href="<?= base_url($path[$i]) ?>"><?= $path[$i] ?></a></li>
                     <?php } ?>
                 </ol>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>

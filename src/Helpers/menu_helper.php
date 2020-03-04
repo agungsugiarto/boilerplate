@@ -10,6 +10,14 @@ if (!function_exists('menu')) {
      */
     function menu()
     {
+        /**
+         * Function parse.
+         * 
+         * @param item       array
+         * @param parent_id  int
+         * 
+         * @return array
+         */
         function parse($item, $parent_id)
         {
             $data = [];

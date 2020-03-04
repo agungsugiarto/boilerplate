@@ -15,10 +15,7 @@ class PermissionController extends BaseController
     {
         // Title and breadcrump
         $data = [
-            'title'      => 'Permission',
-            'breadcrumb' => [
-                'permission' => 'user/permission',
-            ],
+            'title' => 'Permission',
         ];
 
         return view('agungsugiarto\boilerplate\Views\Permission\index', $data);

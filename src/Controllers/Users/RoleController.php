@@ -15,11 +15,7 @@ class RoleController extends BaseController
     public function index()
     {
         $data = [
-            'title'      => 'Role',
-            'breadcrumb' => [
-                'Role' => 'user/role',
-                'Edit' => 'user/role/edit',
-            ],
+            'title' => 'Role',
         ];
 
         $data['data'] = $this->authorize->permissions();
@@ -45,10 +41,7 @@ class RoleController extends BaseController
     public function show()
     {
         $data = [
-            'title'      => 'Role',
-            'breadcrumb' => [
-                'role' => 'user/role/show',
-            ],
+            'title'=> 'Role',
             'data' => $this->authorize->permissions(),
         ];
 
@@ -86,6 +79,7 @@ class RoleController extends BaseController
             $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
         return redirect()->back()->with('message', lang('Auth.loginSuccess'));
