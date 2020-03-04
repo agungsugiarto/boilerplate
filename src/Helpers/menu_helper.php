@@ -12,10 +12,10 @@ if (!function_exists('menu')) {
     {
         /**
          * Function parse.
-         * 
+         *
          * @param item       array
          * @param parent_id  int
-         * 
+         *
          * @return array
          */
         function parse($item, $parent_id)
