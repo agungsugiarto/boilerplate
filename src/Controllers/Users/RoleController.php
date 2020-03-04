@@ -79,6 +79,7 @@ class RoleController extends BaseController
             $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
+
             return redirect()->back()->with('error', $e->getMessage());
         }
 

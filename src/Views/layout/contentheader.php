@@ -9,7 +9,7 @@
                     <?php } ?>
                 </h1>
             </div>
-            <?php if (current_url() != '/' ) { ?>
+            <?php if (current_url() != '/') { ?>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right text-sm">
                     <?php $path = explode('/', uri_string()) ?>

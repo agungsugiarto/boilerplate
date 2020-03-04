@@ -2,7 +2,6 @@
 
 namespace agungsugiarto\boilerplate\Database\Seeds;
 
-use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Database\Seeder;
 use Myth\Auth\Entities\User;
@@ -70,7 +69,7 @@ class BoilerplateSeeder extends Seeder
 
         $this->db->table('menu')->insertBatch([
             [
-                'parent_id'  => '0',  
+                'parent_id'  => '0',
                 'title'      => 'Booilerplate',
                 'icon'       => 'fa-tachometer-alt',
                 'route'      => '#',
@@ -119,6 +118,6 @@ class BoilerplateSeeder extends Seeder
 
     public function down()
     {
-        // 
+        //
     }
 }

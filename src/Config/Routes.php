@@ -2,7 +2,7 @@
 
 $routes->group('admin', [
     'filter'    => 'permission:back-office,manage-user,role-permission',
-    'namespace' => 'agungsugiarto\boilerplate\Controllers\Users'
+    'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
 ], function ($routes) {
     /**
      * User routes.
@@ -24,7 +24,7 @@ $routes->group('admin', [
         $routes->get('show', 'PermissionController::show');
         $routes->post('create', 'PermissionController::create');
         $routes->get('edit/(:num)', 'PermissionController::edit/$1');
-        $routes->put('update/(:num)', 'PermissionController::update/$1');  
+        $routes->put('update/(:num)', 'PermissionController::update/$1');
         $routes->delete('delete/(:num)', 'PermissionController::delete/$1');
     });
 
