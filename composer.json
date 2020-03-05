@@ -22,8 +22,8 @@
     },
     "require-dev": {
         "codeigniter4/framework": "^4",
-		"phpunit/phpunit": "8.5.*"
-	},
+        "phpunit/phpunit": "8.5.*"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
@@ -31,13 +31,12 @@
             "agungsugiarto\\boilerplate\\": "src"
         }
     },
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Support\\": "tests/_support"
-		}
-	},
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
     "scripts": {
-        "test": "vendor/bin/phpunit",
         "post-update-cmd": [
           "@composer dump-autoload"
         ]
