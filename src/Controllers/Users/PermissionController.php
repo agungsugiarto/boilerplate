@@ -131,17 +131,4 @@ class PermissionController extends BaseController
             'messages' => 'Success delete',
         ]);
     }
-
-    /**
-     * Validation Rules.
-     *
-     * @return array an array
-     */
-    private function validationRules()
-    {
-        return [
-            'name'        => 'required|max_length[255]|is_unique[auth_permissions.name',
-            'description' => 'required|max_length[255]',
-        ];
-    }
 }
