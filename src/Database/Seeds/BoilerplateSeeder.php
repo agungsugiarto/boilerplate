@@ -64,8 +64,15 @@ class BoilerplateSeeder extends Seeder
         $this->authorize->addPermissionToGroup('back-office', 'user');
 
         // Assign Role to user
-        $this->authorize->addUserToGroup(1, 1);
-        $this->authorize->addUserToGroup(2, 2);
+        $this->authorize->addUserToGroup(1, 'admin');
+        $this->authorize->addUserToGroup(1, 'user');
+        $this->authorize->addUserToGroup(2, 'user');
+
+        // Assign Permission to user
+        $this->authorize->addPermissionToUser('back-office', 1);
+        $this->authorize->addPermissionToUser('manage-user', 1);
+        $this->authorize->addPermissionToUser('role-permission', 1);
+        $this->authorize->addPermissionToUser('back-office', 2);
 
         $this->db->table('menu')->insertBatch([
             [

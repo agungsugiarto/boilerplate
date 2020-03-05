@@ -16,22 +16,12 @@ class MenuController extends BaseController
 
     public function index()
     {
-        return $this->response->setJSON(
-            $this->parse($this->menu->withDeleted()->findAll(), 0)
-        );
-    }
-
-    private function parse($item, $parent_id)
-    {
-        $data = [];
-        foreach ($item as $value) {
-            if ($value['parent_id'] == $parent_id) {
-                $child = $this->parse($item, $value['id']);
-                $value['child'] = $child ?: $child;
-                $data[] = $value;
-            }
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'success'  => true,
+                'messages' => 'success get data',
+                'data'     => menu()
+            ]);
         }
-
-        return $data;
     }
 }

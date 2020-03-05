@@ -1,6 +1,12 @@
 {
     "name": "agungsugiarto/boilerplate",
     "description": "CodeIgniter4 Boilerplate based on AdminLTE 3 with user management, roles, permissions, ...",
+    "keywords": [
+        "codeigniter4",
+        "authentication",
+        "authorization",
+        "boilerplate"
+    ],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -14,6 +20,10 @@
         "myth/auth": "dev-develop",
         "codeigniter4/translations" : "v4.0.0-rc.3"
     },
+    "require-dev": {
+        "codeigniter4/framework": "^4",
+		"phpunit/phpunit": "8.5.*"
+	},
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
@@ -21,14 +31,15 @@
             "agungsugiarto\\boilerplate\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "ModuleTests\\Support\\": "tests/_support"
-        }
-    },
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Support\\": "tests/_support"
+		}
+	},
     "scripts": {
+        "test": "vendor/bin/phpunit",
         "post-update-cmd": [
-          "composer dump-autoload"
+          "@composer dump-autoload"
         ]
     }
 }
