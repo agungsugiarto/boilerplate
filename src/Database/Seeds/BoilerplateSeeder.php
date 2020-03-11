@@ -159,7 +159,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'group_id' => 2,
                 'menu_id'  => 1,
-            ]
+            ],
         ]);
     }
 

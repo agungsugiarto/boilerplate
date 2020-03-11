@@ -17,9 +17,9 @@ class Boilerplate extends BaseConfig
     //--------------------------------------------------------------------------
 
     public $dashboard = [
-        'namespace' => 'agungsugiarto\boilerplate\Controllers',
+        'namespace'  => 'agungsugiarto\boilerplate\Controllers',
         'controller' => 'DashboardController::index',
-        'filter' => 'permission:back-office'
+        'filter'     => 'permission:back-office',
     ];
 
     //--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class Boilerplate extends BaseConfig
 
     public $theme = [
         'body-sm' => false,
-        'navbar' => [
+        'navbar'  => [
             'bg'     => 'white',
             'type'   => 'light',
             'border' => true,

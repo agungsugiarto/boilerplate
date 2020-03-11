@@ -7,9 +7,9 @@ class DashboardController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
         ];
-        
+
         return view('agungsugiarto\boilerplate\Views\dashboard', $data);
     }
 }

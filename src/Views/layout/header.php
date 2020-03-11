@@ -46,7 +46,7 @@
 
                                     $time = Time::parse(user()->created_at);
                                     echo $time->humanize();
-                                    
+
                                     ?>
                                 </div>
                             </li>

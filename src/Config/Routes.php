@@ -1,6 +1,6 @@
 <?php
 
-$routes->group('admin',  function ($routes) {
+$routes->group('admin', function ($routes) {
     /**
      * Admin routes.
      **/
@@ -18,7 +18,7 @@ $routes->group('admin',  function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('/', 'UserController::index');
-        $routes->get('show', 'UserController::show',  ['as' => 'user-show']);
+        $routes->get('show', 'UserController::show', ['as' => 'user-show']);
         $routes->post('create', 'UserController::create');
         $routes->get('edit/(:num)', 'UserController::edit/$1');
         $routes->put('update/(:num)', 'UserController::update/$1');
