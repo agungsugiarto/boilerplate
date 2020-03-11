@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <?= form_open('admin/role/update', ['method' => 'put']) ?>
+                    <?= form_open('admin/role/update/'.$role->id, ['method' => 'post']) ?>
                         <div class="col-md-10">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Name</label>
@@ -27,7 +27,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role">
+                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= $role->name ?>" placeholder="Name for role">
                                         <div class="invalid-feedback">
                                             <?= session('error.name') ?>
                                         </div>
@@ -41,7 +41,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <textarea class="form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" name="description" value="<?= old('description') ?>" placeholder="Description for role"></textarea>
+                                        <input class="form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" name="description" value="<?= $role->description ?>" placeholder="Description for role"></input>
                                         <div class="invalid-feedback">
                                             <?= session('error.description') ?>
                                         </div>
@@ -53,8 +53,8 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <select multiple="multiple" name="permission[]" title="permission[]">
-                                            <?php foreach ($data as $d) { ?>
-                                                <option value="<?= $d['id'] ?>"><?= $d['name'] ?></option>
+                                            <?php foreach ($permission as $key) { ?>
+                                                <option value="<?= $key['id'] ?>" selected="selected"><?= $key['name'] ?></option>
                                             <?php } ?>
                                         </select>
                                         <?php if (session('error.permission')) { ?>

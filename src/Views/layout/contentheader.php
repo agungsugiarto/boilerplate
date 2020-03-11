@@ -3,7 +3,7 @@
         <div class="row mb-2 align-items-end">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">
-                    <?= $title ?>
+                    <?= $title ?? '' ?>
                     <?php if (isset($subtitle)) { ?>
                         <small class="font-weight-light ml-1 text-md"><?= $subtitle ?></small>
                     <?php } ?>
@@ -27,7 +27,7 @@
                             <?php } ?>
                         <?php } ?>
                     <?php } else { ?>
-                        <li class="breadcrumb-item"><a href="<?= base_url($path[$i]) ?>"><?= $path[$i] ?></a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url(uri_string()) ?>"><?= uri_string() ?></a></li>
                     <?php } ?>
                 </ol>
             </div>

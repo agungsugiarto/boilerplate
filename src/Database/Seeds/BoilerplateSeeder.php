@@ -50,7 +50,7 @@ class BoilerplateSeeder extends Seeder
 
         // Role
         $this->authorize->createGroup('admin', 'Administrators. The top of the food chain.');
-        $this->authorize->createGroup('user', 'User everyday user.');
+        $this->authorize->createGroup('member', 'Member everyday member.');
 
         // Permission
         $this->authorize->createPermission('back-office', 'User can access to the administration panel.');
@@ -61,12 +61,12 @@ class BoilerplateSeeder extends Seeder
         $this->authorize->addPermissionToGroup('back-office', 'admin');
         $this->authorize->addPermissionToGroup('manage-user', 'admin');
         $this->authorize->addPermissionToGroup('role-permission', 'admin');
-        $this->authorize->addPermissionToGroup('back-office', 'user');
+        $this->authorize->addPermissionToGroup('back-office', 'member');
 
         // Assign Role to user
         $this->authorize->addUserToGroup(1, 'admin');
-        $this->authorize->addUserToGroup(1, 'user');
-        $this->authorize->addUserToGroup(2, 'user');
+        $this->authorize->addUserToGroup(1, 'member');
+        $this->authorize->addUserToGroup(2, 'member');
 
         // Assign Permission to user
         $this->authorize->addPermissionToUser('back-office', 1);
@@ -77,49 +77,89 @@ class BoilerplateSeeder extends Seeder
         $this->db->table('menu')->insertBatch([
             [
                 'parent_id'  => '0',
-                'title'      => 'Booilerplate',
-                'icon'       => 'fa-tachometer-alt',
-                'route'      => '#',
+                'title'      => 'Dashboard',
+                'icon'       => 'fa-home',
+                'route'      => 'admin',
                 'sequence'   => '1',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'parent_id'  => '1',
-                'title'      => 'User',
-                'icon'       => 'fa-circle',
-                'route'      => 'admin/user',
+                'parent_id'  => '0',
+                'title'      => 'Authentication',
+                'icon'       => 'fa-tachometer-alt',
+                'route'      => '#',
                 'sequence'   => '2',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'parent_id'  => '1',
-                'title'      => 'Permission',
+                'parent_id'  => '2',
+                'title'      => 'User',
                 'icon'       => 'fa-circle',
-                'route'      => 'admin/permission',
+                'route'      => 'admin/user',
                 'sequence'   => '3',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'parent_id'  => '1',
-                'title'      => 'Role',
+                'parent_id'  => '2',
+                'title'      => 'Permission',
                 'icon'       => 'fa-circle',
-                'route'      => 'admin/role',
+                'route'      => 'admin/permission',
                 'sequence'   => '4',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'parent_id'  => '1',
-                'title'      => 'Menu',
+                'parent_id'  => '2',
+                'title'      => 'Role',
                 'icon'       => 'fa-circle',
-                'route'      => 'admin/menu',
+                'route'      => 'admin/role',
                 'sequence'   => '5',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'parent_id'  => '2',
+                'title'      => 'Menu',
+                'icon'       => 'fa-circle',
+                'route'      => 'admin/menu',
+                'sequence'   => '6',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+        ]);
+
+        $this->db->table('groups_menu')->insertBatch([
+            [
+                'group_id' => 1,
+                'menu_id'  => 1,
+            ],
+            [
+                'group_id' => 1,
+                'menu_id'  => 2,
+            ],
+            [
+                'group_id' => 1,
+                'menu_id'  => 3,
+            ],
+            [
+                'group_id' => 1,
+                'menu_id'  => 4,
+            ],
+            [
+                'group_id' => 1,
+                'menu_id'  => 5,
+            ],
+            [
+                'group_id' => 1,
+                'menu_id'  => 6,
+            ],
+            [
+                'group_id' => 2,
+                'menu_id'  => 1,
+            ]
         ]);
     }
 

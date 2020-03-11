@@ -16,6 +16,10 @@ class MenuController extends BaseController
 
     public function index()
     {
+        $data = [
+            'title' => 'Menu'
+        ];
+
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
                 'success'  => true,
@@ -23,5 +27,7 @@ class MenuController extends BaseController
                 'data'     => menu(),
             ]);
         }
+
+        return view('agungsugiarto\boilerplate\Views\Menu\index', $data);
     }
 }

@@ -24,7 +24,7 @@ if (!function_exists('menu')) {
             foreach ($item as $value) {
                 if ($value['parent_id'] == $parent_id) {
                     $child = parse($item, $value['id']);
-                    $value['child'] = $child ?: $child;
+                    $value['children'] = $child ?: $child;
                     $data[] = $value;
                 }
             }

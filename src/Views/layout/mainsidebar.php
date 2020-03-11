@@ -15,7 +15,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= user()->username ?></a>
+                <a href="<?= route_to('user-show') ?>" class="d-block"><?= user()->username ?></a>
             </div>
         </div>
         <?php } ?>
@@ -24,25 +24,23 @@
                 role="menu" data-accordion="false">
                 <?php foreach (menu() as $parent) { ?>
                 <li class="nav-item has-treeview menu-open">
-                    <a href="<?= $parent['route'] ?>" class="nav-link active">
+                    <a href="<?= base_url($parent['route']) ?>" class="nav-link active">
                         <i class="nav-icon fas <?= $parent['icon']?>"></i>
                         <p>
                             <?= $parent['title'] ?>
-                            <?php if (count($parent['child'])) { ?>
+                            <?php if (count($parent['children'])) { ?>
                             <i class="right fas fa-angle-left"></i>
                             <?php } ?>
                         </p>
                     </a>
-                    <?php if (count($parent['child'])) { ?>
+                    <?php if (count($parent['children'])) { ?>
                     <ul class="nav nav-treeview">
-                        <?php foreach ($parent['child'] as $child) { ?>
+                        <?php foreach ($parent['children'] as $child) { ?>
                         <li class="nav-item has-treeview">
                             <a href="<?= base_url($child['route']) ?>"
                                 class="nav-link <?= current_url() == base_url($child['route']) ? 'active' : '' ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    <?= $child['title'] ?>
-                                </p>
+                                <p><?= $child['title'] ?></p>
                             </a>
                         </li>
                         <?php } ?>

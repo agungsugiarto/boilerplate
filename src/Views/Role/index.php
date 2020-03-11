@@ -59,7 +59,7 @@
             { 'data': 'description' },
             {
                 'data': function (data) {
-                    return '<button type="button" class="btn btn-primary btn-sm btn-edit" data-id="' + data.id + '"><span class="fa fa-fw fa-pencil-alt"></span></button> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + data.id + '"><span class="fa fa-fw fa-trash"></span></button>';
+                    return '<a href="<?= base_url('admin/role/edit') ?>/'+ data.id +'" class="btn btn-primary btn-sm btn-edit"><span class="fa fa-fw fa-pencil-alt"></span></a> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + data.id + '"><span class="fa fa-fw fa-trash"></span></button>';
                 }
             }
         ]

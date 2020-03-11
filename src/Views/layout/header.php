@@ -11,7 +11,7 @@
         <!-- Notifications Dropdown Menu -->
         <?php if (config('Boilerplate')->theme['navbar']['user']['visible']) { ?>
         <li class="nav-item">
-            <a href="<?= route_to('/') ?>" class="nav-link d-flex align-items-center">
+            <a href="<?= route_to('user-show') ?>" class="nav-link d-flex align-items-center">
                 <img src="http://localhost/adminlte3/dist/img/user2-160x160.jpg"
                     class="avatar-img img-circle bg-gray mr-2 elevation-<?= config('Boilerplate')->theme['navbar']['user']['shadow'] ?>"
                     alt="<?= user()->username ?>" height="32">
@@ -38,7 +38,17 @@
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <span>Created At</span> <a class="float-right"><?= user()->created_at ?></a>
+                                <span>Join at</span> 
+                                <div class="float-right">
+                                    <?php
+
+                                    use CodeIgniter\I18n\Time;
+
+                                    $time = Time::parse(user()->created_at);
+                                    echo $time->humanize();
+                                    
+                                    ?>
+                                </div>
                             </li>
                         </ul>
 

@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <?= csrf_meta() ?>
   <title><?= $title ?? '' ?> | <?= config('Boilerplate')->appName ?></title>
+
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css">
@@ -21,7 +22,7 @@
 
 </head>
 
-<body class="layout-fixed layout-navbar-fixed sidebar-mini">
+<body class="layout-fixed layout-navbar-fixed sidebar-mini <?= config('Boilerplate')->theme['footer']['fixed'] ? 'layout-footer-fixed' : '' ?> <?= config('Boilerplate')->theme['body-sm'] ? 'text-sm' : '' ?>">
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -61,9 +62,7 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        <a href="https://github.com/sebastienheyd/boilerplate">
-          made with <i class="fas fa-heart"></i> by agungsugiarto
-        </a>
+        <strong><a href="https://github.com/agungsugiarto/boilerplate">Boilerplate</a></strong>
       </div>
       <!-- Default to the left -->
       <strong>&copy; <?= date('Y') ?> <a href="<?= config('Boilerplate')->theme['footer']['vendorlink'] ?>"><?= config('Boilerplate')->theme['footer']['vendorname']?></a>.</strong> All rights reserved.

@@ -16,12 +16,11 @@ class Boilerplate extends BaseConfig
     // Dashboard controller
     //--------------------------------------------------------------------------
 
-    // public $dashboard = [
-    //     'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-    //     'controller' => '',
-    //     'role' => '',
-    //     'permission' => '',
-    // ];
+    public $dashboard = [
+        'namespace' => 'agungsugiarto\boilerplate\Controllers',
+        'controller' => 'DashboardController::index',
+        'filter' => 'permission:back-office'
+    ];
 
     //--------------------------------------------------------------------------
     // Config cdn for language datatables
@@ -41,6 +40,7 @@ class Boilerplate extends BaseConfig
     //--------------------------------------------------------------------------
 
     public $theme = [
+        'body-sm' => false,
         'navbar' => [
             'bg'     => 'white',
             'type'   => 'light',
@@ -75,7 +75,6 @@ class Boilerplate extends BaseConfig
         ],
         'footer' => [
             'fixed'      => true,
-            'visible'    => true,
             'vendorname' => 'Boilerplate',
             'vendorlink' => 'https://github.com/agungsugiarto/boilerplate',
         ],

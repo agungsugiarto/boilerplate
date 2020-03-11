@@ -3,7 +3,8 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
-
+use Myth\Auth\Entities\User;
+use Myth\Auth\Models\UserModel;
 class UserController extends BaseController
 {
     /**
@@ -14,7 +15,8 @@ class UserController extends BaseController
     public function index()
     {
         return $this->response->setJSON([
-            'groups' => $this->authorize->groups(),
+            'users' => (new UserModel())->select('id, email, username, created_at, updated_at')->get()->getResultObject(),
+            'pager' => $this->pager->links()
         ]);
     }
 
@@ -23,8 +25,9 @@ class UserController extends BaseController
      *
      * @return array an array
      */
-    public function show($id = null)
+    public function show()
     {
+        return view('agungsugiarto\boilerplate\Views\User\profile');
     }
 
     /**

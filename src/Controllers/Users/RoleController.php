@@ -16,9 +16,8 @@ class RoleController extends BaseController
     {
         $data = [
             'title' => 'Role',
+            'data' =>  $this->authorize->permissions(),
         ];
-
-        $data['data'] = $this->authorize->permissions();
 
         return view('agungsugiarto\boilerplate\Views\Role\index', $data);
     }
@@ -28,7 +27,6 @@ class RoleController extends BaseController
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
                 'data' => $this->authorize->groups(),
-                'post' => $this->request->getPost(),
             ]);
         }
     }
@@ -93,14 +91,13 @@ class RoleController extends BaseController
      */
     public function edit($id = null)
     {
-        $group = new Group();
+        $data = [
+            'role' => $this->authorize->group($id),
+            'perm' => $this->authorize->permissions(),
+            'permission' => (new Group())->getPermissionsForGroup($id)
+        ];
 
-        $groupId = $group->getPermissionsForGroup($id);
-
-        return $this->response->setJSON([
-            'permission' => $groupId,
-            // 'group' => $this->authorize->s
-        ]);
+        return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
     }
 
     /**
@@ -110,7 +107,36 @@ class RoleController extends BaseController
      */
     public function update($id = null)
     {
-        $this->authorize->updateGroup(2, 'member', 'Site Member with god-like powers.');
+        $validationRules = [
+            'name'        => 'required|min_length[5]|max_length[255]',
+            'description' => 'required|max_length[255]',
+            'permission'  => 'required',
+        ];
+
+        $name = $this->request->getGetPost('name');
+        $description = $this->request->getGetPost('description');
+        $permission = $this->request->getGetPost('permission');
+
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
+        }
+
+        try {
+            $this->db->transBegin();
+            $this->authorize->updateGroup($id, url_title($name), $description);
+
+            foreach ($permission as $value) {
+                $this->authorize->removePermissionFromGroup($value, $id);
+                $this->authorize->addPermissionToGroup($value, $id);
+            }
+            $this->db->transCommit();
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->back()->with('success', 'Success update!');
     }
 
     /**

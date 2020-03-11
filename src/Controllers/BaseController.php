@@ -3,7 +3,11 @@
 namespace agungsugiarto\boilerplate\Controllers;
 
 use CodeIgniter\Config\Services;
+use Config\Database;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\RequestInterface;
+use Psr\Log\LoggerInterface;
 
 class BaseController extends Controller
 {
@@ -27,6 +31,11 @@ class BaseController extends Controller
     protected $db;
 
     /**
+     * @var Pager
+     */
+    protected $pager;
+
+    /**
      * An array of helpers to be loaded automatically upon
      * class instantiation. These helpers will be available
      * to all other controllers that extend BaseController.
@@ -48,7 +57,7 @@ class BaseController extends Controller
     /**
      * Constructor.
      */
-    public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
@@ -60,6 +69,7 @@ class BaseController extends Controller
         $this->auth = Services::authentication();
         $this->authorize = Services::authorization();
         $this->validation = Services::validation();
-        $this->db = \Config\Database::connect();
+        $this->db = Database::connect();
+        $this->pager = Services::pager();
     }
 }

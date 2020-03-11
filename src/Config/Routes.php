@@ -1,6 +1,15 @@
 <?php
 
-$routes->group('admin', function ($routes) {
+$routes->group('admin',  function ($routes) {
+    /**
+     * Admin routes.
+     **/
+    $routes->group('/', [
+        'filter'    => config('Boilerplate')->dashboard['filter'],
+        'namespace' => config('Boilerplate')->dashboard['namespace'],
+    ], function ($routes) {
+        $routes->get('/', config('Boilerplate')->dashboard['controller']);
+    });
     /**
      * User routes.
      **/
@@ -9,7 +18,7 @@ $routes->group('admin', function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('/', 'UserController::index');
-        $routes->get('show', 'UserController::show');
+        $routes->get('show', 'UserController::show',  ['as' => 'user-show']);
         $routes->post('create', 'UserController::create');
         $routes->get('edit/(:num)', 'UserController::edit/$1');
         $routes->put('update/(:num)', 'UserController::update/$1');
@@ -41,7 +50,7 @@ $routes->group('admin', function ($routes) {
         $routes->get('show', 'RoleController::show');
         $routes->post('create', 'RoleController::create');
         $routes->get('edit/(:num)', 'RoleController::edit/$1');
-        $routes->get('update', 'RoleController::update/$1');
+        $routes->post('update/(:num)', 'RoleController::update/$1');
         $routes->delete('delete/(:num)', 'RoleController::delete/$1');
     });
     /**
