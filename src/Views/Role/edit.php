@@ -53,15 +53,9 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <select multiple="multiple" name="permission[]" title="permission[]">
-<<<<<<< HEAD
                                             <?php foreach ($permission as $key) { ?>
                                                 <option value="<?= $key['id'] ?>" selected="selected"><?= $key['name'] ?></option>
                                             <?php } ?>
-=======
-                                            <?php foreach ($data as $d) { ?>
-                                                <option value="<?= $d['id'] ?>"><?= $d['name'] ?></option>
-                                            <?php } ?>
->>>>>>> 633cd2c19dd1354dec518e6845ee8ab61fb80114
                                         </select>
                                         <?php if (session('error.permission')) { ?>
                                              <?= session('error.permission') ?>
