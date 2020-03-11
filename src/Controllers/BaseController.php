@@ -3,10 +3,10 @@
 namespace agungsugiarto\boilerplate\Controllers;
 
 use CodeIgniter\Config\Services;
-use Config\Database;
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Database;
 use Psr\Log\LoggerInterface;
 
 class BaseController extends Controller

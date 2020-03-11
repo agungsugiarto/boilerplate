@@ -17,7 +17,7 @@ class MenuController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Menu'
+            'title' => 'Menu',
         ];
 
         if ($this->request->isAJAX()) {
