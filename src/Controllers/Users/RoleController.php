@@ -16,7 +16,7 @@ class RoleController extends BaseController
     {
         $data = [
             'title' => 'Role',
-            'data' =>  $this->authorize->permissions(),
+            'data'  => $this->authorize->permissions(),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\index', $data);
@@ -92,9 +92,9 @@ class RoleController extends BaseController
     public function edit($id = null)
     {
         $data = [
-            'role' => $this->authorize->group($id),
-            'perm' => $this->authorize->permissions(),
-            'permission' => (new Group())->getPermissionsForGroup($id)
+            'role'       => $this->authorize->group($id),
+            'perm'       => $this->authorize->permissions(),
+            'permission' => (new Group())->getPermissionsForGroup($id),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\edit', $data);

@@ -8,7 +8,7 @@ class Group extends GroupModel
 {
     /**
      * Gets all permissions for a group in a way that can be
-     * easily used to check against:
+     * easily used to check against:.
      *
      * @param int $groupId
      *
