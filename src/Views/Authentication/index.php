@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= config('app')->defaultLocale ?>">
+<html lang="<?= config('App')->defaultLocale ?>">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
