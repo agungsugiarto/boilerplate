@@ -18,15 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-<<<<<<< HEAD
                     <?= form_open('admin/role/update/'.$role->id, ['method' => 'post']) ?>
-=======
-<<<<<<< HEAD
-                    <?= form_open('admin/role/update/'.$role->id, ['method' => 'post']) ?>
-=======
-                    <?= form_open('admin/role/update', ['method' => 'put']) ?>
->>>>>>> 633cd2c19dd1354dec518e6845ee8ab61fb80114
->>>>>>> dd49c916b616eb0ddf98cef94908b11287f65d8a
                         <div class="col-md-10">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Name</label>
