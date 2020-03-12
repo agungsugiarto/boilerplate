@@ -16,14 +16,14 @@ $routes->group('admin', function ($routes) {
      * User routes.
      **/
     $routes->group('user', [
-        'filter' => 'permission:back-office',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users'
+        'filter'    => 'permission:back-office',
+        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('show', 'UserController::show', ['as' => 'user-show']);
         $routes->group('', [
             'filter'    => 'permission:manage-user',
-            'namespace' => 'agungsugiarto\boilerplate\Controllers\Users'
-        ], function($routes) {
+            'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
+        ], function ($routes) {
             $routes->get('/', 'UserController::index');
             $routes->post('create', 'UserController::create');
             $routes->get('edit/(:num)', 'UserController::edit/$1');
