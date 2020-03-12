@@ -8,6 +8,7 @@ use CodeIgniter\API\ResponseTrait;
 class PermissionController extends BaseController
 {
     use ResponseTrait;
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -22,7 +23,7 @@ class PermissionController extends BaseController
 
         if ($this->request->isAJAX()) {
             return $this->respond([
-                'data' => $this->authorize->permissions()
+                'data' => $this->authorize->permissions(),
             ], 200, 'success retrive data!');
         }
 
@@ -36,9 +37,9 @@ class PermissionController extends BaseController
      */
     public function new()
     {
-        // 
+        //
     }
-    
+
     /**
      * Return the properties of a resource object.
      *
@@ -46,7 +47,7 @@ class PermissionController extends BaseController
      */
     public function show()
     {
-        // 
+        //
     }
 
     /**
@@ -85,12 +86,12 @@ class PermissionController extends BaseController
      */
     public function edit($id)
     {
-        if (! $found = $this->authorize->permission($id)) {
+        if (!$found = $this->authorize->permission($id)) {
             return $this->fail('fail deleted');
         }
 
         return $this->respond([
-            'data' => $found
+            'data' => $found,
         ], 200);
     }
 
@@ -128,9 +129,9 @@ class PermissionController extends BaseController
      */
     public function delete($id)
     {
-        if (! $found = $this->authorize->deletePermission($id)) {
+        if (!$found = $this->authorize->deletePermission($id)) {
             return $this->fail('fail deleted');
-        }        
+        }
 
         return $this->respondDeleted($found);
     }
