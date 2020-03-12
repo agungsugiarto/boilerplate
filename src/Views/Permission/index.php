@@ -47,12 +47,12 @@
         paging: true,
         lengthChange: true,
         searching: true,
-        ordering: false,
+        ordering: true,
         info: true,
         autoWidth: false,
 
         ajax : {
-            url: '<?= route_to('admin/permission/show') ?>',
+            url: '<?= route_to('admin/permission') ?>',
             method: 'get'
         },
         columns : [
@@ -77,90 +77,77 @@
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
         var createForm = $('#form-create-permission');
+        
         $.ajax({
-            url: '<?= route_to('admin/permission/create') ?>',
+            url: '<?= route_to('admin/permission') ?>',
             method: 'post',
-            data: createForm.serializeArray(),
+            data: createForm.serializeArray()
 
-            success: function(response) {
-                if (response.success == false) {
-                    $.each(response.messages, function (elem, messages) {
-                        createForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
-                        createForm.find('textarea[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
-                    });
-                } else {
-                    Toast.fire({
-                        icon: 'success',
-                        title: response.messages
-                    })
-                    tablePermission.ajax.reload();
-                    $("#form-create-permission").trigger("reset");
-                    $("#modal-create-permission").modal('hide');
-                }
-            }
+        }).done((data, textStatus) => {
+            Toast.fire({
+                icon: 'success',
+                title: textStatus
+            })
+            tablePermission.ajax.reload();
+            $("#form-create-permission").trigger("reset");
+            $("#modal-create-permission").modal('hide');
+
+        }).fail((xhr, status, error) => {
+            $.each(xhr.responseJSON.messages, (elem, messages) => {
+                createForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
+                createForm.find('textarea[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
+            });
         })
     })
 
     $(document).on('click', '.btn-edit', function (e) {
         e.preventDefault();
-        var url = "<?= base_url('admin/permission/edit') ?>" + "/" + ":id";
-        url = url.replace(':id', $(this).attr('data-id'));
 
         $.ajax({
-            url: url,
-            method: 'get',
-            data: { "id": $(this).attr('data-id') },
-
-            success: function(response) {
-                if (response.data) {
-                    var editForm = $('#form-edit-permission');
-                    editForm.find('input[name="name"]').val(response.data.name);
-                    editForm.find('textarea[name="description"]').val(response.data.description);
-                    $("#permission_id").val(response.data.id);
-                    $("#modal-edit-permission").modal('show');
-                } else {
-                    Toast.fire({
-                        icon: 'error',
-                        title: response.messages
-                    })
-                }
-            }
+            url: `<?= route_to('admin/permission') ?>/${ $(this).attr('data-id') }/edit`,
+            method: 'GET',
+            
+        }).done((response) => {
+            var editForm = $('#form-edit-permission');
+            editForm.find('input[name="name"]').val(response.data.name);
+            editForm.find('textarea[name="description"]').val(response.data.description);
+            $("#permission_id").val(response.data.id);
+            $("#modal-edit-permission").modal('show');
+        }).fail((data, textStatus) => {
+            Toast.fire({
+                icon: 'error',
+                title: textStatus,
+            });
         })
     })
 
     $(document).on('click', '#btn-update-permission', function (e) {
         $('.text-danger').remove();
         var editForm = $('#form-edit-permission');
-        var url = "<?= base_url('admin/permission/update') ?>" + "/" + ":id";
-        url = url.replace(':id', $('#permission_id').val());
 
         $.ajax({
-            url: url,
-            method: 'put',
-            data: editForm.serialize(),
+            url: `<?= route_to('admin/permission') ?>/${ $('#permission_id').val() }`,
+            method: 'PUT',
+            data: editForm.serialize()
+            
+        }).done((data, textStatus) => {
+            Toast.fire({
+                icon: 'success',
+                title: textStatus
+            })
+            tablePermission.ajax.reload();
+            $("#form-edit-permission").trigger("reset");
+            $("#modal-edit-permission").modal('hide');
 
-            success: function(response) {
-                if (response.success == false) {
-                    $.each(response.messages, function (elem, messages) {
-                        editForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
-                        editForm.find('textarea[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
-                    });
-                } else {
-                    Toast.fire({
-                        icon: 'success',
-                        title: response.messages
-                    })
-                    tablePermission.ajax.reload();
-                    $("#form-edit-permission").trigger("reset");
-                    $("#modal-edit-permission").modal('hide');
-                }
-            }
+        }).fail((xhr, status, error) => {
+            $.each(xhr.responseJSON.messages, (elem, messages) => {
+                editForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
+                editForm.find('textarea[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
+            });
         })
     })
 
     $(document).on('click', '.btn-delete', function (e) {
-        var url = "<?= base_url('admin/permission/delete') ?>" + "/" + ":id"
-        url = url.replace(':id', $(this).attr('data-id'))
 
         Swal.fire({
             title: 'Are you sure?',
@@ -174,24 +161,19 @@
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: url,
-                    method: 'delete',
-                    data: { "id": $(this).attr('data-id') },
-
-                    success: function(response) {
-                        if (response.success == true) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: response.messages
-                            })
-                            tablePermission.ajax.reload();
-                        } else {
-                            Toast.fire({
-                                icon: 'error',
-                                title: response.messages
-                            })
-                        }
-                    }
+                    url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}`,
+                    method: 'DELETE',
+                }).done((data, textStatus) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: textStatus,
+                    });
+                    tablePermission.ajax.reload();
+                }).fail((data, textStatus) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: textStatus,
+                    });
                 })
             }
         })

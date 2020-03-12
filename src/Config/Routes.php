@@ -1,6 +1,7 @@
 <?php
 
 $routes->group('admin', function ($routes) {
+    
     /**
      * Admin routes.
      **/
@@ -10,6 +11,7 @@ $routes->group('admin', function ($routes) {
     ], function ($routes) {
         $routes->get('/', config('Boilerplate')->dashboard['controller']);
     });
+    
     /**
      * User routes.
      **/
@@ -24,20 +26,16 @@ $routes->group('admin', function ($routes) {
         $routes->put('update/(:num)', 'UserController::update/$1');
         $routes->delete('delete/(:num)', 'UserController::delete/$1');
     });
+
     /**
      * Permission routes.
      */
-    $routes->group('permission', [
-        'filter'    => 'permission:role-permission',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-    ], function ($routes) {
-        $routes->get('/', 'PermissionController::index');
-        $routes->get('show', 'PermissionController::show');
-        $routes->post('create', 'PermissionController::create');
-        $routes->get('edit/(:num)', 'PermissionController::edit/$1');
-        $routes->put('update/(:num)', 'PermissionController::update/$1');
-        $routes->delete('delete/(:num)', 'PermissionController::delete/$1');
-    });
+    $routes->resource('permission', [
+        'filter'     => 'permission:role-permission',
+        'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
+        'controller' => 'PermissionController',
+    ]);
+    
     /**
      * Role routes.
      */
@@ -53,6 +51,7 @@ $routes->group('admin', function ($routes) {
         $routes->post('update/(:num)', 'RoleController::update/$1');
         $routes->delete('delete/(:num)', 'RoleController::delete/$1');
     });
+    
     /**
      * Role routes.
      */

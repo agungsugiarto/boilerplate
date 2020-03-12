@@ -3,13 +3,15 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
+use CodeIgniter\API\ResponseTrait;
 
 class PermissionController extends BaseController
 {
+    use ResponseTrait;
     /**
      * Return an array of resource objects, themselves in array format.
      *
-     * @return array an array
+     * @return \CodeIgniter\View\View | \CodeIgniter\API\ResponseTrait
      */
     public function index()
     {
@@ -18,29 +20,39 @@ class PermissionController extends BaseController
             'title' => 'Permission',
         ];
 
+        if ($this->request->isAJAX()) {
+            return $this->respond([
+                'data' => $this->authorize->permissions()
+            ], 200, 'success retrive data!');
+        }
+
         return view('agungsugiarto\boilerplate\Views\Permission\index', $data);
     }
 
     /**
+     * Return an array of resource objects, themselves in array format.
+     *
+     * @return \CodeIgniter\API\ResponseTrait
+     */
+    public function new()
+    {
+        // 
+    }
+    
+    /**
      * Return the properties of a resource object.
      *
-     * @return array an array
+     * @return \CodeIgniter\API\ResponseTrait
      */
     public function show()
     {
-        if ($this->request->isAJAX()) {
-            return $this->response->setJSON([
-                'success'  => true,
-                'messages' => 'Success get data',
-                'data'     => $this->authorize->permissions(),
-            ]);
-        }
+        // 
     }
 
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return array an array
+     * @return \CodeIgniter\API\ResponseTrait
      */
     public function create()
     {
@@ -53,17 +65,15 @@ class PermissionController extends BaseController
         $description = $this->request->getPost('description');
 
         if (!$this->validate($validationRules)) {
-            return $this->response->setJSON([
-                'success'  => false,
-                'messages' => $this->validator->getErrors(),
-            ]);
+            return $this->fail(
+                $this->validator->getErrors()
+            );
         }
 
-        return $this->response->setJSON([
-            'success'  => true,
-            'messages' => 'Succes create',
-            'data'     => $this->authorize->createPermission(url_title($name), $description),
-        ]);
+        return $this->respondCreated(
+            $this->authorize->createPermission(url_title($name), $description),
+            'Success insert data'
+        );
     }
 
     /**
@@ -71,15 +81,17 @@ class PermissionController extends BaseController
      *
      * @param int		id
      *
-     * @return array an array
+     * @return \CodeIgniter\API\ResponseTrait
      */
-    public function edit($id = null)
+    public function edit($id)
     {
-        return $this->response->setJSON([
-            'success'  => true,
-            'messages' => 'Success get data',
-            'data'     => $this->authorize->permission($id),
-        ]);
+        if (! $found = $this->authorize->permission($id)) {
+            return $this->fail('fail deleted');
+        }
+
+        return $this->respond([
+            'data' => $found
+        ], 200);
     }
 
     /**
@@ -87,9 +99,9 @@ class PermissionController extends BaseController
      *
      * @param int 		id
      *
-     * @return array an array
+     * @return \CodeIgniter\API\ResponseTrait
      */
-    public function update($id = null)
+    public function update($id)
     {
         $validationRules = [
             'name'        => 'required|max_length[255]|is_unique[auth_groups.name]',
@@ -99,36 +111,27 @@ class PermissionController extends BaseController
         $data = $this->request->getRawInput();
 
         if (!$this->validate($validationRules)) {
-            return $this->response->setJSON([
-                'success'  => false,
-                'messages' => $this->validator->getErrors(),
-            ]);
+            return $this->fail(
+                $this->validator->getErrors()
+            );
         }
 
-        return $this->response->setJSON([
-            'success'  => true,
-            'messages' => 'Success update',
-            'data'	    => $this->authorize->updatePermission($id, $data['name'], $data['description']),
-        ]);
+        return $this->respondCreated(
+            $this->authorize->updatePermission($id, $data['name'], $data['description'])
+        );
     }
 
     /**
      * Delete the designated resource object from the model.
      *
-     * @return array an array
+     * @return \CodeIgniter\API\ResponseTrait
      */
-    public function delete($id = null)
+    public function delete($id)
     {
-        if (!$this->authorize->deletePermission($id)) {
-            return $this->response->setJSON([
-                'success'  => false,
-                'messages' => 'Unable delete',
-            ]);
-        }
+        if (! $found = $this->authorize->deletePermission($id)) {
+            return $this->fail('fail deleted');
+        }        
 
-        return $this->response->setJSON([
-            'success'  => true,
-            'messages' => 'Success delete',
-        ]);
+        return $this->respondDeleted($found);
     }
 }
