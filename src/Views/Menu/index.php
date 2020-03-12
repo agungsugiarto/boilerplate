@@ -50,7 +50,7 @@
                                 <label class="col-sm-2 col-form-label">Parent</label>
                                 <div class="col-sm-8">
                                     <div class="input-group col">
-                                        <select class="form-control parent" style="width: 100%;>
+                                        <select class="form-control parent" style="width: 100%;">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
