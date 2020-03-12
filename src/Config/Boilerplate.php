@@ -74,7 +74,7 @@ class Boilerplate extends BaseConfig
             ],
         ],
         'footer' => [
-            'fixed'      => true,
+            'fixed'      => false,
             'vendorname' => 'Boilerplate',
             'vendorlink' => 'https://github.com/agungsugiarto/boilerplate',
         ],

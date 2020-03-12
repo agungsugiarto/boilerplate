@@ -11,7 +11,7 @@
         <?php if (config('Boilerplate')->theme['sidebar']['user']['visible']) { ?>
         <div class="user-panel py-3 d-flex">
             <div class="image">
-                <img src="http://localhost/adminlte3/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
+                <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png" class="img-circle elevation-2"
                     alt="User Image">
             </div>
             <div class="info">

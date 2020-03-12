@@ -16,15 +16,20 @@ $routes->group('admin', function ($routes) {
      * User routes.
      **/
     $routes->group('user', [
-        'filter'    => 'permission:manage-user',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
+        'filter' => 'permission:back-office',
+        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users'
     ], function ($routes) {
-        $routes->get('/', 'UserController::index');
         $routes->get('show', 'UserController::show', ['as' => 'user-show']);
-        $routes->post('create', 'UserController::create');
-        $routes->get('edit/(:num)', 'UserController::edit/$1');
-        $routes->put('update/(:num)', 'UserController::update/$1');
-        $routes->delete('delete/(:num)', 'UserController::delete/$1');
+        $routes->group('', [
+            'filter'    => 'permission:manage-user',
+            'namespace' => 'agungsugiarto\boilerplate\Controllers\Users'
+        ], function($routes) {
+            $routes->get('/', 'UserController::index');
+            $routes->post('create', 'UserController::create');
+            $routes->get('edit/(:num)', 'UserController::edit/$1');
+            $routes->put('update/(:num)', 'UserController::update/$1');
+            $routes->delete('delete/(:num)', 'UserController::delete/$1');
+        });
     });
 
     /**
@@ -53,18 +58,11 @@ $routes->group('admin', function ($routes) {
     });
     
     /**
-     * Role routes.
+     * Menu routes.
      */
-    $routes->group('menu', [
-        'filter'    => 'permission:role-permission',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-    ], function ($routes) {
-        $routes->get('/', 'MenuController::index');
-        $routes->post('datatable', 'MenuController::datatable');
-        $routes->get('show', 'MenuController::show');
-        $routes->post('create', 'MenuController::create');
-        $routes->get('edit/(:num)', 'MenuController::edit/$1');
-        $routes->get('update(:num)', 'MenuController::update/$1');
-        $routes->delete('delete/(:num)', 'MenuController::delete/$1');
-    });
+    $routes->resource('menu', [
+        'filter'     => 'permission:role-permission',
+        'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
+        'controller' => 'MenuController',
+    ]);
 });
