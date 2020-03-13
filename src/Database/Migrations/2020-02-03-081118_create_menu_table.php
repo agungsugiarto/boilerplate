@@ -22,8 +22,7 @@ class CreateMenuTable extends Migration
             'deleted_at' => ['type' => 'datetime', 'null' => true],
         ]);
 
-        $this->forge->addKey(['id', 'parent_id']);
-        $this->forge->addUniqueKey('title');
+        $this->forge->addKey('id', true);
         $this->forge->addForeignKey('parent_id', 'menu', 'id', false, 'SET NULL');
         $this->forge->createTable('menu', true);
 
