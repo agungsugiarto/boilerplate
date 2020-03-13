@@ -23,6 +23,7 @@ class CreateMenuTable extends Migration
         ]);
 
         $this->forge->addKey(['id', 'parent_id']);
+        $this->forge->addUniqueKey('title');
         $this->forge->addForeignKey('parent_id', 'menu', 'id', false, 'SET NULL');
         $this->forge->createTable('menu', true);
 
