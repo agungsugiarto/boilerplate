@@ -78,7 +78,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '0',
                 'title'      => 'Dashboard',
-                'icon'       => 'fa-home',
+                'icon'       => 'fas fa-home',
                 'route'      => 'admin',
                 'sequence'   => '1',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -87,7 +87,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '0',
                 'title'      => 'Authentication',
-                'icon'       => 'fa-tachometer-alt',
+                'icon'       => 'fas fa-tachometer-alt',
                 'route'      => '#',
                 'sequence'   => '2',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -96,8 +96,8 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'User',
-                'icon'       => 'fa-circle',
-                'route'      => 'admin/user',
+                'icon'       => 'far fa-circle',
+                'route'      => 'admin/user/manage',
                 'sequence'   => '3',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -105,7 +105,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Permission',
-                'icon'       => 'fa-circle',
+                'icon'       => 'far fa-circle',
                 'route'      => 'admin/permission',
                 'sequence'   => '4',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -114,7 +114,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Role',
-                'icon'       => 'fa-circle',
+                'icon'       => 'far fa-circle',
                 'route'      => 'admin/role',
                 'sequence'   => '5',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -123,7 +123,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Menu',
-                'icon'       => 'fa-circle',
+                'icon'       => 'far fa-circle',
                 'route'      => 'admin/menu',
                 'sequence'   => '6',
                 'created_at' => date('Y-m-d H:i:s'),

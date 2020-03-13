@@ -67,13 +67,13 @@
         ]
     });
 
-    tablePermission.on('order.dt search.dt', function () {
+    tablePermission.on('order.dt search.dt', () => {
         tablePermission.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         });
     }).draw();
 
-    $(document).on('click', '#btn-save-permission', function() {
+    $(document).on('click', '#btn-save-permission', () => {
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
         var createForm = $('#form-create-permission');
@@ -100,7 +100,7 @@
         })
     })
 
-    $(document).on('click', '.btn-edit', function (e) {
+    $(document).on('click', '.btn-edit', (e) => {
         e.preventDefault();
 
         $.ajax({
@@ -121,7 +121,8 @@
         })
     })
 
-    $(document).on('click', '#btn-update-permission', function (e) {
+    $(document).on('click', '#btn-update-permission', (e) => {
+        e.preventDefault();
         $('.text-danger').remove();
         var editForm = $('#form-edit-permission');
 
@@ -147,7 +148,7 @@
         })
     })
 
-    $(document).on('click', '.btn-delete', function (e) {
+    $(document).on('click', '.btn-delete', (e) => {
 
         Swal.fire({
             title: 'Are you sure?',
@@ -179,13 +180,13 @@
         })
     })
 
-    $('#modal-create-permission').on('hidden.bs.modal', function() {
+    $('#modal-create-permission').on('hidden.bs.modal', () => {
         $(this).find('#form-create-permission')[0].reset();
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
     });
 
-    $('#modal-edit-permission').on('hidden.bs.modal', function() {
+    $('#modal-edit-permission').on('hidden.bs.modal', () => {
         $(this).find('#form-edit-permission')[0].reset();
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');

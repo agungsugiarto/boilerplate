@@ -25,11 +25,11 @@
                 <?php foreach (menu() as $parent) { ?>
                 <li class="nav-item has-treeview menu-open">
                     <a href="<?= base_url($parent['route']) ?>" class="nav-link active">
-                        <i class="nav-icon fas <?= $parent['icon']?>"></i>
+                        <i class="nav-icon <?= $parent['icon']?>"></i>
                         <p>
                             <?= $parent['title'] ?>
                             <?php if (count($parent['children'])) { ?>
-                            <i class="right fas fa-angle-left"></i>
+                                <i class="right fas fa-angle-left"></i>
                             <?php } ?>
                         </p>
                     </a>
@@ -39,7 +39,7 @@
                         <li class="nav-item has-treeview">
                             <a href="<?= base_url($child['route']) ?>"
                                 class="nav-link <?= current_url() == base_url($child['route']) ? 'active' : '' ?>">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon <?= $child['icon']?>"></i>
                                 <p><?= $child['title'] ?></p>
                             </a>
                         </li>

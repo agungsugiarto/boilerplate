@@ -7,13 +7,6 @@ use agungsugiarto\boilerplate\Models\MenuModel;
 
 class MenuController extends BaseController
 {
-    protected $menu;
-
-    public function __construct()
-    {
-        $this->menu = new MenuModel();
-    }
-
     public function index()
     {
         $data = [

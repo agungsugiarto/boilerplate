@@ -14,10 +14,11 @@ class UserController extends BaseController
      */
     public function index()
     {
-        return $this->response->setJSON([
-            'users' => (new UserModel())->select('id, email, username, created_at, updated_at')->get()->getResultObject(),
-            'pager' => $this->pager->links(),
-        ]);
+        // return $this->response->setJSON([
+        //     'users' => (new UserModel())->select('id, email, username, created_at, updated_at')->get()->getResultObject(),
+        //     'pager' => $this->pager->links(),
+        // ]);
+        return view('agungsugiarto\boilerplate\Views\User\index');
     }
 
     /**

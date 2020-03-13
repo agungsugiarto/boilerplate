@@ -20,7 +20,7 @@ $routes->group('admin', function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('show', 'UserController::show', ['as' => 'user-show']);
-        $routes->group('', [
+        $routes->group('manage', [
             'filter'    => 'permission:manage-user',
             'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
         ], function ($routes) {

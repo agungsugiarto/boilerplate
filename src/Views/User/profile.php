@@ -1,3 +1,5 @@
+<!-- select2 -->
+<?= $this->include('agungsugiarto\boilerplate\Views\load\select2') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 
@@ -9,7 +11,7 @@
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="http://localhost/adminlte3/dist/img/user2-160x160.jpg"
+                    <img class="profile-user-img img-fluid img-circle" src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png"
                         alt="User profile picture">
                 </div>
                 <h3 class="profile-username text-center"><?= user()->username ?></h3>
@@ -174,7 +176,16 @@
                             <div class="form-group row">
                                 <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                                    <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
+                                    <select class="form-control parent" style="width: 100%;">
+                                        <option selected="selected">Alabama</option>
+                                        <option>Alaska</option>
+                                        <option>California</option>
+                                        <option>Delaware</option>
+                                        <option>Tennessee</option>
+                                        <option>Texas</option>
+                                        <option>Washington</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -202,4 +213,10 @@
     </div>
     <!-- /.col -->
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('js') ?>
+<script>
+    $('.parent').select2();
+</script>
 <?= $this->endSection() ?>

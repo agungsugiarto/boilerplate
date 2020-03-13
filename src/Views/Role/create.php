@@ -15,13 +15,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- <div class="float-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-block btn-primary" id="create-book"
-                            data-toggle="modal" data-target="#modal-create-role"><i class="fa fa-plus"></i> Add
-                            Role</button>
-                    </div>
-                </div> -->
             </div>
             <div class="card-body">
                 <div class="row">
@@ -32,7 +25,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
                                         <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role">
                                         <div class="invalid-feedback">
@@ -46,7 +39,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
                                         </div>
                                         <input type="text" name="description" class="form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="Description for role">
                                         <div class="invalid-feedback">

@@ -3,9 +3,8 @@
 namespace agungsugiarto\boilerplate\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
-use CodeIgniter\CLI\CLI;
 
-class SeedCommand extends BaseCommand
+class InstallCommand extends BaseCommand
 {
     // helper('filesystem');
     /**
@@ -21,21 +20,21 @@ class SeedCommand extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'boilerplate:seed';
+    protected $name = 'boilerplate:install';
 
     /**
      * The command's short description.
      *
      * @var string
      */
-    protected $description = 'Db seed for basic boilerplate data.';
+    protected $description = 'Db install for basic boilerplate data.';
 
     /**
      * The command's usage.
      *
      * @var string
      */
-    protected $usage = 'boilerplate:seed';
+    protected $usage = 'boilerplate:install';
 
     /**
      * The commamd's argument.
@@ -60,10 +59,11 @@ class SeedCommand extends BaseCommand
      */
     public function run(array $params)
     {
-        $params = ['agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder'];
-
         try {
-            $this->call('db:seed', $params);
+            // migrate all first
+            $this->call('migrate', ['-all']);
+            // then seed data
+            $this->call('db:seed', ['agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder']);
         } catch (\Exception $e) {
             $this->showError($e);
         }

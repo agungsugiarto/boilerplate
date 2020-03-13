@@ -9,11 +9,8 @@
 
 <!-- Section content -->
 <?= $this->section('content') ?>
-    <style>
-        .fade.in{
-            opacity: 1;
-        }
-    </style>
+    <?= $this->include('agungsugiarto\boilerplate\Views\Menu\update') ?>
+    <style>.fade.in{opacity: 1;}</style>
     <div class="row">
         <div class="col-lg-5">
             <div class="card card-primary card-outline">
@@ -34,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="dd" id="menu"></div>
+                    <div id="menu"></div>
                 </div>
             </div><!-- /.card -->
         </div>
@@ -42,106 +39,111 @@
         <div class="col-lg-7">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h5>Create Menu</h5>
+                    <div class="float-left">
+                        <h5>Create Menu</h5>
+                    </div>
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-block btn-primary" id="create-book"
+                                data-toggle="modal" data-target="#modal-update"><i class="fa fa-plus"></i> 
+                                Create Menu
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <?= form_open('admin/role/create', ['method' => 'post']) ?>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Parent</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group col">
-                                        <select class="form-control parent" style="width: 100%;">
-                                            <option selected="selected">Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            <?= session('error.name') ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Title</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            <?= session('error.name') ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Icon</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
-                                        </div>
-                                        <input type="text" name="description" class="icon-picker form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="Description for role" autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            <?= session('error.description') ?>
-                                        </div>
-                                    </div>
-                                    <span class="help-block">
-                                        <i class="fa fa-info-circle"></i>&nbsp;For more icons please see <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Route</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-link"></i></span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            <?= session('error.name') ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Role</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <div class="select2-blue" style="width: 100%">
-                                            <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-blue" style="width: 100%;">
-                                                <option>Alabama</option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
-                                            </select>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            <?= session('error.name') ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label for="inputSkills" class="col-sm-2 col-form-label">Parent</label>
                             <div class="col-sm-10">
-                                <div class="float-right">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                            Save
-                                        </button>
+                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
+                                <select class="form-control parent" style="width: 100%;">
+                                    <option selected="selected">Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>California</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputSkills" class="col-sm-2 col-form-label">Active</label>
+                            <div class="col-sm-10">
+                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
+                                <select class="form-control parent" style="width: 100%;">
+                                    <option selected="selected">Active</option>
+                                    <option>Non Active</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Icon</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
+                                    </div>
+                                    <input type="text" name="description" class="icon-picker form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="Description for role" autocomplete="off">
+                                    <div class="invalid-feedback">
+                                        <?= session('error.description') ?>
+                                    </div>
+                                </div>
+                                <span class="help-block">
+                                    <i class="fa fa-info-circle"></i>&nbsp;For more icons please see <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                    </div>
+                                    <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
+                                    <div class="invalid-feedback">
+                                        <?= session('error.name') ?>
                                     </div>
                                 </div>
                             </div>
-                        <!-- </div> -->
-                    <?= form_close() ?>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputName2" class="col-sm-2 col-form-label">Route</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-link"></i></span>
+                                    </div>
+                                    <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
+                                    <div class="invalid-feedback">
+                                        <?= session('error.name') ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputSkills" class="col-sm-2 col-form-label">Role</label>
+                            <div class="col-sm-10">
+                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
+                                <select class="form-control parent" multiple="multiple" style="width: 100%;">
+                                    <option selected="selected">Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>California</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -151,25 +153,24 @@
 
 <?= $this->section('js') ?>
 <script>
+$(function () {
     $('.icon-picker').iconpicker({
         placement: 'bottomRight',
         hideOnSelect: true,
-        showFooter: false,
     });
 
     //Initialize Select2 Elements
-    $('.select2').select2();
     $('.parent').select2();
 
     $.get("<?= base_url('admin/menu') ?>", function(response) {
         $('#menu').nestable({
             maxDepth: 2,
             json: response.data,
-            contentCallback: function(item) {
-                return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>${item.route}" class="dd-nodrag">${item.route}</a>
+            contentCallback: (item) => {
+                return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
                         <span class="float-right">
-                            <a href=<?= route_to('admin/menu') ?>/${item.id}/edit"><i class="fa fa-edit"></i></a>
-                            <a href="javascript:void(0);" data-id="1" class="tree_branch_delete"><span style="color:Tomato;"><i class="fa fa-trash"></i></span></a>
+                            <button data-id="${item.id}" id="btn-update" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
+                            <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
                         </span>`;
             }
         });
@@ -193,6 +194,16 @@
                 $('#menu').nestable('expandAll');
         }
     });
-    
+
+    $(document).on('click', '#btn-update', (e) => {
+        e.preventDefault();
+        $('#modal-update').modal('show');
+    })
+
+    $(document).on('click', '#btn-delete', (e) => {
+        e.preventDefault();
+        $('#modal-update').modal('show');
+    })
+})
 </script>
 <?= $this->endSection() ?>
