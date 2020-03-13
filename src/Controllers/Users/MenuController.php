@@ -3,7 +3,6 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Models\MenuModel;
 
 class MenuController extends BaseController
 {
