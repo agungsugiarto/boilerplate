@@ -1,5 +1,6 @@
 <!-- Include datatables -->
 <?= $this->include('agungsugiarto\boilerplate\Views\load\datatables') ?>
+<?= $this->include('agungsugiarto\boilerplate\Views\load\sweetalert') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 
@@ -11,7 +12,7 @@
                 <div class="card-header">
                     <div class="float-right">
                         <div class="btn-group">
-                            <a href="<?= base_url('admin/role/show') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i> Add
+                            <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i> Add
                                 Role
                             </a>
                         </div>
@@ -56,8 +57,8 @@
         autoWidth: false,
 
         ajax : {
-            url: '<?= base_url('admin/role/datatable') ?>',
-            method: 'post'
+            url: '<?= route_to('admin/role') ?>',
+            method: 'GET'
         },
         columns : [
             { 'data': null },
@@ -65,7 +66,7 @@
             { 'data': 'description' },
             {
                 'data': function (data) {
-                    return '<a href="<?= base_url('admin/role/edit') ?>/'+ data.id +'" class="btn btn-primary btn-sm btn-edit"><span class="fa fa-fw fa-pencil-alt"></span></a> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + data.id + '"><span class="fa fa-fw fa-trash"></span></button>';
+                    return '<a href="<?= route_to('admin/role') ?>/'+ data.id +'/edit" class="btn btn-primary btn-sm btn-edit"><span class="fa fa-fw fa-pencil-alt"></span></a> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + data.id + '"><span class="fa fa-fw fa-trash"></span></button>';
                 }
             }
         ]
@@ -79,21 +80,32 @@
 </script>
 <script>
     $(document).on('click', '.btn-delete', function (e) {
-        var url = "<?= base_url('admin/role/delete') ?>" + "/" + ":id"
-        url = url.replace(':id', $(this).attr('data-id'))
-
-        $.ajax({
-            url: url,
-            method: 'delete',
-            data: { "id": $(this).attr('data-id') },
-
-            success: function(response) {
-                if (response.errors) {
-                    console.log(response.errors)
-                } else {
-                    console.log(response.success)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: `<?= route_to('admin/role') ?>/${$(this).attr('data-id')}`,
+                    method: 'DELETE',
+                }).done((data, textStatus) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: textStatus,
+                    });
                     tableRole.ajax.reload();
-                }
+                }).fail((error) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: error.responseJSON.messages.error,
+                    });
+                })
             }
         })
     })

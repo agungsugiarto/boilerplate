@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <?= form_open('admin/role/create', ['method' => 'post']) ?>
+                    <?= form_open('admin/role', ['method' => 'post']) ?>
                         <?= csrf_field() ?>
                         <div class="col-md-10">
                             <div class="form-group row">

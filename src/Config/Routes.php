@@ -20,16 +20,12 @@ $routes->group('admin', function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('show', 'UserController::show', ['as' => 'user-show']);
-        $routes->group('manage', [
-            'filter'    => 'permission:manage-user',
-            'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-        ], function ($routes) {
-            $routes->get('/', 'UserController::index');
-            $routes->post('create', 'UserController::create');
-            $routes->get('edit/(:num)', 'UserController::edit/$1');
-            $routes->put('update/(:num)', 'UserController::update/$1');
-            $routes->delete('delete/(:num)', 'UserController::delete/$1');
-        });
+        $routes->resource('manage', [
+            'filter'     => 'permission:manage-user',
+            'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
+            'controller' => 'UserController',
+            'except'     => 'show',
+        ]);
     });
 
     /**
@@ -44,18 +40,11 @@ $routes->group('admin', function ($routes) {
     /**
      * Role routes.
      */
-    $routes->group('role', [
-        'filter'    => 'permission:role-permission',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-    ], function ($routes) {
-        $routes->get('/', 'RoleController::index');
-        $routes->post('datatable', 'RoleController::datatable');
-        $routes->get('show', 'RoleController::show');
-        $routes->post('create', 'RoleController::create');
-        $routes->get('edit/(:num)', 'RoleController::edit/$1');
-        $routes->post('update/(:num)', 'RoleController::update/$1');
-        $routes->delete('delete/(:num)', 'RoleController::delete/$1');
-    });
+    $routes->resource('role', [
+        'filter'     => 'permission:role-permission',
+        'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
+        'controller' => 'RoleController',
+    ]);
 
     /**
      * Menu routes.

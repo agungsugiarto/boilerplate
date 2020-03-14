@@ -4,9 +4,12 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Models\Group;
+use CodeIgniter\API\ResponseTrait;
 
 class RoleController extends BaseController
 {
+    use ResponseTrait;
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -19,16 +22,28 @@ class RoleController extends BaseController
             'data'  => $this->authorize->permissions(),
         ];
 
-        return view('agungsugiarto\boilerplate\Views\Role\index', $data);
-    }
-
-    public function datatable()
-    {
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
                 'data' => $this->authorize->groups(),
             ]);
         }
+
+        return view('agungsugiarto\boilerplate\Views\Role\index', $data);
+    }
+
+    /**
+	 * Return a new resource object, with default properties
+	 *
+	 * @return array	an array
+	 */
+	public function new()
+	{
+        $data = [
+            'title'=> 'Role',
+            'data' => $this->authorize->permissions(),
+        ];
+
+        return view('agungsugiarto\boilerplate\Views\Role\create', $data); 
     }
 
     /**
@@ -36,14 +51,9 @@ class RoleController extends BaseController
      *
      * @return array an array
      */
-    public function show()
+    public function show($id)
     {
-        $data = [
-            'title'=> 'Role',
-            'data' => $this->authorize->permissions(),
-        ];
-
-        return view('agungsugiarto\boilerplate\Views\Role\create', $data);
+        // 
     }
 
     /**
@@ -144,12 +154,12 @@ class RoleController extends BaseController
      *
      * @return array an array
      */
-    public function delete($id = null)
+    public function delete($id)
     {
-        if (!$this->authorize->deleteGroup($id)) {
-            return $this->response->setJSON(['errors' => 'Unable delete']);
+        if (!$found = $this->authorize->deleteGroup($id)) {
+            return $this->fail('fail deleted');
         }
 
-        return $this->response->setJSON(['success' => 'Success delete']);
+        return $this->respondDeleted($found);
     }
 }
