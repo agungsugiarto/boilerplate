@@ -32,18 +32,18 @@ class RoleController extends BaseController
     }
 
     /**
-	 * Return a new resource object, with default properties
-	 *
-	 * @return array	an array
-	 */
-	public function new()
-	{
+     * Return a new resource object, with default properties.
+     *
+     * @return array an array
+     */
+    public function new()
+    {
         $data = [
             'title'=> 'Role',
             'data' => $this->authorize->permissions(),
         ];
 
-        return view('agungsugiarto\boilerplate\Views\Role\create', $data); 
+        return view('agungsugiarto\boilerplate\Views\Role\create', $data);
     }
 
     /**
@@ -53,7 +53,7 @@ class RoleController extends BaseController
      */
     public function show($id)
     {
-        // 
+        //
     }
 
     /**
