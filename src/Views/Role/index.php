@@ -41,6 +41,12 @@
 <!-- Push section js -->
 <?= $this->section('js') ?>
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="X-CSRF-TOKEN"]').attr('content')
+        }
+    });
+    
     var tableRole = $('#table-role').DataTable({
         paging: true,
         lengthChange: true,
@@ -70,31 +76,6 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
-</script>
-<script>
-    $(document).on('click', '#btn-save-role', function() {
-        $('.text-danger').remove();
-        var createForm = $('#form-create-role');
-        $.ajax({
-            url: '<?= route_to('admin/role/create') ?>',
-            method: 'post',
-            data: createForm.serializeArray(),
-
-            success: function(response) {
-                if (response.errors) {
-                    $.each(response.errors, function (elem, messages) {
-                        createForm.find('input[name="' + elem + '"]').after('<p class="text-danger">' + messages + '</p>');
-                        createForm.find('textarea[name="' + elem + '"]').after('<p class="text-danger">' + messages + '</p>');
-                    });
-                } else {
-                    console.log(response.success)
-                    tableRole.ajax.reload();
-                    $("#form-create-role").trigger("reset");
-                    $("#modal-create-role").modal('hide');
-                }
-            }
-        })
-    })
 </script>
 <script>
     $(document).on('click', '.btn-delete', function (e) {

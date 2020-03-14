@@ -87,7 +87,7 @@ class PermissionController extends BaseController
     public function edit($id)
     {
         if (!$found = $this->authorize->permission($id)) {
-            return $this->fail('fail deleted');
+            return $this->fail('fail get data');
         }
 
         return $this->respond([

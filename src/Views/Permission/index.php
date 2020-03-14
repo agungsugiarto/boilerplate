@@ -43,6 +43,12 @@
 <!-- Push section js -->
 <?= $this->section('js') ?>
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="X-CSRF-TOKEN"]').attr('content')
+        }
+    });
+
     var tablePermission = $('#table-permission').DataTable({
         paging: true,
         lengthChange: true,
@@ -93,6 +99,13 @@
             $("#modal-create-permission").modal('hide');
 
         }).fail((xhr, status, error) => {
+            if (xhr.responseJSON.message) {
+                Toast.fire({
+                    icon: 'error',
+                    title: xhr.responseJSON.message,
+                });
+            }
+
             $.each(xhr.responseJSON.messages, (elem, messages) => {
                 createForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
                 createForm.find('textarea[name="' + elem + '"]').addClass('is-invalid').after('<p class="text-danger">' + messages + '</p>');
@@ -100,11 +113,10 @@
         })
     })
 
-    $(document).on('click', '.btn-edit', (e) => {
+    $(document).on('click', '.btn-edit', function(e) {
         e.preventDefault();
-
         $.ajax({
-            url: `<?= route_to('admin/permission') ?>/${ $(this).attr('data-id') }/edit`,
+            url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
             
         }).done((response) => {
@@ -113,15 +125,15 @@
             editForm.find('textarea[name="description"]').val(response.data.description);
             $("#permission_id").val(response.data.id);
             $("#modal-edit-permission").modal('show');
-        }).fail((data, textStatus) => {
+        }).fail((error) => {
             Toast.fire({
                 icon: 'error',
-                title: textStatus,
+                title: error.responseJSON.messages.error,
             });
         })
     })
 
-    $(document).on('click', '#btn-update-permission', (e) => {
+    $(document).on('click', '#btn-update-permission', function(e) {
         e.preventDefault();
         $('.text-danger').remove();
         var editForm = $('#form-edit-permission');
@@ -148,8 +160,7 @@
         })
     })
 
-    $(document).on('click', '.btn-delete', (e) => {
-
+    $(document).on('click', '.btn-delete', function(e) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -170,23 +181,23 @@
                         title: textStatus,
                     });
                     tablePermission.ajax.reload();
-                }).fail((data, textStatus) => {
+                }).fail((error) => {
                     Toast.fire({
                         icon: 'error',
-                        title: textStatus,
+                        title: error.responseJSON.messages.error,
                     });
                 })
             }
         })
     })
 
-    $('#modal-create-permission').on('hidden.bs.modal', () => {
+    $('#modal-create-permission').on('hidden.bs.modal', function() {
         $(this).find('#form-create-permission')[0].reset();
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
     });
 
-    $('#modal-edit-permission').on('hidden.bs.modal', () => {
+    $('#modal-edit-permission').on('hidden.bs.modal', function() {
         $(this).find('#form-edit-permission')[0].reset();
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
