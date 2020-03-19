@@ -3,9 +3,9 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
-use Myth\Auth\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Entities\User;
+use Myth\Auth\Models\UserModel;
 
 class UserController extends BaseController
 {
@@ -17,6 +17,7 @@ class UserController extends BaseController
     {
         $this->users = new UserModel();
     }
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -24,13 +25,13 @@ class UserController extends BaseController
      */
     public function index()
     {
-       $data = [
-           'title' => 'Users',
+        $data = [
+            'title' => 'Users',
         ];
-        
+
         if ($this->request->isAJAX()) {
             return $this->respond([
-                'data' => $this->users->get()->getResultArray(), 
+                'data' => $this->users->get()->getResultArray(),
             ]);
         }
 
@@ -46,7 +47,7 @@ class UserController extends BaseController
     {
         return view('agungsugiarto\boilerplate\Views\User\profile');
     }
-    
+
     /**
      * Create a new resource object, from "posted" parameters.
      *
@@ -61,7 +62,6 @@ class UserController extends BaseController
         ];
 
         return view('agungsugiarto\boilerplate\Views\User\create', $data);
-
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends BaseController
 
         try {
             $this->db->transBegin();
-            
+
             $id = $this->users->insert(new User([
                 'active'   => $this->request->getPost('active'),
                 'email'    => $this->request->getPost('email'),
@@ -105,7 +105,6 @@ class UserController extends BaseController
             foreach ($roles as $role) {
                 $this->authorize->addUserToGroup($id, $role);
             }
-        
         } catch (\Exception $e) {
             $this->db->transRollback();
 
@@ -113,6 +112,7 @@ class UserController extends BaseController
         }
 
         $this->db->transCommit();
+
         return redirect()->back()->with('messages', 'success insert data!');
     }
 
@@ -120,6 +120,7 @@ class UserController extends BaseController
      * Return the editable properties of a resource object.
      *
      * @param int id
+     *
      * @return mixed
      */
     public function edit($id)
@@ -140,6 +141,7 @@ class UserController extends BaseController
      * Add or update a model resource, from "posted" properties.
      *
      * @param int id
+     *
      * @return mixed
      */
     public function update($id)
@@ -180,7 +182,6 @@ class UserController extends BaseController
             }
 
             $this->db->transCommit();
-
         } catch (\Exception $e) {
             $this->db->transRollback();
 
@@ -194,6 +195,7 @@ class UserController extends BaseController
      * Delete the designated resource object from the model.
      *
      * @param int id
+     *
      * @return mixed
      */
     public function delete($id)

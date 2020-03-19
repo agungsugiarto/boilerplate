@@ -159,7 +159,7 @@ class RoleController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @return array an array 
+     * @return array an array
      */
     public function delete($id)
     {
