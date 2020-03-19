@@ -1,8 +1,6 @@
-<!-- Include nestable -->
+<!-- Include -->
 <?= $this->include('agungsugiarto\boilerplate\Views\load\nestable') ?>
-<!-- select2 -->
 <?= $this->include('agungsugiarto\boilerplate\Views\load\select2') ?>
-<!-- iconpicker -->
 <?= $this->include('agungsugiarto\boilerplate\Views\load\iconpicker') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>

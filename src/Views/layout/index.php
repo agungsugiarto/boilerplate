@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <?= csrf_meta() ?>
+  <meta name="<?= csrf_token() ?>" content="<?= csrf_hash() ?>">
   <title><?= $title ?? '' ?> | <?= config('Boilerplate')->appName ?></title>
   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -81,24 +81,13 @@
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.1/dist/js/adminlte.min.js"></script>
   <!-- Preload Scriptt -->
   <script>
-    $('.sidebar-toggle').on('click', function (event) {
-      event.preventDefault();
-      if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-        sessionStorage.setItem('sidebar-toggle-collapsed', '');
-      } else {
-        sessionStorage.setItem('sidebar-toggle-collapsed', '1');
-      }
-    });
-
-    (function () {
-      if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-        var body = document.getElementsByTagName('body')[0];
-        body.className = body.className + ' sidebar-collapse';
-      }
-    })();
+  $('.sidebar-toggle').on('click',function(event){event.preventDefault();if(Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))){sessionStorage.setItem('sidebar-toggle-collapsed','')}else{sessionStorage.setItem('sidebar-toggle-collapsed','1')}});(function(){if(Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))){var body=document.getElementsByTagName('body')[0];body.className=body.className+' sidebar-collapse'}})()
   </script>
   <!-- Render section boilerplate js -->
   <?= $this->renderSection('js') ?>
+  <script>
+  $.ajaxSetup({headers:{'<?= config('App')->CSRFHeaderName ?>':$('meta[name="<?= config('App')->CSRFTokenName ?>"]').attr('content')}})
+  </script>
 
 </body>
 

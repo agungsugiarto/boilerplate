@@ -43,11 +43,7 @@
 <!-- Push section js -->
 <?= $this->section('js') ?>
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="X-CSRF-TOKEN"]').attr('content')
-        }
-    });
+    $.get('https://www.google.com/');
 
     var tablePermission = $('#table-permission').DataTable({
         paging: true,

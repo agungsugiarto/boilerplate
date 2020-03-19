@@ -17,63 +17,65 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <?= form_open('admin/role', ['method' => 'post']) ?>
-                        <?= csrf_field() ?>
-                        <div class="col-md-10">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role">
-                                        <div class="invalid-feedback">
-                                            <?= session('error.name') ?>
-                                        </div>
+                <?= form_open('admin/role', ['method' => 'post']) ?>
+                    <?= csrf_field() ?>
+                    <div class="col-md-10">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Description</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
-                                        </div>
-                                        <input type="text" name="description" class="form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="Description for role">
-                                        <div class="invalid-feedback">
-                                            <?= session('error.description') ?>
-                                        </div>
+                                    <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="Name for role">
+                                    <?php if (session('error.name')) : ?>
+                                    <div class="invalid-feedback">
+                                        <h6><?= session('error.name') ?></h6>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Permission</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <select multiple="multiple" name="permission[]" title="permission[]">
-                                            <?php foreach ($data as $d) { ?>
-                                                <option value="<?= $d['id'] ?>"><?= $d['name'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <?php if (session('error.permission')) { ?>
-                                            <p class="text-danger"><?= session('error.permission') ?></p>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="float-right">
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                        Save
-                                    </button>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
-                    <?= form_close() ?>
-                </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
+                                    </div>
+                                    <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="Description for role"><?= old('description') ?></textarea>
+                                    <?php if (session('error.description')) : ?>
+                                    <div class="invalid-feedback">
+                                        <h6><?= session('error.description') ?></h6>
+                                    </div>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Permission</label>
+                            <div class="col-sm-10">
+                                <div class="textarea-group">
+                                    <select multiple="multiple" name="permission[]" title="permission[]">
+                                        <?php foreach ($data as $permission) : ?>
+                                            <option <?= in_array($permission['id'], old('permission', [])) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <?php if (session('error.permission')) : ?>
+                                        <h6 class="text-danger"><?= session('error.permission') ?></h6>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-right">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-sm btn-block btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?= form_close() ?>
             </div>
         </div>
     </div>

@@ -41,13 +41,7 @@
 
 <!-- Push section js -->
 <?= $this->section('js') ?>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="X-CSRF-TOKEN"]').attr('content')
-        }
-    });
-    
+<script>    
     var tableRole = $('#table-role').DataTable({
         paging: true,
         lengthChange: true,
@@ -77,8 +71,7 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
-</script>
-<script>
+    
     $(document).on('click', '.btn-delete', function (e) {
         Swal.fire({
             title: 'Are you sure?',

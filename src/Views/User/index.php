@@ -1,4 +1,7 @@
 <?= $this->include('agungsugiarto\boilerplate\Views\load\select2') ?>
+<?= $this->include('agungsugiarto\boilerplate\Views\load\datatables') ?>
+<?= $this->include('agungsugiarto\boilerplate\Views\load\sweetalert') ?>
+<!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 
 <!-- Section content -->
@@ -6,124 +9,35 @@
     <!-- SELECT2 EXAMPLE -->
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title">Select2 (Default Theme)</h3>
             <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                        class="fas fa-minus"></i></button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                        class="fas fa-remove"></i></button>
+                <div class="btn-group">
+                    <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                        Add User
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Minimal</label>
-                        <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="table-user" class="table table-striped table-hover va-middle">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <!-- <th>Groups</th> -->
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- /.form-group -->
-                    <div class="form-group">
-                        <label>Disabled</label>
-                        <select class="form-control select2" disabled="disabled" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
-                    </div>
-                    <!-- /.form-group -->
                 </div>
-                <!-- /.col -->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Multiple</label>
-                        <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                            style="width: 100%;">
-                            <option>Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
-                    </div>
-                    <!-- /.form-group -->
-                    <div class="form-group">
-                        <label>Disabled Result</label>
-                        <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option disabled="disabled">California (disabled)</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
-                    </div>
-                    <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-            <h5>Custom Color Variants</h5>
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <div class="form-group">
-                        <label>Minimal (.select2-danger)</label>
-                        <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger"
-                            style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
-                    </div>
-                    <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6">
-                    <div class="form-group">
-                        <label>Multiple (.select2-purple)</label>
-                        <div class="select2-purple">
-                            <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                <option>Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information
-            about
-            the plugin.
         </div>
     </div>
     <!-- /.card -->
@@ -131,6 +45,40 @@
 
 <?= $this->section('js') ?>
 <script>
-    $('.select2').select2();
+    var tableUser = $('#table-user').DataTable({
+        ordering: false,
+        autoWidth: false,
+
+        ajax : {
+            url: '<?= route_to('admin/user/manage') ?>',
+            method: 'GET'
+        },
+        columns : [
+            { 'data': null },
+            { 'data': 'username' },
+            { 'data': 'email' },
+            // {
+            //     'data': function (data) {
+            //         return `<span class="badge bg-info">${data.active == 1 ? 'active' : 'non-active'}</span>`
+            //     }
+            // },
+            {
+                'data': function (data) {
+                    return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? 'active' : 'non-active'}</span>`
+                }
+            },
+            { 
+                'data': function (data) {
+                    return `<a href="<?= route_to('admin/user/manage') ?>/${data.id}/edit" class="btn btn-primary btn-sm btn-edit" data-id="${data.id}"><span class="fa fa-fw fa-pencil-alt"></span></a> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="${data.id}"><span class="fa fa-fw fa-trash"></span></button>`;
+                }
+            }
+        ]
+    });
+
+    tableUser.on('order.dt search.dt', () => {
+        tableUser.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        });
+    }).draw();
 </script>
 <?= $this->endSection() ?>

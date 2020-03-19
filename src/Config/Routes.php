@@ -20,11 +20,12 @@ $routes->group('admin', function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->get('show', 'UserController::show', ['as' => 'user-show']);
+        $routes->get('(.*)/update', 'UserController::show/$1', ['as' => 'user-update']);
         $routes->resource('manage', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
             'controller' => 'UserController',
-            'except'     => 'show',
+            'except'     => 'show,update',
         ]);
     });
 
@@ -40,11 +41,18 @@ $routes->group('admin', function ($routes) {
     /**
      * Role routes.
      */
-    $routes->resource('role', [
-        'filter'     => 'permission:role-permission',
-        'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
-        'controller' => 'RoleController',
-    ]);
+    $routes->group('role', [
+        'filter'    => 'permission:role-permission',
+        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
+    ], function ($routes) {
+        $routes->get('/', 'RoleController::index');
+        $routes->get('new', 'RoleController::new');
+        $routes->get('(.*)/show', 'RoleController::show/$1');
+        $routes->post('', 'RoleController::create');
+        $routes->get('(.*)/edit', 'RoleController::edit/$1');
+        $routes->post('(.*)/update', 'RoleController::update/$1', ['as' => 'role-update']);
+        $routes->delete('(.*)', 'RoleController::delete/$1');
+    });
 
     /**
      * Menu routes.

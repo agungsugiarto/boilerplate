@@ -99,12 +99,14 @@ class RoleController extends BaseController
      *
      * @return array an array
      */
-    public function edit($id = null)
+    public function edit($id)
     {
         $data = [
-            'role'       => $this->authorize->group($id),
-            'perm'       => $this->authorize->permissions(),
-            'permission' => (new Group())->getPermissionsForGroup($id),
+            'title'       => 'Edit',
+            'role'        => $this->authorize->group($id),
+            'permissions' => $this->authorize->permissions(),
+            'permission'  => (new Group())->getPermissionsForGroup($id),
+            // 'test'        => $test,
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
@@ -123,9 +125,9 @@ class RoleController extends BaseController
             'permission'  => 'required',
         ];
 
-        $name = $this->request->getGetPost('name');
-        $description = $this->request->getGetPost('description');
-        $permission = $this->request->getGetPost('permission');
+        $name = $this->request->getPost('name');
+        $description = $this->request->getPost('description');
+        $permission = $this->request->getPost('permission');
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
@@ -133,12 +135,17 @@ class RoleController extends BaseController
 
         try {
             $this->db->transBegin();
+            // update group
             $this->authorize->updateGroup($id, url_title($name), $description);
 
+            // remove first all groups permissions
+            $this->db->table('auth_groups_permissions')->where('group_id', $id)->delete();
+
             foreach ($permission as $value) {
-                $this->authorize->removePermissionFromGroup($value, $id);
+                // insert with new permission to group
                 $this->authorize->addPermissionToGroup($value, $id);
             }
+
             $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
@@ -152,7 +159,7 @@ class RoleController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @return array an array
+     * @return array an array 
      */
     public function delete($id)
     {
