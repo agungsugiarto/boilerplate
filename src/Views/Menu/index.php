@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="menu"></div>
+                    <div class="dd" id="menu"></div>
                 </div>
             </div><!-- /.card -->
         </div>
@@ -39,14 +39,6 @@
                 <div class="card-header">
                     <div class="float-left">
                         <h5>Create Menu</h5>
-                    </div>
-                    <div class="float-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-block btn-primary" id="create-book"
-                                data-toggle="modal" data-target="#modal-update"><i class="fa fa-plus"></i> 
-                                Create Menu
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -166,7 +158,7 @@ $(function () {
             json: response.data,
             contentCallback: (item) => {
                 return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
-                        <span class="float-right">
+                        <span class="float-right dd-nodrag">
                             <button data-id="${item.id}" id="btn-update" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
                             <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
                         </span>`;

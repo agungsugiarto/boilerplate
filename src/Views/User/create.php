@@ -97,7 +97,7 @@
                         <div class="col-sm-8">
                             <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="Select Permissions" style="width: 100%;">
                             <?php foreach ($permissions as $permission) : ?>
-                                <option value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
+                                <option <?= in_array($permission['id'], old('permission', [])) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
                             <?php endforeach ?>
                             </select>
                             <?php if (session('error.permission')) : ?>
@@ -110,7 +110,7 @@
                         <div class="col-sm-8">
                             <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="Select Roles" style="width: 100%;">
                             <?php foreach ($roles as $role) : ?>
-                                <option value="<?= $role->id ?>"><?= $role->name ?></option>
+                                <option <?= in_array($role->id, old('role', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
                             <?php endforeach ?>
                             </select>
                             <?php if (session('error.role')) : ?>

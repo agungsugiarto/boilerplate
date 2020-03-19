@@ -16,7 +16,7 @@ class MenuController extends BaseController
             return $this->response->setJSON([
                 'success'  => true,
                 'messages' => 'success get data',
-                'data'     => menu(),
+                'data'     => nestable(),
             ]);
         }
 

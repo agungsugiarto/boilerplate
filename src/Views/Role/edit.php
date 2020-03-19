@@ -57,10 +57,13 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
-                                    <?php foreach ($permissions as $value) : ?>
-                                        <option <?= in_array($value['id'], $permission) ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                    <?php foreach ($permissions as $key => $value) : ?>
+                                        <?php if (array_key_exists($key, $permission)) : ?>
+                                            <option value="<?= $value['id'] ?>" selected><?= $value['name'] ?></option>
+                                        <?php else : ?>
+                                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                        <?php endif ?>
                                     <?php endforeach ?>
-                                    <!-- I need help here to un-select if not match between $values and $permission-->
                                     </select> 
                                     <?php if (session('error.permission')) : ?>
                                         <h6 class="text-danger"><?= session('error.permission') ?></h6>
