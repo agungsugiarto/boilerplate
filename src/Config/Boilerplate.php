@@ -62,10 +62,9 @@ class Boilerplate extends BaseConfig
             'brand' => [
                 'bg'   => 'gray-dark',
                 'logo' => [
-                    'bg'     => 'dark',
-                    'icon'   => '<i class="fas fa-fire"></i>',
-                    'text'   => '<strong>BO</strong>ilerplate',
-                    'shadow' => 0,
+                    'icon'   => 'favicon.ico', // path to image | this example icon on public root folder.
+                    'text'   => '<strong>Bo</strong>ilerplate',
+                    'shadow' => 2,
                 ],
             ],
             'user' => [
@@ -75,8 +74,8 @@ class Boilerplate extends BaseConfig
         ],
         'footer' => [
             'fixed'      => false,
-            'vendorname' => 'Boilerplate',
-            'vendorlink' => 'https://github.com/agungsugiarto/boilerplate',
+            'vendorname' => 'Your Awesome Vendor',
+            'vendorlink' => 'https://your-awesome.com',
         ],
     ];
 }

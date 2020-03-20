@@ -19,13 +19,13 @@ $routes->group('admin', function ($routes) {
         'filter'    => 'permission:back-office',
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
-        $routes->get('show', 'UserController::show', ['as' => 'user-show']);
-        $routes->get('(.*)/update', 'UserController::show/$1', ['as' => 'user-update']);
+        $routes->get('profile', 'UserController::profile', ['as' => 'user-show']);
+        $routes->post('(.*)/update', 'UserController::update/$1', ['as' => 'user-update']);
         $routes->resource('manage', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
             'controller' => 'UserController',
-            'except'     => 'show,update',
+            'except'     => 'update',
         ]);
     });
 

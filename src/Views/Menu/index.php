@@ -14,18 +14,18 @@
             <div class="card card-primary card-outline">
                 <div id="nestable-menu" class="card-header">
                     <div class="btn-group">
-                        <button class="btn btn-info btn-sm" data-action="expand" title="Expand">
+                        <button class="btn btn-info btn-sm tree-tools" data-action="expand" title="Expand">
                             <i class="fas fa-chevron-down"></i>&nbsp;Expand
                         </button>
-                        <button class="btn btn-info btn-sm" data-action="collapse" title="Collapse">
+                        <button class="btn btn-info btn-sm tree-tools" data-action="collapse" title="Collapse">
                             <i class="fas fa-chevron-up"></i>&nbsp;Collapse
                         </button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;Save</span></button>
+                        <button class="btn btn-primary btn-sm save" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;Save</span></button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-warning btn-sm" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;Refresh</span></button>
+                        <button class="btn btn-warning btn-sm refresh" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;Refresh</span></button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -148,12 +148,10 @@ $(function () {
         placement: 'bottomRight',
         hideOnSelect: true,
     });
-
-    //Initialize Select2 Elements
     $('.parent').select2();
 
     $.get("<?= base_url('admin/menu') ?>", function(response) {
-        $('#menu').nestable({
+        $('.dd').nestable({
             maxDepth: 2,
             json: response.data,
             contentCallback: (item) => {
@@ -166,23 +164,32 @@ $(function () {
         });
     });
 
-    $('#nestable-menu').on('click', (e) => {
-        var target = $(e.target);
-        var action = target.data('action');
-
-        switch (action) {
-            case 'expand':
-                $('#menu').nestable('expandAll');
-                break;
-            case 'collapse':
-                $('#menu').nestable('collapseAll');
-                break;
-            case 'refresh':
-                console.log('refresh');
-                break;
-            default:
-                $('#menu').nestable('expandAll');
+    $('.tree-tools').on('click', function(e) {
+        var action = $(this).data('action');
+        if (action === 'expand') {
+            $('.dd').nestable('expandAll');
         }
+        if (action === 'collapse') {
+            $('.dd').nestable('collapseAll');
+        }
+    });
+
+    $('.save').click(function () {
+        var serialize = $('#menu').nestable('serialize');
+        // $.post('http://admin.laravel.local/admin/auth/menu', {
+        //     _token: LA.token,
+        //     _order: JSON.stringify(serialize)
+        // },
+        // function(data){
+        //     $.pjax.reload('#pjax-container');
+        //     toastr.success('Save succeeded !');
+        // });
+        location.reload(true);
+        console.log(JSON.stringify(serialize));
+    });
+
+    $('.refresh').on('click', function (e) {
+        location.reload(true);
     });
 
     $(document).on('click', '#btn-update', (e) => {

@@ -35,11 +35,14 @@
       <div class="input-group mb-3">
         <input type="password" name="password"
           class="form-control <?php if (session('errors.password')) { ?>is-invalid<?php } ?>"
-          placeholder="<?=lang('Auth.password')?>" autocomplete="off">
+          placeholder="<?=lang('Auth.password')?>" value="<?= old('password') ?> autocomplete="off">
         <div class="input-group-append">
           <div class="input-group-text">
             <span class="fas fa-lock"></span>
           </div>
+        </div>
+        <div class="invalid-feedback">
+          <?= session('errors.password') ?>
         </div>
       </div>
       <div class="input-group mb-3">
@@ -50,6 +53,9 @@
           <div class="input-group-text">
             <span class="fas fa-lock"></span>
           </div>
+        </div>
+        <div class="invalid-feedback">
+          <?= session('errors.pass_confirm') ?>
         </div>
       </div>
       <div class="row">

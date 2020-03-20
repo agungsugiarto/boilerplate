@@ -19,6 +19,7 @@ class RoleController extends BaseController
     {
         $data = [
             'title' => 'Role',
+            'subtitle' => 'list',
             'data'  => $this->authorize->permissions(),
         ];
 

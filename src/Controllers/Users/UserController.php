@@ -6,6 +6,7 @@ use agungsugiarto\boilerplate\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use Myth\Auth\Authorization\GroupModel;
 
 class UserController extends BaseController
 {
@@ -31,7 +32,7 @@ class UserController extends BaseController
 
         if ($this->request->isAJAX()) {
             return $this->respond([
-                'data' => $this->users->get()->getResultArray(),
+                'data' => $this->users->get()->getResultObject(),
             ]);
         }
 
@@ -41,9 +42,32 @@ class UserController extends BaseController
     /**
      * Return the properties of a resource object.
      *
+     * @param int id
+     * 
      * @return mixed
      */
-    public function show()
+    public function show($id)
+    {
+        if ($this->request->isAJAX()) {
+            $group = new GroupModel();
+
+            $userGroups = $group->getGroupsForUser($id);
+            $user = $this->users->where('id', $id)->get()->getResultArray();
+    
+            if (!$user) {
+                return $this->fail('fail get data');
+            }
+    
+            return $this->respond([
+                'data' => [
+                    'user' => $user,
+                    'groups' => $userGroups,
+                ],
+            ], 200);
+        }
+    }
+
+    public function profile()
     {
         return view('agungsugiarto\boilerplate\Views\User\profile');
     }
@@ -200,5 +224,24 @@ class UserController extends BaseController
      */
     public function delete($id)
     {
+    }
+
+    private function listAllUser()
+    {
+        $users = $this->users->get()->getResultObject();
+        $data = [];
+
+        foreach ($users as $item) {
+            $user['active']     = $item->active;
+            $user['username']   = $item->username;
+            $user['email']      = $item->email;
+            $user['created_at'] = $item->created_at;
+            $user['groups']     = (new GroupModel())->getGroupsForUser($item->id);
+
+            $data[] = $user;
+
+        }
+
+        return $data;
     }
 }

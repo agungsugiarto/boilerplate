@@ -42,7 +42,8 @@
       <div class="input-group mb-3">
         <input type="password" class="form-control <?php if (session('errors.password')) { ?>is-invalid<?php } ?>" 
           placeholder="<?=lang('Auth.password')?>"
-          name="password">
+          name="password"
+          value="<?= old('password') ?>">
         <div class="input-group-append">
           <div class="input-group-text">
             <span class="fas fa-lock"></span>

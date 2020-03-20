@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <i class="fas fa-fire"></i>
+      <img src="<?= base_url(config('Boilerplate')->theme['sidebar']['brand']['logo']['icon']) ?>" class="brand-image img-circle elevation-<?= config('Boilerplate')->theme['sidebar']['brand']['logo']['shadow'] ?>">
       <b><?= config('Boilerplate')->appName ?></b>
     </div>
     <?= $this->renderSection('content') ?>

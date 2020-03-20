@@ -1,17 +1,13 @@
 <aside class="main-sidebar <?= config('Boilerplate')->theme['sidebar']['border'] ? 'border-right' : ''?> sidebar-<?= config('Boilerplate')->theme['sidebar']['type'] ?>-<?= config('Boilerplate')->theme['sidebar']['links']['bg'] ?> elevation-<?= config('Boilerplate')->theme['sidebar']['shadow'] ?>">
-    <a href="<?= route_to('/') ?>"
-        class="brand-link <?= !empty(config('Boilerplate')->theme['sidebar']['brand']['bg']) ? 'bg-'.config('Boilerplate')->theme['sidebar']['brand']['bg'] : '' ?>">
-        <span
-            class="brand-logo bg-<?= config('Boilerplate')->theme['sidebar']['brand']['logo']['bg'] ?> elevation-<?= config('Boilerplate')->theme['sidebar']['brand']['logo']['shadow'] ?>">
-            <?= config('Boilerplate')->theme['sidebar']['brand']['logo']['icon'] ?>
-        </span>
+    <a href="<?= route_to('/') ?>" class="brand-link <?= !empty(config('Boilerplate')->theme['sidebar']['brand']['bg']) ? 'bg-'.config('Boilerplate')->theme['sidebar']['brand']['bg'] : '' ?>">
+        <img src="<?= base_url(config('Boilerplate')->theme['sidebar']['brand']['logo']['icon']) ?>" class="brand-image img-circle elevation-<?= config('Boilerplate')->theme['sidebar']['brand']['logo']['shadow'] ?>" style="opacity: .8">
         <span class="brand-text"><?= config('Boilerplate')->theme['sidebar']['brand']['logo']['text'] ?></span>
     </a>
     <div class="sidebar">
         <?php if (config('Boilerplate')->theme['sidebar']['user']['visible']) { ?>
         <div class="user-panel py-3 d-flex">
             <div class="image">
-                <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png" class="img-circle elevation-2"
+                <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png" class="img-circle elevation-<?= config('Boilerplate')->theme['sidebar']['user']['shadow'] ?>"
                     alt="User Image">
             </div>
             <div class="info">
