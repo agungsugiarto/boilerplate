@@ -18,9 +18,9 @@ class RoleController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Role',
+            'title'    => 'Role',
             'subtitle' => 'list',
-            'data'  => $this->authorize->permissions(),
+            'data'     => $this->authorize->permissions(),
         ];
 
         if ($this->request->isAJAX()) {
