@@ -4,7 +4,7 @@
         <span class="brand-text"><?= config('Boilerplate')->theme['sidebar']['brand']['logo']['text'] ?></span>
     </a>
     <div class="sidebar">
-        <?php if (config('Boilerplate')->theme['sidebar']['user']['visible']) { ?>
+        <?php if (config('Boilerplate')->theme['sidebar']['user']['visible']) : ?>
         <div class="user-panel py-3 d-flex">
             <div class="image">
                 <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png" class="img-circle elevation-<?= config('Boilerplate')->theme['sidebar']['user']['shadow'] ?>"
@@ -14,36 +14,38 @@
                 <a href="<?= route_to('user-show') ?>" class="d-block"><?= user()->username ?></a>
             </div>
         </div>
-        <?php } ?>
+        <?php endif ?>
         <nav class="mt-3">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent <?= config('Boilerplate')->theme['sidebar']['compact'] ? 'nav-compact' : '' ?>" data-widget="treeview"
                 role="menu" data-accordion="false">
-                <?php foreach (menu() as $parent) { ?>
+                <?php foreach (menu() as $parent) : ?>
+                <!-- Fix me menu-open and active-->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="<?= base_url($parent['route']) ?>" class="nav-link active">
-                        <i class="nav-icon <?= $parent['icon']?>"></i>
+                    <a href="<?= base_url($parent->route) ?>" class="nav-link active">
+                <!-- end note -->
+                        <i class="nav-icon <?= $parent->icon ?>"></i>
                         <p>
-                            <?= $parent['title'] ?>
-                            <?php if (count($parent['children'])) { ?>
+                            <?= $parent->title ?>
+                            <?php if (count($parent->children)) : ?>
                                 <i class="right fas fa-angle-left"></i>
-                            <?php } ?>
+                            <?php endif ?>
                         </p>
                     </a>
-                    <?php if (count($parent['children'])) { ?>
+                    <?php if (count($parent->children)) : ?>
                     <ul class="nav nav-treeview">
-                        <?php foreach ($parent['children'] as $child) { ?>
+                        <?php foreach ($parent->children as $child) : ?>
                         <li class="nav-item has-treeview">
-                            <a href="<?= base_url($child['route']) ?>"
-                                class="nav-link <?= current_url() == base_url($child['route']) ? 'active' : '' ?>">
-                                <i class="nav-icon <?= $child['icon']?>"></i>
-                                <p><?= $child['title'] ?></p>
+                            <a href="<?= base_url($child->route) ?>"
+                                class="nav-link <?= current_url() == base_url($child->route) ? 'active' : '' ?>">
+                                <i class="nav-icon <?= $child->icon ?>"></i>
+                                <p><?= $child->title ?></p>
                             </a>
                         </li>
-                        <?php } ?>
+                        <?php endforeach ?>
                     </ul>
-                    <?php } ?>
+                    <?php endif ?>
                 </li>
-                <?php } ?>
+                <?php endforeach ?>
             </ul>
         </nav>
     </div>

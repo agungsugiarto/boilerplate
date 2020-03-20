@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add a Permission</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?= lang('permission.add') ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,18 +11,18 @@
             <div class="modal-body">
                 <form id="form-create-permission" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name of permission">
+                        <label><?= lang('permission.name') ?></label>
+                        <input type="text" class="form-control" name="name" placeholder="<?= lang('permission.place_name') ?>">
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="description" placeholder="Description for permission"></textarea>
+                        <label><?= lang('permission.description') ?></label>
+                        <textarea class="form-control" name="description" placeholder="<?= lang('permission.place_description') ?>"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-sm" id="btn-save-permission">Save</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><?= lang('permission.close') ?></button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-save-permission"><?= lang('permission.save') ?></button>
             </div>
         </div>
     </div>

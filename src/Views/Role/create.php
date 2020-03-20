@@ -21,13 +21,13 @@
                     <?= csrf_field() ?>
                     <div class="col-md-10">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Name</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('role.name') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="Name for role">
+                                    <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="<?= lang('role.place_name') ?>">
                                     <?php if (session('error.name')) : ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.name') ?></h6>
@@ -37,13 +37,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Description</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('role.description') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
                                     </div>
-                                    <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="Description for role"><?= old('description') ?></textarea>
+                                    <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="<?= lang('role.place_description') ?>"><?= old('description') ?></textarea>
                                     <?php if (session('error.description')) : ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.description') ?></h6>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Permission</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('permission.title') ?></label>
                             <div class="col-sm-10">
                                 <div class="textarea-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
@@ -70,7 +70,7 @@
                         <div class="float-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                    Save
+                                    <?= lang('role.save') ?>
                                 </button>
                             </div>
                         </div>

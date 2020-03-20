@@ -15,17 +15,17 @@
                 <div id="nestable-menu" class="card-header">
                     <div class="btn-group">
                         <button class="btn btn-info btn-sm tree-tools" data-action="expand" title="Expand">
-                            <i class="fas fa-chevron-down"></i>&nbsp;Expand
+                            <i class="fas fa-chevron-down"></i>&nbsp;<?= lang('menu.expand') ?>
                         </button>
                         <button class="btn btn-info btn-sm tree-tools" data-action="collapse" title="Collapse">
-                            <i class="fas fa-chevron-up"></i>&nbsp;Collapse
+                            <i class="fas fa-chevron-up"></i>&nbsp;<?= lang('menu.collapse') ?>
                         </button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm save" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;Save</span></button>
+                        <button class="btn btn-primary btn-sm save" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;<?= lang('menu.save') ?></span></button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-warning btn-sm refresh" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;Refresh</span></button>
+                        <button class="btn btn-warning btn-sm refresh" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;<?= lang('menu.refresh') ?></span></button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,99 +38,108 @@
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <div class="float-left">
-                        <h5>Create Menu</h5>
+                        <h5><?= lang('menu.add') ?></h5>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal">
+                    <form action="<?= route_to('admin/menu') ?>" method="post" class="form-horizontal">
+                        <?= csrf_field() ?>
                         <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 col-form-label">Parent</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('menu.parent') ?></label>
+                            <div class="col-sm-10">
+                                <select class="form-control parent" name="parent_id" style="width: 100%;">
+                                    <option selcted value="0">ROOT</option>
+                                    <?php foreach($menus as $menu) : ?>
+                                        <option <?= ($menu->id == old('parent')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <span class="help-block">
+                                    <i class="fas fa-exclamation-triangle"></i>&nbsp;<?= lang('menu.warning_parent') ?>
+                                </span>
+                                <?php if (session('error.parent')) : ?>
+                                    <div class="invalid-feedback">
+                                        <h6><?= session('error.parent') ?></h6>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"><?= lang('menu.active') ?></label>
                             <div class="col-sm-10">
                                 <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
-                                <select class="form-control parent" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
+                                <select class="form-control parent" name="active" style="width: 100%;">
+                                    <option selected value="1"><?= lang('menu.active') ?></option>
+                                    <option value="0"><?= lang('menu.non_active') ?></option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 col-form-label">Active</label>
-                            <div class="col-sm-10">
-                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
-                                <select class="form-control parent" style="width: 100%;">
-                                    <option selected="selected">Active</option>
-                                    <option>Non Active</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Icon</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('menu.icon') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
                                     </div>
-                                    <input type="text" name="description" class="icon-picker form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="Description for role" autocomplete="off">
+                                    <input type="text" name="icon" class="icon-picker form-control <?php if (session('error.icon')) { ?>is-invalid<?php } ?>" value="<?= old('icon') ?>" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
+                                    <?php if (session('error.icon')) : ?>
                                     <div class="invalid-feedback">
-                                        <?= session('error.description') ?>
+                                        <h6><?= session('error.icon') ?></h6>
                                     </div>
+                                    <?php endif ?>
                                 </div>
                                 <span class="help-block">
-                                    <i class="fa fa-info-circle"></i>&nbsp;For more icons please see <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
+                                    <i class="fa fa-info-circle"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Title</label>
+                            <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.title') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
+                                    <input type="text" name="title" class="form-control <?php if (session('error.title')) { ?>is-invalid<?php } ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
+                                    <?php if (session('error.title')) : ?>
                                     <div class="invalid-feedback">
-                                        <?= session('error.name') ?>
+                                        <h6><?= session('error.title') ?></h6>
                                     </div>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputName2" class="col-sm-2 col-form-label">Route</label>
+                            <label for="inputName2" class="col-sm-2 col-form-label"><?= lang('menu.route') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-link"></i></span>
                                     </div>
-                                    <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="Name for role" autocomplete="off">
+                                    <input type="text" name="route" class="form-control <?php if (session('error.route')) { ?>is-invalid<?php } ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
+                                    <?php if (session('error.route')) : ?>
                                     <div class="invalid-feedback">
-                                        <?= session('error.name') ?>
+                                        <h6><?= session('error.route') ?></h6>
                                     </div>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 col-form-label">Role</label>
+                            <label class="col-sm-2 col-form-label"><?= lang('menu.role') ?></label>
                             <div class="col-sm-10">
-                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
-                                <select class="form-control parent" multiple="multiple" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
+                                <select multiple="multiple" class="form-control parent" name="groups_menu[]" data-placeholder="<?= lang('menu.select_role') ?>" style="width: 100%;">
+                                    <?php foreach($roles as $role) : ?>
+                                        <option <?= in_array($role->id, old('groups_menu', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
+                                    <?php endforeach ?>
                                 </select>
+                                <?php if (session('error.role')) : ?>
+                                    <h6 class="text-danger"><?= session('error.role') ?></h6>
+                                <?php endif ?>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary"><?= lang('menu.save') ?></button>
                             </div>
                         </div>
                     </form>

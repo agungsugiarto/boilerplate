@@ -56,11 +56,13 @@ class BoilerplateSeeder extends Seeder
         $this->authorize->createPermission('back-office', 'User can access to the administration panel.');
         $this->authorize->createPermission('manage-user', 'User can create, delete or modify the users.');
         $this->authorize->createPermission('role-permission', 'User can edit and define permissions for a role.');
+        $this->authorize->createPermission('menu-permission', 'User cand create, delete or modify the menu.');
 
         // Assign Permission to role
         $this->authorize->addPermissionToGroup('back-office', 'admin');
         $this->authorize->addPermissionToGroup('manage-user', 'admin');
         $this->authorize->addPermissionToGroup('role-permission', 'admin');
+        $this->authorize->addPermissionToGroup('menu-permission', 'admin');
         $this->authorize->addPermissionToGroup('back-office', 'member');
 
         // Assign Role to user
@@ -72,13 +74,14 @@ class BoilerplateSeeder extends Seeder
         $this->authorize->addPermissionToUser('back-office', 1);
         $this->authorize->addPermissionToUser('manage-user', 1);
         $this->authorize->addPermissionToUser('role-permission', 1);
+        $this->authorize->addPermissionToUser('menu-permission', 1);
         $this->authorize->addPermissionToUser('back-office', 2);
 
         $this->db->table('menu')->insertBatch([
             [
                 'parent_id'  => '0',
                 'title'      => 'Dashboard',
-                'icon'       => 'fas fa-home',
+                'icon'       => 'fas fa-tachometer-alt',
                 'route'      => 'admin',
                 'sequence'   => '1',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -86,8 +89,8 @@ class BoilerplateSeeder extends Seeder
             ],
             [
                 'parent_id'  => '0',
-                'title'      => 'Authentication',
-                'icon'       => 'fas fa-tachometer-alt',
+                'title'      => 'User Management',
+                'icon'       => 'fas fa-user',
                 'route'      => '#',
                 'sequence'   => '2',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -96,7 +99,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'User',
-                'icon'       => 'far fa-circle',
+                'icon'       => 'fas fa-users',
                 'route'      => 'admin/user/manage',
                 'sequence'   => '3',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -105,7 +108,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Permission',
-                'icon'       => 'far fa-circle',
+                'icon'       => 'fas fa-user-lock',
                 'route'      => 'admin/permission',
                 'sequence'   => '4',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -114,7 +117,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Role',
-                'icon'       => 'far fa-circle',
+                'icon'       => 'fas fa-users-cog',
                 'route'      => 'admin/role',
                 'sequence'   => '5',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -123,7 +126,7 @@ class BoilerplateSeeder extends Seeder
             [
                 'parent_id'  => '2',
                 'title'      => 'Menu',
-                'icon'       => 'far fa-circle',
+                'icon'       => 'fas fa-stream',
                 'route'      => 'admin/menu',
                 'sequence'   => '6',
                 'created_at' => date('Y-m-d H:i:s'),

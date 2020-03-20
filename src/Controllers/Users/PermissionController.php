@@ -18,7 +18,8 @@ class PermissionController extends BaseController
     {
         // Title and breadcrump
         $data = [
-            'title' => 'Permission',
+            'title'    => lang('permission.title'),
+            'subtitle' => lang('permission.subtitle'),
         ];
 
         if ($this->request->isAJAX()) {
