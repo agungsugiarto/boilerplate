@@ -14,8 +14,9 @@
                     <div class="float-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-primary" id="create-book"
-                                data-toggle="modal" data-target="#modal-create-permission"><i class="fa fa-plus"></i> Add
-                                Permission</button>
+                                data-toggle="modal" data-target="#modal-create-permission"><i class="fa fa-plus"></i>
+                                <?= lang('permission.add') ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -25,9 +26,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th><?= lang('permission.name') ?></th>
+                                    <th><?= lang('permission.description') ?></th>
+                                    <th><?= lang('permission.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>

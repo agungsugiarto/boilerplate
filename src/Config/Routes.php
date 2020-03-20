@@ -58,7 +58,7 @@ $routes->group('admin', function ($routes) {
      * Menu routes.
      */
     $routes->resource('menu', [
-        'filter'     => 'permission:role-permission',
+        'filter'     => 'permission:menu-permission',
         'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
         'controller' => 'MenuController',
     ]);

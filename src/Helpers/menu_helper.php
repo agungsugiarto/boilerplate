@@ -22,9 +22,9 @@ if (!function_exists('menu')) {
         {
             $data = [];
             foreach ($item as $value) {
-                if ($value['parent_id'] == $parent_id) {
-                    $child = parse($item, $value['id']);
-                    $value['children'] = $child ?: $child;
+                if ($value->parent_id == $parent_id) {
+                    $child = parse($item, $value->id);
+                    $value->children = $child ?: $child;
                     $data[] = $value;
                 }
             }
@@ -38,7 +38,7 @@ if (!function_exists('menu')) {
         //     cache()->save('menu', $data, 300);
         // }
         // return $found;
-        return parse((new MenuModel())->orderBy('sequence', 'asc')->findAll(), 0);
+        return parse((new MenuModel())->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
     }
 }
 
@@ -62,9 +62,9 @@ if (!function_exists('nestable')) {
         {
             $data = [];
             foreach ($item as $value) {
-                if ($value['parent_id'] == $parent_id) {
-                    $child = nest($item, $value['id']);
-                    $value['children'] = $child ? $child : '';
+                if ($value->parent_id == $parent_id) {
+                    $child = nest($item, $value->id);
+                    $value->children = $child ? $child : '';
                     $data[] = $value;
                 }
             }
@@ -78,6 +78,6 @@ if (!function_exists('nestable')) {
         //     cache()->save('menu', $data, 300);
         // }
         // return $found;
-        return nest((new MenuModel())->orderBy('sequence', 'asc')->findAll(), 0);
+        return nest((new MenuModel())->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
     }
 }

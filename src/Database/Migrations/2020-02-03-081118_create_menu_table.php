@@ -42,7 +42,7 @@ class CreateMenuTable extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('menu');
         $this->forge->dropTable('groups_menu');
+        $this->forge->dropTable('menu');
     }
 }

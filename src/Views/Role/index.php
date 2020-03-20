@@ -12,8 +12,8 @@
                 <div class="card-header">
                     <div class="float-right">
                         <div class="btn-group">
-                            <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i> Add
-                                Role
+                            <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                                <?= lang('role.add') ?>
                             </a>
                         </div>
                     </div>
@@ -24,9 +24,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th><?= lang('role.name') ?></th>
+                                    <th><?= lang('role.description') ?></th>
+                                    <th><?= lang('role.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
