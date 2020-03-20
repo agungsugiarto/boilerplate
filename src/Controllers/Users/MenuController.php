@@ -71,7 +71,6 @@ class MenuController extends BaseController
                     'menu_id'  => $id,
                 ]);
             }
-
         } catch (\Exception $e) {
             $this->db->transRollback();
 

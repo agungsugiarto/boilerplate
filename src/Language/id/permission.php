@@ -11,5 +11,5 @@ return [
     'description'       => 'Deskripsi',
     'action'            => 'Aksi',
     'place_name'        => 'Nama dari izin.',
-    'place_description' => 'Deskripsi untuk izin.'
+    'place_description' => 'Deskripsi untuk izin.',
 ];

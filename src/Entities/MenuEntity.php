@@ -16,7 +16,7 @@ class MenuEntity extends Entity
      * when they are accessed.
      */
     protected $casts = [
-        'active' => 'boolean'
+        'active' => 'boolean',
     ];
 
     /**
