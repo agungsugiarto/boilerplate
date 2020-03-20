@@ -4,9 +4,9 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
+use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
-use Myth\Auth\Authorization\GroupModel;
 
 class UserController extends BaseController
 {
@@ -43,7 +43,7 @@ class UserController extends BaseController
      * Return the properties of a resource object.
      *
      * @param int id
-     * 
+     *
      * @return mixed
      */
     public function show($id)
@@ -53,14 +53,14 @@ class UserController extends BaseController
 
             $userGroups = $group->getGroupsForUser($id);
             $user = $this->users->where('id', $id)->get()->getResultArray();
-    
+
             if (!$user) {
                 return $this->fail('fail get data');
             }
-    
+
             return $this->respond([
                 'data' => [
-                    'user' => $user,
+                    'user'   => $user,
                     'groups' => $userGroups,
                 ],
             ], 200);
@@ -232,14 +232,13 @@ class UserController extends BaseController
         $data = [];
 
         foreach ($users as $item) {
-            $user['active']     = $item->active;
-            $user['username']   = $item->username;
-            $user['email']      = $item->email;
+            $user['active'] = $item->active;
+            $user['username'] = $item->username;
+            $user['email'] = $item->email;
             $user['created_at'] = $item->created_at;
-            $user['groups']     = (new GroupModel())->getGroupsForUser($item->id);
+            $user['groups'] = (new GroupModel())->getGroupsForUser($item->id);
 
             $data[] = $user;
-
         }
 
         return $data;
