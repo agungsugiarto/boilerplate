@@ -16,7 +16,7 @@ return [
     'non_active'     => 'Tidak Aktif',
     'icon'           => 'Ikon',
     'info_icon'      => 'Untuk ikon lainnya, silahkan lihat',
-    'place_icon'     => 'Ikon dari fontawesome.',   
+    'place_icon'     => 'Ikon dari fontawesome.',
     'title'          => 'Judul',
     'place_title'    => 'Nama untuk menu.',
     'route'          => 'Route',

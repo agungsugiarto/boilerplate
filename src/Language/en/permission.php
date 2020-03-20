@@ -11,5 +11,5 @@ return [
     'description'       => 'Description',
     'action'            => 'Action',
     'place_name'        => 'Name of permission.',
-    'place_description' => 'Description for permission.'
+    'place_description' => 'Description for permission.',
 ];

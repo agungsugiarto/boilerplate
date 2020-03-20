@@ -85,7 +85,6 @@ class RoleController extends BaseController
             foreach ($permission as $value) {
                 $this->authorize->addPermissionToGroup($value, $id);
             }
-            
         } catch (\Exception $e) {
             $this->db->transRollback();
 
@@ -93,7 +92,7 @@ class RoleController extends BaseController
         }
 
         $this->db->transCommit();
-        
+
         return redirect()->back()->with('message', lang('Auth.loginSuccess'));
     }
 

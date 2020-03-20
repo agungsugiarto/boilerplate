@@ -10,5 +10,5 @@ return [
     'description'       => 'Description',
     'action'            => 'Action',
     'place_name'        => 'Name of role.',
-    'place_description' => 'Description for role.'
+    'place_description' => 'Description for role.',
 ];
