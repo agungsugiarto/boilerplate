@@ -226,7 +226,7 @@ $(function () {
             var editForm = $('#form-edit');
 
             var group_id = response.data[0].group_id;
-            var group = group_id.split(',');
+            var group = group_id.split('|');
             var parent_id = response.data[0].parent_id == 0 ? 0 : response.data[0].parent_id;
 
             editForm.find('select[name="active"]').val(response.data[0].active).change();
