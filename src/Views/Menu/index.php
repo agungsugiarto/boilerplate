@@ -2,6 +2,7 @@
 <?= $this->include('agungsugiarto\boilerplate\Views\load\nestable') ?>
 <?= $this->include('agungsugiarto\boilerplate\Views\load\select2') ?>
 <?= $this->include('agungsugiarto\boilerplate\Views\load\iconpicker') ?>
+<?= $this->include('agungsugiarto\boilerplate\Views\load\sweetalert') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 
@@ -50,15 +51,15 @@
                                 <select class="form-control parent" name="parent_id" style="width: 100%;">
                                     <option selcted value="0">ROOT</option>
                                     <?php foreach($menus as $menu) : ?>
-                                        <option <?= ($menu->id == old('parent')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
+                                        <option <?= ($menu->id == old('parent_id')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <span class="help-block">
                                     <i class="fas fa-exclamation-triangle"></i>&nbsp;<?= lang('menu.warning_parent') ?>
                                 </span>
-                                <?php if (session('error.parent')) : ?>
+                                <?php if (session('error.parent_id')) : ?>
                                     <div class="invalid-feedback">
-                                        <h6><?= session('error.parent') ?></h6>
+                                        <h6><?= session('error.parent_id') ?></h6>
                                     </div>
                                 <?php endif ?>
                             </div>
@@ -66,7 +67,6 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"><?= lang('menu.active') ?></label>
                             <div class="col-sm-10">
-                                <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
                                 <select class="form-control parent" name="active" style="width: 100%;">
                                     <option selected value="1"><?= lang('menu.active') ?></option>
                                     <option value="0"><?= lang('menu.non_active') ?></option>
@@ -159,19 +159,23 @@ $(function () {
     });
     $('.parent').select2();
 
-    $.get("<?= base_url('admin/menu') ?>", function(response) {
+    menu();
+
+    function menu() {
+        $.get("<?= base_url('admin/menu') ?>", function(response) {
         $('.dd').nestable({
             maxDepth: 2,
             json: response.data,
             contentCallback: (item) => {
                 return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
                         <span class="float-right dd-nodrag">
-                            <button data-id="${item.id}" id="btn-update" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
+                            <button data-id="${item.id}" id="btn-edit" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
                             <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
                         </span>`;
             }
         });
     });
+    }
 
     $('.tree-tools').on('click', function(e) {
         var action = $(this).data('action');
@@ -202,34 +206,111 @@ $(function () {
         location.reload(true);
     });
 
-    $(document).on('click', '#btn-update', function(e) {
-        // e.preventDefault();
-        // $('#modal-update').modal('show');
+    $(document).on('click', '#btn-edit', function(e) {
         e.preventDefault();
 
         $.ajax({
             url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
+            dataType: 'JSON',
             
         }).done((response) => {
-            var editForm = $('#form-edit-permission');
-            editForm.find('input[name="name"]').val(response.data.name);
-            editForm.find('textarea[name="description"]').val(response.data.description);
-            $("#permission_id").val(response.data.id);
-            console.log(response);
+
+            $('#active').select2();
+            $('#parent_id').select2({
+                data: response.menu
+            });
+            $('#groups_menu').select2({
+                data: response.roles
+            });
+            var editForm = $('#form-edit');
+
+            var group_id = response.data[0].group_id;
+            var group = group_id.split(',');
+            var parent_id = response.data[0].parent_id == 0 ? 0 : response.data[0].parent_id;
+
+            editForm.find('select[name="active"]').val(response.data[0].active).change();
+            editForm.find('select[name="parent_id"]').val(parent_id).change();
+            editForm.find('select[name="groups_menu[]"]').val(group).change();
+            editForm.find('input[name="icon"]').val(response.data[0].icon);
+            editForm.find('input[name="icon"]').val(response.data[0].icon);
+            editForm.find('input[name="title"]').val(response.data[0].title);
+            editForm.find('input[name="route"]').val(response.data[0].route);
+            $("#menu_id").val(response.data[0].id);
             $('#modal-update').modal('show');
+
         }).fail((error) => {
-            // Toast.fire({
-            //     icon: 'error',
-            //     title: error.responseJSON.messages.error,
-            // });
+            Toast.fire({
+                icon: 'error',
+                title: error.responseJSON.messages.error,
+            });
+        })
+    });
+
+    $(document).on('click', '#btn-update', function(e) {
+        $('.invalid-feedback').remove();
+        var editForm = $('#form-edit');
+
+        $.ajax({
+            url: `<?= route_to('admin/menu') ?>/${ $('#menu_id').val() }`,
+            method: 'PUT',
+            data: editForm.serialize()
+            
+        }).done((data, textStatus) => {
+            Toast.fire({
+                icon: 'success',
+                title: textStatus
+            })
+
+            $('.dd').nestable('destroy');
+            menu();
+            $("#form-edit").trigger("reset");
+            $("#modal-update").modal('hide');
+
+        }).fail((xhr, status, error) => {
+            $.each(xhr.responseJSON.messages, (elem, messages) => {
+                editForm.find('input[name="' + elem + '"]').addClass('is-invalid').after('<p class="invalid-feedback">' + messages + '</p>');
+            });
+        })
+    });
+
+    $(document).on('click', '#btn-delete', function(e) {
+        Swal.fire({
+            title: '<?= lang('global.title') ?>',
+            text: "<?= lang('global.text') ?>",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '<?= lang('global.confirm_delete') ?>'
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}`,
+                    method: 'DELETE',
+                }).done((data, textStatus) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: textStatus,
+                    });
+                    $('.dd').nestable('destroy');
+                    menu();
+                }).fail((error) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: error.responseJSON.messages.error,
+                    });
+                })
+            }
         })
     })
 
-    $(document).on('click', '#btn-delete', (e) => {
-        e.preventDefault();
-        $('#modal-update').modal('show');
-    })
+    $('#modal-edit').on('hidden.bs.modal', function() {
+        $(this).find('#form-edit')[0].reset();
+        $('.is-invalid').removeClass('is-invalid');
+        $('.invalid-feedback').removeClass('invalid-feedback');
+    });
 })
 </script>
 <?= $this->endSection() ?>

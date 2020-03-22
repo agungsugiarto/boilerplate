@@ -9,27 +9,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form id="form-edit" class="form-horizontal">
+                    <input type="hidden" id="menu_id">
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.parent') ?></label>
                         <div class="col-sm-10">
-                            <select class="form-control parent" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
+                            <select name="parent_id" id="parent_id" style="width: 100%;">
+                                <option value="0">ROOT</option>
                             </select>
+                            <span class="help-block">
+                                <i class="fas fa-exclamation-triangle"></i>&nbsp;<?= lang('menu.warning_parent') ?>
+                            </span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.active') ?></label>
                         <div class="col-sm-10">
-                            <select class="form-control parent" style="width: 100%;">
-                                <option selected="selected">Active</option>
-                                <option>Non Active</option>
+                            <select class="form-control" id="active" name="active" style="width: 100%;">
+                                <option value="1"><?= lang('menu.active') ?></option>
+                                <option value="0"><?= lang('menu.non_active') ?></option>
                             </select>
                         </div>
                     </div>
@@ -40,10 +38,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
                                 </div>
-                                <input type="text" name="description" class="icon-picker form-control <?php if (session('error.description')) { ?>is-invalid<?php } ?>" value="<?= old('description') ?>" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    <?= session('error.description') ?>
-                                </div>
+                                <input type="text" name="icon" class="icon-picker form-control" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
                             </div>
                             <span class="help-block">
                                 <i class="fa fa-info-circle"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
@@ -57,10 +52,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                 </div>
-                                <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    <?= session('error.name') ?>
-                                </div>
+                                <input type="text" name="title" class="form-control <?php if (session('error.title')) { ?>is-invalid<?php } ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -71,24 +63,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-link"></i></span>
                                 </div>
-                                <input type="text" name="name" class="form-control <?php if (session('error.name')) { ?>is-invalid<?php } ?>" value="<?= old('name') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
-                                <div class="invalid-feedback">
-                                    <?= session('error.name') ?>
-                                </div>
+                                <input type="text" name="route" class="form-control <?php if (session('error.route')) { ?>is-invalid<?php } ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.role') ?></label>
                         <div class="col-sm-10">
-                            <select class="form-control parent" multiple="multiple" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
+                            <select name="groups_menu[]" id="groups_menu" multiple="multiple" style="width: 100%;">
                             </select>
                         </div>
                     </div>

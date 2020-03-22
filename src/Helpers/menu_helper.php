@@ -34,11 +34,11 @@ if (!function_exists('menu')) {
 
         // TODO: cache the result
         // if (! $found = cache('menu')) {
-        //     $data = parse((new MenuModel())->orderBy('sequence', 'asc')->findAll(), 0);
+        //     $data = parse((new MenuModel())->where('active', 1)->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
         //     cache()->save('menu', $data, 300);
         // }
-        // return $found;
-        return parse((new MenuModel())->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
+        // return $found; 
+        return parse((new MenuModel())->where('active', 1)->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
     }
 }
 

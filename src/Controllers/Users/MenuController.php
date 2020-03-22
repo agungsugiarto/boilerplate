@@ -21,6 +21,11 @@ class MenuController extends BaseController
         $this->groupsMenu = new GroupMenuModel();
     }
 
+    /**
+     * Return an array of resource objects, themselves in array format.
+     *
+     * @return \CodeIgniter\View\View | \CodeIgniter\API\ResponseTrait
+     */
     public function index()
     {
         $data = [
@@ -30,7 +35,7 @@ class MenuController extends BaseController
         ];
 
         if ($this->request->isAJAX()) {
-            return $this->response->setJSON([
+            return $this->respond([
                 'success'  => true,
                 'messages' => 'success get data',
                 'data'     => nestable(),
@@ -43,11 +48,11 @@ class MenuController extends BaseController
     public function create()
     {
         $validationRules = [
-            'parent_id'   => 'required',
-            'active'      => 'required',
-            'icon'        => 'required',
-            'route'       => 'required',
-            'title'       => 'required',
+            'parent_id'   => 'required|numeric',
+            'active'      => 'required|numeric',
+            'icon'        => 'required|min_length[5]|max_length[55]',
+            'route'       => 'required|min_length[2]|max_length[255]',
+            'title'       => 'required|min_length[5]|max_length[255]',
             'groups_menu' => 'required',
         ];
 
@@ -85,14 +90,56 @@ class MenuController extends BaseController
 
     public function update($id)
     {
-        if ($this->request->isAJAX()) {
-            return $this->respond($this->request->getJSON());
+        $validationRules = [
+            'parent_id'   => 'required|numeric',
+            'active'      => 'required|numeric',
+            'icon'        => 'required|min_length[5]|max_length[55]',
+            'route'       => 'required|min_length[2]|max_length[255]',
+            'title'       => 'required|min_length[5]|max_length[255]',
+            'groups_menu' => 'required',
+        ];
+
+        if (!$this->validate($validationRules)) {
+            return $this->fail($this->validator->getErrors());
         }
+
+        $data = $this->request->getRawInput();
+
+        try {
+            $this->db->transBegin();
+            
+            $this->menu->update($id, [
+                'parent_id' => $data['parent_id'],
+                'active'    => $data['active'],
+                'title'     => $data['title'],
+                'icon'      => $data['icon'],
+                'route'     => $data['route'],
+            ]);
+
+            // remove first all menu group by id
+            $this->db->table('groups_menu')->where('menu_id', $id)->delete();
+
+            foreach ($data['groups_menu'] as $groups) {
+                // insert with new 
+                $this->groupsMenu->insert([
+                    'group_id' => $groups,
+                    'menu_id'  => $id,
+                ]);
+            }
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+
+            return $this->fail($e->getMessage());
+        }
+
+        $this->db->transCommit();
+
+        return $this->respondCreated();
     }
 
     public function edit($id)
     {
-        $found = $this->menu->where('id', $id)->get()->getResultArray();
+        $found = $this->menu->getMenuById($id);
 
         if ($this->request->isAJAX()) {
             if (!$found) {
@@ -100,8 +147,19 @@ class MenuController extends BaseController
             }
 
             return $this->respond([
-                'data' => $found,
+                'data'  => $found,
+                'menu'  => $this->menu->getMenu(),
+                'roles' => $this->menu->getRole(),
             ]);
         }
+    }
+
+    public function delete($id)
+    {
+        if (!$found = $this->menu->where('id', $id)->delete()) {
+            return $this->fail('fail deleted');
+        }
+
+        return $this->respondDeleted($found);
     }
 }
