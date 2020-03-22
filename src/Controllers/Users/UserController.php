@@ -27,7 +27,7 @@ class UserController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Users',
+            'title' => lang('user.title'),
         ];
 
         if ($this->request->isAJAX()) {
@@ -80,7 +80,7 @@ class UserController extends BaseController
     public function new()
     {
         $data = [
-            'title'       => 'Users',
+            'title'       => lang('user.title'),
             'permissions' => $this->authorize->permissions(),
             'roles'       => $this->authorize->groups(),
         ];
@@ -150,7 +150,7 @@ class UserController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => 'Users',
+            'title'       => lang('user.title'),
             'permissions' => $this->authorize->permissions(),
             'roles'       => $this->authorize->groups(),
             'user'        => $this->users->find($id)->toArray(),

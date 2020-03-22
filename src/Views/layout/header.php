@@ -38,16 +38,9 @@
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <span>Join at</span> 
+                                <span><?= lang('user.join') ?></span> 
                                 <div class="float-right">
-                                    <?php
-
-                                    use CodeIgniter\I18n\Time;
-
-                                    $time = Time::parse(user()->created_at);
-                                    echo $time->humanize();
-
-                                    ?>
+                                    <?= user()->created_at->toLocalizedString('MMM d, yyyy') ?>
                                 </div>
                             </li>
                         </ul>

@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Support\\": "tests/_support"
+            "Tests\\": "tests"
         }
     },
     "scripts": {

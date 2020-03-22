@@ -132,8 +132,8 @@
                                         <option <?= in_array($role->id, old('groups_menu', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <?php if (session('error.role')) : ?>
-                                    <h6 class="text-danger"><?= session('error.role') ?></h6>
+                                <?php if (session('error.groups_menu')) : ?>
+                                    <h6 class="text-danger"><?= session('error.groups_menu') ?></h6>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -183,27 +183,47 @@ $(function () {
         }
     });
 
-    $('.save').click(function () {
-        var serialize = $('#menu').nestable('serialize');
-        // $.post('http://admin.laravel.local/admin/auth/menu', {
-        //     _token: LA.token,
-        //     _order: JSON.stringify(serialize)
-        // },
-        // function(data){
-        //     $.pjax.reload('#pjax-container');
-        //     toastr.success('Save succeeded !');
-        // });
-        location.reload(true);
-        console.log(JSON.stringify(serialize));
+    $('.save').click(function (e) {
+        // e.preventDefault()
+        // var serialize = $('#menu').nestable('serialize');
+
+        // $.ajax({
+        //     url: `<?= route_to('admin/menu') ?>/1}`,
+        //     method: 'PUT',
+        //     data: JSON.stringify(serialize)
+        // }).done((data, textStatus) => {
+        //     console.log(data);
+        // }).fail((xhr, status, error) => {
+        //     console.log(xhr)
+        // })
     });
 
     $('.refresh').on('click', function (e) {
         location.reload(true);
     });
 
-    $(document).on('click', '#btn-update', (e) => {
+    $(document).on('click', '#btn-update', function(e) {
+        // e.preventDefault();
+        // $('#modal-update').modal('show');
         e.preventDefault();
-        $('#modal-update').modal('show');
+
+        $.ajax({
+            url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}/edit`,
+            method: 'GET',
+            
+        }).done((response) => {
+            var editForm = $('#form-edit-permission');
+            editForm.find('input[name="name"]').val(response.data.name);
+            editForm.find('textarea[name="description"]').val(response.data.description);
+            $("#permission_id").val(response.data.id);
+            console.log(response);
+            $('#modal-update').modal('show');
+        }).fail((error) => {
+            // Toast.fire({
+            //     icon: 'error',
+            //     title: error.responseJSON.messages.error,
+            // });
+        })
     })
 
     $(document).on('click', '#btn-delete', (e) => {

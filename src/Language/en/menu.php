@@ -11,7 +11,7 @@ return [
     'close'          => 'Close',
     // fields
     'parent'         => 'Parent',
-    'warning_parent' => 'Please note! the menu only support max depth 2.',
+    'warning_parent' => 'Please note! the menu only support with max depth 2.',
     'active'         => 'Active',
     'non_active'     => 'Non Active',
     'icon'           => 'Icon',

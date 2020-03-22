@@ -13,7 +13,6 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.parent') ?></label>
                         <div class="col-sm-10">
-                            <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
                             <select class="form-control parent" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
@@ -28,7 +27,6 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.active') ?></label>
                         <div class="col-sm-10">
-                            <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
                             <select class="form-control parent" style="width: 100%;">
                                 <option selected="selected">Active</option>
                                 <option>Non Active</option>
@@ -83,7 +81,6 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('menu.role') ?></label>
                         <div class="col-sm-10">
-                            <!-- <input type="text" class="form-control" id="inputSkills" placeholder="Skills"> -->
                             <select class="form-control parent" multiple="multiple" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>

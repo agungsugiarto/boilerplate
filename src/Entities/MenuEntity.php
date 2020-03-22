@@ -20,7 +20,7 @@ class MenuEntity extends Entity
     ];
 
     /**
-     * Activate user.
+     * Activate menu.
      *
      * @return $this
      */
@@ -32,7 +32,7 @@ class MenuEntity extends Entity
     }
 
     /**
-     * Unactivate user.
+     * Unactivate menu.
      *
      * @return $this
      */

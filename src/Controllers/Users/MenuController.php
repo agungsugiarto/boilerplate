@@ -6,9 +6,12 @@ use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\MenuEntity;
 use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
+use CodeIgniter\API\ResponseTrait;
 
 class MenuController extends BaseController
 {
+    use ResponseTrait;
+
     protected $menu;
     protected $groupsMenu;
 
@@ -39,8 +42,6 @@ class MenuController extends BaseController
 
     public function create()
     {
-        // dd($this->request->getPost());
-
         $validationRules = [
             'parent_id'   => 'required',
             'active'      => 'required',
@@ -80,5 +81,27 @@ class MenuController extends BaseController
         $this->db->transCommit();
 
         return redirect()->back()->with('message', lang('Auth.loginSuccess'));
+    }
+
+    public function update($id)
+    {
+        if ($this->request->isAJAX()) {
+            return $this->respond($this->request->getJSON());
+        }
+    }
+
+    public function edit($id)
+    {
+        $found = $this->menu->where('id', $id)->get()->getResultArray();
+
+        if ($this->request->isAJAX()) {
+            if (!$found) {
+                return $this->fail('failed');
+            }
+
+            return $this->respond([
+                'data' => $found,
+            ]);
+        }
     }
 }

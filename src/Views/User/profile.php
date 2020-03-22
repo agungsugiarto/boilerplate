@@ -18,22 +18,15 @@
                 <p class="text-muted text-center"><i class="far fa-fw fa-envelope"></i><?= user()->email ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>join at</b> 
+                        <b><?= lang('user.join') ?></b> 
                         <a class="float-right">
-                            <?php
-
-                            use CodeIgniter\I18n\Time;
-
-                            $time = Time::parse(user()->created_at);
-                            echo $time->humanize();
-
-                            ?>
+                            <?= user()->created_at->toLocalizedString('MMM d, yyyy') .' '. user()->created_at->humanize() ?>
                         </a>
                     </li>
                 </ul>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label class="custom-file-label" for="customFile"><?= lang('user.choose_image') ?></label>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -45,7 +38,7 @@
         <div class="card card-outline">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab"><?= lang('user.setting') ?></a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -123,7 +116,7 @@
                                     <div class="float-right">
                                         <div class="btn-group">
                                             <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                                Save
+                                            <?= lang('user.save') ?>
                                             </button>
                                         </div>
                                     </div>

@@ -12,7 +12,7 @@
             <div class="card-tools">
                 <div class="btn-group">
                     <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
-                        Add User
+                        <?= lang('user.add') ?>
                     </a>
                 </div>
             </div>
@@ -25,11 +25,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <!-- <th>Groups</th> -->
-                                    <th>Active</th>
-                                    <th>Action</th>
+                                    <th><?= lang('user.username') ?></th>
+                                    <th><?= lang('user.email') ?></th>
+                                    <th><?= lang('user.active') ?></th>
+                                    <th><?= lang('user.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,11 +56,6 @@
             { 'data': null },
             { 'data': 'username' },
             { 'data': 'email' },
-            // {
-            //     'data': function (data) {
-            //         return `<span class="badge bg-info">${data.active == 1 ? 'active' : 'non-active'}</span>`
-            //     }
-            // },
             {
                 'data': function (data) {
                     return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? 'active' : 'non-active'}</span>`
