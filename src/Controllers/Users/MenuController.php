@@ -107,7 +107,7 @@ class MenuController extends BaseController
 
         try {
             $this->db->transBegin();
-            
+
             $this->menu->update($id, [
                 'parent_id' => $data['parent_id'],
                 'active'    => $data['active'],
@@ -120,7 +120,7 @@ class MenuController extends BaseController
             $this->db->table('groups_menu')->where('menu_id', $id)->delete();
 
             foreach ($data['groups_menu'] as $groups) {
-                // insert with new 
+                // insert with new
                 $this->groupsMenu->insert([
                     'group_id' => $groups,
                     'menu_id'  => $id,
