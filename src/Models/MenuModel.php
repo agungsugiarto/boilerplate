@@ -34,13 +34,14 @@ class MenuModel extends Model
      * Find menu. By default we need to detect driver,
      * because different function group_concat
      * between MySQLi and Postgre.
-     * 
+     *
      * @param int id
+     *
      * @return array
      */
-    function getMenuById($id)
+    public function getMenuById($id)
     {
-        switch($this->db->DBDriver) {
+        switch ($this->db->DBDriver) {
             case 'MySQLi':
                 // do mysqli
                 return $this->getMenuDriverMySQLi($id);
@@ -54,10 +55,10 @@ class MenuModel extends Model
 
     /**
      * function getMenu for select2.
-     * 
+     *
      * @return array
      */
-    function getMenu()
+    public function getMenu()
     {
         return $this->db->table('menu')
             ->select('id, title as text')
@@ -68,10 +69,10 @@ class MenuModel extends Model
 
     /**
      * Function getRole for select2.
-     * 
+     *
      * @return array
      */
-    function getRole()
+    public function getRole()
     {
         return $this->db->table('auth_groups')
             ->select('id, name as text')
@@ -81,8 +82,9 @@ class MenuModel extends Model
 
     /**
      * Function getMenuDriverMySQLi.
-     * 
+     *
      * @param int id
+     *
      * @return array
      */
     private function getMenuDriverMySQLi($id)
@@ -95,14 +97,16 @@ class MenuModel extends Model
             ->get()
             ->getResultArray();
     }
-    
+
     /**
      * Function getMenuDRiverPostgre.
-     * 
+     *
      * @param int id
+     *
      * @return array
      */
-    private function getMenuDRiverPostgre($id) {
+    private function getMenuDRiverPostgre($id)
+    {
         return $this->db->table('menu')
             ->select('menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.icon, menu.route, groups_menu.menu_id, array_agg(groups_menu.group_id) as group_id')
             ->join('groups_menu', 'menu.id = groups_menu.menu_id', 'left')
