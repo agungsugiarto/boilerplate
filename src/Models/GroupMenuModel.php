@@ -20,15 +20,22 @@ class GroupMenuModel extends Model
      */
     public function menuHasRole()
     {
-        return $this->db->table('menu')
-            ->select('menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route')
-            ->join('groups_menu', 'menu.id = groups_menu.menu_id', 'left')
-            ->join('auth_groups', 'groups_menu.group_id = auth_groups.id', 'left')
-            ->join('auth_groups_users', 'auth_groups.id = auth_groups_users.group_id', 'left')
-            ->join('users', 'auth_groups_users.user_id = users.id', 'left')
-            ->where(['users.id' => user()->id, 'menu.active' => 1])
-            ->groupBy('menu.id')
-            ->get()
-            ->getResultObject();
+        if (!$found = cache(user()->id.'_group_menu')) {
+            $found = $this->db->table('menu')
+                ->select('menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route')
+                ->join('groups_menu', 'menu.id = groups_menu.menu_id', 'left')
+                ->join('auth_groups', 'groups_menu.group_id = auth_groups.id', 'left')
+                ->join('auth_groups_users', 'auth_groups.id = auth_groups_users.group_id', 'left')
+                ->join('users', 'auth_groups_users.user_id = users.id', 'left')
+                ->where(['users.id' => user()->id, 'menu.active' => 1])
+                ->orderBy('menu.sequence', 'asc')
+                ->groupBy('menu.id')
+                ->get()
+                ->getResultObject();
+            
+            cache()->save(user()->id.'_group_menu', $found, 300);
+        }
+
+        return $found;
     }
 }
