@@ -15,7 +15,7 @@ class GroupMenuModel extends Model
     /**
      * Menu has role to check specific user can
      * accsess to the menu.
-     * 
+     *
      * @return array
      */
     public function menuHasRole()
