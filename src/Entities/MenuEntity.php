@@ -2,6 +2,7 @@
 
 namespace agungsugiarto\boilerplate\Entities;
 
+use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\Entity;
 
 class MenuEntity extends Entity
@@ -51,5 +52,15 @@ class MenuEntity extends Entity
     public function isActivated(): bool
     {
         return isset($this->attributes['active']) && $this->attributes['active'] == true;
+    }
+
+    /**
+     * Check to see max value from fields sequence.
+     * 
+     * @return int
+     */
+    public function sequence(): int
+    {
+        return (new MenuModel())->selectMax('sequence')->get()->getRow()->sequence;
     }
 }

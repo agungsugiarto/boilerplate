@@ -28,6 +28,7 @@ class MenuController extends BaseController
      */
     public function index()
     {
+        // return $this->response->setJSON($this->menu->selectMax('sequence')->get()->getRow()->sequence);
         $data = [
             'title' => 'Menu',
             'roles' => $this->authorize->groups(),
@@ -45,6 +46,13 @@ class MenuController extends BaseController
         return view('agungsugiarto\boilerplate\Views\Menu\index', $data);
     }
 
+    public function new()
+    {
+    }
+
+    public function show($id)
+    {}
+
     public function create()
     {
         $validationRules = [
@@ -52,7 +60,7 @@ class MenuController extends BaseController
             'active'      => 'required|numeric',
             'icon'        => 'required|min_length[5]|max_length[55]',
             'route'       => 'required|min_length[2]|max_length[255]',
-            'title'       => 'required|min_length[4]|max_length[255]',
+            'title'       => 'required|min_length[2]|max_length[255]',
             'groups_menu' => 'required',
         ];
 
@@ -63,13 +71,15 @@ class MenuController extends BaseController
         try {
             $this->db->transBegin();
 
-            $id = $this->menu->insert(new MenuEntity([
-                'parent_id' => $this->request->getPost('parent_id'),
-                'active'    => $this->request->getPost('active'),
-                'title'     => $this->request->getPost('title'),
-                'icon'      => $this->request->getPost('icon'),
-                'route'     => $this->request->getPost('route'),
-            ]));
+            $menu = new MenuEntity();
+            $menu->parent_id = $this->request->getPost('parent_id');
+            $menu->active    = $this->request->getPost('active');
+            $menu->title     = $this->request->getPost('title');
+            $menu->icon      = $this->request->getPost('icon');
+            $menu->route     = $this->request->getPost('route');
+            $menu->sequence  = $menu->sequence() + 1;
+
+            $id = $this->menu->insert($menu);
 
             foreach ($this->request->getPost('groups_menu') as $groups) {
                 $this->groupsMenu->insert([
@@ -95,7 +105,7 @@ class MenuController extends BaseController
             'active'      => 'required|numeric',
             'icon'        => 'required|min_length[5]|max_length[55]',
             'route'       => 'required|min_length[2]|max_length[255]',
-            'title'       => 'required|min_length[4]|max_length[255]',
+            'title'       => 'required|min_length[2]|max_length[255]',
             'groups_menu' => 'required',
         ];
 
@@ -116,7 +126,7 @@ class MenuController extends BaseController
                 'route'     => $data['route'],
             ]);
 
-            // remove first all menu group by id
+            // first remove all groups_menu by id
             $this->db->table('groups_menu')->where('menu_id', $id)->delete();
 
             foreach ($data['groups_menu'] as $groups) {
@@ -156,10 +166,10 @@ class MenuController extends BaseController
 
     public function delete($id)
     {
-        if (!$found = $this->menu->where('id', $id)->delete()) {
+        if (!$this->menu->where('id', $id)->delete()) {
             return $this->fail('fail deleted');
         }
 
-        return $this->respondDeleted($found);
+        return $this->respondDeleted('success');
     }
 }

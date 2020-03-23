@@ -70,14 +70,14 @@
 
       <div class="row">
         <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block">Change password</button>
+          <button type="submit" class="btn btn-primary btn-block"><?=lang('Auth.resetPassword')?></button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
     <p class="mt-3 mb-1">
-      <a href="login.html">Login</a>
+      <a href="<?= route_to('login') ?>"><?=lang('Auth.signIn')?></a>
     </p>
   </div>
   <!-- /.login-card-body -->

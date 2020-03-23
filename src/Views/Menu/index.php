@@ -156,6 +156,7 @@ $(function () {
     $('.icon-picker').iconpicker({
         placement: 'bottomRight',
         hideOnSelect: true,
+        inputSearch: true,
     });
     $('.parent').select2();
 
@@ -163,18 +164,18 @@ $(function () {
 
     function menu() {
         $.get("<?= base_url('admin/menu') ?>", function(response) {
-        $('.dd').nestable({
-            maxDepth: 2,
-            json: response.data,
-            contentCallback: (item) => {
-                return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
-                        <span class="float-right dd-nodrag">
-                            <button data-id="${item.id}" id="btn-edit" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
-                            <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
-                        </span>`;
-            }
+            $('.dd').nestable({
+                maxDepth: 2,
+                json: response.data,
+                contentCallback: (item) => {
+                    return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
+                            <span class="float-right dd-nodrag">
+                                <button data-id="${item.id}" id="btn-edit" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
+                                <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
+                            </span>`;
+                }
+            });
         });
-    });
     }
 
     $('.tree-tools').on('click', function(e) {
@@ -187,20 +188,20 @@ $(function () {
         }
     });
 
-    $('.save').click(function (e) {
-        // e.preventDefault()
-        // var serialize = $('#menu').nestable('serialize');
+    // $('.save').click(function (e) {
+    //     e.preventDefault();
+    //     var serialize = $('#menu').nestable('serialize');
 
-        // $.ajax({
-        //     url: `<?= route_to('admin/menu') ?>/1}`,
-        //     method: 'PUT',
-        //     data: JSON.stringify(serialize)
-        // }).done((data, textStatus) => {
-        //     console.log(data);
-        // }).fail((xhr, status, error) => {
-        //     console.log(xhr)
-        // })
-    });
+    //     $.ajax({
+    //         url: `<?= route_to('admin/new') ?>}`,
+    //         method: 'POST',
+    //         data: JSON.stringify(serialize)
+    //     }).done((data, textStatus) => {
+    //         console.log(data);
+    //     }).fail((xhr, status, error) => {
+    //         console.log(xhr)
+    //     })
+    // });
 
     $('.refresh').on('click', function (e) {
         location.reload(true);
