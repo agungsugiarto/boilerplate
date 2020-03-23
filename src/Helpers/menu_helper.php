@@ -1,5 +1,6 @@
 <?php
 
+use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
 
 if (!function_exists('menu')) {
@@ -38,7 +39,7 @@ if (!function_exists('menu')) {
         //     cache()->save('menu', $data, 300);
         // }
         // return $found;
-        return parse((new MenuModel())->where('active', 1)->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
+        return parse((new GroupMenuModel())->menuHasRole(), 0);
     }
 }
 

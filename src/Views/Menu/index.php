@@ -139,7 +139,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" class="btn btn-sm btn-primary"><?= lang('menu.save') ?></button>
+                                <button type="submit" class="float-right btn btn-sm btn-primary"><?= lang('menu.save') ?></button>
                             </div>
                         </div>
                     </form>
@@ -209,6 +209,7 @@ $(function () {
 
     $(document).on('click', '#btn-edit', function(e) {
         e.preventDefault();
+        $('.is-invalid').removeClass('is-invalid');
 
         $.ajax({
             url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}/edit`,
