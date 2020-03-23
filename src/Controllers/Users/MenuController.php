@@ -51,7 +51,8 @@ class MenuController extends BaseController
     }
 
     public function show($id)
-    {}
+    {
+    }
 
     public function create()
     {
@@ -73,11 +74,11 @@ class MenuController extends BaseController
 
             $menu = new MenuEntity();
             $menu->parent_id = $this->request->getPost('parent_id');
-            $menu->active    = $this->request->getPost('active');
-            $menu->title     = $this->request->getPost('title');
-            $menu->icon      = $this->request->getPost('icon');
-            $menu->route     = $this->request->getPost('route');
-            $menu->sequence  = $menu->sequence() + 1;
+            $menu->active = $this->request->getPost('active');
+            $menu->title = $this->request->getPost('title');
+            $menu->icon = $this->request->getPost('icon');
+            $menu->route = $this->request->getPost('route');
+            $menu->sequence = $menu->sequence() + 1;
 
             $id = $this->menu->insert($menu);
 

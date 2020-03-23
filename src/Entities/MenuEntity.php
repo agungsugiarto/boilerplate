@@ -56,7 +56,7 @@ class MenuEntity extends Entity
 
     /**
      * Check to see max value from fields sequence.
-     * 
+     *
      * @return int
      */
     public function sequence(): int
