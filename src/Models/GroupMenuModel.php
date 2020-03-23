@@ -32,7 +32,7 @@ class GroupMenuModel extends Model
                 ->groupBy('menu.id')
                 ->get()
                 ->getResultObject();
-            
+
             cache()->save(user()->id.'_group_menu', $found, 300);
         }
 
