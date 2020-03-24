@@ -7,8 +7,7 @@ use CodeIgniter\CLI\CLI;
 use Config\Autoload;
 
 /**
- * Class PublishCommand
- * @package agungsugiarto\boilerplate\Commands
+ * Class PublishCommand.
  */
 class PublishCommand extends BaseCommand
 {

@@ -5,8 +5,7 @@ namespace agungsugiarto\boilerplate\Models;
 use Myth\Auth\Authorization\GroupModel;
 
 /**
- * Class Group
- * @package agungsugiarto\boilerplate\Models
+ * Class Group.
  */
 class Group extends GroupModel
 {

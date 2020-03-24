@@ -9,8 +9,7 @@ use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
 /**
- * Class UserController
- * @package agungsugiarto\boilerplate\Controllers\Users
+ * Class UserController.
  */
 class UserController extends BaseController
 {

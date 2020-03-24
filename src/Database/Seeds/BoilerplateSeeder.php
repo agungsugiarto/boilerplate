@@ -8,8 +8,7 @@ use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
 /**
- * Class BoilerplateSeeder
- * @package agungsugiarto\boilerplate\Database\Seeds
+ * Class BoilerplateSeeder.
  */
 class BoilerplateSeeder extends Seeder
 {

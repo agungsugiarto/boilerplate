@@ -9,8 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
 /**
- * Class RoleFilter
- * @package agungsugiarto\boilerplate\Filters
+ * Class RoleFilter.
  */
 class RoleFilter implements FilterInterface
 {

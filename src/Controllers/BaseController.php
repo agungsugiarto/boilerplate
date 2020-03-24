@@ -10,8 +10,7 @@ use Config\Database;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class BaseController
- * @package agungsugiarto\boilerplate\Controllers
+ * Class BaseController.
  */
 class BaseController extends Controller
 {

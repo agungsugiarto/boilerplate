@@ -3,8 +3,7 @@
 namespace agungsugiarto\boilerplate\Controllers;
 
 /**
- * Class DashboardController
- * @package agungsugiarto\boilerplate\Controllers
+ * Class DashboardController.
  */
 class DashboardController extends BaseController
 {
