@@ -62,6 +62,7 @@ class InstallCommand extends BaseCommand
     public function run(array $params)
     {
         try {
+            $this->call('boilerplate:publish');
             // migrate all first
             $this->call('migrate', ['-all']);
             // then seed data

@@ -71,76 +71,17 @@ class PublishCommand extends BaseCommand
     public function run(array $params)
     {
         $this->determineSourcePath();
-
-        // Controller
-        if (CLI::prompt('Publish Controller?', ['y', 'n']) == 'y') {
-            $this->publishController();
-        }
-
-        // Views
-        if (CLI::prompt('Publish Views?', ['y', 'n']) == 'y') {
-            $this->publishViews();
-        }
-
-        // Config
-        if (CLI::prompt('Publish Config file?', ['y', 'n']) == 'y') {
-            $this->publishConfig();
-        }
-    }
-
-    protected function publishController()
-    {
-        $path = "{$this->sourcePath}/Controllers/AuthController.php";
-
-        $content = file_get_contents($path);
-        $content = $this->replaceNamespace($content, 'Myth\Auth\Controllers', 'Controllers');
-
-        $this->writeFile('Controllers/AuthController.php', $content);
-    }
-
-    protected function publishViews()
-    {
-        $map = directory_map($this->sourcePath.'/Views');
-        $prefix = '';
-
-        foreach ($map as $key => $view) {
-            if (is_array($view)) {
-                $oldPrefix = $prefix;
-                $prefix .= $key;
-
-                foreach ($view as $file) {
-                    $this->publishView($file, $prefix);
-                }
-
-                $prefix = $oldPrefix;
-
-                continue;
-            }
-
-            $this->publishView($view, $prefix);
-        }
-    }
-
-    protected function publishView($view, string $prefix = '')
-    {
-        $path = "{$this->sourcePath}/Views/{$prefix}{$view}";
-        $namespace = defined('APP_NAMESPACE') ? APP_NAMESPACE : 'App';
-
-        $content = file_get_contents($path);
-        $content = str_replace('agungsugiarto\boilertplate\Views', $namespace.'\Authentication', $content);
-
-        $this->writeFile("Views/{$prefix}{$view}", $content);
+        $this->publishConfig();
     }
 
     protected function publishConfig()
     {
-        $path = "{$this->sourcePath}/Config/Auth.php";
+        $path = "{$this->sourcePath}/Config/Boilerplate.php";
 
         $content = file_get_contents($path);
-        $content = str_replace('namespace Myth\Auth\Config', 'namespace Config', $content);
-        $content = str_replace('extends BaseConfig', "extends \Myth\Auth\Config\Auth", $content);
+        $content = str_replace('namespace agungsugiarto\boilerplate\Config', 'namespace Config', $content);
 
-        $this->writeFile('Config/Auth.php', $content);
+        $this->writeFile('Config/Boilerplate.php', $content);
     }
 
     //--------------------------------------------------------------------
