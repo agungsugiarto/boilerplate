@@ -9,8 +9,7 @@ use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\API\ResponseTrait;
 
 /**
- * Class MenuController
- * @package agungsugiarto\boilerplate\Controllers\Users
+ * Class MenuController.
  */
 class MenuController extends BaseController
 {

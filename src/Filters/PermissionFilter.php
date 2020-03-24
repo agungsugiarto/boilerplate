@@ -9,8 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
 /**
- * Class PermissionFilter
- * @package agungsugiarto\boilerplate\Filters
+ * Class PermissionFilter.
  */
 class PermissionFilter implements FilterInterface
 {

@@ -6,8 +6,7 @@ use agungsugiarto\boilerplate\Entities\MenuEntity;
 use CodeIgniter\Model;
 
 /**
- * Class MenuModel
- * @package agungsugiarto\boilerplate\Models
+ * Class MenuModel.
  */
 class MenuModel extends Model
 {

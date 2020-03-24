@@ -7,8 +7,7 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\View\View;
 
 /**
- * Class PermissionController
- * @package agungsugiarto\boilerplate\Controllers\Users
+ * Class PermissionController.
  */
 class PermissionController extends BaseController
 {

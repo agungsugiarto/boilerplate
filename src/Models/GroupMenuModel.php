@@ -5,8 +5,7 @@ namespace agungsugiarto\boilerplate\Models;
 use CodeIgniter\Model;
 
 /**
- * Class GroupMenuModel
- * @package agungsugiarto\boilerplate\Models
+ * Class GroupMenuModel.
  */
 class GroupMenuModel extends Model
 {

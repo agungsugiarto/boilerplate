@@ -7,8 +7,7 @@ use agungsugiarto\boilerplate\Models\Group;
 use CodeIgniter\API\ResponseTrait;
 
 /**
- * Class RoleController
- * @package agungsugiarto\boilerplate\Controllers\Users
+ * Class RoleController.
  */
 class RoleController extends BaseController
 {

@@ -5,8 +5,7 @@ namespace agungsugiarto\boilerplate\Commands;
 use CodeIgniter\CLI\BaseCommand;
 
 /**
- * Class InstallCommand
- * @package agungsugiarto\boilerplate\Commands
+ * Class InstallCommand.
  */
 class InstallCommand extends BaseCommand
 {
