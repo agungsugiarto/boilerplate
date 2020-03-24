@@ -8,6 +8,10 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
+/**
+ * Class RoleFilter
+ * @package agungsugiarto\boilerplate\Filters
+ */
 class RoleFilter implements FilterInterface
 {
     /**

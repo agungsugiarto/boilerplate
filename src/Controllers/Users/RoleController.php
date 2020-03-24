@@ -6,6 +6,10 @@ use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Models\Group;
 use CodeIgniter\API\ResponseTrait;
 
+/**
+ * Class RoleController
+ * @package agungsugiarto\boilerplate\Controllers\Users
+ */
 class RoleController extends BaseController
 {
     use ResponseTrait;

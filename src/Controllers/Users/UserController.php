@@ -8,6 +8,10 @@ use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
+/**
+ * Class UserController
+ * @package agungsugiarto\boilerplate\Controllers\Users
+ */
 class UserController extends BaseController
 {
     use ResponseTrait;

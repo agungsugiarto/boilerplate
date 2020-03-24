@@ -4,6 +4,10 @@ namespace agungsugiarto\boilerplate\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+/**
+ * Class Boilerplate
+ * @package agungsugiarto\boilerplate\Config
+ */
 class Boilerplate extends BaseConfig
 {
     //--------------------------------------------------------------------------

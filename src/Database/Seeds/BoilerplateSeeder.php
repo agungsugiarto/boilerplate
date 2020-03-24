@@ -7,6 +7,10 @@ use CodeIgniter\Database\Seeder;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
+/**
+ * Class BoilerplateSeeder
+ * @package agungsugiarto\boilerplate\Database\Seeds
+ */
 class BoilerplateSeeder extends Seeder
 {
     /**

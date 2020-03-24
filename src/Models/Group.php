@@ -4,6 +4,10 @@ namespace agungsugiarto\boilerplate\Models;
 
 use Myth\Auth\Authorization\GroupModel;
 
+/**
+ * Class Group
+ * @package agungsugiarto\boilerplate\Models
+ */
 class Group extends GroupModel
 {
     /**

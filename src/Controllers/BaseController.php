@@ -9,6 +9,10 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class BaseController
+ * @package agungsugiarto\boilerplate\Controllers
+ */
 class BaseController extends Controller
 {
     /**

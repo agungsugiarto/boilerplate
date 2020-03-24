@@ -5,6 +5,10 @@ namespace agungsugiarto\boilerplate\Models;
 use agungsugiarto\boilerplate\Entities\MenuEntity;
 use CodeIgniter\Model;
 
+/**
+ * Class MenuModel
+ * @package agungsugiarto\boilerplate\Models
+ */
 class MenuModel extends Model
 {
     protected $table = 'menu';
@@ -33,7 +37,7 @@ class MenuModel extends Model
     /**
      * Find menu. By default we need to detect driver,
      * because different function group_concat
-     * between MySQLi and Postgre.
+     * between MySQLi and Postgres.
      *
      * @param int id
      *
@@ -47,7 +51,7 @@ class MenuModel extends Model
                 return $this->getMenuDriverMySQLi($id);
                 break;
             case 'Postgre':
-                // do postgre
+                // do postgres
                 return $this->getMenuDRiverPostgre($id);
                 break;
         }

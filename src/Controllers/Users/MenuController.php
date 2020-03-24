@@ -8,6 +8,10 @@ use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\API\ResponseTrait;
 
+/**
+ * Class MenuController
+ * @package agungsugiarto\boilerplate\Controllers\Users
+ */
 class MenuController extends BaseController
 {
     use ResponseTrait;
@@ -28,7 +32,6 @@ class MenuController extends BaseController
      */
     public function index()
     {
-        // return $this->response->setJSON($this->menu->selectMax('sequence')->get()->getRow()->sequence);
         $data = [
             'title' => 'Menu',
             'roles' => $this->authorize->groups(),

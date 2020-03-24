@@ -4,6 +4,10 @@ namespace agungsugiarto\boilerplate\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
+/**
+ * Class CreateMenuTable
+ * @package agungsugiarto\boilerplate\Database\Migrations
+ */
 class CreateMenuTable extends Migration
 {
     public function up()

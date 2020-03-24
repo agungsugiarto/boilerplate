@@ -5,6 +5,10 @@ namespace agungsugiarto\boilerplate\Entities;
 use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\Entity;
 
+/**
+ * Class MenuEntity
+ * @package agungsugiarto\boilerplate\Entities
+ */
 class MenuEntity extends Entity
 {
     /**

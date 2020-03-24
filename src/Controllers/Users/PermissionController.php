@@ -4,7 +4,12 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\View\View;
 
+/**
+ * Class PermissionController
+ * @package agungsugiarto\boilerplate\Controllers\Users
+ */
 class PermissionController extends BaseController
 {
     use ResponseTrait;
@@ -12,7 +17,7 @@ class PermissionController extends BaseController
     /**
      * Return an array of resource objects, themselves in array format.
      *
-     * @return \CodeIgniter\View\View | \CodeIgniter\API\ResponseTrait
+     * @return View | \CodeIgniter\API\ResponseTrait
      */
     public function index()
     {

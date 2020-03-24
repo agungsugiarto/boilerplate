@@ -2,6 +2,10 @@
 
 namespace agungsugiarto\boilerplate\Controllers;
 
+/**
+ * Class DashboardController
+ * @package agungsugiarto\boilerplate\Controllers
+ */
 class DashboardController extends BaseController
 {
     public function index()

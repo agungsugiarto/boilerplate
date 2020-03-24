@@ -6,9 +6,12 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Config\Autoload;
 
+/**
+ * Class PublishCommand
+ * @package agungsugiarto\boilerplate\Commands
+ */
 class PublishCommand extends BaseCommand
 {
-    // helper('filesystem');
     /**
      * The group the command is lumped under
      * when listing commands.

@@ -4,9 +4,12 @@ namespace agungsugiarto\boilerplate\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 
+/**
+ * Class InstallCommand
+ * @package agungsugiarto\boilerplate\Commands
+ */
 class InstallCommand extends BaseCommand
 {
-    // helper('filesystem');
     /**
      * The group the command is lumped under
      * when listing commands.

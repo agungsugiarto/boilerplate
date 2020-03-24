@@ -4,6 +4,10 @@ namespace agungsugiarto\boilerplate\Models;
 
 use CodeIgniter\Model;
 
+/**
+ * Class GroupMenuModel
+ * @package agungsugiarto\boilerplate\Models
+ */
 class GroupMenuModel extends Model
 {
     protected $table = 'groups_menu';
