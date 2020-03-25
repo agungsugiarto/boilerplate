@@ -49,8 +49,8 @@ class MenuController extends BaseController
     }
 
     /**
-     * Update to sort menu
-     * 
+     * Update to sort menu.
+     *
      * @return CodeIgniter\API\ResponseTrait
      */
     public function new()
@@ -59,7 +59,7 @@ class MenuController extends BaseController
         $menu = new MenuEntity();
 
         $i = 1;
-        foreach($data as $item) {
+        foreach ($data as $item) {
             if (array_key_exists('parent_id', $item)) {
                 $menu->parent_id = $item->parent_id;
                 $menu->sequence = $i++;
