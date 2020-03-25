@@ -17,12 +17,13 @@ class GroupMenuModel extends Model
 
     /**
      * Menu has role to check specific user can
-     * accsess to the menu.
+     * see accsess to the menu.
      *
      * @return array
      */
     public function menuHasRole()
     {
+        // We need cache this menu ?
         if (!$found = cache(user()->id.'_group_menu')) {
             $found = $this->db->table('menu')
                 ->select('menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route')

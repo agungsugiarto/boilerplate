@@ -1,10 +1,10 @@
 
 CodeIgniter 4 Application Boilerplate
 =====================================
-![Package](https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg)
+[![Latest Stable Version](https://poser.pugx.org/agungsugiarto/boilerplate/version)](https://packagist.org/packages/agungsugiarto/boilerplate)
+[![Package](https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg)](https://packagist.org/packages/agungsugiarto/boilerplate)
+[![Total Downloads](https://poser.pugx.org/agungsugiarto/boilerplate/downloads)](https://packagist.org/packages/agungsugiarto/boilerplate)
 [![StyleCI](https://github.styleci.io/repos/243432201/shield?branch=master)](https://github.styleci.io/repos/243432201)
-![PHP Composer](https://github.com/agungsugiarto/boilerplate/workflows/PHP%20Composer/badge.svg)
-![GitHub All Releases](https://img.shields.io/github/downloads/agungsugiarto/boilerplate/total)
 [![GitHub stars](https://img.shields.io/github/stars/agungsugiarto/boilerplate)](https://github.com/agungsugiarto/boilerplate/stargazers)
 [![GitHub license](https://img.shields.io/github/license/agungsugiarto/boilerplate)](https://github.com/agungsugiarto/boilerplate/blob/master/LICENSE.md)
 
@@ -51,7 +51,7 @@ database.default.DBDriver = MySQLi
 ```
 **3.** Run publish auth
 ```bash
-php spark auth:publsih
+php spark auth:publish
 
 Publish Migration? [y, n]: n
 Publish Models? [y, n]: n
@@ -63,7 +63,7 @@ Publish Config file? [y, n]: y
 Publish Language file? [y, n]:
 ```
 
-> NOTE: Everything about how to configure auth you find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
+> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
 Its done ? not to fast. After the publish `Config/Auth.php` you need to change

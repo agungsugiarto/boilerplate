@@ -48,14 +48,44 @@ class MenuController extends BaseController
         return view('agungsugiarto\boilerplate\Views\Menu\index', $data);
     }
 
+    /**
+     * Update to sort menu
+     * 
+     * @return CodeIgniter\API\ResponseTrait
+     */
     public function new()
     {
+        $data = $this->request->getJSON();
+        $menu = new MenuEntity();
+
+        $i = 1;
+        foreach($data as $item) {
+            if (array_key_exists('parent_id', $item)) {
+                $menu->parent_id = $item->parent_id;
+                $menu->sequence = $i++;
+            } else {
+                $menu->parent_id = 0;
+                $menu->sequence = $i++;
+            }
+            $result = $this->menu->update($item->id, $menu);
+        }
+
+        if (!$result) {
+            return $this->fail('Failed');
+        }
+
+        return $this->respondCreated($result);
     }
 
     public function show($id)
     {
     }
 
+    /**
+     * Create a new resource object, from "posted" parameters.
+     *
+     * @return \CodeIgniter\API\ResponseTrait
+     */
     public function create()
     {
         $validationRules = [
@@ -101,6 +131,13 @@ class MenuController extends BaseController
         return redirect()->back()->with('message', lang('Auth.loginSuccess'));
     }
 
+    /**
+     * Add or update a model resource, from "posted" properties.
+     *
+     * @param int 		id
+     *
+     * @return \CodeIgniter\API\ResponseTrait
+     */
     public function update($id)
     {
         $validationRules = [
@@ -150,6 +187,13 @@ class MenuController extends BaseController
         return $this->respondCreated();
     }
 
+    /**
+     * Return the editable properties of a resource object.
+     *
+     * @param int		id
+     *
+     * @return \CodeIgniter\API\ResponseTrait
+     */
     public function edit($id)
     {
         $found = $this->menu->getMenuById($id);
@@ -167,6 +211,11 @@ class MenuController extends BaseController
         }
     }
 
+    /**
+     * Delete the designated resource object from the model.
+     *
+     * @return \CodeIgniter\API\ResponseTrait
+     */
     public function delete($id)
     {
         if (!$this->menu->where('id', $id)->delete()) {

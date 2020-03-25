@@ -61,5 +61,12 @@ $routes->group('admin', function ($routes) {
         'filter'     => 'permission:menu-permission',
         'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
         'controller' => 'MenuController',
+        'except'     => 'new',
+    ]);
+
+    $routes->put('menu-update', 'MenuController::new', [
+        'filter'    => 'permission:menu-permission',
+        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
+        'as'        => 'menu-update',
     ]);
 });

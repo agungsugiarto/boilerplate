@@ -188,20 +188,36 @@ $(function () {
         }
     });
 
-    // $('.save').click(function (e) {
-    //     e.preventDefault();
-    //     var serialize = $('#menu').nestable('serialize');
+    $('.save').on('click', function (e) {
+        e.preventDefault();
+        var serialize = $('#menu').nestable('toArray');
+        var btnSave = $(this);
+        $(this).attr('disabled', true);
+        $(this).html('<i class="fas fa-spinner fa-spin"></i>');
 
-    //     $.ajax({
-    //         url: `<?= route_to('admin/new') ?>}`,
-    //         method: 'POST',
-    //         data: JSON.stringify(serialize)
-    //     }).done((data, textStatus) => {
-    //         console.log(data);
-    //     }).fail((xhr, status, error) => {
-    //         console.log(xhr)
-    //     })
-    // });
+        $.ajax({
+            url: `<?= route_to('menu-update') ?>`,
+            method: 'PUT',
+            dataType: 'JSON',
+            data: JSON.stringify(serialize)
+        }).done((data, textStatus) => {
+            Toast.fire({
+                icon: 'success',
+                title: textStatus
+            });
+            btnSave.attr('disabled', false);
+            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('menu.save') ?>");
+            $('.dd').nestable('destroy');
+            menu();
+        }).fail((error) => {
+            Toast.fire({
+                icon: 'error',
+                title: error.responseJSON.messages.error,
+            });
+            btnSave.attr('disabled', false);
+            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('menu.save') ?>");
+        })
+    });
 
     $('.refresh').on('click', function (e) {
         location.reload(true);
@@ -262,7 +278,7 @@ $(function () {
             Toast.fire({
                 icon: 'success',
                 title: textStatus
-            })
+            });
 
             $('.dd').nestable('destroy');
             menu();
