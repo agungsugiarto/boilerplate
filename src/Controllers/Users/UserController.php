@@ -35,7 +35,7 @@ class UserController extends BaseController
 
         if ($this->request->isAJAX()) {
             return $this->respond([
-                'data' => $this->users->get()->getResultObject(),
+                'data' => $this->users->asObject()->findAll(),
             ]);
         }
 
@@ -256,6 +256,11 @@ class UserController extends BaseController
      */
     public function delete($id)
     {
+        if (!$found = $this->users->where('id', $id)->delete()) {
+            return $this->fail('fail deleted');
+        }
+
+        return $this->respondDeleted($found);
     }
 
     private function listAllUser()
