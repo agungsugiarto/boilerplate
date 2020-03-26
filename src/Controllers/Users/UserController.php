@@ -72,6 +72,35 @@ class UserController extends BaseController
 
     public function profile()
     {
+        if ($this->request->getMethod() === 'post') {
+            $id = user()->id;
+            $validationRules = [
+                'email'        => "required|valid_email|is_unique[users.email,id,$id]",
+                'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,$id]",
+                'password'     => 'if_exist',
+                'pass_confirm' => 'matches[password]',
+            ];
+
+            if (!$this->validate($validationRules)) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
+            }
+
+            $user = new User();
+
+            if ($this->request->getPost('password')) {
+                $user->password = $this->request->getPost('password');
+            }
+
+            $user->email = $this->request->getPost('email');
+            $user->username = $this->request->getPost('username');
+
+            if ($this->users->skipValidation(true)->update(user()->id, $user)) {
+                return redirect()->back()->with('success', 'success');
+            }
+
+            return redirect()->back()->withInput()->with('error', $this->users->getErrors());
+        }
+
         return view('agungsugiarto\boilerplate\Views\User\profile');
     }
 

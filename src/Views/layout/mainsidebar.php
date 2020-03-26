@@ -11,7 +11,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="<?= route_to('user-show') ?>" class="d-block"><?= user()->username ?></a>
+                <a href="<?= route_to('user-profile') ?>" class="d-block"><?= user()->username ?></a>
             </div>
         </div>
         <?php endif ?>

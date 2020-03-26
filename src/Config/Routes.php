@@ -19,7 +19,7 @@ $routes->group('admin', function ($routes) {
         'filter'    => 'permission:back-office',
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
-        $routes->get('profile', 'UserController::profile', ['as' => 'user-show']);
+        $routes->match(['get', 'post'], 'profile', 'UserController::profile', ['as' => 'user-profile']);
         $routes->post('(.*)/update', 'UserController::update/$1', ['as' => 'user-update']);
         $routes->resource('manage', [
             'filter'     => 'permission:manage-user',
