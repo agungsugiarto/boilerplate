@@ -135,6 +135,10 @@ Usage
 -----
 You can find how its work with the read code routes, controller and views etc. Finnaly happy coding!
 
+Changelog
+--------
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
 Contributing
 ------------
 Contributions are very welcome.
