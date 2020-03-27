@@ -28,7 +28,7 @@ class Group extends GroupModel
             ->getResultArray();
     }
 
-     /**
+    /**
      * Returns an array of all groups that a user is a member of.
      *
      * @param $userId
@@ -42,7 +42,7 @@ class Group extends GroupModel
                 ->where('user_id', $userId)
                 ->get()
                 ->getResultObject();
-        
+
         $found = [];
         foreach ($group as $row) {
             $found[$row->id] = strtolower($row->name);
