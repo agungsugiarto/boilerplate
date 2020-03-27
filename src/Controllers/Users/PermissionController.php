@@ -63,7 +63,7 @@ class PermissionController extends BaseController
     public function create()
     {
         $validationRules = [
-            'name'        => 'required|min_length[5]|max_length[255]|is_unique[auth_groups.name]',
+            'name'        => 'required|min_length[5]|max_length[255]|is_unique[auth_permissions.name]',
             'description' => 'required|max_length[255]',
         ];
 
@@ -110,7 +110,7 @@ class PermissionController extends BaseController
     public function update($id)
     {
         $validationRules = [
-            'name'        => 'required|max_length[255]|is_unique[auth_groups.name]',
+            'name'        => 'required|max_length[255]|is_unique[auth_permissions.name]',
             'description' => 'required|max_length[255]',
         ];
 

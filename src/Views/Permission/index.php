@@ -84,8 +84,10 @@
         $.ajax({
             url: '<?= route_to('admin/permission') ?>',
             method: 'post',
-            data: createForm.serializeArray()
-
+            data: {
+                name: slugify(createForm.find("input[name='name']").val()),
+                description: createForm.find("textarea[name='description']").val()
+            },
         }).done((data, textStatus) => {
             Toast.fire({
                 icon: 'success',
@@ -199,6 +201,15 @@
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
     });
+    
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+    }
 </script>
 
 <?= $this->endSection() ?>
