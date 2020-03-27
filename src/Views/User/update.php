@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="<?= route_to('admin/user/manage') ?>" method="patch" class="form-horizontal">
+                <form action="<?= route_to('user-update', $user['id']) ?>" method="post" class="form-horizontal">
                     <?= csrf_field() ?>
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
@@ -96,8 +96,12 @@
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('permission.title') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="<?= lang('user.select_permission') ?>" style="width: 100%;">
-                            <?php foreach ($permissions as $permission) : ?>
-                                <option value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
+                            <?php foreach ($permissions as $value) : ?>
+                                <?php if (array_key_exists($value['id'], $permission)) : ?>
+                                    <option value="<?= $value['id'] ?>" selected><?= $value['name'] ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                <?php endif ?>
                             <?php endforeach ?>
                             </select>
                             <?php if (session('error.permission')) : ?>
@@ -109,8 +113,12 @@
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('role.title') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="<?= lang('user.select_role') ?>" style="width: 100%;">
-                            <?php foreach ($roles as $role) : ?>
-                                <option value="<?= $role->id ?>"><?= $role->name ?></option>
+                            <?php foreach ($roles as $value) : ?>
+                                <?php if (array_key_exists($value->id, $role)) : ?>
+                                    <option value="<?= $value->id ?>" selected><?= $value->name ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $value->id ?>"><?= $value->name ?></option>
+                                <?php endif ?>
                             <?php endforeach ?>
                             </select>
                             <?php if (session('error.role')) : ?>
@@ -138,7 +146,7 @@
 
 <?= $this->section('js') ?>
 <script>
-    $('.select').select2();
+$('.select').select2({disabled: true});
 </script>
 <?= $this->endSection() ?>
 

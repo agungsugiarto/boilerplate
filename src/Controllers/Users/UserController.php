@@ -3,8 +3,10 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
+use agungsugiarto\boilerplate\Models\Group;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Authorization\GroupModel;
+use Myth\Auth\Authorization\PermissionModel;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 
@@ -184,12 +186,12 @@ class UserController extends BaseController
         $data = [
             'title'       => lang('user.title'),
             'permissions' => $this->authorize->permissions(),
+            'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
+            'role'        => (new Group())->getGroupsForUser($id),
             'user'        => $this->users->find($id)->toArray(),
         ];
-
-        // dd($data['user']);
-
+        
         return view('agungsugiarto\boilerplate\Views\User\update', $data);
     }
 
@@ -204,16 +206,13 @@ class UserController extends BaseController
     {
         $validationRules = [
             'active'       => 'required',
-            'username'     => 'required|alpha_numeric_space|min_length[3]|is_unique[users.username]',
-            'email'        => 'required|valid_email|is_unique[users.email]',
-            'password'     => 'required|strong_password',
-            'pass_confirm' => 'required|matches[password]',
-            'permission'   => 'required',
-            'role'         => 'required',
+            'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,$id]",
+            'email'        => "required|valid_email|is_unique[users.email,id,$id]",
+            'password'     => 'if_exist',
+            'pass_confirm' => 'matches[password]',
+            'permission'   => 'if_exist',
+            'role'         => 'if_exist',
         ];
-
-        $permissions = $this->request->getGet('permission');
-        $roles = $this->request->getGet('role');
 
         if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
@@ -221,30 +220,46 @@ class UserController extends BaseController
 
         try {
             $this->db->transBegin();
+            $user = new User();
 
-            $id = $this->users->update(new User([
-                'active'   => $this->request->getGet('active'),
-                'email'    => $this->request->getGet('email'),
-                'username' => $this->request->getGet('username'),
-                'password' => $this->request->getGet('password'),
-            ]));
-
-            foreach ($permissions as $permission) {
-                $this->authorize->addPermissionToUser($permission, $id);
+            if ($this->request->getPost('password')) {
+                $user->password = $this->request->getPost('password');
             }
 
-            foreach ($roles as $role) {
-                $this->authorize->addUserToGroup($id, $role);
-            }
+            $user->email = $this->request->getPost('email');
+            $user->username = $this->request->getPost('username');
 
-            $this->db->transCommit();
+            $this->users->skipValidation(true)->update($id, $user);
+
+            // At this time disable feature role and permission update.
+            // Both permission and role im not sure this is
+            // best practice or not to handle update,
+            // remove permission and role from user
+            // then insert with new record.
+            
+            // foreach ($this->request->getPost('permission') as $permission) {
+            //     // delete first permission from user
+            //     // $this->authorize->removePermissionFromUser($permission, $id);
+            //     // insert with new permission
+            //     $this->authorize->addPermissionToUser($permission, $id);
+            // }
+
+            
+            // foreach ($this->request->getPost('role') as $role) {
+            //     // delete first groups from user
+            //     // $this->authorize->removeUserFromGroup($id, $role);
+            //     // insert with new role
+            //     $this->authorize->addUserToGroup($id, $role);
+            // }
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('errors', $e->getMessage());
         }
 
-        return redirect()->back()->with('messages', 'success update data!');
+        $this->db->transCommit();
+
+        return redirect()->back()->with('messages', 'success insert data!');
     }
 
     /**
