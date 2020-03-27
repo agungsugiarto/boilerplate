@@ -191,7 +191,7 @@ class UserController extends BaseController
             'role'        => (new Group())->getGroupsForUser($id),
             'user'        => $this->users->find($id)->toArray(),
         ];
-        
+
         return view('agungsugiarto\boilerplate\Views\User\update', $data);
     }
 
@@ -236,7 +236,7 @@ class UserController extends BaseController
             // best practice or not to handle update,
             // remove permission and role from user
             // then insert with new record.
-            
+
             // foreach ($this->request->getPost('permission') as $permission) {
             //     // delete first permission from user
             //     // $this->authorize->removePermissionFromUser($permission, $id);
@@ -244,7 +244,6 @@ class UserController extends BaseController
             //     $this->authorize->addPermissionToUser($permission, $id);
             // }
 
-            
             // foreach ($this->request->getPost('role') as $role) {
             //     // delete first groups from user
             //     // $this->authorize->removeUserFromGroup($id, $role);
