@@ -276,22 +276,4 @@ class UserController extends BaseController
 
         return $this->respondDeleted($found);
     }
-
-    private function listAllUser()
-    {
-        $users = $this->users->get()->getResultObject();
-        $data = [];
-
-        foreach ($users as $item) {
-            $user['active'] = $item->active;
-            $user['username'] = $item->username;
-            $user['email'] = $item->email;
-            $user['created_at'] = $item->created_at;
-            $user['groups'] = (new GroupModel())->getGroupsForUser($item->id);
-
-            $data[] = $user;
-        }
-
-        return $data;
-    }
 }

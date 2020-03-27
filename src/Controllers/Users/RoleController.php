@@ -149,13 +149,13 @@ class RoleController extends BaseController
                 // insert with new permission to group
                 $this->authorize->addPermissionToGroup($value, $id);
             }
-
-            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('error', $e->getMessage());
         }
+        
+        $this->db->transCommit();
 
         return redirect()->back()->with('success', 'Success update!');
     }
