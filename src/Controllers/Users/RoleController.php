@@ -154,7 +154,7 @@ class RoleController extends BaseController
 
             return redirect()->back()->with('error', $e->getMessage());
         }
-        
+
         $this->db->transCommit();
 
         return redirect()->back()->with('success', 'Success update!');
