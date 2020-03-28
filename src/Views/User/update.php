@@ -23,11 +23,8 @@
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control active" name="active" style="width: 100%;">
-                                <?php if ($user['active'] == 1) : ?>
-                                <option selected value="1"><?= lang('user.active') ?></option>
-                                <?php else : ?>
-                                <option selected value="0"><?= lang('user.non_active') ?></option>
-                                <?php endif ?>
+                                <option <?= $user['active'] == 1 ? 'selected' : '' ?> value="1"><?= lang('user.active') ?></option>
+                                <option <?= $user['active'] == 0 ? 'selected' : '' ?> value="0"><?= lang('user.non_active') ?></option>
                             </select>
                         </div>
                     </div>
