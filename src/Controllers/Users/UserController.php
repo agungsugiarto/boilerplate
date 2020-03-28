@@ -189,7 +189,7 @@ class UserController extends BaseController
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
             'role'        => (new Group())->getGroupsForUser($id),
-            'user'        => $this->users->find($id)->toArray(),
+            'user'        => $this->users->asArray()->find($id),
         ];
 
         return view('agungsugiarto\boilerplate\Views\User\update', $data);
@@ -226,6 +226,7 @@ class UserController extends BaseController
                 $user->password = $this->request->getPost('password');
             }
 
+            $user->active = $this->request->getPost('active');
             $user->email = $this->request->getPost('email');
             $user->username = $this->request->getPost('username');
 

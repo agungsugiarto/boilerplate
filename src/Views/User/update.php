@@ -22,9 +22,12 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control select" name="active" style="width: 100%;">
-                                <option value="1" selected="selected"><?= lang('user.active') ?></option>
-                                <option value="0"><?= lang('user.non_active') ?></option>
+                            <select class="form-control active" name="active" style="width: 100%;">
+                                <?php if ($user['active'] == 1) : ?>
+                                <option selected value="1"><?= lang('user.active') ?></option>
+                                <?php else : ?>
+                                <option selected value="0"><?= lang('user.non_active') ?></option>
+                                <?php endif ?>
                             </select>
                         </div>
                     </div>
@@ -146,6 +149,7 @@
 
 <?= $this->section('js') ?>
 <script>
+$('.active').select2();
 $('.select').select2({disabled: true});
 </script>
 <?= $this->endSection() ?>
