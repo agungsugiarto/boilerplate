@@ -75,16 +75,16 @@ public $views = [
     'forgot'          => 'agungsugiarto\boilerplate\Views\Authentication\forgot',
     'reset'           => 'agungsugiarto\boilerplate\Views\Authentication\reset',
     'emailForgot'     => 'agungsugiarto\boilerplate\Views\Authentication\emails\fogot',
-    'emailActivation' => 'agungsugiarto\boilerplate\Views\Authentication\emails\acivation',
+    'emailActivation' => 'agungsugiarto\boilerplate\Views\Authentication\emails\activation',
 ];
 ```
 
 Open `app\Config\Filters.php` see at `$aliases` add with below like this.
 ```php
 public $aliases = [
-	'login'      => \Myth\Auth\Filters\LoginFilter::class,
-	'role'       => \agungsugiarto\boilerplate\Filters\RoleFilter::class,
-	'permission' => \agungsugiarto\boilerplate\Filters\PermissionFilter::class,
+    'login'      => \Myth\Auth\Filters\LoginFilter::class,
+    'role'       => \agungsugiarto\boilerplate\Filters\RoleFilter::class,
+    'permission' => \agungsugiarto\boilerplate\Filters\PermissionFilter::class,
 ];
 ```
 
