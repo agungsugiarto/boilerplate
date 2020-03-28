@@ -1,6 +1,5 @@
 <!-- Include datatables -->
 <?= $this->include('agungsugiarto\boilerplate\Views\load\datatables') ?>
-<?= $this->include('agungsugiarto\boilerplate\Views\load\sweetalert') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 

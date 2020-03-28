@@ -91,12 +91,12 @@ class RoleController extends BaseController
         } catch (\Exception $e) {
             $this->db->transRollback();
 
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('message', lang('Auth.loginSuccess'));
+        return redirect()->back()->with('sweet-success', 'success');
     }
 
     /**
@@ -152,12 +152,12 @@ class RoleController extends BaseController
         } catch (\Exception $e) {
             $this->db->transRollback();
 
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('success', 'Success update!');
+        return redirect()->back()->with('sweet-success', 'success');
     }
 
     /**

@@ -97,10 +97,10 @@ class UserController extends BaseController
             $user->username = $this->request->getPost('username');
 
             if ($this->users->skipValidation(true)->update(user()->id, $user)) {
-                return redirect()->back()->with('success', 'success');
+                return redirect()->back()->with('sweet-success', 'success');
             }
 
-            return redirect()->back()->withInput()->with('error', $this->users->getErrors());
+            return redirect()->back()->withInput()->with('sweet-error', 'errors');
         }
 
         return view('agungsugiarto\boilerplate\Views\User\profile');
@@ -166,12 +166,12 @@ class UserController extends BaseController
         } catch (\Exception $e) {
             $this->db->transRollback();
 
-            return redirect()->back()->with('errors', $e->getMessage());
+            return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('messages', 'success insert data!');
+        return redirect()->back()->with('sweet-success', 'success');
     }
 
     /**
@@ -254,12 +254,12 @@ class UserController extends BaseController
         } catch (\Exception $e) {
             $this->db->transRollback();
 
-            return redirect()->back()->with('errors', $e->getMessage());
+            return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('messages', 'success insert data!');
+        return redirect()->back()->with('sweet-success', 'success');
     }
 
     /**

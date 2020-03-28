@@ -128,7 +128,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('message', lang('Auth.loginSuccess'));
+        return redirect()->back()->with('sweet-success', 'Success add book!');
     }
 
     /**
