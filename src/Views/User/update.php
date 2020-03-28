@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control active" name="active" style="width: 100%;">
+                            <select class="form-control" id="active" name="active" style="width: 100%;">
                                 <option <?= $user['active'] == 1 ? 'selected' : '' ?> value="1"><?= lang('user.active') ?></option>
                                 <option <?= $user['active'] == 0 ? 'selected' : '' ?> value="0"><?= lang('user.non_active') ?></option>
                             </select>
@@ -146,7 +146,7 @@
 
 <?= $this->section('js') ?>
 <script>
-$('.active').select2();
+$('#active').select2();
 $('.select').select2({disabled: true});
 </script>
 <?= $this->endSection() ?>
