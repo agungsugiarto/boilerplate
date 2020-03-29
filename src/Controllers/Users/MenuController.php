@@ -123,18 +123,18 @@ class MenuController extends BaseController
         } catch (\Exception $e) {
             $this->db->transRollback();
 
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'Success add book!');
+        return redirect()->back()->with('sweet-success', 'success');
     }
 
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int 		id
+     * @param int id
      *
      * @return \CodeIgniter\API\ResponseTrait
      */
@@ -190,7 +190,7 @@ class MenuController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int		id
+     * @param int id
      *
      * @return \CodeIgniter\API\ResponseTrait
      */
@@ -214,6 +214,8 @@ class MenuController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
+     * @param int id
+     * 
      * @return \CodeIgniter\API\ResponseTrait
      */
     public function delete($id)
