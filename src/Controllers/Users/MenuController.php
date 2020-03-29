@@ -215,7 +215,7 @@ class MenuController extends BaseController
      * Delete the designated resource object from the model.
      *
      * @param int id
-     * 
+     *
      * @return \CodeIgniter\API\ResponseTrait
      */
     public function delete($id)
