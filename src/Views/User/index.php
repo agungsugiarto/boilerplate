@@ -57,7 +57,7 @@
             { 'data': 'email' },
             {
                 'data': function (data) {
-                    return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? 'active' : 'non-active'}</span>`
+                    return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('user.active') ?>' : '<?= lang('user.non_active') ?>'}</span>`
                 }
             },
             { 

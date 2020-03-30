@@ -74,6 +74,10 @@ class UserController extends BaseController
 
     public function profile()
     {
+        $data = [
+            'title' => lang('user.profile'),
+        ];
+
         if ($this->request->getMethod() === 'post') {
             $id = user()->id;
             $validationRules = [
@@ -103,7 +107,7 @@ class UserController extends BaseController
             return redirect()->back()->withInput()->with('sweet-error', 'errors');
         }
 
-        return view('agungsugiarto\boilerplate\Views\User\profile');
+        return view('agungsugiarto\boilerplate\Views\User\profile', $data);
     }
 
     /**

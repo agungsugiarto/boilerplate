@@ -92,7 +92,7 @@ class MenuController extends BaseController
             'parent_id'   => 'required|numeric',
             'active'      => 'required|numeric',
             'icon'        => 'required|min_length[5]|max_length[55]',
-            'route'       => 'required|min_length[2]|max_length[255]',
+            'route'       => 'required|max_length[255]',
             'title'       => 'required|min_length[2]|max_length[255]',
             'groups_menu' => 'required',
         ];
@@ -144,7 +144,7 @@ class MenuController extends BaseController
             'parent_id'   => 'required|numeric',
             'active'      => 'required|numeric',
             'icon'        => 'required|min_length[5]|max_length[55]',
-            'route'       => 'required|min_length[2]|max_length[255]',
+            'route'       => 'required|max_length[255]',
             'title'       => 'required|min_length[2]|max_length[255]',
             'groups_menu' => 'required',
         ];

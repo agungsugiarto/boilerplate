@@ -5,6 +5,7 @@ return [
     'add'               => 'Add User',
     'save'              => 'Save',
     // fields
+    'profile'           => 'Profile',
     'username'          => 'Username',
     'email'             => 'Email',
     'active'            => 'Active',

@@ -5,6 +5,7 @@ return [
     'add'               => 'Tambah Pengguna',
     'save'              => 'Simpan',
     // fields
+    'profile'           => 'Profil',
     'username'          => 'Nama Pengguna',
     'email'             => 'Email',
     'active'            => 'Aktif',

@@ -4,7 +4,6 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\View\View;
 
 /**
  * Class PermissionController.
@@ -85,7 +84,7 @@ class PermissionController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int		id
+     * @param int id
      *
      * @return \CodeIgniter\API\ResponseTrait
      */
@@ -103,7 +102,7 @@ class PermissionController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int 		id
+     * @param int id
      *
      * @return \CodeIgniter\API\ResponseTrait
      */
