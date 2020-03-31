@@ -19,10 +19,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent <?= config('Boilerplate')->theme['sidebar']['compact'] ? 'nav-compact' : '' ?>" data-widget="treeview"
                 role="menu" data-accordion="false">
                 <?php foreach (menu() as $parent) : ?>
-                <!-- Fix me menu-open and active-->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="<?= base_url($parent->route) ?>" class="nav-link active">
-                <!-- end note -->
+                <li class="nav-item has-treeview <?= current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'menu-open' : '' ?>">
+                    <a href="<?= base_url($parent->route) ?>" class="nav-link <?= current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'active' : '' ?>">
                         <i class="nav-icon <?= $parent->icon ?>"></i>
                         <p>
                             <?= $parent->title ?>
