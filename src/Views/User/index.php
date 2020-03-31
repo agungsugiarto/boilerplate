@@ -60,9 +60,14 @@
                     return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('user.active') ?>' : '<?= lang('user.non_active') ?>'}</span>`
                 }
             },
-            { 
-                'data': function (data) {
-                    return `<a href="<?= route_to('admin/user/manage') ?>/${data.id}/edit" class="btn btn-primary btn-sm btn-edit" data-id="${data.id}"><span class="fa fa-fw fa-pencil-alt"></span></a> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="${data.id}"><span class="fa fa-fw fa-trash"></span></button>`;
+            {
+                "data": function(data) {
+                    return `<td class="text-right py-0 align-middle">
+                            <div class="btn-group btn-group-sm">
+                                <a href="<?= route_to('admin/user/manage') ?>/${data.id}/edit" class="btn btn-primary btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                                <button class="btn btn-danger btn-delete" data-id="${data.id}"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </td>`
                 }
             }
         ]

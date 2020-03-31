@@ -49,7 +49,7 @@
         paging: true,
         lengthChange: true,
         searching: true,
-        ordering: true,
+        ordering: false,
         info: true,
         autoWidth: false,
 
@@ -61,9 +61,14 @@
             { 'data': null },
             { 'data': 'name' },
             { 'data': 'description' },
-            { 
-                'data': function (data) {
-                    return '<button type="button" class="btn btn-primary btn-sm btn-edit" data-id="' + data.id + '"><span class="fa fa-fw fa-pencil-alt"></span></button> <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + data.id + '"><span class="fa fa-fw fa-trash"></span></button>';
+            {
+                "data": function(data) {
+                    return `<td class="text-right py-0 align-middle">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-primary btn-edit" data-id="${data.id}"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger btn-delete" data-id="${data.id}"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </td>`
                 }
             }
         ]

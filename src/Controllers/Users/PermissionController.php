@@ -109,7 +109,7 @@ class PermissionController extends BaseController
     public function update($id)
     {
         $validationRules = [
-            'name'        => 'required|max_length[255]|is_unique[auth_permissions.name]',
+            'name'        => "required|max_length[255]|is_unique[auth_permissions.name,id,$id]",
             'description' => 'required|max_length[255]',
         ];
 
