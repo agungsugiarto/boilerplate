@@ -74,7 +74,7 @@ class UserController extends BaseController
 
     /**
      * Show profile user or update.
-     * 
+     *
      * @return mixed
      */
     public function profile()
