@@ -1,14 +1,12 @@
-name: PHP Composer
+name: boilerplate build
 
 on:
   push:
     branches: 
     - master
-    - develop
   pull_request:
     branches: 
     - master
-    - develop
 
 jobs:
   build:
@@ -16,17 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
     - name: Setup PHP
       uses: shivammathur/setup-php@master
       with:
         php-version: '7.2'
         extension-csv: intl, json, mbstring, mysqlnd. xdebug, xml
         coverage: xdebug
-       
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+    - name: Setup MySQL
+      uses: samin/mysql-action@v1.3
+      with:
+        mysql version: 5.7
+        mysql password: test
+        mysql user: test
+        mysql database: boilerplate-test
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: "Validate composer.json and composer.lock"
+      run: "composer validate"
+    - name: "Install dependencies"
+      run: "composer install"
+    - name: "CS Check"
+      run: "composer cs-check"
+    - name: "Code analyze"
+      run: "composer analyze"
+    - name: "Run test suite"
+      run: "composer test -- -c phpunit.xml.github-actions.dist"
