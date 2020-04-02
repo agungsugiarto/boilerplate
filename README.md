@@ -26,9 +26,14 @@ Screenshoot | Demo On [Heroku](https://boilerplate-codeigniter4.herokuapp.com/)
 Installation
 ------------
 
-**1.** Get The Module
+**1.** Get The Module, since packages myth/auth still on development we need to change composer.json in root project directory. Open composer.json with your ide and add code like [this](https://github.com/agungsugiarto/boilerplate/blob/master/composer.json#L27-L28), or below like this.
 
- require via composer
+```bash
+"minimum-stability": "dev",
+"prefer-stable": true,
+```
+
+And run require via composer
 
 ```bash
 composer require agungsugiarto/boilerplate
