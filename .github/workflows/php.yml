@@ -21,7 +21,7 @@ jobs:
         extension-csv: intl, json, mbstring, mysqlnd. xdebug, xml
         coverage: xdebug
     - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
+      run: sudo service mysql stop
     - name: Setup MySQL
       uses: samin/mysql-action@v1.3
       with:
