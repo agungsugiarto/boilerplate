@@ -2,17 +2,17 @@
 
 namespace Tests\Controllers;
 
-use agungsugiarto\boilerplate\Controllers\Users\PermissionController;
+use App\Controllers\Home;
 use CodeIgniter\Test\CIDatabaseTestCase;
 use CodeIgniter\Test\ControllerTester;
 
-class PermissionTest extends CIDatabaseTestCase
+class ExampleTest extends CIDatabaseTestCase
 {
     use ControllerTester;
     
-    public function testIndexPermission()
+    public function testIndexHome()
     {
-        $result = $this->controller(PermissionController::class)
+        $result = $this->controller(Home::class)
                         ->execute('index');
                         
         $this->assertTrue($result->isOK());
