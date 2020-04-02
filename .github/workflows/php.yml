@@ -35,8 +35,6 @@ jobs:
       run: "composer validate"
     - name: "Install dependencies"
       run: "composer install"
-    - name: "CS Check"
-      run: "composer cs-check"
     - name: "Code analyze"
       run: "composer analyze"
     - name: "Run test suite"
