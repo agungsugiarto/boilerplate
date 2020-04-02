@@ -39,6 +39,7 @@
     "scripts": {
         "post-update-cmd": [
           "@composer dump-autoload"
-        ]
+        ],
+        "test": "phpunit --colors=always -vvv"
     }
 }
