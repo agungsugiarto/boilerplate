@@ -1,12 +1,15 @@
+<p align="center"><img src="https://codeigniter.com/assets/images/codeigniter4logo.png" width="200"></p>
+
+<p align="center">
+<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/version"></a>
+<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg"></a>
+<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/downloads"</img></a>
+<a href="https://github.com/agungsugiarto/boilerplate/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/agungsugiarto/boilerplate"></a>
+</p>
 
 CodeIgniter 4 Application Boilerplate
 =====================================
-[![Latest Stable Version](https://poser.pugx.org/agungsugiarto/boilerplate/version)](https://packagist.org/packages/agungsugiarto/boilerplate)
-[![Package](https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg)](https://packagist.org/packages/agungsugiarto/boilerplate)
-[![Total Downloads](https://poser.pugx.org/agungsugiarto/boilerplate/downloads)](https://packagist.org/packages/agungsugiarto/boilerplate)
-[![StyleCI](https://github.styleci.io/repos/243432201/shield?branch=master)](https://github.styleci.io/repos/243432201)
-[![GitHub stars](https://img.shields.io/github/stars/agungsugiarto/boilerplate)](https://github.com/agungsugiarto/boilerplate/stargazers)
-[![GitHub license](https://img.shields.io/github/license/agungsugiarto/boilerplate)](https://github.com/agungsugiarto/boilerplate/blob/master/LICENSE.md)
+This package for CodeIgniter 4 serves as a basic for quickly creating a back-office. It includes profile creation and his management, user management, roles, permissions and create dynamically menu.
 
 Feature
 -------
@@ -26,7 +29,7 @@ Screenshoot | Demo On [Heroku](https://boilerplate-codeigniter4.herokuapp.com/)
 Installation
 ------------
 
-**1.** Get The Module, since packages myth/auth still on development we need to change composer.json in root project directory. Open composer.json with your ide and add code like [this](https://github.com/agungsugiarto/boilerplate/blob/master/composer.json#L27-L28), or below like this.
+**1.** Get The Module, since packages myth/auth still on development we need to change composer.json in root project directory. Open composer.json with your text editor and add code like [this](https://github.com/agungsugiarto/boilerplate/blob/master/composer.json#L27-L28), or below like this.
 
 ```bash
 "minimum-stability": "dev",
