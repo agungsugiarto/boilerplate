@@ -19,13 +19,20 @@ class Group extends GroupModel
      */
     public function getPermissionsForGroup(int $groupId): array
     {
-        return $this->db->table('auth_groups')
+        $permissions =  $this->db->table('auth_groups')
             ->select('auth_permissions.id, auth_permissions.name, auth_permissions.description')
             ->join('auth_groups_permissions', 'auth_groups_permissions.group_id = auth_groups.id', 'inner')
             ->join('auth_permissions', 'auth_permissions.id = auth_groups_permissions.permission_id', 'inner')
             ->where('auth_groups.id', $groupId)
             ->get()
-            ->getResultArray();
+            ->getResultObject();
+
+        $found =  [];
+        foreach ($permissions as $row) {
+            $found[$row->id] = strtolower($row->name); 
+        }
+
+        return $found;
     }
 
     /**

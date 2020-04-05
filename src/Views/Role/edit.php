@@ -57,8 +57,8 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
-                                    <?php foreach ($permissions as $key => $value) : ?>
-                                        <?php if (array_key_exists($key, $permission)) : ?>
+                                    <?php foreach ($permissions as $value) : ?>
+                                        <?php if (array_key_exists($value['id'], $permission)) : ?>
                                             <option value="<?= $value['id'] ?>" selected><?= $value['name'] ?></option>
                                         <?php else : ?>
                                             <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
