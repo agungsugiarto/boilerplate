@@ -241,25 +241,26 @@ class UserController extends BaseController
 
             $this->users->skipValidation(true)->update($id, $user);
 
-            // At this time disable feature role and permission update.
             // Both permission and role im not sure this is
             // best practice or not to handle update,
             // remove permission and role from user
             // then insert with new record.
 
-            // foreach ($this->request->getPost('permission') as $permission) {
-            //     // delete first permission from user
-            //     // $this->authorize->removePermissionFromUser($permission, $id);
-            //     // insert with new permission
-            //     $this->authorize->addPermissionToUser($permission, $id);
-            // }
+            // delete first permission from user
+            $this->db->table('auth_users_permissions')->where('user_id', $id)->delete();
 
-            // foreach ($this->request->getPost('role') as $role) {
-            //     // delete first groups from user
-            //     // $this->authorize->removeUserFromGroup($id, $role);
-            //     // insert with new role
-            //     $this->authorize->addUserToGroup($id, $role);
-            // }
+            foreach ($this->request->getPost('permission') as $permission) {
+                // insert with new permission
+                $this->authorize->addPermissionToUser($permission, $id);
+            }
+
+            // delete first groups from user
+            $this->db->table('auth_groups_users')->where('user_id', $id)->delete();
+
+            foreach ($this->request->getPost('role') as $role) {
+                // insert with new role
+                $this->authorize->addUserToGroup($id, $role);
+            }
         } catch (\Exception $e) {
             $this->db->transRollback();
 
