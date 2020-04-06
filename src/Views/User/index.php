@@ -27,6 +27,7 @@
                                     <th><?= lang('user.username') ?></th>
                                     <th><?= lang('user.email') ?></th>
                                     <th><?= lang('user.active') ?></th>
+                                    <th><?= lang('user.join') ?></th>
                                     <th><?= lang('user.action') ?></th>
                                 </tr>
                             </thead>
@@ -58,6 +59,12 @@
             {
                 'data': function (data) {
                     return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('user.active') ?>' : '<?= lang('user.non_active') ?>'}</span>`
+                }
+            },
+            {
+                'data': 'created_at',
+                'render': function(date) {
+                    return moment(date).fromNow()
                 }
             },
             {
