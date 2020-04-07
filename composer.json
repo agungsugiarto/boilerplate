@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "codeigniter4/framework": "^4",
-        "phpunit/phpunit": "8.5.*"
+        "phpunit/phpunit": "8.5.*",
+        "fzaninotto/faker": "^1.9"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
