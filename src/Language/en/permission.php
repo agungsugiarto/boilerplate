@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'title'             => 'Permission',
+    'title'             => 'Permissions',
     'subtitle'          => 'list',
     'add'               => 'Add Permission',
     'save'              => 'Save',
+    'edit'              => 'Edit Permission',
     'close'             => 'Close',
     // fields
     'name'              => 'Name',

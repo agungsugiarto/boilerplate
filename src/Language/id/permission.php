@@ -5,6 +5,7 @@ return [
     'subtitle'          => 'daftar',
     'add'               => 'Tambah Izin',
     'save'              => 'Simpan',
+    'edit'              => 'Ubah Izin',
     'close'             => 'Tutup',
     // fields
     'name'              => 'Nama',

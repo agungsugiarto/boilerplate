@@ -193,7 +193,7 @@ class UserController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => lang('user.title'),
+            'title'       => lang('user.edit'),
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),

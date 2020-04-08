@@ -4,6 +4,7 @@ return [
     'title'             => 'Peranan',
     'subtitle'          => 'daftar',
     'add'               => 'Tambah Peran',
+    'edit'              => 'Ubah Peran',
     'save'              => 'Simpan',
     // fields
     'name'              => 'Nama',

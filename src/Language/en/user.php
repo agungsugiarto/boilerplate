@@ -4,6 +4,7 @@ return [
     'title'             => 'Users',
     'add'               => 'Add User',
     'save'              => 'Save',
+    'edit'              => 'Edit User',
     // fields
     'profile'           => 'Profile',
     'username'          => 'Username',

@@ -21,8 +21,8 @@ class RoleController extends BaseController
     public function index()
     {
         $data = [
-            'title'    => 'Role',
-            'subtitle' => 'list',
+            'title'    => lang('role.title'),
+            'subtitle' => lang('role.subtitle'),
             'data'     => $this->authorize->permissions(),
         ];
 
@@ -43,7 +43,7 @@ class RoleController extends BaseController
     public function new()
     {
         $data = [
-            'title'=> 'Role',
+            'title'=> lang('role.add'),
             'data' => $this->authorize->permissions(),
         ];
 
@@ -107,7 +107,7 @@ class RoleController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => 'Edit',
+            'title'       => lang('role.edit'),
             'role'        => $this->authorize->group($id),
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new Group())->getPermissionsForGroup($id),

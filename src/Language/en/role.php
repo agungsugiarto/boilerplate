@@ -1,9 +1,10 @@
 <?php
 
 return [
-    'title'             => 'Role',
+    'title'             => 'Roles',
     'subtitle'          => 'list',
     'add'               => 'Add Role',
+    'edit'              => 'Edit Role',
     'save'              => 'Save',
     // fields
     'name'              => 'Name',

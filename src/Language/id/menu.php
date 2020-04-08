@@ -7,11 +7,11 @@ return [
     'refresh'        => 'Perbaharui',
     'add'            => 'Tambah Menu',
     'save'           => 'Simpan',
-    'edit'           => 'Rubah Menu',
+    'edit'           => 'Ubah Menu',
     'close'          => 'Tutup',
     // fields
     'parent'         => 'Induk',
-    'warning_parent' => 'Tolong dicatat! menu hanya mendukung dengan kedalaman maksimal 2.',
+    'warning_parent' => 'Tolong dicatat! menu hanya mendukung maksimal kedalaman 2.',
     'active'         => 'Aktif',
     'non_active'     => 'Tidak Aktif',
     'icon'           => 'Ikon',

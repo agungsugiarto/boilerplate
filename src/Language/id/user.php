@@ -4,6 +4,7 @@ return [
     'title'             => 'Pengguna',
     'add'               => 'Tambah Pengguna',
     'save'              => 'Simpan',
+    'edit'              => 'Ubah Pengguna',
     // fields
     'profile'           => 'Profil',
     'username'          => 'Nama Pengguna',
