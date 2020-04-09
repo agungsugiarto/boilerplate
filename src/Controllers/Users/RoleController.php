@@ -108,11 +108,11 @@ class RoleController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => lang('role.title'),
+            'title'        => lang('role.title'),
             'subtitle'     => lang('role.edit'),
-            'role'        => $this->authorize->group($id),
-            'permissions' => $this->authorize->permissions(),
-            'permission'  => (new Group())->getPermissionsForGroup($id),
+            'role'         => $this->authorize->group($id),
+            'permissions'  => $this->authorize->permissions(),
+            'permission'   => (new Group())->getPermissionsForGroup($id),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
