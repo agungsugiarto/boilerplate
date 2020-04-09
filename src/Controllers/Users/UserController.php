@@ -32,7 +32,8 @@ class UserController extends BaseController
     public function index()
     {
         $data = [
-            'title' => lang('user.title'),
+            'title'    => lang('user.title'),
+            'subtitle' => lang('user.subtitle'),
         ];
 
         if ($this->request->isAJAX()) {
@@ -180,7 +181,7 @@ class UserController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'success');
+        return redirect()->back()->with('sweet-success', lang('user.msg_insert'));
     }
 
     /**
@@ -193,7 +194,8 @@ class UserController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => lang('user.edit'),
+            'title'       => lang('user.title'),
+            'subtitle'    => lang('user.edit'),
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
@@ -269,7 +271,7 @@ class UserController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'success');
+        return redirect()->back()->with('sweet-success', lang('user.msg_update'));
     }
 
     /**
@@ -281,10 +283,10 @@ class UserController extends BaseController
      */
     public function delete($id)
     {
-        if (!$found = $this->users->where('id', $id)->delete()) {
-            return $this->fail('fail deleted');
+        if (!$found = $this->users->delete($id)) {
+            return $this->failNotFound(lang('user.msg_get_fail'));
         }
 
-        return $this->respondDeleted($found);
+        return $this->respondDeleted($found, lang('user.msg_delete'));
     }
 }

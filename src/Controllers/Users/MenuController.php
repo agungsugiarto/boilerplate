@@ -32,7 +32,7 @@ class MenuController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Menu',
+            'title' => lang('menu.title'),
             'roles' => $this->authorize->groups(),
             'menus' => $this->menu->orderBy('sequence', 'asc')->findAll(),
         ];
@@ -71,10 +71,10 @@ class MenuController extends BaseController
         }
 
         if (!$result) {
-            return $this->fail('Failed');
+            return $this->fail($result, lang('menu.msg_fail_order'));
         }
 
-        return $this->respondCreated($result);
+        return $this->respondCreated($result, lang('menu.msg_update'));
     }
 
     public function show($id)
@@ -128,7 +128,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'success');
+        return redirect()->back()->with('sweet-success', lang('menu.msg_insert'));
     }
 
     /**
@@ -158,7 +158,7 @@ class MenuController extends BaseController
         try {
             $this->db->transBegin();
 
-            $this->menu->update($id, [
+            $menu = $this->menu->update($id, [
                 'parent_id' => $data['parent_id'],
                 'active'    => $data['active'],
                 'title'     => $data['title'],
@@ -184,7 +184,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return $this->respondCreated();
+        return $this->respondCreated($menu, lang('menu.msg_update'));
     }
 
     /**
@@ -200,7 +200,7 @@ class MenuController extends BaseController
 
         if ($this->request->isAJAX()) {
             if (!$found) {
-                return $this->fail('failed');
+                return $this->failNotFound(lang('menu.msg_get_fail'));
             }
 
             return $this->respond([
@@ -220,10 +220,12 @@ class MenuController extends BaseController
      */
     public function delete($id)
     {
-        if (!$this->menu->where('id', $id)->delete()) {
-            return $this->fail('fail deleted');
+        $found = $this->menu->delete($id);
+
+        if ($found->connID->affected_rows === 0) {
+            return $this->failNotFound($found, lang('menu.msg_get_fail'));
         }
 
-        return $this->respondDeleted('success');
+        return $this->respondDeleted($found, lang('menu.msg_delete'));
     }
 }

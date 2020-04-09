@@ -2,13 +2,12 @@
 
 return [
     'title'             => 'Users',
+    'subtitle'          => 'User list',
     'add'               => 'Add User',
     'save'              => 'Save',
-    'edit'              => 'Edit User',
+    'edit'              => 'Edit user',
     // fields
     'profile'           => 'Profile',
-    'username'          => 'Username',
-    'email'             => 'Email',
     'active'            => 'Active',
     'non_active'        => 'Non Active',
     'action'            => 'Action',
@@ -17,4 +16,9 @@ return [
     'join'              => 'Member since',
     'setting'           => 'Setting',
     'choose_image'      => 'Choose image',
+    //messages
+    'msg_insert'        => 'The user has been correctly added.',
+    'msg_update'        => 'The user has been correctly modified.',
+    'msg_delete'        => 'The user has been correctly deleted.',
+    'msg_get_fail'      => 'The user not found or already deleted.',
 ];

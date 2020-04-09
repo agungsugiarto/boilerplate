@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'title'          => 'Menu',
+    'title'          => 'Pengelolan menu',
     'expand'         => 'Perlebar',
     'collapse'       => 'Perkecil',
     'refresh'        => 'Perbaharui',
-    'add'            => 'Tambah Menu',
+    'add'            => 'Tambah menu',
     'save'           => 'Simpan',
-    'edit'           => 'Ubah Menu',
+    'edit'           => 'Ubah menu',
     'close'          => 'Tutup',
     // fields
     'parent'         => 'Induk',
@@ -17,10 +17,16 @@ return [
     'icon'           => 'Ikon',
     'info_icon'      => 'Untuk ikon lainnya, silahkan lihat',
     'place_icon'     => 'Ikon dari fontawesome.',
-    'title'          => 'Judul',
+    'name'           => 'Judul',
     'place_title'    => 'Nama untuk menu.',
     'route'          => 'Route',
     'place_route'    => 'Route untuk link menu.',
     'role'           => 'Peran',
     'select_role'    => 'Pilih Peran',
+    //messages
+    'msg_insert'     => 'Menu berhasil ditambahkan.',
+    'msg_update'     => 'Menu berhasil dirubah.',
+    'msg_delete'     => 'Menu berhasil dihapus.',
+    'msg_get_fail'   => 'Menu tidak ditemukan atau sudah dihapus.',
+    'msg_fail_order' => 'Menu tidak berhasil di urutkan.',
 ];

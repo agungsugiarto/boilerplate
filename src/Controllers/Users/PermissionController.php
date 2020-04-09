@@ -28,7 +28,7 @@ class PermissionController extends BaseController
         if ($this->request->isAJAX()) {
             return $this->respond([
                 'data' => $this->authorize->permissions(),
-            ], 200, 'success retrive data!');
+            ]);
         }
 
         return view('agungsugiarto\boilerplate\Views\Permission\index', $data);
@@ -77,7 +77,7 @@ class PermissionController extends BaseController
 
         return $this->respondCreated(
             $this->authorize->createPermission(url_title($name), $description),
-            'Success insert data'
+            lang('permission.msg_insert')
         );
     }
 
@@ -91,12 +91,12 @@ class PermissionController extends BaseController
     public function edit($id)
     {
         if (!$found = $this->authorize->permission($id)) {
-            return $this->fail('fail get data');
+            return $this->failNotFound(lang('permission.msg_get_fail'));
         }
 
         return $this->respond([
             'data' => $found,
-        ], 200);
+        ]);
     }
 
     /**
@@ -122,7 +122,8 @@ class PermissionController extends BaseController
         }
 
         return $this->respondCreated(
-            $this->authorize->updatePermission($id, $data['name'], $data['description'])
+            $this->authorize->updatePermission($id, $data['name'], $data['description']),
+            lang('permission.msg_update')
         );
     }
 
@@ -133,10 +134,10 @@ class PermissionController extends BaseController
      */
     public function delete($id)
     {
-        if (!$found = $this->authorize->deletePermission($id)) {
-            return $this->fail('fail deleted');
+        if ($found = $this->authorize->deletePermission($id)) {
+            return $this->respondDeleted($found, lang('permission.msg_delete'));
         }
 
-        return $this->respondDeleted($found);
+        return $this->failNotFound($found, lang('permission.msg_get_fail'));
     }
 }

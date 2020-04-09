@@ -92,10 +92,10 @@
                 name: slugify(createForm.find("input[name='name']").val()),
                 description: createForm.find("textarea[name='description']").val()
             },
-        }).done((data, textStatus) => {
+        }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',
-                title: textStatus
+                title: jqXHR.statusText
             })
             tablePermission.ajax.reload();
             $("#form-create-permission").trigger("reset");
@@ -146,10 +146,10 @@
             method: 'PUT',
             data: editForm.serialize()
             
-        }).done((data, textStatus) => {
+        }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',
-                title: textStatus
+                title: jqXHR.statusText
             })
             tablePermission.ajax.reload();
             $("#form-edit-permission").trigger("reset");
@@ -178,16 +178,16 @@
                 $.ajax({
                     url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
-                }).done((data, textStatus) => {
+                }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
                         icon: 'success',
-                        title: textStatus,
+                        title: jqXHR.statusText,
                     });
                     tablePermission.ajax.reload();
-                }).fail((error) => {
+                }).fail((jqXHR, textStatus, errorThrown) => {
                     Toast.fire({
                         icon: 'error',
-                        title: error.responseJSON.messages.error,
+                        title: jqXHR.responseJSON.messages.error,
                     });
                 })
             }

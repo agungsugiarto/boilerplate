@@ -24,8 +24,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th><?= lang('user.username') ?></th>
-                                    <th><?= lang('user.email') ?></th>
+                                    <th><?= lang('Auth.username') ?></th>
+                                    <th><?= lang('Auth.email') ?></th>
                                     <th><?= lang('user.active') ?></th>
                                     <th><?= lang('user.join') ?></th>
                                     <th><?= lang('user.action') ?></th>
@@ -95,10 +95,10 @@
                 $.ajax({
                     url: `<?= route_to('admin/user/manage') ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
-                }).done((data, textStatus) => {
+                }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
                         icon: 'success',
-                        title: textStatus,
+                        title: jqXHR.statusText,
                     });
                     tableUser.ajax.reload();
                 }).fail((error) => {

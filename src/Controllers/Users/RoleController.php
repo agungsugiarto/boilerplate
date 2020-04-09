@@ -43,8 +43,9 @@ class RoleController extends BaseController
     public function new()
     {
         $data = [
-            'title'=> lang('role.add'),
-            'data' => $this->authorize->permissions(),
+            'title'    => lang('role.title'),
+            'subtitle' => lang('role.add'),
+            'data'     => $this->authorize->permissions(),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\create', $data);
@@ -96,7 +97,7 @@ class RoleController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'success');
+        return redirect()->back()->with('sweet-success', lang('role.msg_insert'));
     }
 
     /**
@@ -107,7 +108,8 @@ class RoleController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => lang('role.edit'),
+            'title'       => lang('role.title'),
+            'subtitle'     => lang('role.edit'),
             'role'        => $this->authorize->group($id),
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new Group())->getPermissionsForGroup($id),
@@ -157,7 +159,7 @@ class RoleController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', 'success');
+        return redirect()->back()->with('sweet-success', lang('role.msg_update'));
     }
 
     /**
@@ -168,9 +170,9 @@ class RoleController extends BaseController
     public function delete($id)
     {
         if (!$found = $this->authorize->deleteGroup($id)) {
-            return $this->fail('fail deleted');
+            return $this->failNotFound(lang('role.msg_get_fail'));
         }
 
-        return $this->respondDeleted($found);
+        return $this->respondDeleted($found, lang('role.msg_delete'));
     }
 }

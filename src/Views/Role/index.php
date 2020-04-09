@@ -91,10 +91,10 @@
                 $.ajax({
                     url: `<?= route_to('admin/role') ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
-                }).done((data, textStatus) => {
+                }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
                         icon: 'success',
-                        title: textStatus,
+                        title: jqXHR.statusText,
                     });
                     tableRole.ajax.reload();
                 }).fail((error) => {

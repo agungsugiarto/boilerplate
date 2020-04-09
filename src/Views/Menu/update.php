@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.title') ?></label>
+                        <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.name') ?></label>
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <div class="input-group-prepend">

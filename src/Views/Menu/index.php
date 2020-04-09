@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.title') ?></label>
+                            <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.name') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -199,10 +199,10 @@ $(function () {
             method: 'PUT',
             dataType: 'JSON',
             data: JSON.stringify(serialize)
-        }).done((data, textStatus) => {
+        }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',
-                title: textStatus
+                title: jqXHR.statusText
             });
             btnSave.attr('disabled', false);
             btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('menu.save') ?>");
@@ -256,10 +256,10 @@ $(function () {
             $("#menu_id").val(response.data[0].id);
             $('#modal-update').modal('show');
 
-        }).fail((error) => {
+        }).fail((jqXHR, textStatus, errorThrown) => {
             Toast.fire({
                 icon: 'error',
-                title: error.responseJSON.messages.error,
+                title: jqXHR.responseJSON.messages.error,
             });
         })
     });
@@ -273,10 +273,10 @@ $(function () {
             method: 'PUT',
             data: editForm.serialize()
             
-        }).done((data, textStatus) => {
+        }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',
-                title: textStatus
+                title: jqXHR.statusText
             });
 
             $('.dd').nestable('destroy');
@@ -306,17 +306,17 @@ $(function () {
                 $.ajax({
                     url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
-                }).done((data, textStatus) => {
+                }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
                         icon: 'success',
-                        title: textStatus,
+                        title: jqXHR.statusText,
                     });
                     $('.dd').nestable('destroy');
                     menu();
-                }).fail((error) => {
+                }).fail((jqXHR, textStatus, errorThrown) => {
                     Toast.fire({
                         icon: 'error',
-                        title: error.responseJSON.messages.error,
+                        title: jqXHR.responseJSON.messages.error,
                     });
                 })
             }
