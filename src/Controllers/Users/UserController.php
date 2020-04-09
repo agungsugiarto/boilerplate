@@ -107,10 +107,10 @@ class UserController extends BaseController
             $user->username = $this->request->getPost('username');
 
             if ($this->users->skipValidation(true)->update(user()->id, $user)) {
-                return redirect()->back()->with('sweet-success', 'success');
+                return redirect()->back()->with('sweet-success', lang('user.msg_update'));
             }
 
-            return redirect()->back()->withInput()->with('sweet-error', 'errors');
+            return redirect()->back()->withInput()->with('sweet-error', lang('user.msg_get_fail'));
         }
 
         return view('agungsugiarto\boilerplate\Views\User\profile', $data);
