@@ -138,6 +138,6 @@ class PermissionController extends BaseController
             return $this->respondDeleted($found, lang('permission.msg_delete'));
         }
 
-        return $this->failNotFound($found, lang('permission.msg_get_fail'));
+        return $this->failNotFound(lang('permission.msg_get_fail'));
     }
 }

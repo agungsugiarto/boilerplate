@@ -220,10 +220,8 @@ class MenuController extends BaseController
      */
     public function delete($id)
     {
-        $found = $this->menu->delete($id);
-
-        if ($found->connID->affected_rows === 0) {
-            return $this->failNotFound($found, lang('menu.msg_get_fail'));
+        if (!$found = $this->menu->delete($id)) {
+            return $this->failNotFound(lang('menu.msg_get_fail'));
         }
 
         return $this->respondDeleted($found, lang('menu.msg_delete'));
