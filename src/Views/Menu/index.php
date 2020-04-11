@@ -309,7 +309,7 @@ $(function () {
                 }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
                         icon: 'success',
-                        title: jqXHR.statusText,
+                        title: textStatus,
                     });
                     $('.dd').nestable('destroy');
                     menu();
