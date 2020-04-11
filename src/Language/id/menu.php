@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'          => 'Pengelolan menu',
+    'title'          => 'Pengelolaan menu',
     'expand'         => 'Perlebar',
     'collapse'       => 'Perkecil',
     'refresh'        => 'Perbaharui',

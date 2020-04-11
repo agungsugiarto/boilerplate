@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'          => 'Management menu',
+    'title'          => 'Menu management',
     'expand'         => 'Expand',
     'collapse'       => 'Collapse',
     'refresh'        => 'Refresh',
