@@ -60,7 +60,7 @@ class MenuController extends BaseController
 
         $i = 1;
         foreach ($data as $item) {
-            if (array_key_exists('parent_id', $item)) {
+            if (isset($item->parent_id)) {
                 $menu->parent_id = $item->parent_id;
                 $menu->sequence = $i++;
             } else {
