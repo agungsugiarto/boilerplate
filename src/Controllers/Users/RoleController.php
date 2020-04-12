@@ -112,7 +112,7 @@ class RoleController extends BaseController
             'subtitle'     => lang('role.edit'),
             'role'         => $this->authorize->group($id),
             'permissions'  => $this->authorize->permissions(),
-            'permission'   => (new Group())->getPermissionsForGroup($id),
+            'permission'   => $this->authorize->groupPermissions($id),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
