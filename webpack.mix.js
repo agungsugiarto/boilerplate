@@ -105,3 +105,36 @@ mix.scripts([
     'node_modules/tinymce/tinymce.min.js',
     'node_modules/tinymce/jquery.tinymce.min.js'
 ], 'public/js/tinymce/tinymce.min.js').version();
+
+// ============== Nestable ==============
+
+mix.styles(
+    'node_modules/nestable2/jquery.nestable.css',
+    'public/js/nestable2/jquery.nestable.min.css'
+).version();
+
+mix.scripts([
+    'node_modules/nestable2/jquery.nestable.js',
+], 'public/js/nestable2/jquery.nestable.min.css').version();
+
+// ============== Fontawesome iconpicker ==============
+
+mix.less(
+    'node_modules/fontawesome-iconpicker/src/less/iconpicker.less',
+    'public/js/fontawesome-iconpicker/fontawesome-iconpicker.min.css'
+).version();
+
+mix.scripts([
+    'node_modules/fontawesome-iconpicker/src/js/iconpicker.js',
+], 'public/js/fontawesome-iconpicker/fontawesome-iconpicker.min.js').version();
+
+// ============== Duallistbox ==============
+
+mix.styles(
+    'node_modules/bootstrap4-duallistbox/src/bootstrap-duallistbox.css',
+    'public/js/bootstrap4-duallistbox/bootstrap-duallistbox.min.css'
+).version();
+
+mix.scripts([
+    'node_modules/bootstrap4-duallistbox/src/jquery.bootstrap-duallistbox.js',
+], 'public/js/bootstrap4-duallistbox/bootstrap-duallistbox.min.js').version();
