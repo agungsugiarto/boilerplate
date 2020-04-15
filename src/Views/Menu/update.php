@@ -18,7 +18,7 @@
                                 <option value="0">ROOT</option>
                             </select>
                             <span class="help-block">
-                                <i class="fas fa-exclamation-triangle"></i>&nbsp;<?= lang('menu.warning_parent') ?>
+                                <i class="fas fa-exclamation-triangle text-danger"></i>&nbsp;<?= lang('menu.warning_parent') ?>
                             </span>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 <input type="text" name="icon" class="icon-picker form-control" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
                             </div>
                             <span class="help-block">
-                                <i class="fa fa-info-circle"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
+                                <i class="fa fa-info-circle text-info"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
                             </span>
                         </div>
                     </div>
