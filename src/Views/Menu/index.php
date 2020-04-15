@@ -54,7 +54,7 @@
                                     <?php endforeach ?>
                                 </select>
                                 <span class="help-block">
-                                    <i class="fas fa-exclamation-triangle"></i>&nbsp;<?= lang('menu.warning_parent') ?>
+                                    <i class="fas fa-exclamation-triangle text-danger"></i>&nbsp;<?= lang('menu.warning_parent') ?>
                                 </span>
                                 <?php if (session('error.parent_id')) : ?>
                                     <div class="invalid-feedback">
@@ -87,7 +87,7 @@
                                     <?php endif ?>
                                 </div>
                                 <span class="help-block">
-                                    <i class="fa fa-info-circle"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
+                                    <i class="fa fa-info-circle text-info"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
                                 </span>
                             </div>
                         </div>
