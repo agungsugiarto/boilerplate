@@ -45,6 +45,8 @@
 <?= $this->section('js') ?>
 <script>
     var tableUser = $('#table-user').DataTable({
+        processing: true,
+        serverSide: true,
         ordering: false,
         autoWidth: false,
 
@@ -53,7 +55,7 @@
             method: 'GET'
         },
         columns : [
-            { 'data': null },
+            { 'data': 'id' },
             { 'data': 'username' },
             { 'data': 'email' },
             {

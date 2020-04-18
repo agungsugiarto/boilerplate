@@ -3,6 +3,8 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
+use agungsugiarto\boilerplate\Entities\Collection;
+use agungsugiarto\boilerplate\Models\PermissionModel;
 use CodeIgniter\API\ResponseTrait;
 
 /**
@@ -19,19 +21,23 @@ class PermissionController extends BaseController
      */
     public function index()
     {
-        // Title and breadcrump
-        $data = [
-            'title'    => lang('permission.title'),
-            'subtitle' => lang('permission.subtitle'),
-        ];
-
         if ($this->request->isAJAX()) {
-            return $this->respond([
-                'data' => $this->authorize->permissions(),
-            ]);
+            $start = $this->request->getGet('start');
+            $length = $this->request->getGet('length');
+            $search = $this->request->getGet('search[value]');
+            $collection = new Collection();
+    
+            return $this->respond($collection->toColection(
+                model(PermissionModel::class)->findPaginatedData($length, $start, $search),
+                model(PermissionModel::class)->countAllResults(),
+                model(PermissionModel::class)->countFindData($search)
+            ));
         }
 
-        return view('agungsugiarto\boilerplate\Views\Permission\index', $data);
+        return view('agungsugiarto\boilerplate\Views\Permission\index', [
+            'title'    => lang('permission.title'),
+            'subtitle' => lang('permission.subtile'),
+        ]);
     }
 
     /**

@@ -3,7 +3,8 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Models\Group;
+use agungsugiarto\boilerplate\Entities\Collection;
+use agungsugiarto\boilerplate\Models\GroupModel;
 use CodeIgniter\API\ResponseTrait;
 
 /**
@@ -20,19 +21,24 @@ class RoleController extends BaseController
      */
     public function index()
     {
-        $data = [
+        if ($this->request->isAJAX()) {
+            $start = $this->request->getGet('start');
+            $length = $this->request->getGet('length');
+            $search = $this->request->getGet('search[value]');
+            $collection = new Collection();
+    
+            return $this->respond($collection->toColection(
+                model(GroupModel::class)->findPaginatedData($length, $start, $search),
+                model(GroupModel::class)->countAllResults(),
+                model(GroupModel::class)->countFindData($search)
+            ));
+        }
+
+        return view('agungsugiarto\boilerplate\Views\Role\index', [
             'title'    => lang('role.title'),
             'subtitle' => lang('role.subtitle'),
             'data'     => $this->authorize->permissions(),
-        ];
-
-        if ($this->request->isAJAX()) {
-            return $this->response->setJSON([
-                'data' => $this->authorize->groups(),
-            ]);
-        }
-
-        return view('agungsugiarto\boilerplate\Views\Role\index', $data);
+        ]);
     }
 
     /**

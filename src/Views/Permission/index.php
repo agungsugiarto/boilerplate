@@ -46,19 +46,17 @@
     $.get('https://www.google.com/');
 
     var tablePermission = $('#table-permission').DataTable({
-        paging: true,
-        lengthChange: true,
-        searching: true,
+        processing: true,
+        serverSide: true,
         ordering: false,
-        info: true,
         autoWidth: false,
 
         ajax : {
             url: '<?= route_to('admin/permission') ?>',
-            method: 'get'
+            method: 'GET'
         },
         columns : [
-            { 'data': null },
+            { 'data': 'id' },
             { 'data': 'name' },
             { 'data': 'description' },
             {
@@ -73,12 +71,6 @@
             }
         ]
     });
-
-    tablePermission.on('order.dt search.dt', () => {
-        tablePermission.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        });
-    }).draw();
 
     $(document).on('click', '#btn-save-permission', () => {
         $('.text-danger').remove();

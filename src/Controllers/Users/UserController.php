@@ -3,12 +3,12 @@
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Models\Group;
+use agungsugiarto\boilerplate\Entities\Collection;
+use agungsugiarto\boilerplate\Models\GroupModel;
+use agungsugiarto\boilerplate\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
-use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Authorization\PermissionModel;
 use Myth\Auth\Entities\User;
-use Myth\Auth\Models\UserModel;
 
 /**
  * Class UserController.
@@ -31,18 +31,23 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $data = [
-            'title'    => lang('user.title'),
-            'subtitle' => lang('user.subtitle'),
-        ];
-
         if ($this->request->isAJAX()) {
-            return $this->respond([
-                'data' => $this->users->asObject()->findAll(),
-            ]);
+            $start = $this->request->getGet('start');
+            $length = $this->request->getGet('length');
+            $search = $this->request->getGet('search[value]');
+            $collection = new Collection();
+    
+            return $this->respond($collection->toColection(
+                model(UserModel::class)->findPaginatedData($length, $start, $search),
+                model(UserModel::class)->countAllResults(),
+                model(UserModel::class)->countFindData($search)
+            ));
         }
 
-        return view('agungsugiarto\boilerplate\Views\User\index', $data);
+        return view('agungsugiarto\boilerplate\Views\User\index', [
+            'title'    => lang('user.title'),
+            'subtitle' => lang('user.subtitle'),
+        ]);
     }
 
     /**
@@ -199,7 +204,7 @@ class UserController extends BaseController
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
-            'role'        => (new Group())->getGroupsForUser($id),
+            'role'        => (new GroupModel())->getGroupsForUser($id),
             'user'        => $this->users->asArray()->find($id),
         ];
 
