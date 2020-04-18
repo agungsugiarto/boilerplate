@@ -28,11 +28,11 @@
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                     <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="<?= lang('role.place_name') ?>">
-                                    <?php if (session('error.name')) : ?>
+                                    <?php if (session('error.name')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.name') ?></h6>
                                     </div>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -44,11 +44,11 @@
                                         <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
                                     </div>
                                     <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="<?= lang('role.place_description') ?>"><?= old('description') ?></textarea>
-                                    <?php if (session('error.description')) : ?>
+                                    <?php if (session('error.description')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.description') ?></h6>
                                     </div>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -57,13 +57,13 @@
                             <div class="col-sm-10">
                                 <div class="textarea-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
-                                        <?php foreach ($data as $permission) : ?>
+                                        <?php foreach ($data as $permission) { ?>
                                             <option <?= in_array($permission['id'], old('permission', [])) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
-                                        <?php endforeach ?>
+                                        <?php } ?>
                                     </select>
-                                    <?php if (session('error.permission')) : ?>
+                                    <?php if (session('error.permission')) { ?>
                                         <h6 class="text-danger"><?= session('error.permission') ?></h6>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

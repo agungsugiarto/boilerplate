@@ -6,9 +6,9 @@ class Collection
 {
     /**
      * Return data to colection map datatable.
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return array
      */
     public function toColection(array $data, int $recordsTotal, int $recordsFiltered)
