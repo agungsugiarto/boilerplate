@@ -20,7 +20,7 @@
                     <li class="list-group-item">
                         <b><?= lang('user.join') ?></b> 
                         <a class="float-right">
-                            <?= user()->created_at->toLocalizedString('MMM d, yyyy') .' '. user()->created_at->humanize() ?>
+                            <?= user()->created_at->toLocalizedString('MMM d, yyyy').' '.user()->created_at->humanize() ?>
                         </a>
                     </li>
                 </ul>
@@ -55,11 +55,11 @@
                                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                         </div>
                                         <input type="email" name="email" class="form-control <?= session('error.email') ? 'is-invalid' : '' ?>" value="<?= user()->email ?>" placeholder="<?=lang('Auth.email')?>" autocomplete="off">
-                                        <?php if (session('error.email')) : ?>
+                                        <?php if (session('error.email')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.email') ?></h6>
                                         </div>
-                                        <?php endif ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -71,11 +71,11 @@
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
                                         <input type="text" name="username" class="form-control <?= session('error.username') ? 'is-invalid' : '' ?>" value="<?= user()->username ?>" placeholder="<?=lang('Auth.username')?>" autocomplete="off">
-                                        <?php if (session('error.username')) : ?>
+                                        <?php if (session('error.username')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.username') ?></h6>
                                         </div>
-                                        <?php endif ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -87,11 +87,11 @@
                                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         </div>
                                         <input type="password" name="password" class="form-control <?= session('error.password') ? 'is-invalid' : '' ?>" placeholder="<?=lang('Auth.password')?>" autocomplete="off">
-                                        <?php if (session('error.password')) : ?>
+                                        <?php if (session('error.password')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.password') ?></h6>
                                         </div>
-                                        <?php endif ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -103,11 +103,11 @@
                                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         </div>
                                         <input type="password" name="pass_confirm" class="form-control <?= session('error.pass_confirm') ? 'is-invalid' : '' ?>" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off">
-                                        <?php if (session('error.pass_confirm')) : ?>
+                                        <?php if (session('error.pass_confirm')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.pass_confirm') ?></h6>
                                         </div>
-                                        <?php endif ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Tests\Support;
 
@@ -18,7 +18,7 @@ class SessionTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 
         $this->mockSession();
     }
-    
+
     /**
      * Pre-loads the mock session driver into $this->session.
      *
@@ -26,7 +26,7 @@ class SessionTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
      */
     protected function mockSession()
     {
-        require_once SYSTEMPATH . 'Test/Mock/MockSession.php';
+        require_once SYSTEMPATH.'Test/Mock/MockSession.php';
         $config = config('App');
         $this->session = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
         \Config\Services::injectMock('session', $this->session);
