@@ -52,7 +52,7 @@ class GroupModel extends BaseModel
 
         return $this->builder()->limit($length, $start)->get()->getResultObject();
     }
-    
+
     /**
      * FInd with count all data.
      *
@@ -68,7 +68,7 @@ class GroupModel extends BaseModel
                                 ->orLike('description', $keyword)
                            ->groupEnd()
                            ->countAllResults()
-                           
+
                         : $this->builder()->countAllResults();
     }
 }
