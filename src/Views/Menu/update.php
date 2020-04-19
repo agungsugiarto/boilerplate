@@ -52,7 +52,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                 </div>
-                                <input type="text" name="title" class="form-control <?php if (session('error.title')) { ?>is-invalid<?php } ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
+                                <input type="text" name="title" class="form-control <?= session('error.title') ? 'is-invalid' : '' ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-link"></i></span>
                                 </div>
-                                <input type="text" name="route" class="form-control <?php if (session('error.route')) { ?>is-invalid<?php } ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
+                                <input type="text" name="route" class="form-control <?= session('error.route') ? 'is-invalid' : '' ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
                             </div>
                         </div>
                     </div>

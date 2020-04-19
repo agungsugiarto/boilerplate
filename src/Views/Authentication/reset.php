@@ -10,7 +10,7 @@
       <?= csrf_field() ?>
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control <?php if (session('errors.token')) { ?>is-invalid<?php } ?>" 
+        <input type="text" class="form-control <?= session('errors.token') ? 'is-invalid' : '' ?>" 
           placeholder="<?=lang('Auth.token')?>"
           name="token"
           value="<?= old('token', $token ?? '') ?>">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="input-group mb-3">
-        <input type="email" class="form-control <?php if (session('errors.email')) { ?>is-invalid<?php } ?>" 
+        <input type="email" class="form-control <?= session('errors.email') ? 'is-invalid' : '' ?>" 
           placeholder="<?=lang('Auth.email')?>"
           name="email"
           value="<?= old('email') ?>">
@@ -40,7 +40,7 @@
       </div>
 
       <div class="input-group mb-3">
-        <input type="password" class="form-control <?php if (session('errors.password')) { ?>is-invalid<?php } ?>" 
+        <input type="password" class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>" 
           placeholder="<?=lang('Auth.password')?>"
           name="password"
           value="<?= old('password') ?>">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="input-group mb-3">
-        <input type="password" class="form-control <?php if (session('errors.pass_confirm')) { ?>is-invalid<?php } ?>" 
+        <input type="password" class="form-control <?= session('errors.pass_confirm') ? 'is-invalid' : '' ?>" 
           placeholder="<?=lang('Auth.repeatPassword')?>"
           name="pass_confirm">
         <div class="input-group-append">

@@ -71,7 +71,7 @@
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
                                         <input type="text" name="username" class="form-control <?= session('error.username') ? 'is-invalid' : '' ?>" value="<?= user()->username ?>" placeholder="<?=lang('Auth.username')?>" autocomplete="off">
-                                        <?php if(session('error.username')) : ?>
+                                        <?php if (session('error.username')) : ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.username') ?></h6>
                                         </div>

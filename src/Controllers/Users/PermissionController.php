@@ -36,7 +36,7 @@ class PermissionController extends BaseController
 
         return view('agungsugiarto\boilerplate\Views\Permission\index', [
             'title'    => lang('permission.title'),
-            'subtitle' => lang('permission.subtile'),
+            'subtitle' => lang('permission.subtitle'),
         ]);
     }
 
