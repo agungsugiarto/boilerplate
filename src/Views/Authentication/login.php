@@ -10,7 +10,7 @@
       <?php if ($config->validFields === ['email']) { ?>
       <div class="input-group mb-3">
         <input type="email" name="login"
-          class="form-control <?php if (session('error.login') || session('errors.login')) { ?>is-invalid<?php } ?>"
+          class="form-control <?= session('error.login') || session('errors.login') ? 'is-invalid' : '' ?>"
           placeholder="<?=lang('Auth.email')?>" value="<?= old('login') ?>" autocomplete="off">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -24,7 +24,7 @@
       <?php } else { ?>
       <div class="input-group mb-3">
         <input type="text" name="login"
-          class="form-control <?php if (session('error.login') || session('errors.login')) { ?>is-invalid<?php } ?>"
+          class="form-control <?= session('error.login') || session('errors.login') ? 'is-invalid' : '' ?>"
           placeholder="<?=lang('Auth.emailOrUsername')?>" value="<?= old('login') ?>" autocomplete="off">
         <div class="input-group-append">
           <div class="input-group-text">
@@ -38,7 +38,7 @@
       <?php } ?>
       <div class="input-group mb-3">
         <input type="password" name="password"
-          class="form-control <?php if (session('errors.password')) { ?>is-invalid<?php } ?>"
+          class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>"
           placeholder="<?=lang('Auth.password')?>">
         <div class="input-group-append">
           <div class="input-group-text">

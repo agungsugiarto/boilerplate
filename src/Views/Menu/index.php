@@ -49,18 +49,18 @@
                             <div class="col-sm-10">
                                 <select class="form-control parent" name="parent_id" style="width: 100%;">
                                     <option selcted value="0">ROOT</option>
-                                    <?php foreach($menus as $menu) : ?>
+                                    <?php foreach ($menus as $menu) { ?>
                                         <option <?= ($menu->id == old('parent_id')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
-                                    <?php endforeach ?>
+                                    <?php } ?>
                                 </select>
                                 <span class="help-block">
                                     <i class="fas fa-exclamation-triangle text-danger"></i>&nbsp;<?= lang('menu.warning_parent') ?>
                                 </span>
-                                <?php if (session('error.parent_id')) : ?>
+                                <?php if (session('error.parent_id')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.parent_id') ?></h6>
                                     </div>
-                                <?php endif ?>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -79,12 +79,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
                                     </div>
-                                    <input type="text" name="icon" class="icon-picker form-control <?php if (session('error.icon')) { ?>is-invalid<?php } ?>" value="<?= old('icon') ?>" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
-                                    <?php if (session('error.icon')) : ?>
+                                    <input type="text" name="icon" class="icon-picker form-control <?= session('error.icon') ? 'is-invalid' : '' ?>" value="<?= old('icon') ?>" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
+                                    <?php if (session('error.icon')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.icon') ?></h6>
                                     </div>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                                 <span class="help-block">
                                     <i class="fa fa-info-circle text-info"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
@@ -98,12 +98,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" name="title" class="form-control <?php if (session('error.title')) { ?>is-invalid<?php } ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
-                                    <?php if (session('error.title')) : ?>
+                                    <input type="text" name="title" class="form-control <?= session('error.title') ? 'is-invalid' : '' ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
+                                    <?php if (session('error.title')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.title') ?></h6>
                                     </div>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -114,12 +114,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-link"></i></span>
                                     </div>
-                                    <input type="text" name="route" class="form-control <?php if (session('error.route')) { ?>is-invalid<?php } ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
-                                    <?php if (session('error.route')) : ?>
+                                    <input type="text" name="route" class="form-control <?= session('error.route') ? 'is-invalid' : '' ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
+                                    <?php if (session('error.route')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.route') ?></h6>
                                     </div>
-                                    <?php endif ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -127,13 +127,13 @@
                             <label class="col-sm-2 col-form-label"><?= lang('menu.role') ?></label>
                             <div class="col-sm-10">
                                 <select multiple="multiple" class="form-control parent" name="groups_menu[]" data-placeholder="<?= lang('menu.select_role') ?>" style="width: 100%;">
-                                    <?php foreach($roles as $role) : ?>
+                                    <?php foreach ($roles as $role) { ?>
                                         <option <?= in_array($role->id, old('groups_menu', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
-                                    <?php endforeach ?>
+                                    <?php } ?>
                                 </select>
-                                <?php if (session('error.groups_menu')) : ?>
+                                <?php if (session('error.groups_menu')) { ?>
                                     <h6 class="text-danger"><?= session('error.groups_menu') ?></h6>
-                                <?php endif ?>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group row">

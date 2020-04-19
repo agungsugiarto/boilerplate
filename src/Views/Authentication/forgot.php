@@ -10,7 +10,7 @@
       <?= csrf_field() ?>
       <div class="input-group mb-3">
         <input type="email" name="email"
-          class="form-control <?php if (session('errors.email')) { ?>is-invalid<?php } ?>"
+          class="form-control <?= session('errors.email') ? 'is-invalid' : '' ?>"
           placeholder="<?=lang('Auth.email')?>">
         <div class="input-group-append">
           <div class="input-group-text">
