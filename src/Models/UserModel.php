@@ -26,7 +26,7 @@ class UserModel extends BaseModel
 
         return $this->builder()->where('deleted_at', null)->limit($length, $start)->get()->getResultObject();
     }
-    
+
     /**
      * FInd with count all data.
      *
@@ -43,7 +43,7 @@ class UserModel extends BaseModel
                            ->groupEnd()
                            ->where('deleted_at', null)
                            ->countAllResults()
-                           
+
                         : $this->builder()->where('deleted_at', null)->countAllResults();
     }
 }
