@@ -36,7 +36,7 @@ class UserController extends BaseController
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
             $collection = new Collection();
-    
+
             return $this->respond($collection->toColection(
                 model(UserModel::class)->findPaginatedData($length, $start, $search),
                 model(UserModel::class)->countAllResults(),
