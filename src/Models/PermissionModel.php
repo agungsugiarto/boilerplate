@@ -26,7 +26,7 @@ class PermissionModel extends BaseModel
 
         return $this->builder()->limit($length, $start)->get()->getResultObject();
     }
-    
+
     /**
      * FInd with count all data.
      *
@@ -42,7 +42,7 @@ class PermissionModel extends BaseModel
                                 ->orLike('description', $keyword)
                            ->groupEnd()
                            ->countAllResults()
-                           
+
                         : $this->builder()->countAllResults();
     }
 }

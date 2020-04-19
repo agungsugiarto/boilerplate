@@ -105,24 +105,24 @@
     }
   });
 
-  <?php if (session('sweet-success')) : ?>
+  <?php if (session('sweet-success')) { ?>
     Toast.fire({
       icon: 'success',
       title: '<?= session('sweet-success.') ?>'
     });
-  <?php endif ?>
-  <?php if (session('sweet-warning')) : ?>
+  <?php } ?>
+  <?php if (session('sweet-warning')) { ?>
     Toast.fire({
       icon: 'warning',
       title: '<?= session('sweet-warning.') ?>'
     });
-  <?php endif ?>
-  <?php if (session('sweet-error')) : ?>
+  <?php } ?>
+  <?php if (session('sweet-error')) { ?>
     Toast.fire({
       icon: 'error',
       title: '<?= session('sweet-error.') ?>'
     });
-  <?php endif ?>
+  <?php } ?>
   </script>
 </body>
 
