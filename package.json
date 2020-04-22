@@ -25,7 +25,6 @@
         "bootbox": "^5.3.4",
         "bootstrap": "^4.4.1",
         "bootstrap-fileinput": "^5.0.8",
-        "codemirror": "^5.51.0",
         "datatables.net": "^1.10.20",
         "datatables.net-bs4": "^1.10.20",
         "drmonty-datatables-plugins": "^1.10.12",
@@ -33,7 +32,6 @@
         "fontawesome-iconpicker": "^3.2.0",
         "nestable2": "^1.6.0",
         "select2": "^4.0.13",
-        "stickytoolbar": "^2.2.1",
-        "tinymce": "^5.2.0"
+        "stickytoolbar": "^2.2.1"
     }
 }
