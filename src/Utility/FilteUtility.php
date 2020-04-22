@@ -2,17 +2,16 @@
 
 namespace agungsugiarto\boilerplate\Utility;
 
-use agungsugiarto\boilerplate\Utility\FileUtilityInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Class that handles manipulation of files and directories
+ * Class that handles manipulation of files and directories.
  */
-class FileUtility implements FileUtilityInterface
+class FilteUtility implements FileUtilityInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function copy($from, $to)
     {
@@ -24,7 +23,7 @@ class FileUtility implements FileUtilityInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function recursiveCopy($source, $destination)
     {
@@ -35,15 +34,15 @@ class FileUtility implements FileUtilityInterface
 
         foreach ($iterator as $item) {
             if ($item->isDir()) {
-                $this->mkdir($destination . DS . $iterator->getSubPathName());
+                $this->mkdir($destination.DS.$iterator->getSubPathName());
             } else {
-                $this->copy($item, $destination . DS . $iterator->getSubPathName());
+                $this->copy($item, $destination.DS.$iterator->getSubPathName());
             }
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function exists($path)
     {
@@ -51,7 +50,7 @@ class FileUtility implements FileUtilityInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function mkdir($path, $options = [])
     {
@@ -63,16 +62,16 @@ class FileUtility implements FileUtilityInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function delete($paths)
     {
-        if (! is_array($paths)) {
+        if (!is_array($paths)) {
             $paths = [$paths];
         }
 
         foreach ($paths as $path) {
-            if (! $this->exists($path)) {
+            if (!$this->exists($path)) {
                 continue;
             }
 
@@ -88,6 +87,7 @@ class FileUtility implements FileUtilityInterface
      * Force delete non-empty directory.
      *
      * @param string $path Path of the directory to remove.
+     *
      * @return void
      */
     private function deleteDir($path)
