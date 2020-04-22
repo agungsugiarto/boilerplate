@@ -75,16 +75,6 @@ _modules/*
 .idea/
 *.iml
 
-# Netbeans
-nbproject/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.nb-gradle/
-
 # Sublime Text
 *.tmlanguage.cache
 *.tmPreferences.cache
