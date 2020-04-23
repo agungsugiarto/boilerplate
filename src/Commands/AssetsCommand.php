@@ -48,20 +48,20 @@ class AssetsCommand extends BaseCommand
     public function run(array $params)
     {
         try {
-			CLI::write("Trying install module");
+            CLI::write('Trying install module');
 
-			$this->publish();
+            $this->publish();
 
-			CLI::write("Module have been installed");
-		} catch (\Exception  $e) {
-			$this->showError($e);
-		}
+            CLI::write('Module have been installed');
+        } catch (\Exception  $e) {
+            $this->showError($e);
+        }
     }
 
     private function publish()
     {
         $filesystem = new FilteUtility();
 
-        $filesystem->recursiveCopy(realpath(__DIR__ . '/../../resource/build'), ROOTPATH . 'public');
+        $filesystem->recursiveCopy(realpath(__DIR__.'/../../resource/build'), ROOTPATH.'public');
     }
 }
