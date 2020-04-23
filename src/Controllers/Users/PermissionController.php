@@ -25,9 +25,8 @@ class PermissionController extends BaseController
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $collection = new Collection();
 
-            return $this->respond($collection->toColection(
+            return $this->respond(Collection::datatable(
                 model(PermissionModel::class)->findPaginatedData($length, $start, $search),
                 model(PermissionModel::class)->countAllResults(),
                 model(PermissionModel::class)->countFindData($search)

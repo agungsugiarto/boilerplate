@@ -25,9 +25,8 @@ class RoleController extends BaseController
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $collection = new Collection();
 
-            return $this->respond($collection->toColection(
+            return $this->respond(Collection::datatable(
                 model(GroupModel::class)->findPaginatedData($length, $start, $search),
                 model(GroupModel::class)->countAllResults(),
                 model(GroupModel::class)->countFindData($search)

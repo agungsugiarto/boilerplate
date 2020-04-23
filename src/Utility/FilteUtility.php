@@ -34,9 +34,9 @@ class FilteUtility implements FileUtilityInterface
 
         foreach ($iterator as $item) {
             if ($item->isDir()) {
-                $this->mkdir($destination.DS.$iterator->getSubPathName());
+                $this->mkdir($destination.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
             } else {
-                $this->copy($item, $destination.DS.$iterator->getSubPathName());
+                $this->copy($item, $destination.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
             }
         }
     }
