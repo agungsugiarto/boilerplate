@@ -9,8 +9,8 @@ class UserModel extends BaseModel
     /**
      * FInd with paginate data.
      *
-     * @param int $length
-     * @param int $start
+     * @param int    $length
+     * @param int    $start
      * @param string $keyword
      *
      * @return array

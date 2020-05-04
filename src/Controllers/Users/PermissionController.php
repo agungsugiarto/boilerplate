@@ -51,7 +51,7 @@ class PermissionController extends ResourceController
         if (!$record = $this->model->find($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
- 
+
         return $this->respond(['data' => $record]);
     }
 
@@ -74,7 +74,7 @@ class PermissionController extends ResourceController
         if (!$data = $this->model->save($this->request->getPost())) {
             return $this->fail($this->model->errors());
         }
- 
+
         return $this->respondCreated($data, lang('boilerplate.permission.msg.msg_insert'));
     }
 
@@ -90,7 +90,7 @@ class PermissionController extends ResourceController
         if (!$found = $this->model->find($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
- 
+
         return $this->respond(['data' => $found], 200, lang('boilerplate.permission.msg.msg_get', [$id]));
     }
 
@@ -106,7 +106,7 @@ class PermissionController extends ResourceController
         if (!$result = $this->model->update($id, $this->request->getRawInput())) {
             return $this->fail($this->model->errors());
         }
- 
+
         return $this->respondUpdated($result, lang('boilerplate.permission.msg.msg_update', [$id]));
     }
 
@@ -122,7 +122,7 @@ class PermissionController extends ResourceController
         if (!$this->model->delete($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
- 
+
         return $this->respondDeleted(['id' => $id], lang('boilerplate.permission.msg.msg_delete', [$id]));
     }
 }

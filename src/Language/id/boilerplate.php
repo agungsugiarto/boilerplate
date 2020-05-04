@@ -13,7 +13,7 @@ return [
     ],
 
     /**
-     * Permission
+     * Permission.
      */
     'permission' => [
         'add'      => 'Tambah izin',
@@ -36,7 +36,7 @@ return [
     ],
 
     /**
-     * Role
+     * Role.
      */
     'role' => [
         'add'      => 'Tambah peran',
@@ -59,7 +59,7 @@ return [
     ],
 
     /**
-     * Menu
+     * Menu.
      */
     'menu' => [
         'expand'   => 'Perlebar',
@@ -93,7 +93,7 @@ return [
     ],
 
     /**
-     * user
+     * user.
      */
     'user' => [
         'add'      => 'Tambah pengguna',
