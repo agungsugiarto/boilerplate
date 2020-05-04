@@ -2,17 +2,17 @@
 
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
-use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
 use agungsugiarto\boilerplate\Models\PermissionModel;
-use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\RESTful\ResourceController;
 
 /**
  * Class PermissionController.
  */
-class PermissionController extends BaseController
+class PermissionController extends ResourceController
 {
-    use ResponseTrait;
+    protected $modelName = PermissionModel::class;
+    protected $format = 'json';
 
     /**
      * Return an array of resource objects, themselves in array format.
@@ -25,9 +25,8 @@ class PermissionController extends BaseController
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $collection = new Collection();
 
-            return $this->respond($collection->toColection(
+            return $this->respond(Collection::datatable(
                 model(PermissionModel::class)->findPaginatedData($length, $start, $search),
                 model(PermissionModel::class)->countAllResults(),
                 model(PermissionModel::class)->countFindData($search)
@@ -35,115 +34,95 @@ class PermissionController extends BaseController
         }
 
         return view('agungsugiarto\boilerplate\Views\Permission\index', [
-            'title'    => lang('permission.title'),
-            'subtitle' => lang('permission.subtitle'),
+            'title'    => lang('boilerplate.permission.title'),
+            'subtitle' => lang('boilerplate.permission.subtitle'),
         ]);
-    }
-
-    /**
-     * Return an array of resource objects, themselves in array format.
-     *
-     * @return \CodeIgniter\API\ResponseTrait
-     */
-    public function new()
-    {
-        //
     }
 
     /**
      * Return the properties of a resource object.
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @param int $id
+     *
+     * @return array an array
      */
-    public function show()
+    public function show($id = null)
     {
-        //
+        if (!$record = $this->model->find($id)) {
+            return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
+        }
+ 
+        return $this->respond(['data' => $record]);
+    }
+
+    /**
+     * Return a new resource object, with default properties.
+     *
+     * @return array an array
+     */
+    public function new()
+    {
     }
 
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return array an array
      */
     public function create()
     {
-        $validationRules = [
-            'name'        => 'required|min_length[5]|max_length[255]|is_unique[auth_permissions.name]',
-            'description' => 'required|max_length[255]',
-        ];
-
-        $name = $this->request->getPost('name');
-        $description = $this->request->getPost('description');
-
-        if (!$this->validate($validationRules)) {
-            return $this->fail(
-                $this->validator->getErrors()
-            );
+        if (!$data = $this->model->save($this->request->getPost())) {
+            return $this->fail($this->model->errors());
         }
-
-        return $this->respondCreated(
-            $this->authorize->createPermission(url_title($name), $description),
-            lang('permission.msg_insert')
-        );
+ 
+        return $this->respondCreated($data, lang('boilerplate.permission.msg.msg_insert'));
     }
 
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int id
+     * @param int $id
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return array an array
      */
-    public function edit($id)
+    public function edit($id = null)
     {
-        if (!$found = $this->authorize->permission($id)) {
-            return $this->failNotFound(lang('permission.msg_get_fail'));
+        if (!$found = $this->model->find($id)) {
+            return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
-
-        return $this->respond([
-            'data' => $found,
-        ]);
+ 
+        return $this->respond(['data' => $found], 200, lang('boilerplate.permission.msg.msg_get', [$id]));
     }
 
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int id
+     * @param int $id
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return array an array
      */
-    public function update($id)
+    public function update($id = null)
     {
-        $validationRules = [
-            'name'        => "required|max_length[255]|is_unique[auth_permissions.name,id,$id]",
-            'description' => 'required|max_length[255]',
-        ];
-
-        $data = $this->request->getRawInput();
-
-        if (!$this->validate($validationRules)) {
-            return $this->fail(
-                $this->validator->getErrors()
-            );
+        if (!$result = $this->model->update($id, $this->request->getRawInput())) {
+            return $this->fail($this->model->errors());
         }
-
-        return $this->respondCreated(
-            $this->authorize->updatePermission($id, $data['name'], $data['description']),
-            lang('permission.msg_update')
-        );
+ 
+        return $this->respondUpdated($result, lang('boilerplate.permission.msg.msg_update', [$id]));
     }
 
     /**
      * Delete the designated resource object from the model.
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @param int $id
+     *
+     * @return array an array
      */
-    public function delete($id)
+    public function delete($id = null)
     {
-        if ($found = $this->authorize->deletePermission($id)) {
-            return $this->respondDeleted($found, lang('permission.msg_delete'));
+        if (!$this->model->delete($id)) {
+            return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
-
-        return $this->failNotFound(lang('permission.msg_get_fail'));
+ 
+        return $this->respondDeleted(['id' => $id], lang('boilerplate.permission.msg.msg_delete', [$id]));
     }
 }

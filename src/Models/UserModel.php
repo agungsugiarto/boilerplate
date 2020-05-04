@@ -11,20 +11,22 @@ class UserModel extends BaseModel
      *
      * @param int $length
      * @param int $start
+     * @param string $keyword
      *
      * @return array
      */
-    public function findPaginatedData(int $length, int $start, string $keyword = ''): ?array
+    public function findPaginatedData(int $length, int $start, string $keyword = ''): array
     {
-        if ($keyword) {
-            $this->builder()
-                 ->groupStart()
-                     ->like('username', $keyword)
-                     ->orLike('email', $keyword)
-                 ->groupEnd();
-        }
-
-        return $this->builder()->where('deleted_at', null)->limit($length, $start)->get()->getResultObject();
+        return $this->builder()
+            ->select('id, username, email, active, created_at')
+            ->groupStart()
+                ->like('username', $keyword)
+                ->orLike('email', $keyword)
+            ->groupEnd()
+            ->where('deleted_at', null)
+            ->limit($length, $start)
+            ->get()
+            ->getResultObject();
     }
 
     /**
@@ -36,14 +38,13 @@ class UserModel extends BaseModel
      */
     public function countFindData(string $keyword = ''): int
     {
-        return $keyword ? $this->builder()
-                           ->groupStart()
-                                ->like('username', $keyword)
-                                ->orLike('email', $keyword)
-                           ->groupEnd()
-                           ->where('deleted_at', null)
-                           ->countAllResults()
-
-                        : $this->builder()->where('deleted_at', null)->countAllResults();
+        return $this->builder()
+            ->select('id, username, email, active, created_at')
+            ->groupStart()
+                ->like('username', $keyword)
+                ->orLike('email', $keyword)
+            ->groupEnd()
+            ->where('deleted_at', null)
+            ->countAllResults();
     }
 }

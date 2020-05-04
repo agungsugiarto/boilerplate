@@ -31,21 +31,16 @@ class MenuController extends BaseController
      */
     public function index()
     {
-        $data = [
-            'title' => lang('menu.title'),
-            'roles' => $this->authorize->groups(),
-            'menus' => $this->menu->orderBy('sequence', 'asc')->findAll(),
-        ];
-
         if ($this->request->isAJAX()) {
-            return $this->respond([
-                'success'  => true,
-                'messages' => 'success get data',
-                'data'     => nestable(),
-            ]);
+            return $this->respond(['data' => nestable()]);
         }
 
-        return view('agungsugiarto\boilerplate\Views\Menu\index', $data);
+        return view('agungsugiarto\boilerplate\Views\Menu\index', [
+            'title'    => lang('boilerplate.menu.title'),
+            'subtitle' => lang('boilerplate.menu.subtitle'),
+            'roles'    => $this->authorize->groups(),
+            'menus'    => $this->menu->orderBy('sequence', 'asc')->findAll(),
+        ]);
     }
 
     /**
@@ -71,10 +66,10 @@ class MenuController extends BaseController
         }
 
         if (!$result) {
-            return $this->fail($result, lang('menu.msg_fail_order'));
+            return $this->fail($result, lang('boilerplate.menu.msg.msg_fail_order'));
         }
 
-        return $this->respondCreated($result, lang('menu.msg_update'));
+        return $this->respondUpdated($result, lang('boilerplate.menu.msg.msg_update'));
     }
 
     public function show($id)
@@ -128,7 +123,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', lang('menu.msg_insert'));
+        return redirect()->back()->with('sweet-success', lang('boilerplate.menu.msg.msg_insert'));
     }
 
     /**
@@ -184,7 +179,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return $this->respondCreated($menu, lang('menu.msg_update'));
+        return $this->respondUpdated($menu, lang('boilerplate.menu.msg.msg_update'));
     }
 
     /**
@@ -200,7 +195,7 @@ class MenuController extends BaseController
 
         if ($this->request->isAJAX()) {
             if (!$found) {
-                return $this->failNotFound(lang('menu.msg_get_fail'));
+                return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
             }
 
             return $this->respond([
@@ -221,9 +216,9 @@ class MenuController extends BaseController
     public function delete($id)
     {
         if ($found = $this->menu->delete($id)) {
-            return $this->respondCreated($found, lang('menu.msg_delete'));
+            return $this->respondCreated($found, lang('boilerplate.menu.msg.msg_delete'));
         }
 
-        return $this->failNotFound(lang('menu.msg_get_fail'));
+        return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
     }
 }

@@ -21,13 +21,13 @@
                     <?= csrf_field() ?>
                     <div class="col-md-10">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('role.name') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.role.fields.name') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="<?= lang('role.place_name') ?>">
+                                    <input type="text" name="name" class="form-control <?= session('error.name') ? 'is-invalid' : '' ?>" value="<?= old('name') ?>" placeholder="<?= lang('boilerplate.role.fields.plc_name') ?>">
                                     <?php if (session('error.name')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.name') ?></h6>
@@ -37,13 +37,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('role.description') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.role.fields.description') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-comment-alt"></i></span>
                                     </div>
-                                    <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="<?= lang('role.place_description') ?>"><?= old('description') ?></textarea>
+                                    <textarea type="text" name="description" class="form-control <?= session('error.description') ? 'is-invalid' : '' ?>" value="<?= old('description') ?>" placeholder="<?= lang('boilerplate.role.fields.plc_description') ?>"><?= old('description') ?></textarea>
                                     <?php if (session('error.description')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.description') ?></h6>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('permission.title') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.permission.title') ?></label>
                             <div class="col-sm-10">
                                 <div class="textarea-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
@@ -70,7 +70,7 @@
                         <div class="float-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                    <?= lang('role.save') ?>
+                                    <?= lang('boilerplate.global.save') ?>
                                 </button>
                             </div>
                         </div>

@@ -35,9 +35,8 @@ class UserController extends BaseController
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $collection = new Collection();
 
-            return $this->respond($collection->toColection(
+            return $this->respond(Collection::datatable(
                 model(UserModel::class)->findPaginatedData($length, $start, $search),
                 model(UserModel::class)->countAllResults(),
                 model(UserModel::class)->countFindData($search)
@@ -45,8 +44,8 @@ class UserController extends BaseController
         }
 
         return view('agungsugiarto\boilerplate\Views\User\index', [
-            'title'    => lang('user.title'),
-            'subtitle' => lang('user.subtitle'),
+            'title'    => lang('boilerplate.user.title'),
+            'subtitle' => lang('boilerplate.user.subtitle'),
         ]);
     }
 
@@ -59,23 +58,6 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        if ($this->request->isAJAX()) {
-            $group = new GroupModel();
-
-            $userGroups = $group->getGroupsForUser($id);
-            $user = $this->users->where('id', $id)->get()->getResultArray();
-
-            if (!$user) {
-                return $this->fail('fail get data');
-            }
-
-            return $this->respond([
-                'data' => [
-                    'user'   => $user,
-                    'groups' => $userGroups,
-                ],
-            ], 200);
-        }
     }
 
     /**
@@ -85,10 +67,6 @@ class UserController extends BaseController
      */
     public function profile()
     {
-        $data = [
-            'title' => lang('user.profile'),
-        ];
-
         if ($this->request->getMethod() === 'post') {
             $id = user()->id;
             $validationRules = [
@@ -112,13 +90,15 @@ class UserController extends BaseController
             $user->username = $this->request->getPost('username');
 
             if ($this->users->skipValidation(true)->update(user()->id, $user)) {
-                return redirect()->back()->with('sweet-success', lang('user.msg_update'));
+                return redirect()->back()->with('sweet-success', lang('boilerplate.user.msg.msg_update'));
             }
 
-            return redirect()->back()->withInput()->with('sweet-error', lang('user.msg_get_fail'));
+            return redirect()->back()->withInput()->with('sweet-error', lang('boilerplate.user.msg.msg_get_fail'));
         }
 
-        return view('agungsugiarto\boilerplate\Views\User\profile', $data);
+        return view('agungsugiarto\boilerplate\Views\User\profile', [
+            'title' => lang('boilerplate.user.fields.profile'),
+        ]);
     }
 
     /**
@@ -128,13 +108,12 @@ class UserController extends BaseController
      */
     public function new()
     {
-        $data = [
-            'title'       => lang('user.title'),
+        return view('agungsugiarto\boilerplate\Views\User\create', [
+            'title'       => lang('boilerplate.user.title'),
+            'subtitle'    => lang('boilerplate.user.add'),
             'permissions' => $this->authorize->permissions(),
             'roles'       => $this->authorize->groups(),
-        ];
-
-        return view('agungsugiarto\boilerplate\Views\User\create', $data);
+        ]);
     }
 
     /**
@@ -186,7 +165,7 @@ class UserController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', lang('user.msg_insert'));
+        return redirect()->back()->with('sweet-success', lang('boileplate.user.msg.msg_insert'));
     }
 
     /**
@@ -199,8 +178,8 @@ class UserController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'       => lang('user.title'),
-            'subtitle'    => lang('user.edit'),
+            'title'       => lang('boilerplate.user.title'),
+            'subtitle'    => lang('boilerplate.user.edit'),
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
@@ -248,11 +227,6 @@ class UserController extends BaseController
 
             $this->users->skipValidation(true)->update($id, $user);
 
-            // Both permission and role im not sure this is
-            // best practice or not to handle update,
-            // remove permission and role from user
-            // then insert with new record.
-
             // delete first permission from user
             $this->db->table('auth_users_permissions')->where('user_id', $id)->delete();
 
@@ -276,7 +250,7 @@ class UserController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', lang('user.msg_update'));
+        return redirect()->back()->with('sweet-success', lang('boilerplate.user.msg.msg_update'));
     }
 
     /**
@@ -289,9 +263,9 @@ class UserController extends BaseController
     public function delete($id)
     {
         if (!$found = $this->users->delete($id)) {
-            return $this->failNotFound(lang('user.msg_get_fail'));
+            return $this->failNotFound(lang('boilerplate.user.msg.msg_get_fail'));
         }
 
-        return $this->respondDeleted($found, lang('user.msg_delete'));
+        return $this->respondDeleted($found, lang('boilerplate.user.msg.msg_delete'));
     }
 }

@@ -11,7 +11,7 @@
             <div class="card-tools">
                 <div class="btn-group">
                     <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
-                        <?= lang('user.add') ?>
+                        <?= lang('boilerplate.user.add') ?>
                     </a>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                                     <th>#</th>
                                     <th><?= lang('Auth.username') ?></th>
                                     <th><?= lang('Auth.email') ?></th>
-                                    <th><?= lang('user.active') ?></th>
-                                    <th><?= lang('user.join') ?></th>
-                                    <th><?= lang('user.action') ?></th>
+                                    <th><?= lang('boilerplate.user.fields.active') ?></th>
+                                    <th><?= lang('boilerplate.user.fields.join') ?></th>
+                                    <th><?= lang('boilerplate.global.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,12 +55,12 @@
             method: 'GET'
         },
         columns : [
-            { 'data': 'id' },
+            { 'data': null },
             { 'data': 'username' },
             { 'data': 'email' },
             {
                 'data': function (data) {
-                    return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('user.active') ?>' : '<?= lang('user.non_active') ?>'}</span>`
+                    return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('boilerplate.user.fields.active') ?>' : '<?= lang('boilerplate.user.fields.non_active') ?>'}</span>`
                 }
             },
             {
@@ -82,15 +82,22 @@
         ]
     });
 
+    tableUser.on( 'draw.dt', function () {
+    var PageInfo = $('#table-user').DataTable().page.info();
+         tableUser.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        } );
+    });
+
     $(document).on('click', '.btn-delete', function(e) {
         Swal.fire({
-            title: '<?= lang('global.title') ?>',
-            text: "<?= lang('global.text') ?>",
+            title: '<?= lang('boilerplate.global.sweet.title') ?>',
+            text: "<?= lang('boilerplate.global.sweet.text') ?>",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('global.confirm_delete') ?>'
+            confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
         })
         .then((result) => {
             if (result.value) {

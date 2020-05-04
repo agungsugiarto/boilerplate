@@ -14,7 +14,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-primary" id="create-book"
                                 data-toggle="modal" data-target="#modal-create-permission"><i class="fa fa-plus"></i>
-                                <?= lang('permission.add') ?>
+                                <?= lang('boilerplate.permission.add') ?>
                             </button>
                         </div>
                     </div>
@@ -25,9 +25,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th><?= lang('permission.name') ?></th>
-                                    <th><?= lang('permission.description') ?></th>
-                                    <th><?= lang('permission.action') ?></th>
+                                    <th><?= lang('boilerplate.permission.fields.name') ?></th>
+                                    <th><?= lang('boilerplate.permission.fields.description') ?></th>
+                                    <th><?= lang('boilerplate.global.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +43,6 @@
 <!-- Push section js -->
 <?= $this->section('js') ?>
 <script>
-    $.get('https://www.google.com/');
 
     var tablePermission = $('#table-permission').DataTable({
         processing: true,
@@ -56,7 +55,7 @@
             method: 'GET'
         },
         columns : [
-            { 'data': 'id' },
+            { 'data': null },
             { 'data': 'name' },
             { 'data': 'description' },
             {
@@ -70,6 +69,13 @@
                 }
             }
         ]
+    });
+
+    tablePermission.on( 'draw.dt', function () {
+    var PageInfo = $('#table-permission').DataTable().page.info();
+         tablePermission.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        } );
     });
 
     $(document).on('click', '#btn-save-permission', () => {
@@ -157,13 +163,13 @@
 
     $(document).on('click', '.btn-delete', function(e) {
         Swal.fire({
-            title: '<?= lang('global.title') ?>',
-            text: "<?= lang('global.text') ?>",
+            title: '<?= lang('boilerplate.global.sweet.title') ?>',
+            text: "<?= lang('boilerplate.global.sweet.text') ?>",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('global.confirm_delete') ?>'
+            confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
         })
         .then((result) => {
             if (result.value) {

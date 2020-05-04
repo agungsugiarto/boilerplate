@@ -25,9 +25,8 @@ class RoleController extends BaseController
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $collection = new Collection();
 
-            return $this->respond($collection->toColection(
+            return $this->respond(Collection::datatable(
                 model(GroupModel::class)->findPaginatedData($length, $start, $search),
                 model(GroupModel::class)->countAllResults(),
                 model(GroupModel::class)->countFindData($search)
@@ -35,8 +34,8 @@ class RoleController extends BaseController
         }
 
         return view('agungsugiarto\boilerplate\Views\Role\index', [
-            'title'    => lang('role.title'),
-            'subtitle' => lang('role.subtitle'),
+            'title'    => lang('boilerplate.role.title'),
+            'subtitle' => lang('boilerplate.role.subtitle'),
             'data'     => $this->authorize->permissions(),
         ]);
     }
@@ -49,8 +48,8 @@ class RoleController extends BaseController
     public function new()
     {
         $data = [
-            'title'    => lang('role.title'),
-            'subtitle' => lang('role.add'),
+            'title'    => lang('boilerplate.role.title'),
+            'subtitle' => lang('boilerplate.role.add'),
             'data'     => $this->authorize->permissions(),
         ];
 
@@ -103,7 +102,7 @@ class RoleController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', lang('role.msg_insert'));
+        return redirect()->back()->with('sweet-success', lang('boilerplate.role.msg.msg_insert'));
     }
 
     /**
@@ -114,8 +113,8 @@ class RoleController extends BaseController
     public function edit($id)
     {
         $data = [
-            'title'        => lang('role.title'),
-            'subtitle'     => lang('role.edit'),
+            'title'        => lang('boilerplate.role.title'),
+            'subtitle'     => lang('boilerplate.role.edit'),
             'role'         => $this->authorize->group($id),
             'permissions'  => $this->authorize->permissions(),
             'permission'   => $this->authorize->groupPermissions($id),
@@ -165,7 +164,7 @@ class RoleController extends BaseController
 
         $this->db->transCommit();
 
-        return redirect()->back()->with('sweet-success', lang('role.msg_update'));
+        return redirect()->back()->with('sweet-success', lang('boilerplate.role.msg.msg_update', [$id]));
     }
 
     /**
@@ -176,9 +175,9 @@ class RoleController extends BaseController
     public function delete($id)
     {
         if (!$found = $this->authorize->deleteGroup($id)) {
-            return $this->failNotFound(lang('role.msg_get_fail'));
+            return $this->failNotFound(lang('boilerplate.role.msg.msg_get_fail', [$id]));
         }
 
-        return $this->respondDeleted($found, lang('role.msg_delete'));
+        return $this->respondDeleted($found, lang('boilerplate.role.msg.msg_delete', [$id]));
     }
 }

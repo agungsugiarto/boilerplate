@@ -68,11 +68,9 @@ class BaseController extends Controller
         //--------------------------------------------------------------------
         // Preload any models, libraries, etc, here.
         //--------------------------------------------------------------------
-        $this->session = Services::session();
         $this->auth = Services::authentication();
         $this->authorize = Services::authorization();
         $this->validation = Services::validation();
         $this->db = Database::connect();
-        $this->pager = Services::pager();
     }
 }

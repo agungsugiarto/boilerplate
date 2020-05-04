@@ -1,5 +1,3 @@
-<!-- select2 -->
-<?= $this->include('agungsugiarto\boilerplate\Views\load\select2') ?>
 <!-- Extend from layout index -->
 <?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
 
@@ -18,16 +16,12 @@
                 <p class="text-muted text-center"><i class="far fa-fw fa-envelope"></i><?= user()->email ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b><?= lang('user.join') ?></b> 
+                        <b><?= lang('boilerplate.user.fields.join') ?></b> 
                         <a class="float-right">
                             <?= user()->created_at->toLocalizedString('MMM d, yyyy').' '.user()->created_at->humanize() ?>
                         </a>
                     </li>
                 </ul>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile"><?= lang('user.choose_image') ?></label>
-                </div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -38,7 +32,7 @@
         <div class="card card-outline">
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab"><?= lang('user.setting') ?></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab"><?= lang('boilerplate.user.fields.setting') ?></a></li>
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -116,7 +110,7 @@
                                     <div class="float-right">
                                         <div class="btn-group">
                                             <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                            <?= lang('user.save') ?>
+                                            <?= lang('boilerplate.global.save') ?>
                                             </button>
                                         </div>
                                     </div>
@@ -133,17 +127,4 @@
     </div>
     <!-- /.col -->
 </div>
-<?= $this->endSection() ?>
-
-<?= $this->section('js') ?>
-<script>
-$('.parent').select2();
-
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-
-</script>
 <?= $this->endSection() ?>

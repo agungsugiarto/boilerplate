@@ -18,10 +18,10 @@
     "require": {
         "php": ">7.2",
         "myth/auth": "dev-develop",
-        "codeigniter4/translations" : "v4.0.0-rc.3"
+        "codeigniter4/translations" : "^4.0"
     },
     "require-dev": {
-        "codeigniter4/framework": "^4",
+        "codeigniter4/framework": "^4.0",
         "phpunit/phpunit": "8.5.*",
         "fzaninotto/faker": "^1.9"
     },

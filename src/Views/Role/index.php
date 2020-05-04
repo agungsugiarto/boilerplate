@@ -12,7 +12,7 @@
                     <div class="float-right">
                         <div class="btn-group">
                             <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
-                                <?= lang('role.add') ?>
+                                <?= lang('boilerplate.role.add') ?>
                             </a>
                         </div>
                     </div>
@@ -23,9 +23,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th><?= lang('role.name') ?></th>
-                                    <th><?= lang('role.description') ?></th>
-                                    <th><?= lang('role.action') ?></th>
+                                    <th><?= lang('boilerplate.role.fields.name') ?></th>
+                                    <th><?= lang('boilerplate.role.fields.description') ?></th>
+                                    <th><?= lang('boilerplate.global.action') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +52,7 @@
             method: 'GET'
         },
         columns : [
-            { 'data': 'id' },
+            { 'data': null },
             { 'data': 'name' },
             { 'data': 'description' },
             {
@@ -67,16 +67,23 @@
             }
         ]
     });
+
+    tableRole.on( 'draw.dt', function () {
+    var PageInfo = $('#table-role').DataTable().page.info();
+         tableRole.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        } );
+    });
     
     $(document).on('click', '.btn-delete', function (e) {
         Swal.fire({
-            title: '<?= lang('global.title') ?>',
-            text: "<?= lang('global.text') ?>",
+            title: '<?= lang('boilerplate.global.sweet.title') ?>',
+            text: "<?= lang('boilerplate.global.sweet.text') ?>",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('global.confirm_delete') ?>'
+            confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
         })
         .then((result) => {
             if (result.value) {

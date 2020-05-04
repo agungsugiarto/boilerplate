@@ -15,17 +15,17 @@
                 <div id="nestable-menu" class="card-header">
                     <div class="btn-group">
                         <button class="btn btn-info btn-sm tree-tools" data-action="expand" title="Expand">
-                            <i class="fas fa-chevron-down"></i>&nbsp;<?= lang('menu.expand') ?>
+                            <i class="fas fa-chevron-down"></i>&nbsp;<?= lang('boilerplate.menu.expand') ?>
                         </button>
                         <button class="btn btn-info btn-sm tree-tools" data-action="collapse" title="Collapse">
-                            <i class="fas fa-chevron-up"></i>&nbsp;<?= lang('menu.collapse') ?>
+                            <i class="fas fa-chevron-up"></i>&nbsp;<?= lang('boilerplate.menu.collapse') ?>
                         </button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm save" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;<?= lang('menu.save') ?></span></button>
+                        <button class="btn btn-primary btn-sm save" data-action="save" title="Save"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;<?= lang('boilerplate.global.save') ?></span></button>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-warning btn-sm refresh" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;<?= lang('menu.refresh') ?></span></button>
+                        <button class="btn btn-warning btn-sm refresh" data-action="refresh" title="Refresh"><i class="fas fa-sync-alt"></i><span class="hidden-xs">&nbsp;<?= lang('boilerplate.menu.refresh') ?></span></button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,14 +38,14 @@
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <div class="float-left">
-                        <h5><?= lang('menu.add') ?></h5>
+                        <h5><?= lang('boilerplate.menu.add') ?></h5>
                     </div>
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('admin/menu') ?>" method="post" class="form-horizontal">
                         <?= csrf_field() ?>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('menu.parent') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.parent') ?></label>
                             <div class="col-sm-10">
                                 <select class="form-control parent" name="parent_id" style="width: 100%;">
                                     <option selcted value="0">ROOT</option>
@@ -54,7 +54,7 @@
                                     <?php } ?>
                                 </select>
                                 <span class="help-block">
-                                    <i class="fas fa-exclamation-triangle text-danger"></i>&nbsp;<?= lang('menu.warning_parent') ?>
+                                    <i class="fas fa-exclamation-triangle text-danger"></i>&nbsp;<?= lang('boilerplate.menu.fields.warning_parent') ?>
                                 </span>
                                 <?php if (session('error.parent_id')) { ?>
                                     <div class="invalid-feedback">
@@ -64,22 +64,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('menu.active') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.active') ?></label>
                             <div class="col-sm-10">
                                 <select class="form-control parent" name="active" style="width: 100%;">
-                                    <option selected value="1"><?= lang('menu.active') ?></option>
-                                    <option value="0"><?= lang('menu.non_active') ?></option>
+                                    <option selected value="1"><?= lang('boilerplate.menu.fields.active') ?></option>
+                                    <option value="0"><?= lang('boilerplate.menu.fields.non_active') ?></option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('menu.icon') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.icon') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fab fa-font-awesome-flag"></i></span>
                                     </div>
-                                    <input type="text" name="icon" class="icon-picker form-control <?= session('error.icon') ? 'is-invalid' : '' ?>" value="<?= old('icon') ?>" placeholder="<?= lang('menu.place_icon') ?>" autocomplete="off">
+                                    <input type="text" name="icon" class="icon-picker form-control <?= session('error.icon') ? 'is-invalid' : '' ?>" value="<?= old('icon') ?>" placeholder="<?= lang('boilerplate.menu.fields.place_icon') ?>" autocomplete="off">
                                     <?php if (session('error.icon')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.icon') ?></h6>
@@ -87,18 +87,18 @@
                                     <?php } ?>
                                 </div>
                                 <span class="help-block">
-                                    <i class="fa fa-info-circle text-info"></i>&nbsp;<?= lang('menu.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
+                                    <i class="fa fa-info-circle text-info"></i>&nbsp;<?= lang('boilerplate.menu.fields.info_icon') ?> <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label"><?= lang('menu.name') ?></label>
+                            <label for="inputName" class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.name') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" name="title" class="form-control <?= session('error.title') ? 'is-invalid' : '' ?>" value="<?= old('title') ?>" placeholder="<?= lang('menu.place_title') ?>" autocomplete="off">
+                                    <input type="text" name="title" class="form-control <?= session('error.title') ? 'is-invalid' : '' ?>" value="<?= old('title') ?>" placeholder="<?= lang('boilerplate.menu.fields.place_title') ?>" autocomplete="off">
                                     <?php if (session('error.title')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.title') ?></h6>
@@ -108,13 +108,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputName2" class="col-sm-2 col-form-label"><?= lang('menu.route') ?></label>
+                            <label for="inputName2" class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.route') ?></label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-link"></i></span>
                                     </div>
-                                    <input type="text" name="route" class="form-control <?= session('error.route') ? 'is-invalid' : '' ?>" value="<?= old('route') ?>" placeholder="<?= lang('menu.place_route') ?>" autocomplete="off">
+                                    <input type="text" name="route" class="form-control <?= session('error.route') ? 'is-invalid' : '' ?>" value="<?= old('route') ?>" placeholder="<?= lang('boilerplate.menu.fields.place_route') ?>" autocomplete="off">
                                     <?php if (session('error.route')) { ?>
                                     <div class="invalid-feedback">
                                         <h6><?= session('error.route') ?></h6>
@@ -124,9 +124,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"><?= lang('menu.role') ?></label>
+                            <label class="col-sm-2 col-form-label"><?= lang('boilerplate.role.fields.name') ?></label>
                             <div class="col-sm-10">
-                                <select multiple="multiple" class="form-control parent" name="groups_menu[]" data-placeholder="<?= lang('menu.select_role') ?>" style="width: 100%;">
+                                <select multiple="multiple" class="form-control parent" name="groups_menu[]" data-placeholder="<?= lang('boilerplate.role.fields.plc_name') ?>" style="width: 100%;">
                                     <?php foreach ($roles as $role) { ?>
                                         <option <?= in_array($role->id, old('groups_menu', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
                                     <?php } ?>
@@ -138,7 +138,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" class="float-right btn btn-sm btn-primary"><?= lang('menu.save') ?></button>
+                                <button type="submit" class="float-right btn btn-sm btn-primary"><?= lang('boilerplate.global.save') ?></button>
                             </div>
                         </div>
                     </form>
@@ -205,7 +205,7 @@ $(function () {
                 title: jqXHR.statusText
             });
             btnSave.attr('disabled', false);
-            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('menu.save') ?>");
+            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('boilerplate.global.save') ?>");
             $('.dd').nestable('destroy');
             menu();
         }).fail((error) => {
@@ -214,7 +214,7 @@ $(function () {
                 title: error.responseJSON.messages.error,
             });
             btnSave.attr('disabled', false);
-            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('menu.save') ?>");
+            btnSave.html('<i class="fa fa-save"></i> ' + "<?= lang('boilerplate.global.save') ?>");
         })
     });
 
@@ -293,13 +293,13 @@ $(function () {
 
     $(document).on('click', '#btn-delete', function(e) {
         Swal.fire({
-            title: '<?= lang('global.title') ?>',
-            text: "<?= lang('global.text') ?>",
+            title: '<?= lang('boilerplate.global.sweet.title') ?>',
+            text: "<?= lang('boilerplate.global.sweet.text') ?>",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('global.confirm_delete') ?>'
+            confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
         })
         .then((result) => {
             if (result.value) {

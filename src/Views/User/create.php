@@ -20,11 +20,11 @@
                 <form action="<?= route_to('admin/user/manage') ?>" method="post" class="form-horizontal">
                     <?= csrf_field() ?>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.active') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control select" name="active" style="width: 100%;">
-                                <option value="1" selected="selected"><?= lang('user.active') ?></option>
-                                <option value="0"><?= lang('user.non_active') ?></option>
+                                <option value="1" selected="selected"><?= lang('boilerplate.user.fields.active') ?></option>
+                                <option value="0"><?= lang('boilerplate.user.fields.non_active') ?></option>
                             </select>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('permission.title') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.permission.title') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="<?= lang('user.select_permission') ?>" style="width: 100%;">
+                            <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="<?= lang('boilerplate.permission.fields.plc_name') ?>" style="width: 100%;">
                             <?php foreach ($permissions as $permission) { ?>
                                 <option <?= in_array($permission['id'], old('permission', [])) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
                             <?php } ?>
@@ -106,9 +106,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('role.title') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.role.title') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="<?= lang('user.select_role') ?>" style="width: 100%;">
+                            <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="<?= lang('boilerplate.role.fields.plc_name') ?>" style="width: 100%;">
                             <?php foreach ($roles as $role) { ?>
                                 <option <?= in_array($role->id, old('role', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
                             <?php } ?>
@@ -123,7 +123,7 @@
                             <div class="float-right">
                                 <div class="btn-group">
                                     <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                        Save
+                                        <?= lang('boilerplate.global.save')?>
                                     </button>
                                 </div>
                             </div>

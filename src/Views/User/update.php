@@ -23,8 +23,8 @@
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control select" name="active" style="width: 100%;">
-                                <option <?= $user['active'] == 1 ? 'selected' : '' ?> value="1"><?= lang('user.active') ?></option>
-                                <option <?= $user['active'] == 0 ? 'selected' : '' ?> value="0"><?= lang('user.non_active') ?></option>
+                                <option <?= $user['active'] == 1 ? 'selected' : '' ?> value="1"><?= lang('boilerplate.user.fields.active') ?></option>
+                                <option <?= $user['active'] == 0 ? 'selected' : '' ?> value="0"><?= lang('boilerplate.user.fields.non_active') ?></option>
                             </select>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('permission.title') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.permission.title') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="<?= lang('user.select_permission') ?>" style="width: 100%;">
+                            <select class="form-control select" name="permission[]" multiple="multiple" data-placeholder="<?= lang('boilerplate.permission.fields.plc_name') ?>" style="width: 100%;">
                             <?php foreach ($permissions as $value) { ?>
                                 <?php if (array_key_exists($value['id'], $permission)) { ?>
                                     <option value="<?= $value['id'] ?>" selected><?= $value['name'] ?></option>
@@ -110,9 +110,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('role.title') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.role.title') ?></label>
                         <div class="col-sm-8">
-                            <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="<?= lang('user.select_role') ?>" style="width: 100%;">
+                            <select class="form-control select" name="role[]" multiple="multiple" data-placeholder="<?= lang('boilerplate.role.fields.plc_name') ?>" style="width: 100%;">
                             <?php foreach ($roles as $value) { ?>
                                 <?php if (array_key_exists($value->id, $role)) { ?>
                                     <option value="<?= $value->id ?>" selected><?= $value->name ?></option>
@@ -131,7 +131,7 @@
                             <div class="float-right">
                                 <div class="btn-group">
                                     <button type="submit" class="btn btn-sm btn-block btn-primary">
-                                        <?= lang('user.save') ?>
+                                        <?= lang('boilerplate.global.save') ?>
                                     </button>
                                 </div>
                             </div>

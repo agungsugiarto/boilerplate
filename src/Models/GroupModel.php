@@ -37,20 +37,21 @@ class GroupModel extends BaseModel
      *
      * @param int $length
      * @param int $start
+     * @param string $keyword
      *
      * @return array
      */
-    public function findPaginatedData(int $length, int $start, string $keyword = ''): ?array
+    public function findPaginatedData(int $length, int $start, string $keyword = ''): array
     {
-        if ($keyword) {
-            $this->builder()
-                 ->groupStart()
-                     ->like('name', $keyword)
-                     ->orLike('description', $keyword)
-                 ->groupEnd();
-        }
-
-        return $this->builder()->limit($length, $start)->get()->getResultObject();
+        return $this->builder()
+            ->select('id, name, description')
+            ->groupStart()
+                ->like('name', $keyword)
+                ->orLike('description', $keyword)
+            ->groupEnd()
+            ->limit($length, $start)
+            ->get()
+            ->getResultObject();
     }
 
     /**
@@ -62,13 +63,12 @@ class GroupModel extends BaseModel
      */
     public function countFindData(string $keyword = ''): int
     {
-        return $keyword ? $this->builder()
-                           ->groupStart()
-                                ->like('name', $keyword)
-                                ->orLike('description', $keyword)
-                           ->groupEnd()
-                           ->countAllResults()
-
-                        : $this->builder()->countAllResults();
+        return $this->builder()
+            ->select('id, name, description')
+            ->groupStart()
+                ->like('name', $keyword)
+                ->orLike('description', $keyword)
+            ->groupEnd()
+            ->countAllResults();
     }
 }
