@@ -13,7 +13,7 @@ return [
     ],
 
     /**
-     * Permission
+     * Permission.
      */
     'permission' => [
         'add'      => 'Add permission',
@@ -36,7 +36,7 @@ return [
     ],
 
     /**
-     * Role
+     * Role.
      */
     'role' => [
         'add'      => 'Add role',
@@ -59,7 +59,7 @@ return [
     ],
 
     /**
-     * Menu
+     * Menu.
      */
     'menu' => [
         'expand'   => 'Expand',
@@ -93,7 +93,7 @@ return [
     ],
 
     /**
-     * user
+     * user.
      */
     'user' => [
         'add'      => 'Add user',

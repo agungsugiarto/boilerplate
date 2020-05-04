@@ -8,8 +8,8 @@ class Collection
      * Return data to colection map datatable.
      *
      * @param array $data
-     * @param int $recordsTotal
-     * @param int $recordsFiltered
+     * @param int   $recordsTotal
+     * @param int   $recordsFiltered
      *
      * @return array
      */
