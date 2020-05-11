@@ -13,6 +13,16 @@ class PermissionController extends ResourceController
 {
     protected $modelName = PermissionModel::class;
     protected $format = 'json';
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        helper('menu');
+    }
 
     /**
      * Return an array of resource objects, themselves in array format.
