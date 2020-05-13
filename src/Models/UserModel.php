@@ -12,7 +12,7 @@ class UserModel extends BaseModel
      *
      * @param int    $length
      * @param int    $start
-     * @param string $order 
+     * @param string $order
      * @param string $dir
      * @param string $keyword
      *
