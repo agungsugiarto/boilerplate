@@ -2,7 +2,6 @@
 
 namespace agungsugiarto\boilerplate\Models;
 
-use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel as BaseModel;
 
 class UserModel extends BaseModel
