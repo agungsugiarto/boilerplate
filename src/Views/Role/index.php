@@ -44,13 +44,17 @@
     var tableRole = $('#table-role').DataTable({
         processing: true,
         serverSide: true,
-        ordering: false,
         autoWidth: false,
+        order: [[1, 'asc']],
 
         ajax : {
             url: '<?= route_to('admin/role') ?>',
             method: 'GET'
         },
+        columnDefs: [{
+            orderable: false,
+            targets: [0,3]
+        }],
         columns : [
             { 'data': null },
             { 'data': 'name' },

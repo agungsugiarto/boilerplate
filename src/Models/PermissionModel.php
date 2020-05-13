@@ -11,11 +11,13 @@ class PermissionModel extends BaseModel
      *
      * @param int    $length
      * @param int    $start
+     * @param string $order 
+     * @param string $dir
      * @param string $keyword
      *
      * @return array
      */
-    public function findPaginatedData(int $length, int $start, string $keyword = ''): array
+    public function findPaginatedData(string $order, string $dir, int $length, int $start, string $keyword = ''): array
     {
         return $this->builder()
             ->select('id, name, description')
@@ -23,6 +25,7 @@ class PermissionModel extends BaseModel
                 ->like('name', $keyword)
                 ->orLike('description', $keyword)
             ->groupEnd()
+            ->orderBy($order, $dir)
             ->limit($length, $start)
             ->get()
             ->getResultObject();

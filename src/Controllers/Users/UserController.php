@@ -32,12 +32,20 @@ class UserController extends BaseController
     public function index()
     {
         if ($this->request->isAJAX()) {
+            $columns = [
+                1 => 'username',
+                2 => 'email',
+                5 => 'created_at',
+            ];
+
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
+            $order = $columns[$this->request->getGet('order[0][column]')];
+            $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                model(UserModel::class)->findPaginatedData($length, $start, $search),
+                model(UserModel::class)->findPaginatedData($order, $dir, $length, $start, $search),
                 model(UserModel::class)->countAllResults(),
                 model(UserModel::class)->countFindData($search)
             ));

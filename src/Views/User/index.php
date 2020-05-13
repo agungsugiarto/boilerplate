@@ -5,41 +5,42 @@
 
 <!-- Section content -->
 <?= $this->section('content') ?>
-    <!-- SELECT2 EXAMPLE -->
-    <div class="card card-default">
-        <div class="card-header">
-            <div class="card-tools">
-                <div class="btn-group">
-                    <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
-                        <?= lang('boilerplate.user.add') ?>
-                    </a>
-                </div>
+<!-- SELECT2 EXAMPLE -->
+<div class="card card-default">
+    <div class="card-header">
+        <div class="card-tools">
+            <div class="btn-group">
+                <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                    <?= lang('boilerplate.user.add') ?>
+                </a>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table id="table-user" class="table table-striped table-hover va-middle">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th><?= lang('Auth.username') ?></th>
-                                    <th><?= lang('Auth.email') ?></th>
-                                    <th><?= lang('boilerplate.user.fields.active') ?></th>
-                                    <th><?= lang('boilerplate.user.fields.join') ?></th>
-                                    <th><?= lang('boilerplate.global.action') ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="table-user" class="table table-striped table-hover va-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><?= lang('Auth.username') ?></th>
+                                <th><?= lang('Auth.email') ?></th>
+                                <th><?= lang('boilerplate.user.fields.active') ?></th>
+                                <th><?= lang('boilerplate.role.fields.name') ?></th>
+                                <th><?= lang('boilerplate.user.fields.join') ?></th>
+                                <th><?= lang('boilerplate.global.action') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.card -->
+</div>
+<!-- /.card -->
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
@@ -47,26 +48,46 @@
     var tableUser = $('#table-user').DataTable({
         processing: true,
         serverSide: true,
-        ordering: false,
         autoWidth: false,
+        order: [[1, 'asc']],
 
-        ajax : {
+        ajax: {
             url: '<?= route_to('admin/user/manage') ?>',
             method: 'GET'
         },
-        columns : [
-            { 'data': null },
-            { 'data': 'username' },
-            { 'data': 'email' },
+        columnDefs: [{
+            orderable: false,
+            targets: [0,3,4,6]
+        }],
+        columns: [{
+                'data': null
+            },
             {
-                'data': function (data) {
+                'data': 'username'
+            },
+            {
+                'data': 'email'
+            },
+            {
+                'data': function(data) {
                     return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('boilerplate.user.fields.active') ?>' : '<?= lang('boilerplate.user.fields.non_active') ?>'}</span>`
                 }
             },
             {
+                'data': 'roles',
+                'render': function(roles) {
+                    var value = []
+                    Object.keys(roles).forEach(function(key) {
+                        value.push(roles[key]);
+                    })
+
+                    return value.toString().replace(',', ', ')
+                }
+            },
+            {
                 'data': 'created_at',
-                'render': function(date) {
-                    return moment(date).fromNow()
+                'render': function(data) {
+                    return moment(data.date).fromNow()
                 }
             },
             {
@@ -82,47 +103,52 @@
         ]
     });
 
-    tableUser.on( 'draw.dt', function () {
-    var PageInfo = $('#table-user').DataTable().page.info();
-         tableUser.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+    tableUser.on('draw.dt', function() {
+        var PageInfo = $('#table-user').DataTable().page.info();
+        tableUser.column(0, {
+            page: 'current'
+        }).nodes().each(function(cell, i) {
             cell.innerHTML = i + 1 + PageInfo.start;
-        } );
+        });
     });
 
     $(document).on('click', '.btn-delete', function(e) {
         Swal.fire({
-            title: '<?= lang('boilerplate.global.sweet.title') ?>',
-            text: "<?= lang('boilerplate.global.sweet.text') ?>",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
-        })
-        .then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: `<?= route_to('admin/user/manage') ?>/${$(this).attr('data-id')}`,
-                    method: 'DELETE',
-                }).done((data, textStatus, jqXHR) => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: jqXHR.statusText,
-                    });
-                    tableUser.ajax.reload();
-                }).fail((error) => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: error.responseJSON.messages.error,
-                    });
-                })
-            }
-        })
+                title: '<?= lang('boilerplate.global.sweet.title') ?>',
+                text: "<?= lang('boilerplate.global.sweet.text') ?>",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '<?= lang('boilerplate.global.sweet.confirm_delete') ?>'
+            })
+            .then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: `<?= route_to('admin/user/manage') ?>/${$(this).attr('data-id')}`,
+                        method: 'DELETE',
+                    }).done((data, textStatus, jqXHR) => {
+                        Toast.fire({
+                            icon: 'success',
+                            title: jqXHR.statusText,
+                        });
+                        tableUser.ajax.reload();
+                    }).fail((error) => {
+                        Toast.fire({
+                            icon: 'error',
+                            title: error.responseJSON.messages.error,
+                        });
+                    })
+                }
+            })
     });
 
     tableUser.on('order.dt search.dt', () => {
-        tableUser.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
+        tableUser.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
         });
     }).draw();
 </script>
