@@ -27,7 +27,6 @@
                                 <th><?= lang('Auth.username') ?></th>
                                 <th><?= lang('Auth.email') ?></th>
                                 <th><?= lang('boilerplate.user.fields.active') ?></th>
-                                <th><?= lang('boilerplate.role.fields.name') ?></th>
                                 <th><?= lang('boilerplate.user.fields.join') ?></th>
                                 <th><?= lang('boilerplate.global.action') ?></th>
                             </tr>
@@ -57,7 +56,7 @@
         },
         columnDefs: [{
             orderable: false,
-            targets: [0,3,4,6]
+            targets: [0,3,5]
         }],
         columns: [{
                 'data': null
@@ -71,17 +70,6 @@
             {
                 'data': function(data) {
                     return `<span class="badge ${data.active == 1 ? 'bg-success' : 'bg-danger'}">${data.active == 1 ? '<?= lang('boilerplate.user.fields.active') ?>' : '<?= lang('boilerplate.user.fields.non_active') ?>'}</span>`
-                }
-            },
-            {
-                'data': 'roles',
-                'render': function(roles) {
-                    var value = []
-                    Object.keys(roles).forEach(function(key) {
-                        value.push(roles[key]);
-                    })
-
-                    return value.toString().replace(',', ', ')
                 }
             },
             {

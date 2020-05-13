@@ -20,7 +20,7 @@ class UserModel extends BaseModel
      */
     public function findPaginatedData(string $order, string $dir, int $length, int $start, string $keyword = ''): array
     {
-        $this->builder()
+        return $this->builder()
             ->select('id, username, email, active, created_at')
             ->groupStart()
                 ->like('username', $keyword)
@@ -28,23 +28,9 @@ class UserModel extends BaseModel
             ->groupEnd()
             ->where('deleted_at', null)
             ->orderBy($order, $dir)
-            ->limit($length, $start);
-
-        $results = $this->asObject(User::class)->findAll();
-
-        foreach ($results as $result) {
-            $data[] = [
-                'id'          => $result->id,
-                'active'      => $result->active,
-                'username'    => $result->username,
-                'email'       => $result->email,
-                'created_at'  => $result->created_at,
-                'roles'       => $result->getRoles(),
-                'permissions' => $result->getPermissions(),
-            ];
-        }
-
-        return $data;
+            ->limit($length, $start)
+            ->get()
+            ->getResultObject();
     }
 
     /**

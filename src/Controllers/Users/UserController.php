@@ -35,7 +35,7 @@ class UserController extends BaseController
             $columns = [
                 1 => 'username',
                 2 => 'email',
-                5 => 'created_at',
+                4 => 'created_at',
             ];
 
             $start = $this->request->getGet('start');
