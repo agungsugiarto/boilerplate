@@ -89,7 +89,7 @@ class PublishCommand extends BaseCommand
     {
         $map = directory_map($this->sourcePath.'/Database/Migrations');
 
-        foreach ($map as $file){        
+        foreach ($map as $file){
             $content = file_get_contents("{$this->sourcePath}/Database/Migrations/{$file}");
             $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
 

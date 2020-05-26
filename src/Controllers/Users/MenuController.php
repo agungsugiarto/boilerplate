@@ -231,12 +231,12 @@ class MenuController extends BaseController
     }
     
     /**
-     * Delete cache group menu
+     * Delete cache group menu.
      */
-	private function deleteCacheMenu()
+    private function deleteCacheMenu()
 	{
-		if (cache(user()->id.'_group_menu')) {
-			cache()->delete(user()->id.'_group_menu');
-		}
-	}
+        if (cache(user()->id.'_group_menu')) {
+            cache()->delete(user()->id.'_group_menu');
+        }
+    }
 }
