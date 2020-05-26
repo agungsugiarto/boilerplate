@@ -68,6 +68,9 @@ class MenuController extends BaseController
         if (!$result) {
             return $this->fail($result, lang('boilerplate.menu.msg.msg_fail_order'));
         }
+        
+		//Delete cache
+		$this->deleteCacheMenu();
 
         return $this->respondUpdated($result, lang('boilerplate.menu.msg.msg_update'));
     }
@@ -122,6 +125,9 @@ class MenuController extends BaseController
         }
 
         $this->db->transCommit();
+        
+		//Delete cache
+		$this->deleteCacheMenu();
 
         return redirect()->back()->with('sweet-success', lang('boilerplate.menu.msg.msg_insert'));
     }
@@ -178,6 +184,9 @@ class MenuController extends BaseController
         }
 
         $this->db->transCommit();
+        
+		//Delete cache
+		$this->deleteCacheMenu();
 
         return $this->respondUpdated($menu, lang('boilerplate.menu.msg.msg_update'));
     }
@@ -217,8 +226,20 @@ class MenuController extends BaseController
     {
         if ($found = $this->menu->delete($id)) {
             return $this->respondCreated($found, lang('boilerplate.menu.msg.msg_delete'));
+            //Delete cache
+            $this->deleteCacheMenu();
         }
 
         return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
     }
+    
+    /*
+	* Delete cache group menu
+	*/
+	private function deleteCacheMenu()
+	{
+		if (cache(user()->id.'_group_menu')) {
+			cache()->delete(user()->id.'_group_menu');
+		}
+	}
 }
