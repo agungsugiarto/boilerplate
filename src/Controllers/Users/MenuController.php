@@ -229,12 +229,12 @@ class MenuController extends BaseController
 
         return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
     }
-    
+
     /**
      * Delete cache group menu.
      */
     private function deleteCacheMenu()
-	{
+    {
         if (cache(user()->id.'_group_menu')) {
             cache()->delete(user()->id.'_group_menu');
         }
