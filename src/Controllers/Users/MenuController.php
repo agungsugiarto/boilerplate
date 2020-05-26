@@ -224,7 +224,7 @@ class MenuController extends BaseController
         if ($found = $this->menu->delete($id)) {
             //Delete cache
             $this->deleteCacheMenu();
-            
+
             return $this->respondCreated($found, lang('boilerplate.menu.msg.msg_delete'));
         }
 
