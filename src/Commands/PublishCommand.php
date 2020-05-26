@@ -87,7 +87,7 @@ class PublishCommand extends BaseCommand
 
     protected function publishMigration()
     {
-        $map = directory_map($this->sourcePath . '/Database/Migrations');
+        $map = directory_map($this->sourcePath.'/Database/Migrations');
 
         foreach ($map as $file)
         {
