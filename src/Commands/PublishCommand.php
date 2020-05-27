@@ -145,7 +145,7 @@ class PublishCommand extends BaseCommand
         $config = new Autoload();
         $appPath = $config->psr4[APP_NAMESPACE];
 
-        $directory = dirname($appPath . $path);
+        $directory = dirname($appPath.$path);
 
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
@@ -160,6 +160,6 @@ class PublishCommand extends BaseCommand
 
         $path = str_replace($appPath, '', $path);
 
-        CLI::write(CLI::color('  created: ', 'green') .$path);
+        CLI::write(CLI::color('  created: ', 'green').$path);
     }
 }
