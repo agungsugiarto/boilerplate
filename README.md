@@ -61,14 +61,17 @@ database.default.DBDriver = MySQLi
 ```bash
 php spark auth:publish
 
-Publish Migration? [y, n]: n
+Publish Migration? [y, n]: y
+  created: Database/Migrations/2017-11-20-223112_create_auth_tables.php
+  Remember to run `spark migrate -all` to migrate the database.
 Publish Models? [y, n]: n
 Publish Entities? [y, n]: n
 Publish Controller? [y, n]: n
 Publish Views? [y, n]: n
+Publish Filters? [y, n]: n
 Publish Config file? [y, n]: y
   created: Config/Auth.php
-Publish Language file? [y, n]:
+Publish Language file? [y, n]: n
 ```
 
 > NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
@@ -82,7 +85,7 @@ public $views = [
     'register'        => 'agungsugiarto\boilerplate\Views\Authentication\register',
     'forgot'          => 'agungsugiarto\boilerplate\Views\Authentication\forgot',
     'reset'           => 'agungsugiarto\boilerplate\Views\Authentication\reset',
-    'emailForgot'     => 'agungsugiarto\boilerplate\Views\Authentication\emails\fogot',
+    'emailForgot'     => 'agungsugiarto\boilerplate\Views\Authentication\emails\forgot',
     'emailActivation' => 'agungsugiarto\boilerplate\Views\Authentication\emails\activation',
 ];
 ```
