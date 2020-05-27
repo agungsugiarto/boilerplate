@@ -87,11 +87,11 @@ class PublishCommand extends BaseCommand
 
     protected function publishMigration()
     {
-        $map = directory_map($this->sourcePath . '/Database/Migrations');
+        $map = directory_map($this->sourcePath.'/Database/Migrations');
 
         foreach ($map as $file) {
             $content = file_get_contents("{$this->sourcePath}/Database/Migrations/{$file}");
-            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace ' . APP_NAMESPACE . '\Database\Migrations', $content);
+            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
 
             $this->writeFile("Database/Migrations/{$file}", $content);
         }
@@ -125,7 +125,7 @@ class PublishCommand extends BaseCommand
      */
     protected function determineSourcePath()
     {
-        $this->sourcePath = realpath(__DIR__ . '/../');
+        $this->sourcePath = realpath(__DIR__.'/../');
 
         if ($this->sourcePath == '/' || empty($this->sourcePath)) {
             CLI::error('Unable to determine the correct source directory. Bailing.');
@@ -152,7 +152,7 @@ class PublishCommand extends BaseCommand
         }
 
         try {
-            write_file($appPath . $path, $content);
+            write_file($appPath.$path, $content);
         } catch (\Exception $e) {
             $this->showError($e);
             exit();
@@ -160,6 +160,6 @@ class PublishCommand extends BaseCommand
 
         $path = str_replace($appPath, '', $path);
 
-        CLI::write(CLI::color('  created: ', 'green') . $path);
+        CLI::write(CLI::color('  created: ', 'green') .$path);
     }
 }
