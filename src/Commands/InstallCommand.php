@@ -64,7 +64,7 @@ class InstallCommand extends BaseCommand
         try {
             $this->call('boilerplate:publish');
             // migrate all first
-            $this->call('migrate', ['-all']);
+            $this->call('migrate');
             // then seed data
             $this->call('db:seed', ['agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder']);
         } catch (\Exception $e) {

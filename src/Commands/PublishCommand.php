@@ -72,6 +72,7 @@ class PublishCommand extends BaseCommand
     {
         $this->determineSourcePath();
         $this->publishConfig();
+        $this->publishMigration();
     }
 
     protected function publishConfig()
@@ -82,6 +83,18 @@ class PublishCommand extends BaseCommand
         $content = str_replace('namespace agungsugiarto\boilerplate\Config', 'namespace Config', $content);
 
         $this->writeFile('Config/Boilerplate.php', $content);
+    }
+
+    protected function publishMigration()
+    {
+        $map = directory_map($this->sourcePath.'/Database/Migrations');
+
+        foreach ($map as $file) {
+            $content = file_get_contents("{$this->sourcePath}/Database/Migrations/{$file}");
+            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
+
+            $this->writeFile("Database/Migrations/{$file}", $content);
+        }
     }
 
     //--------------------------------------------------------------------
