@@ -215,10 +215,10 @@ class MenuController extends BaseController
      */
     public function delete($id)
     {
-        if ($found = $this->menu->delete($id)) {
-            return $this->respondCreated($found, lang('boilerplate.menu.msg.msg_delete'));
+        if (!$this->menu->delete($id)) {
+            return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
         }
 
-        return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
+        return $this->respondDeleted(['id' => $id], lang('boilerplate.menu.msg.msg_delete'));
     }
 }

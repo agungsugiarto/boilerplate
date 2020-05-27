@@ -21,6 +21,11 @@ class MenuModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    // trigger
+    protected $afterInsert = ['deleteCacheMenu'];
+    protected $afterUpdate = ['deleteCacheMenu'];
+    protected $afterDelete = ['deleteCacheMenu'];
+
     protected $validationRules = [
         'title'       => 'required|min_length[10]|max_length[60]',
         'parent_id'   => 'required',
@@ -44,16 +49,9 @@ class MenuModel extends Model
      */
     public function getMenuById($id)
     {
-        switch ($this->db->DBDriver) {
-            case 'MySQLi':
-                // do mysqli
-                return $this->getMenuDriverMySQLi($id);
-                break;
-            case 'Postgre':
-                // do postgres
-                return $this->getMenuDRiverPostgre($id);
-                break;
-        }
+        return $this->db->DBDriver === 'Postgre'
+            ? $this->getMenuDRiverPostgre($id)
+            : $this->getMenuDriverMySQLi($id);
     }
 
     /**
@@ -118,5 +116,17 @@ class MenuModel extends Model
             ->groupBy(['menu.id', 'groups_menu.menu_id'])
             ->get()
             ->getResultArray();
+    }
+    
+    /**
+     * deleteCacheMenu.
+     *
+     * @return void
+     */
+    protected function deleteCacheMenu()
+    {
+        if (cache(user()->id.'_group_menu')) {
+            cache()->delete(user()->id.'_group_menu');
+        }
     }
 }
