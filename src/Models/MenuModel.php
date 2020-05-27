@@ -117,7 +117,7 @@ class MenuModel extends Model
             ->get()
             ->getResultArray();
     }
-    
+
     /**
      * deleteCacheMenu.
      *
