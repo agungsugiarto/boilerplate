@@ -75,7 +75,7 @@
             {
                 'data': 'created_at',
                 'render': function(data) {
-                    return moment(data.date).fromNow()
+                    return moment(data).fromNow()
                 }
             },
             {
