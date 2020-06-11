@@ -167,7 +167,7 @@ $(function () {
                 maxDepth: 2,
                 json: response.data,
                 contentCallback: (item) => {
-                    return `<i class="fa ${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
+                    return `<i class="${item.icon}"></i>&nbsp;<strong>${item.title}</strong>&nbsp;&nbsp;&nbsp;<a href="<?= base_url() ?>/${item.route}" class="dd-nodrag">${item.route}</a>
                             <span class="float-right dd-nodrag">
                                 <button data-id="${item.id}" id="btn-edit" class="btn btn-primary btn-xs"><span class="fa fa-fw fa-pencil-alt"></span></button>
                                 <button data-id="${item.id}" id="btn-delete" class="btn btn-danger btn-xs"><span class="fa fa-fw fa-trash"></span></button>
