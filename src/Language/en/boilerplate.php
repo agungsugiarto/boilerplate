@@ -1,10 +1,11 @@
-<?php
+ <?php
 
 return [
     'global' => [
         'save'   => 'Save',
         'close'  => 'Close',
         'action' => 'Action',
+        'logout' => 'Logout',
         'sweet'  => [
             'title'          => 'Are you sure?',
             'text'           => "You won't be able to revert this!",

@@ -38,14 +38,14 @@
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <span><?= lang('user.join') ?></span> 
+                                <span><?= lang('boilerplate.user.fields.join') ?></span> 
                                 <div class="float-right">
                                     <?= user()->created_at->toLocalizedString('MMM d, yyyy') ?>
                                 </div>
                             </li>
                         </ul>
 
-                        <a href="<?= route_to('logout') ?>" class="btn btn-primary btn-block"><b>Logout</b></a>
+                        <a href="<?= route_to('logout') ?>" class="btn btn-primary btn-block"><b><?= lang('boilerplate.global.logout') ?></b></a>
                     </div>
                     <!-- /.card-body -->
                 </div>

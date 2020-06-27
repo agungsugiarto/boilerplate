@@ -5,6 +5,7 @@ return [
         'save'   => 'Simpan',
         'close'  => 'Tutup',
         'action' => 'Aksi',
+        'logout' => 'Logout',
         'sweet'  => [
             'title'          => 'Apakah kamu yakin?',
             'text'           => 'Anda tidak akan dapat mengembalikan ini!',
