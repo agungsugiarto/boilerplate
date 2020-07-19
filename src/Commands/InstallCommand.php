@@ -3,6 +3,7 @@
 namespace agungsugiarto\boilerplate\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
+use Config\Database;
 
 /**
  * Class InstallCommand.
@@ -66,7 +67,8 @@ class InstallCommand extends BaseCommand
             // migrate all first
             $this->call('migrate');
             // then seed data
-            $this->call('db:seed', ['agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder']);
+            $seeder = Database::seeder();
+            $seeder->call('agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder');
         } catch (\Exception $e) {
             $this->showError($e);
         }
