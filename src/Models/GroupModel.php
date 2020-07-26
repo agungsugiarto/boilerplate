@@ -9,6 +9,31 @@ use Myth\Auth\Authorization\GroupModel as BaseModel;
  */
 class GroupModel extends BaseModel
 {
+    const ORDERABLE = [
+        1 => 'name',
+        2 => 'description',
+    ];
+
+    /**
+     * Get resource data.
+     * 
+     * @param string $search
+     * 
+     * @return \CodeIgniter\Database\BaseBuilder
+     */
+    public function getResource(string $search = '')
+    {
+        $builder = $this->builder()
+            ->select('id, name, description');
+
+        return empty($search)
+            ? $builder
+            : $builder->groupStart()
+                ->like('name', $search)
+                ->orLike('description', $search)
+            ->groupEnd();
+    }
+
     /**
      * Returns an array of all groups that a user is a member of.
      *
@@ -19,10 +44,10 @@ class GroupModel extends BaseModel
     public function getGroupsForUser(int $userId)
     {
         $group = $this->builder()
-                ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')
-                ->where('user_id', $userId)
-                ->get()
-                ->getResultObject();
+            ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')
+            ->where('user_id', $userId)
+            ->get()
+            ->getResultObject();
 
         $found = [];
         foreach ($group as $row) {
@@ -30,48 +55,5 @@ class GroupModel extends BaseModel
         }
 
         return $found;
-    }
-
-    /**
-     * FInd with paginate data.
-     *
-     * @param int    $length
-     * @param int    $start
-     * @param string $order
-     * @param string $dir
-     * @param string $keyword
-     *
-     * @return array
-     */
-    public function findPaginatedData(string $order, string $dir, int $length, int $start, string $keyword = ''): array
-    {
-        return $this->builder()
-            ->select('id, name, description')
-            ->groupStart()
-                ->like('name', $keyword)
-                ->orLike('description', $keyword)
-            ->groupEnd()
-            ->orderBy($order, $dir)
-            ->limit($length, $start)
-            ->get()
-            ->getResultObject();
-    }
-
-    /**
-     * FInd with count all data.
-     *
-     * @param string $keyword
-     *
-     * @return int
-     */
-    public function countFindData(string $keyword = ''): int
-    {
-        return $this->builder()
-            ->select('id, name, description')
-            ->groupStart()
-                ->like('name', $keyword)
-                ->orLike('description', $keyword)
-            ->groupEnd()
-            ->countAllResults();
     }
 }

@@ -6,46 +6,28 @@ use Myth\Auth\Authorization\PermissionModel as BaseModel;
 
 class PermissionModel extends BaseModel
 {
-    /**
-     * FInd with paginate data.
-     *
-     * @param int    $length
-     * @param int    $start
-     * @param string $order
-     * @param string $dir
-     * @param string $keyword
-     *
-     * @return array
-     */
-    public function findPaginatedData(string $order, string $dir, int $length, int $start, string $keyword = ''): array
-    {
-        return $this->builder()
-            ->select('id, name, description')
-            ->groupStart()
-                ->like('name', $keyword)
-                ->orLike('description', $keyword)
-            ->groupEnd()
-            ->orderBy($order, $dir)
-            ->limit($length, $start)
-            ->get()
-            ->getResultObject();
-    }
+    const ORDERABLE = [
+        1 => 'name',
+        2 => 'description',
+    ];
 
     /**
-     * FInd with count all data.
-     *
-     * @param string $keyword
-     *
-     * @return int
+     * Get resource data.
+     * 
+     * @param string $search
+     * 
+     * @return \CodeIgniter\Database\BaseBuilder
      */
-    public function countFindData(string $keyword = ''): int
+    public function getResource(string $search = '')
     {
-        return $this->builder()
-            ->select('id, name, description')
-            ->groupStart()
-                ->like('name', $keyword)
-                ->orLike('description', $keyword)
-            ->groupEnd()
-            ->countAllResults();
+        $builder = $this->builder()
+            ->select('id, name, description');
+
+        return empty($search)
+            ? $builder
+            : $builder->groupStart()
+                ->like('name', $search)
+                ->orLike('description', $search)
+            ->groupEnd();
     }
 }

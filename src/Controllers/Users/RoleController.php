@@ -22,21 +22,16 @@ class RoleController extends BaseController
     public function index()
     {
         if ($this->request->isAJAX()) {
-            $columns = [
-                1 => 'name',
-                2 => 'description',
-            ];
-
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $order = $columns[$this->request->getGet('order[0][column]')];
+            $order = GroupModel::ORDERABLE[$this->request->getGet('order[0][column]')];
             $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                model(GroupModel::class)->findPaginatedData($order, $dir, $length, $start, $search),
-                model(GroupModel::class)->countAllResults(),
-                model(GroupModel::class)->countFindData($search)
+                model(GroupModel::class)->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
+                model(GroupModel::class)->getResource()->countAllResults(),
+                model(GroupModel::class)->getResource($search)->countAllResults()
             ));
         }
 

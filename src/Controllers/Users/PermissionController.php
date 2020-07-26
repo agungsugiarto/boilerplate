@@ -32,21 +32,16 @@ class PermissionController extends ResourceController
     public function index()
     {
         if ($this->request->isAJAX()) {
-            $columns = [
-                1 => 'name',
-                2 => 'description',
-            ];
-
             $start = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $order = $columns[$this->request->getGet('order[0][column]')];
+            $order = PermissionModel::ORDERABLE[$this->request->getGet('order[0][column]')];
             $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                model(PermissionModel::class)->findPaginatedData($order, $dir, $length, $start, $search),
-                model(PermissionModel::class)->countAllResults(),
-                model(PermissionModel::class)->countFindData($search)
+                $this->model->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
+                $this->model->getResource()->countAllResults(),
+                $this->model->getResource($search)->countAllResults()
             ));
         }
 

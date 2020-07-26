@@ -6,48 +6,31 @@ use Myth\Auth\Models\UserModel as BaseModel;
 
 class UserModel extends BaseModel
 {
-    /**
-     * FInd with paginate data.
-     *
-     * @param int    $length
-     * @param int    $start
-     * @param string $order
-     * @param string $dir
-     * @param string $keyword
-     *
-     * @return array
-     */
-    public function findPaginatedData(string $order, string $dir, int $length, int $start, string $keyword = ''): array
-    {
-        return $this->builder()
-            ->select('id, username, email, active, created_at')
-            ->groupStart()
-                ->like('username', $keyword)
-                ->orLike('email', $keyword)
-            ->groupEnd()
-            ->where('deleted_at', null)
-            ->orderBy($order, $dir)
-            ->limit($length, $start)
-            ->get()
-            ->getResultObject();
-    }
+    const ORDERABLE = [
+        1 => 'username',
+        2 => 'email',
+        4 => 'created_at',
+    ];
 
     /**
-     * FInd with count all data.
-     *
-     * @param string $keyword
-     *
-     * @return int
+     * Get resource data.
+     * 
+     * @param string $search
+     * 
+     * @return \CodeIgniter\Database\BaseBuilder
      */
-    public function countFindData(string $keyword = ''): int
+    public function getResource(string $search = '')
     {
-        return $this->builder()
-            ->select('id, username, email, active, created_at')
-            ->groupStart()
-                ->like('username', $keyword)
-                ->orLike('email', $keyword)
-            ->groupEnd()
-            ->where('deleted_at', null)
-            ->countAllResults();
+        $builder = $this->builder()
+            ->select('id, username, email, active, created_at');
+
+        $condition = empty($search)
+            ? $builder
+            : $builder->groupStart()
+                ->like('username', $search)
+                ->orLike('email', $search)
+            ->groupEnd();
+
+        return $condition->where('deleted_at', null);
     }
 }
