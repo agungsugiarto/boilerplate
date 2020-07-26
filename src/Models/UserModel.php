@@ -14,9 +14,9 @@ class UserModel extends BaseModel
 
     /**
      * Get resource data.
-     * 
+     *
      * @param string $search
-     * 
+     *
      * @return \CodeIgniter\Database\BaseBuilder
      */
     public function getResource(string $search = '')
