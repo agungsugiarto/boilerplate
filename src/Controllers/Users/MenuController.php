@@ -53,21 +53,28 @@ class MenuController extends BaseController
         $data = $this->request->getJSON();
         $menu = new MenuEntity();
 
-        $i = 1;
-        foreach ($data as $item) {
-            if (isset($item->parent_id)) {
-                $menu->parent_id = $item->parent_id;
-                $menu->sequence = $i++;
-            } else {
-                $menu->parent_id = 0;
-                $menu->sequence = $i++;
+        try {
+            $this->db->transBegin();
+
+            $i = 1;
+            foreach ($data as $item) {
+                if (isset($item->parent_id)) {
+                    $menu->parent_id = $item->parent_id;
+                    $menu->sequence = $i++;
+                } else {
+                    $menu->parent_id = 0;
+                    $menu->sequence = $i++;
+                }
+
+                $this->menu->update($item->id, $menu);
             }
-            $result = $this->menu->update($item->id, $menu);
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+
+            return $this->fail(lang('boilerplate.menu.msg.msg_fail_order'));
         }
 
-        if (!$result) {
-            return $this->fail($result, lang('boilerplate.menu.msg.msg_fail_order'));
-        }
+        $this->db->transCommit();
 
         return $this->respondUpdated($result, lang('boilerplate.menu.msg.msg_update'));
     }
