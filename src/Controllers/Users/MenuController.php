@@ -76,7 +76,7 @@ class MenuController extends BaseController
 
         $this->db->transCommit();
 
-        return $this->respondUpdated($result, lang('boilerplate.menu.msg.msg_update'));
+        return $this->respondUpdated([], lang('boilerplate.menu.msg.msg_update'));
     }
 
     public function show($id)
