@@ -20,7 +20,7 @@
                 <form action="<?= route_to('user-update', $user['id']) ?>" method="post" class="form-horizontal">
                     <?= csrf_field() ?>
                     <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('user.active') ?></label>
+                        <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.active') ?></label>
                         <div class="col-sm-8">
                             <select class="form-control select" name="active" style="width: 100%;">
                                 <option <?= $user['active'] == 1 ? 'selected' : '' ?> value="1"><?= lang('boilerplate.user.fields.active') ?></option>
