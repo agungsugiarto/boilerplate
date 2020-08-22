@@ -242,18 +242,18 @@ $(function () {
             });
             var editForm = $('#form-edit');
 
-            var group_id = response.data[0].group_id;
+            var group_id = response.data.group_id;
             var group = group_id.split('|');
-            var parent_id = response.data[0].parent_id == 0 ? 0 : response.data[0].parent_id;
+            var parent_id = response.data.parent_id == 0 ? 0 : response.data.parent_id;
 
-            editForm.find('select[name="active"]').val(response.data[0].active).change();
+            editForm.find('select[name="active"]').val(response.data.active).change();
             editForm.find('select[name="parent_id"]').val(parent_id).change();
             editForm.find('select[name="groups_menu[]"]').val(group).change();
-            editForm.find('input[name="icon"]').val(response.data[0].icon);
-            editForm.find('input[name="icon"]').val(response.data[0].icon);
-            editForm.find('input[name="title"]').val(response.data[0].title);
-            editForm.find('input[name="route"]').val(response.data[0].route);
-            $("#menu_id").val(response.data[0].id);
+            editForm.find('input[name="icon"]').val(response.data.icon);
+            editForm.find('input[name="icon"]').val(response.data.icon);
+            editForm.find('input[name="title"]').val(response.data.title);
+            editForm.find('input[name="route"]').val(response.data.route);
+            $("#menu_id").val(response.data.id);
             $('#modal-update').modal('show');
 
         }).fail((jqXHR, textStatus, errorThrown) => {
@@ -324,7 +324,7 @@ $(function () {
     })
 
     $('#modal-edit').on('hidden.bs.modal', function() {
-        $(this).find('#form-edit')[0].reset();
+        $(this).find('#form-edit').reset();
         $('.is-invalid').removeClass('is-invalid');
         $('.invalid-feedback').removeClass('invalid-feedback');
     });

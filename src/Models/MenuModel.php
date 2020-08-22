@@ -96,7 +96,7 @@ class MenuModel extends Model
             ->join('auth_groups', 'groups_menu.group_id = auth_groups.id', 'left')
             ->where('menu.id', $id)
             ->get()
-            ->getResultArray();
+            ->getRow();
     }
 
     /**
@@ -115,7 +115,7 @@ class MenuModel extends Model
             ->where('menu.id', $id)
             ->groupBy(['menu.id', 'groups_menu.menu_id'])
             ->get()
-            ->getResultArray();
+            ->getRow();
     }
 
     /**
