@@ -2,17 +2,20 @@
 
 namespace agungsugiarto\boilerplate\Controllers\Users;
 
+use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
 use agungsugiarto\boilerplate\Models\PermissionModel;
-use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\API\ResponseTrait;
 
 /**
  * Class PermissionController.
  */
-class PermissionController extends ResourceController
+class PermissionController extends BaseController
 {
-    protected $modelName = PermissionModel::class;
-    protected $format = 'json';
+    use ResponseTrait;
+
+    /** @var \agungsugiarto\boilerplate\Models\PermissionModel */
+    protected $permission;
 
     /**
      * __construct.
@@ -21,7 +24,7 @@ class PermissionController extends ResourceController
      */
     public function __construct()
     {
-        helper('menu');
+        $this->permission = new PermissionModel();
     }
 
     /**
@@ -39,9 +42,9 @@ class PermissionController extends ResourceController
             $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                $this->model->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
-                $this->model->getResource()->countAllResults(),
-                $this->model->getResource($search)->countAllResults()
+                $this->permission->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
+                $this->permission->getResource()->countAllResults(),
+                $this->permission->getResource($search)->countAllResults()
             ));
         }
 
@@ -52,39 +55,14 @@ class PermissionController extends ResourceController
     }
 
     /**
-     * Return the properties of a resource object.
-     *
-     * @param int $id
-     *
-     * @return array an array
-     */
-    public function show($id = null)
-    {
-        if (!$record = $this->model->find($id)) {
-            return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
-        }
-
-        return $this->respond(['data' => $record]);
-    }
-
-    /**
-     * Return a new resource object, with default properties.
-     *
-     * @return array an array
-     */
-    public function new()
-    {
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return array an array
      */
     public function create()
     {
-        if (!$data = $this->model->save($this->request->getPost())) {
-            return $this->fail($this->model->errors());
+        if (!$data = $this->permission->save($this->request->getPost())) {
+            return $this->fail($this->permission->errors());
         }
 
         return $this->respondCreated($data, lang('boilerplate.permission.msg.msg_insert'));
@@ -99,7 +77,7 @@ class PermissionController extends ResourceController
      */
     public function edit($id = null)
     {
-        if (!$found = $this->model->find($id)) {
+        if (!$found = $this->permission->find($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
 
@@ -115,8 +93,8 @@ class PermissionController extends ResourceController
      */
     public function update($id = null)
     {
-        if (!$result = $this->model->update($id, $this->request->getRawInput())) {
-            return $this->fail($this->model->errors());
+        if (!$result = $this->permission->update($id, $this->request->getRawInput())) {
+            return $this->fail($this->permission->errors());
         }
 
         return $this->respondUpdated($result, lang('boilerplate.permission.msg.msg_update', [$id]));
@@ -131,7 +109,7 @@ class PermissionController extends ResourceController
      */
     public function delete($id = null)
     {
-        if (!$this->model->delete($id)) {
+        if (!$this->permission->delete($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
 

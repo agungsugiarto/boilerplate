@@ -15,28 +15,19 @@ use Psr\Log\LoggerInterface;
 class BaseController extends Controller
 {
     /**
-     * @var Authorize
+     * @var \Myth\Auth\Authorization\FlatAuthorization
      */
     protected $authorize;
+
     /**
-     * @var Auth
+     * @var \Myth\Auth\Authentication\LocalAuthenticator
      */
     protected $auth;
 
     /**
-     * @var Config
-     */
-    protected $config;
-
-    /**
-     * @var Db
+     * @var \CodeIgniter\Database\BaseConnection|\CodeIgniter\Database\BaseBuilder
      */
     protected $db;
-
-    /**
-     * @var Pager
-     */
-    protected $pager;
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -45,17 +36,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['auth', 'inflector', 'form', 'menu'];
-
-    /**
-     * @var \CodeIgniter\Session\Session
-     */
-    protected $session;
-
-    /**
-     * @var \Config\Services::validation();
-     */
-    protected $validation;
+    protected $helpers = ['auth', 'form', 'menu'];
 
     /**
      * Constructor.
@@ -70,7 +51,6 @@ class BaseController extends Controller
         //--------------------------------------------------------------------
         $this->auth = Services::authentication();
         $this->authorize = Services::authorization();
-        $this->validation = Services::validation();
         $this->db = Database::connect();
     }
 }

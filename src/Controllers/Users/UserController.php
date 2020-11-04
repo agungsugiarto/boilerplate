@@ -17,6 +17,7 @@ class UserController extends BaseController
 {
     use ResponseTrait;
 
+    /** @var \agungsugiarto\boilerplate\Models\UserModel */
     protected $users;
 
     public function __construct()
@@ -39,9 +40,9 @@ class UserController extends BaseController
             $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                model(UserModel::class)->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
-                model(UserModel::class)->getResource()->countAllResults(),
-                model(UserModel::class)->getResource($search)->countAllResults()
+                $this->users->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
+                $this->users->getResource()->countAllResults(),
+                $this->users->getResource($search)->countAllResults()
             ));
         }
 
@@ -49,17 +50,6 @@ class UserController extends BaseController
             'title'    => lang('boilerplate.user.title'),
             'subtitle' => lang('boilerplate.user.subtitle'),
         ]);
-    }
-
-    /**
-     * Return the properties of a resource object.
-     *
-     * @param int id
-     *
-     * @return mixed
-     */
-    public function show($id)
-    {
     }
 
     /**
@@ -142,9 +132,9 @@ class UserController extends BaseController
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
-        try {
-            $this->db->transBegin();
+        $this->db->transBegin();
 
+        try {
             $id = $this->users->insert(new User([
                 'active'   => $this->request->getPost('active'),
                 'email'    => $this->request->getPost('email'),
@@ -159,13 +149,13 @@ class UserController extends BaseController
             foreach ($roles as $role) {
                 $this->authorize->addUserToGroup($id, $role);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
         }
-
-        $this->db->transCommit();
 
         return redirect()->back()->with('sweet-success', lang('boileplate.user.msg.msg_insert'));
     }
@@ -215,8 +205,9 @@ class UserController extends BaseController
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
+        $this->db->transBegin();
+
         try {
-            $this->db->transBegin();
             $user = new User();
 
             if ($this->request->getPost('password')) {
@@ -244,13 +235,13 @@ class UserController extends BaseController
                 // insert with new role
                 $this->authorize->addUserToGroup($id, $role);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
         }
-
-        $this->db->transCommit();
 
         return redirect()->back()->with('sweet-success', lang('boilerplate.user.msg.msg_update'));
     }

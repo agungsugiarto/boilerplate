@@ -19,6 +19,7 @@
             <div class="card-body">
                 <form action="<?= base_url('admin/role/'.$role->id) ?>/update" method="post">
                     <?= csrf_field() ?>
+                    <input type="hidden" name="_method" value="put" />
                     <div class="col-md-10">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"><?= lang('boilerplate.role.fields.name') ?></label>
@@ -86,7 +87,7 @@
 
 <?= $this->section('js') ?>
     <script>
-        var demo = $('select[name="permission[]"]').bootstrapDualListbox();
+        $('select[name="permission[]"]').bootstrapDualListbox();
     </script>
 <?= $this->endSection() ?>
 

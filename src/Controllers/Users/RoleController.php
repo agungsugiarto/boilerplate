@@ -14,6 +14,14 @@ class RoleController extends BaseController
 {
     use ResponseTrait;
 
+    /** @var \agungsugiarto\boilerplate\Models\GroupModel */
+    protected $group;
+
+    public function __construct()
+    {
+        $this->group = new GroupModel();
+    }
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -29,9 +37,9 @@ class RoleController extends BaseController
             $dir = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
-                model(GroupModel::class)->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
-                model(GroupModel::class)->getResource()->countAllResults(),
-                model(GroupModel::class)->getResource($search)->countAllResults()
+                $this->group->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
+                $this->group->getResource()->countAllResults(),
+                $this->group->getResource($search)->countAllResults()
             ));
         }
 
@@ -59,16 +67,6 @@ class RoleController extends BaseController
     }
 
     /**
-     * Return the properties of a resource object.
-     *
-     * @return array an array
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return array an array
@@ -89,31 +87,38 @@ class RoleController extends BaseController
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
+        $this->db->transBegin();
+
         try {
-            $this->db->transBegin();
             $id = $this->authorize->createGroup(url_title($name), $description);
 
             foreach ($permission as $value) {
                 $this->authorize->addPermissionToGroup($value, $id);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
-        $this->db->transCommit();
-
         return redirect()->back()->with('sweet-success', lang('boilerplate.role.msg.msg_insert'));
     }
 
     /**
      * Return the editable properties of a resource object.
-     *
+     * 
+     * @param int $id
+     * 
      * @return array an array
      */
-    public function edit($id)
+    public function edit($id = null)
     {
+        if (is_null($this->authorize->group($id))) {
+            return redirect()->back()->with('sweet-error', lang('boilerplate.role.msg.msg_get_fail', [$id]));
+        }
+
         $data = [
             'title'        => lang('boilerplate.role.title'),
             'subtitle'     => lang('boilerplate.role.edit'),
@@ -127,7 +132,9 @@ class RoleController extends BaseController
 
     /**
      * Add or update a model resource, from "posted" properties.
-     *
+     * 
+     * @param int $id
+     * 
      * @return array an array
      */
     public function update($id = null)
@@ -146,8 +153,9 @@ class RoleController extends BaseController
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
+        $this->db->transBegin();
+
         try {
-            $this->db->transBegin();
             // update group
             $this->authorize->updateGroup($id, url_title($name), $description);
 
@@ -158,23 +166,25 @@ class RoleController extends BaseController
                 // insert with new permission to group
                 $this->authorize->addPermissionToGroup($value, $id);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
         }
 
-        $this->db->transCommit();
-
         return redirect()->back()->with('sweet-success', lang('boilerplate.role.msg.msg_update', [$id]));
     }
 
     /**
      * Delete the designated resource object from the model.
-     *
+     * 
+     * @param int $id
+     * 
      * @return array an array
      */
-    public function delete($id)
+    public function delete($id = null)
     {
         if (!$found = $this->authorize->deleteGroup($id)) {
             return $this->failNotFound(lang('boilerplate.role.msg.msg_get_fail', [$id]));

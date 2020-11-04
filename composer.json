@@ -23,7 +23,7 @@
     "require-dev": {
         "codeigniter4/framework": "^4.0",
         "phpunit/phpunit": "8.5.*",
-        "fzaninotto/faker": "^1.9"
+        "fakerphp/faker": "^1.10"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

@@ -17,8 +17,9 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="<?= route_to('user-update', $user['id']) ?>" method="post" class="form-horizontal">
+                <form action="<?= base_url('admin/user/manage/'.$user['id']) ?>/update" method="post" class="form-horizontal">
                     <?= csrf_field() ?>
+                    <input type="hidden" name="_method" value="put" />
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.active') ?></label>
                         <div class="col-sm-8">

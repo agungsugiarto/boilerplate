@@ -20,12 +20,11 @@ $routes->group('admin', function ($routes) {
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
     ], function ($routes) {
         $routes->match(['get', 'post'], 'profile', 'UserController::profile', ['as' => 'user-profile']);
-        $routes->post('(.*)/update', 'UserController::update/$1', ['as' => 'user-update']);
         $routes->resource('manage', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
             'controller' => 'UserController',
-            'except'     => 'update',
+            'except'     => 'show',
         ]);
     });
 
@@ -36,23 +35,17 @@ $routes->group('admin', function ($routes) {
         'filter'     => 'permission:role-permission',
         'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
         'controller' => 'PermissionController',
+        'except'     => 'show,new',
     ]);
 
     /**
      * Role routes.
      */
-    $routes->group('role', [
-        'filter'    => 'permission:role-permission',
-        'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
-    ], function ($routes) {
-        $routes->get('/', 'RoleController::index');
-        $routes->get('new', 'RoleController::new');
-        $routes->get('(.*)/show', 'RoleController::show/$1');
-        $routes->post('', 'RoleController::create');
-        $routes->get('(.*)/edit', 'RoleController::edit/$1');
-        $routes->post('(.*)/update', 'RoleController::update/$1', ['as' => 'role-update']);
-        $routes->delete('(.*)', 'RoleController::delete/$1');
-    });
+    $routes->resource('role', [
+        'filter'     => 'permission:role-permission',
+        'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
+        'controller' => 'RoleController',
+    ]);
 
     /**
      * Menu routes.
@@ -61,12 +54,13 @@ $routes->group('admin', function ($routes) {
         'filter'     => 'permission:menu-permission',
         'namespace'  => 'agungsugiarto\boilerplate\Controllers\Users',
         'controller' => 'MenuController',
-        'except'     => 'new',
+        'except'     => 'new,show',
     ]);
 
     $routes->put('menu-update', 'MenuController::new', [
         'filter'    => 'permission:menu-permission',
         'namespace' => 'agungsugiarto\boilerplate\Controllers\Users',
+        'except'    => 'show',
         'as'        => 'menu-update',
     ]);
 });

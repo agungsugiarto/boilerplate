@@ -53,9 +53,9 @@ class MenuController extends BaseController
         $data = $this->request->getJSON();
         $menu = new MenuEntity();
 
-        try {
-            $this->db->transBegin();
+        $this->db->transBegin();
 
+        try {
             $i = 1;
             foreach ($data as $item) {
                 if (isset($item->parent_id)) {
@@ -68,19 +68,15 @@ class MenuController extends BaseController
 
                 $this->menu->update($item->id, $menu);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return $this->fail(lang('boilerplate.menu.msg.msg_fail_order'));
         }
 
-        $this->db->transCommit();
-
         return $this->respondUpdated([], lang('boilerplate.menu.msg.msg_update'));
-    }
-
-    public function show($id)
-    {
     }
 
     /**
@@ -103,9 +99,9 @@ class MenuController extends BaseController
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
-        try {
-            $this->db->transBegin();
+        $this->db->transBegin();
 
+        try {
             $menu = new MenuEntity();
             $menu->parent_id = $this->request->getPost('parent_id');
             $menu->active = $this->request->getPost('active');
@@ -122,13 +118,13 @@ class MenuController extends BaseController
                     'menu_id'  => $id,
                 ]);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
         }
-
-        $this->db->transCommit();
 
         return redirect()->back()->with('sweet-success', lang('boilerplate.menu.msg.msg_insert'));
     }
@@ -157,9 +153,9 @@ class MenuController extends BaseController
 
         $data = $this->request->getRawInput();
 
-        try {
-            $this->db->transBegin();
+        $this->db->transBegin();
 
+        try {
             $menu = $this->menu->update($id, [
                 'parent_id' => $data['parent_id'],
                 'active'    => $data['active'],
@@ -178,13 +174,13 @@ class MenuController extends BaseController
                     'menu_id'  => $id,
                 ]);
             }
+
+            $this->db->transCommit();
         } catch (\Exception $e) {
             $this->db->transRollback();
 
             return $this->fail($e->getMessage());
         }
-
-        $this->db->transCommit();
 
         return $this->respondUpdated($menu, lang('boilerplate.menu.msg.msg_update'));
     }
