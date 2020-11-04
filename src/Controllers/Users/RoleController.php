@@ -108,9 +108,9 @@ class RoleController extends BaseController
 
     /**
      * Return the editable properties of a resource object.
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return array an array
      */
     public function edit($id = null)
@@ -132,9 +132,9 @@ class RoleController extends BaseController
 
     /**
      * Add or update a model resource, from "posted" properties.
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return array an array
      */
     public function update($id = null)
@@ -179,9 +179,9 @@ class RoleController extends BaseController
 
     /**
      * Delete the designated resource object from the model.
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return array an array
      */
     public function delete($id = null)
