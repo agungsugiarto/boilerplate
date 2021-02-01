@@ -44,8 +44,8 @@
 		<const name="PUBLICPATH" value="./vendor/codeigniter4/framework/public/"/>
 		<env name="database.tests.hostname" value="localhost"/>
 		<env name="database.tests.database" value="boilerplate-test"/>
-		<env name="database.tests.username" value="root"/>
-		<env name="database.tests.password" value=""/>
+		<env name="database.tests.username" value="test"/>
+		<env name="database.tests.password" value="test"/>
 		<env name="database.tests.DBDriver" value="MySQLi"/>
 		<env name="database.tests.DBPrefix" value=""/>
 	</php>
