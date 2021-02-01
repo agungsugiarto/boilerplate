@@ -26,11 +26,11 @@ jobs:
         run: sudo service mysql stop
       - name: Setup MySQL
         uses: samin/mysql-action@v1.3
-      with:
-        mysql version: 5.7
-        mysql password: test
-        mysql user: test
-        mysql database: boilerplate-test
+        with:
+          mysql version: 5.7
+          mysql password: test
+          mysql user: test
+          mysql database: boilerplate-test
       - name: Checkout
         uses: actions/checkout@v2
       - name: "Validate composer.json and composer.lock"
