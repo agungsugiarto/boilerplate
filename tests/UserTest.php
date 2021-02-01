@@ -11,13 +11,13 @@ class UserTest extends AuthTestCase
         $permission2 = $this->createPermission(['name' => 'second']);
 
         $this->hasInDatabase('auth_users_permissions', [
-            'user_id' => $user->id,
-            'permission_id' => $permission1->id
+            'user_id'       => $user->id,
+            'permission_id' => $permission1->id,
         ]);
 
         $this->hasInDatabase('auth_users_permissions', [
-            'user_id' => $user->id,
-            'permission_id' => $permission2->id
+            'user_id'       => $user->id,
+            'permission_id' => $permission2->id,
         ]);
 
         $expected = [
@@ -35,13 +35,13 @@ class UserTest extends AuthTestCase
         $permission = $this->createPermission(['name' => 'first']);
 
         $this->hasInDatabase('auth_groups_permissions', [
-            'group_id' => $group->id,
-            'permission_id' => $permission->id
+            'group_id'      => $group->id,
+            'permission_id' => $permission->id,
         ]);
 
         $this->hasInDatabase('auth_groups_users', [
-            'user_id' => $user->id,
-            'group_id' => $group->id
+            'user_id'  => $user->id,
+            'group_id' => $group->id,
         ]);
 
         $expected = [
@@ -56,8 +56,8 @@ class UserTest extends AuthTestCase
         $user = $this->createUser();
         $permission = $this->createPermission();
         $this->hasInDatabase('auth_users_permissions', [
-            'user_id' => $user->id,
-            'permission_id' => $permission->id
+            'user_id'       => $user->id,
+            'permission_id' => $permission->id,
         ]);
 
         $this->assertTrue($user->can($permission->name));
