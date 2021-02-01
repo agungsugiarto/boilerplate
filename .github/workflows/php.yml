@@ -1,4 +1,4 @@
-name: "Boilerplate Build"
+name: "ci build"
 
 on:
   pull_request:
@@ -22,15 +22,6 @@ jobs:
           extensions: intl, json, mbstring, xdebug, xml
           php-version: "${{ matrix.php-versions }}"
           coverage: xdebug
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
-      - name: Setup MySQL
-        uses: samin/mysql-action@v1.3
-        with:
-          mysql version: 5.7
-          mysql password: test
-          mysql user: test
-          mysql database: boilerplate-test
       - name: Checkout
         uses: actions/checkout@v2
       - name: "Validate composer.json and composer.lock"
