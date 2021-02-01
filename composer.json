@@ -16,14 +16,14 @@
         }
     ],
     "require": {
-        "php": ">7.2",
+        "php": "^7.3 || ^8.0",
         "myth/auth": "dev-develop",
+        "codeigniter4/framework": "^4.1",
         "codeigniter4/translations" : "^4.0"
     },
     "require-dev": {
-        "codeigniter4/framework": "^4.0",
-        "phpunit/phpunit": "8.5.*",
-        "fakerphp/faker": "^1.10"
+        "phpunit/phpunit": "^9.1",
+        "fakerphp/faker": "^1.13"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
