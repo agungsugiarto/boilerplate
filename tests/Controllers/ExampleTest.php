@@ -9,12 +9,12 @@ use Tests\Support\AuthTestCase;
 class ExampleTest extends AuthTestCase
 {
     use ControllerTester;
-    
+
     public function testIndexHome()
     {
         $result = $this->controller(Home::class)
             ->execute('index');
-                        
+
         $this->assertTrue($result->isOK());
     }
 }
