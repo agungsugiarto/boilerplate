@@ -9,7 +9,7 @@
 
 CodeIgniter 4 Application Boilerplate
 =====================================
-This package for CodeIgniter 4 serves as a basic for quickly creating a back-office. It includes profile creation and his management, user management, roles, permissions and create dynamically menu.
+This package for CodeIgniter 4 serves as a basic platform for quickly creating a back-office application. It includes profile creation and management, user management, roles, permissions and a dynamically generated menu.
 
 Feature
 -------
