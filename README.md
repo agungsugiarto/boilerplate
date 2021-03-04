@@ -9,18 +9,18 @@
 
 CodeIgniter 4 Application Boilerplate
 =====================================
-This package for CodeIgniter 4 serves as a basic platform for quickly creating a back-office application. It includes profile creation and management, user management, roles, permissions and a dynamically generated menu.
+This package for CodeIgniter 4 serves as a basic platform for quickly creating a back-office application. It includes profile creation and management, user management, roles, permissions and a dynamically-generated menu.
 
 Feature
 -------
 * Configurable backend theme [AdminLTE 3](https://adminlte.io/docs/3.0/)
-* Css framework [Bootstrap 4](https://getbootstrap.com/)
+* CSS framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
-* Role-based permissions provided by [Myth/Auth](https://github.com/lonnieezell/myth-auth)
-* Menu dynamically
+* Role-based permissions (RBAC) provided by [Myth/Auth](https://github.com/lonnieezell/myth-auth)
+* Dynamically-Generated Menu
 * Localized English / Indonesian
 
-This project is early on development feel free to contribute
+This project is still early in its development... please feel free to contribute!
 ------------------------------------------------------------
 Screenshoot | Demo On [Heroku](https://boilerplate-codeigniter4.herokuapp.com/)
 -------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Screenshoot | Demo On [Heroku](https://boilerplate-codeigniter4.herokuapp.com/)
 Installation
 ------------
 
-**1.** Get The Module, since packages myth/auth still on development we need to change composer.json in root project directory. Open composer.json with your text editor and add code like [this](https://github.com/agungsugiarto/boilerplate/blob/master/composer.json#L27-L28), or below like this.
+**1.** Get The Module, since the myth/auth packages is still under development, we need to change composer.json in root project directory. Open composer.json with your text editor and add code like [this](https://github.com/agungsugiarto/boilerplate/blob/master/composer.json#L27-L28), or below like this.
 
 ```bash
 "minimum-stability": "dev",
@@ -42,7 +42,7 @@ And run require via composer
 composer require agungsugiarto/boilerplate
 ```
 
-**2.** Set CI_ENVIRONMENT, base url, index page, and database config in your `.env` file based on your existing database (If you don't have a `.env` file, you can copy first from `env` file: `cp env .env` first). If the database not exists, create database first.
+**2.** Set CI_ENVIRONMENT, baseURL, index page, and database config in your `.env` file based on your existing database (If you don't have a `.env` file, you can copy first from `env` file: `cp env .env` first). If the database does not exist, create the database first.
 
 ```bash
 # .env file
@@ -77,8 +77,8 @@ Publish Language file? [y, n]: n
 > NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
-Its done ? not to fast. After the publish `Config/Auth.php` you need to change
-`public $views` with below like this.
+Is it ready yet? Not so fast!! ;-) After publishing `Config/Auth.php` you need to change
+`public $views` with these lines below:
 ```php
 public $views = [
     'login'           => 'agungsugiarto\boilerplate\Views\Authentication\login',
@@ -90,7 +90,7 @@ public $views = [
 ];
 ```
 
-Open `app\Config\Filters.php` see at `$aliases` add with below like this.
+Open `app\Config\Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
     'login'      => \Myth\Auth\Filters\LoginFilter::class,
@@ -144,7 +144,7 @@ class Boilerplate extends BaseConfig
 
 Usage
 -----
-You can find how its work with the read code routes, controller and views etc. Finnaly happy coding!
+You can find how it works with the read code routes, controller and views etc. Finnally... Happy Coding!
 
 Changelog
 --------
