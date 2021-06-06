@@ -23,7 +23,7 @@
                             <?php if ($i == count($path) - 1) { ?>
                                 <li class="breadcrumb-item active"><?= $path[$i] ?></li>
                             <?php } else { ?>
-                                <li class="breadcrumb-item"><a href="<?= base_url($path[$i]) ?>"><?= $path[$i] ?></a></li>
+                                <li class="breadcrumb-item"><a href="<?= base_url((isset($path[$i-1])?$path[$i-1].'/':'').$path[$i]) ?>"><?= $path[$i] ?></a></li>
                             <?php } ?>
                         <?php } ?>
                     <?php } else { ?>
