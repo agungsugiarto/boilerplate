@@ -8,7 +8,7 @@ return [
         'logout' => 'Salir',
         'sweet'  => [
             'title'          => 'Estás Seguro?',
-            'text'           => "Si no estas seguro da click en cancelar!",
+            'text'           => 'Si no estas seguro da click en cancelar!',
             'confirm_delete' => 'Si, Eliminalo!',
         ],
     ],
