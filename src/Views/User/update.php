@@ -11,7 +11,7 @@
             <div class="card-header">
                 <div class="float-left">
                     <div class="btn-group">
-                        <a href="<?= route_to('admin/user/manage') ?>" class="btn btn-sm btn-block btn-secondary"><i class="fas fa-arrow-left"></i>
+                        <a href="<?= base_url(route_to('admin/user/manage')) ?>" class="btn btn-sm btn-block btn-secondary"><i class="fas fa-arrow-left"></i>
                         </a>
                     </div>
                 </div>

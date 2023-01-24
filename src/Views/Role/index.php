@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <div class="float-right">
                         <div class="btn-group">
-                            <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                            <a href="<?= base_url(route_to('admin/role/new')) ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
                                 <?= lang('boilerplate.role.add') ?>
                             </a>
                         </div>
@@ -48,7 +48,7 @@
         order: [[1, 'asc']],
 
         ajax : {
-            url: '<?= route_to('admin/role') ?>',
+            url: '<?= base_url(route_to('admin/role')) ?>',
             method: 'GET'
         },
         columnDefs: [{
@@ -92,7 +92,7 @@
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: `<?= route_to('admin/role') ?>/${$(this).attr('data-id')}`,
+                    url: `<?= base_url(route_to('admin/role')) ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
                 }).done((data, textStatus, jqXHR) => {
                     Toast.fire({

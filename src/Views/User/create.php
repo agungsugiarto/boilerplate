@@ -11,13 +11,13 @@
             <div class="card-header">
                 <div class="float-left">
                     <div class="btn-group">
-                        <a href="<?= route_to('admin/user/manage') ?>" class="btn btn-sm btn-block btn-secondary"><i class="fas fa-arrow-left"></i>
+                        <a href="<?= base_url(route_to('admin/user/manage')) ?>" class="btn btn-sm btn-block btn-secondary"><i class="fas fa-arrow-left"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <form action="<?= route_to('admin/user/manage') ?>" method="post" class="form-horizontal">
+                <form action="<?= base_url(route_to('admin/user/manage')) ?>" method="post" class="form-horizontal">
                     <?= csrf_field() ?>
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.active') ?></label>

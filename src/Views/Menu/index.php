@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="<?= route_to('admin/menu') ?>" method="post" class="form-horizontal">
+                    <form action="<?= base_url(route_to('admin/menu')) ?>" method="post" class="form-horizontal">
                         <?= csrf_field() ?>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.parent') ?></label>
@@ -195,7 +195,7 @@ $(function () {
         $(this).html('<i class="fas fa-spinner fa-spin"></i>');
 
         $.ajax({
-            url: `<?= route_to('menu-update') ?>`,
+            url: `<?= base_url(route_to('menu-update')) ?>`,
             method: 'PUT',
             dataType: 'JSON',
             data: JSON.stringify(serialize)
@@ -227,7 +227,7 @@ $(function () {
         $('.is-invalid').removeClass('is-invalid');
 
         $.ajax({
-            url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}/edit`,
+            url: `<?= base_url(route_to('admin/menu')) ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
             dataType: 'JSON',
             
@@ -269,7 +269,7 @@ $(function () {
         var editForm = $('#form-edit');
 
         $.ajax({
-            url: `<?= route_to('admin/menu') ?>/${ $('#menu_id').val() }`,
+            url: `<?= base_url(route_to('admin/menu')) ?>/${ $('#menu_id').val() }`,
             method: 'PUT',
             data: editForm.serialize()
             
@@ -304,7 +304,7 @@ $(function () {
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}`,
+                    url: `<?= base_url(route_to('admin/menu')) ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
                 }).done((data, textStatus, jqXHR) => {
                     Toast.fire({

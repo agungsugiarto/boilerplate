@@ -4,7 +4,7 @@
   <div class="card-body register-card-body">
     <p class="login-box-msg"><?=lang('Auth.register')?></p>
     <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
-    <form action="<?= route_to('register') ?>" method="post">
+    <form action="<?= base_url(route_to('register')) ?>" method="post">
       <?= csrf_field() ?>
       <div class="input-group mb-3">
         <input type="text" name="username"
@@ -67,7 +67,7 @@
       </div>
     </form>
 
-    <p><?=lang('Auth.alreadyRegistered')?> <a href="<?= route_to('login') ?>"
+    <p><?=lang('Auth.alreadyRegistered')?> <a href="<?= base_url(route_to('login')) ?>"
         class="text-center"><?=lang('Auth.signIn')?></a></p>
   </div>
   <!-- /.form-box -->

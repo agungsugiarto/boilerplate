@@ -5,7 +5,7 @@
   <div class="card-body login-card-body">
     <p class="login-box-msg"><?=lang('Auth.loginTitle')?></p>
     <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
-    <form action="<?= route_to('login') ?>" method="post">
+    <form action="<?= base_url(route_to('login')) ?>" method="post">
       <?= csrf_field() ?>
       <?php if ($config->validFields === ['email']) { ?>
       <div class="input-group mb-3">
@@ -69,11 +69,11 @@
     </form>
 
     <p class="mb-1">
-      <a href="<?= route_to('forgot') ?>"><?=lang('Auth.forgotYourPassword')?></a>
+      <a href="<?= base_url(route_to('forgot')) ?>"><?=lang('Auth.forgotYourPassword')?></a>
     </p>
     <?php if ($config->allowRegistration) { ?>
     <p class="mb-0">
-      <a href="<?= route_to('register') ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
+      <a href="<?= base_url(route_to('register')) ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
     </p>
     <?php } ?>
   </div>

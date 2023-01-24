@@ -51,7 +51,7 @@
         order: [[1, 'asc']],
 
         ajax : {
-            url: '<?= route_to('admin/permission') ?>',
+            url: '<?= base_url(route_to('admin/permission')) ?>',
             method: 'GET'
         },
         columnDefs: [{
@@ -88,7 +88,7 @@
         var createForm = $('#form-create-permission');
         
         $.ajax({
-            url: '<?= route_to('admin/permission') ?>',
+            url: '<?= base_url(route_to('admin/permission')) ?>',
             method: 'post',
             data: {
                 name: slugify(createForm.find("input[name='name']").val()),
@@ -121,7 +121,7 @@
     $(document).on('click', '.btn-edit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}/edit`,
+            url: `<?= base_url(route_to('admin/permission')) ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
             
         }).done((response) => {
@@ -144,7 +144,7 @@
         var editForm = $('#form-edit-permission');
 
         $.ajax({
-            url: `<?= route_to('admin/permission') ?>/${ $('#permission_id').val() }`,
+            url: `<?= base_url(route_to('admin/permission')) ?>/${ $('#permission_id').val() }`,
             method: 'PUT',
             data: editForm.serialize()
             
@@ -178,7 +178,7 @@
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}`,
+                    url: `<?= base_url(route_to('admin/permission')) ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
                 }).done((data, textStatus, jqXHR) => {
                     Toast.fire({

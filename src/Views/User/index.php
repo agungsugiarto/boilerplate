@@ -10,7 +10,7 @@
     <div class="card-header">
         <div class="card-tools">
             <div class="btn-group">
-                <a href="<?= route_to('admin/user/manage/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                <a href="<?= base_url(route_to('admin/user/manage/new')) ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
                     <?= lang('boilerplate.user.add') ?>
                 </a>
             </div>
@@ -51,7 +51,7 @@
         order: [[1, 'asc']],
 
         ajax: {
-            url: '<?= route_to('admin/user/manage') ?>',
+            url: '<?= base_url(route_to('admin/user/manage')) ?>',
             method: 'GET'
         },
         columnDefs: [{

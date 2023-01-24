@@ -6,7 +6,7 @@
     <p class="login-box-msg"><?=lang('Auth.forgotPassword')?></p>
     <p class="login-box-msg"><?=lang('Auth.enterEmailForInstructions')?></p>
     <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
-    <form action="<?= route_to('forgot') ?>" method="post">
+    <form action="<?= base_url(route_to('forgot')) ?>" method="post">
       <?= csrf_field() ?>
       <div class="input-group mb-3">
         <input type="email" name="email"
@@ -30,11 +30,11 @@
     </form>
 
     <p class="mt-3 mb-1">
-      <a href="<?= route_to('login') ?>"><?=lang('Auth.signIn')?></a>
+      <a href="<?= base_url(route_to('login')) ?>"><?=lang('Auth.signIn')?></a>
     </p>
     <?php if ($config->allowRegistration) { ?>
     <p class="mb-0">
-      <a href="<?= route_to('register') ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
+      <a href="<?= base_url(route_to('register')) ?>" class="text-center"><?=lang('Auth.needAnAccount')?></a>
     </p>
     <?php } ?>
   </div>

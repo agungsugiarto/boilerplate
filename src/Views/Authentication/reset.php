@@ -6,7 +6,7 @@
     <p class="login-box-msg"><?=lang('Auth.resetYourPassword')?></p>
     <p><?=lang('Auth.enterCodeEmailPassword')?></p>
     <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
-    <form action="<?= route_to('reset-password') ?>" method="post">
+    <form action="<?= base_url(route_to('reset-password')) ?>" method="post">
       <?= csrf_field() ?>
 
       <div class="input-group mb-3">
@@ -77,7 +77,7 @@
     </form>
 
     <p class="mt-3 mb-1">
-      <a href="<?= route_to('login') ?>"><?=lang('Auth.signIn')?></a>
+      <a href="<?= base_url(route_to('login')) ?>"><?=lang('Auth.signIn')?></a>
     </p>
   </div>
   <!-- /.login-card-body -->
