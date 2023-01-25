@@ -82,7 +82,7 @@
                 "data": function(data) {
                     return `<td class="text-right py-0 align-middle">
                             <div class="btn-group btn-group-sm">
-                                <a href="<?= route_to('admin/user/manage') ?>/${data.id}/edit" class="btn btn-primary btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="<?= base_url(route_to('admin/user/manage')) ?>/${data.id}/edit" class="btn btn-primary btn-edit"><i class="fas fa-pencil-alt"></i></a>
                                 <button class="btn btn-danger btn-delete" data-id="${data.id}"><i class="fas fa-trash"></i></button>
                             </div>
                             </td>`
@@ -113,7 +113,7 @@
             .then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: `<?= route_to('admin/user/manage') ?>/${$(this).attr('data-id')}`,
+                        url: `<?= base_url(route_to('admin/user/manage')) ?>/${$(this).attr('data-id')}`,
                         method: 'DELETE',
                     }).done((data, textStatus, jqXHR) => {
                         Toast.fire({
