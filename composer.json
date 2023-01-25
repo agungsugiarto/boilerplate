@@ -1,6 +1,6 @@
 {
-    "name": "agungsugiarto/boilerplate",
-    "description": "CodeIgniter4 Boilerplate based on AdminLTE 3 with user management, roles, permissions, ...",
+    "name": "julio101290/boilerplate",
+    "description": "CodeIgniter4 Boilerplate based on AdminLTE 3 with user management, roles, permissions,  forked of agungsugiarto/boilerplate ...",
     "keywords": [
         "codeigniter4",
         "authentication",
@@ -12,7 +12,10 @@
     "authors": [
         {
             "name": "Agung Sugiarto",
-            "email": "me.agungsugiarto@gmail.com"
+            "email": "me.agungsugiarto@gmail.com",
+           
+            "name": "Julio Leyva",
+            "email": "juliocesarleyvarodriguez@hotmail.com"
         }
     ],
     "require": {
@@ -29,7 +32,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "agungsugiarto\\boilerplate\\": "src"
+            "julio101290\\boilerplate\\": "src"
         }
     },
     "autoload-dev": {
