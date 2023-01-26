@@ -6,6 +6,7 @@ return [
         'close'  => 'Tutup',
         'action' => 'Aksi',
         'logout' => 'Logout',
+        'search' => 'Cari',
         'sweet'  => [
             'title'          => 'Apakah kamu yakin?',
             'text'           => 'Anda tidak akan dapat mengembalikan ini!',

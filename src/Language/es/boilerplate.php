@@ -6,6 +6,7 @@ return [
         'close'  => 'Cerrar',
         'action' => 'Acción',
         'logout' => 'Salir',
+        'search' => 'Buscar',
         'sweet'  => [
             'title'          => 'Estás Seguro?',
             'text'           => 'Si no estas seguro da click en cancelar!',

@@ -6,6 +6,7 @@ return [
         'close'  => 'Close',
         'action' => 'Action',
         'logout' => 'Logout',
+        'search' => 'Search',
         'sweet'  => [
             'title'          => 'Are you sure?',
             'text'           => "You won't be able to revert this!",
