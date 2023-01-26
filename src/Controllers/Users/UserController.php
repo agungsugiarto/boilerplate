@@ -1,11 +1,11 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Controllers\Users;
+namespace julio101290\boilerplate\Controllers\Users;
 
-use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Entities\Collection;
-use agungsugiarto\boilerplate\Models\GroupModel;
-use agungsugiarto\boilerplate\Models\UserModel;
+use julio101290\boilerplate\Controllers\BaseController;
+use julio101290\boilerplate\Entities\Collection;
+use julio101290\boilerplate\Models\GroupModel;
+use julio101290\boilerplate\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Authorization\PermissionModel;
 use Myth\Auth\Entities\User;
@@ -17,7 +17,7 @@ class UserController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var \agungsugiarto\boilerplate\Models\UserModel */
+    /** @var \julio101290\boilerplate\Models\UserModel */
     protected $users;
 
     public function __construct()
@@ -46,7 +46,7 @@ class UserController extends BaseController
             ));
         }
 
-        return view('agungsugiarto\boilerplate\Views\User\index', [
+        return view('julio101290\boilerplate\Views\User\index', [
             'title'    => lang('boilerplate.user.title'),
             'subtitle' => lang('boilerplate.user.subtitle'),
         ]);
@@ -88,7 +88,7 @@ class UserController extends BaseController
             return redirect()->back()->withInput()->with('sweet-error', lang('boilerplate.user.msg.msg_get_fail'));
         }
 
-        return view('agungsugiarto\boilerplate\Views\User\profile', [
+        return view('julio101290\boilerplate\Views\User\profile', [
             'title' => lang('boilerplate.user.fields.profile'),
         ]);
     }
@@ -100,7 +100,7 @@ class UserController extends BaseController
      */
     public function new()
     {
-        return view('agungsugiarto\boilerplate\Views\User\create', [
+        return view('julio101290\boilerplate\Views\User\create', [
             'title'       => lang('boilerplate.user.title'),
             'subtitle'    => lang('boilerplate.user.add'),
             'permissions' => $this->authorize->permissions(),
@@ -179,7 +179,7 @@ class UserController extends BaseController
             'user'        => $this->users->asArray()->find($id),
         ];
 
-        return view('agungsugiarto\boilerplate\Views\User\update', $data);
+        return view('julio101290\boilerplate\Views\User\update', $data);
     }
 
     /**

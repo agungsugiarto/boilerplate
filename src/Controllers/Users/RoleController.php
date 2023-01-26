@@ -1,10 +1,10 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Controllers\Users;
+namespace julio101290\boilerplate\Controllers\Users;
 
-use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Entities\Collection;
-use agungsugiarto\boilerplate\Models\GroupModel;
+use julio101290\boilerplate\Controllers\BaseController;
+use julio101290\boilerplate\Entities\Collection;
+use julio101290\boilerplate\Models\GroupModel;
 use CodeIgniter\API\ResponseTrait;
 
 /**
@@ -14,7 +14,7 @@ class RoleController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var \agungsugiarto\boilerplate\Models\GroupModel */
+    /** @var \julio101290\boilerplate\Models\GroupModel */
     protected $group;
 
     public function __construct()
@@ -43,7 +43,7 @@ class RoleController extends BaseController
             ));
         }
 
-        return view('agungsugiarto\boilerplate\Views\Role\index', [
+        return view('julio101290\boilerplate\Views\Role\index', [
             'title'    => lang('boilerplate.role.title'),
             'subtitle' => lang('boilerplate.role.subtitle'),
             'data'     => $this->authorize->permissions(),
@@ -63,7 +63,7 @@ class RoleController extends BaseController
             'data'     => $this->authorize->permissions(),
         ];
 
-        return view('agungsugiarto\boilerplate\Views\Role\create', $data);
+        return view('julio101290\boilerplate\Views\Role\create', $data);
     }
 
     /**
@@ -127,7 +127,7 @@ class RoleController extends BaseController
             'permission'   => $this->authorize->groupPermissions($id),
         ];
 
-        return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
+        return view('julio101290\boilerplate\Views\Role\edit', $data);
     }
 
     /**

@@ -28,16 +28,16 @@
   <div class="wrapper">
 
     <!-- Navbar -->
-    <?= $this->include('agungsugiarto\boilerplate\Views\layout\header') ?>
+    <?= $this->include('julio101290\boilerplate\Views\layout\header') ?>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <?= $this->include('agungsugiarto\boilerplate\Views\layout\mainsidebar') ?>
+    <?= $this->include('julio101290\boilerplate\Views\layout\mainsidebar') ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <?= $this->include('agungsugiarto\boilerplate\Views\layout\contentheader') ?>
+      <?= $this->include('julio101290\boilerplate\Views\layout\contentheader') ?>
       <!-- /.content-header -->
 
       <!-- Main content -->
@@ -64,7 +64,7 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        <strong><a href="https://github.com/agungsugiarto/boilerplate">Boilerplate</a></strong>
+        <strong><a href="https://github.com/julio101290/boilerplate">Boilerplate</a></strong>
       </div>
       <!-- Default to the left -->
       <strong>&copy; <?= date('Y') ?> <a href="<?= config('Boilerplate')->theme['footer']['vendorlink'] ?>"><?= config('Boilerplate')->theme['footer']['vendorname']?></a>.</strong> All rights reserved.

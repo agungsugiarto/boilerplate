@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Filters;
+namespace julio101290\boilerplate\Filters;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Filters\FilterInterface;

@@ -1,7 +1,7 @@
 <?php
 
-use agungsugiarto\boilerplate\Models\GroupMenuModel;
-use agungsugiarto\boilerplate\Models\MenuModel;
+use julio101290\boilerplate\Models\GroupMenuModel;
+use julio101290\boilerplate\Models\MenuModel;
 
 if (!function_exists('menu')) {
     /**

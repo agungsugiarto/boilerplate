@@ -80,7 +80,7 @@ class PublishCommand extends BaseCommand
         $path = "{$this->sourcePath}/Config/Boilerplate.php";
 
         $content = file_get_contents($path);
-        $content = str_replace('namespace agungsugiarto\boilerplate\Config', 'namespace Config', $content);
+        $content = str_replace('namespace julio101290\boilerplate\Config', 'namespace Config', $content);
 
         $this->writeFile('Config/Boilerplate.php', $content);
     }
@@ -91,7 +91,7 @@ class PublishCommand extends BaseCommand
 
         foreach ($map as $file) {
             $content = file_get_contents("{$this->sourcePath}/Database/Migrations/{$file}");
-            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
+            $content = str_replace('namespace julio101290\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
 
             $this->writeFile("Database/Migrations/{$file}", $content);
         }

@@ -1,11 +1,11 @@
-<?= $this->extend('agungsugiarto\boilerplate\Views\Authentication\index') ?>
+<?= $this->extend('julio101290\boilerplate\Views\Authentication\index') ?>
 <?= $this->section('content') ?>
 <!-- /.login-logo -->
 <div class="card">
   <div class="card-body login-card-body">
     <p class="login-box-msg"><?=lang('Auth.resetYourPassword')?></p>
     <p><?=lang('Auth.enterCodeEmailPassword')?></p>
-    <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
+    <?= $this->include('julio101290\boilerplate\Views\Authentication\message_block') ?>
     <form action="<?= base_url(route_to('reset-password')) ?>" method="post">
       <?= csrf_field() ?>
 
