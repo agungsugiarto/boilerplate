@@ -1,8 +1,8 @@
 <p align="center">
-<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/version"></a>
-<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg"></a>
-<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/downloads"</img></a>
-<a href="https://github.com/julio101290/boilerplate/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/agungsugiarto/boilerplate"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/julio101290/boilerplate/version"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://img.shields.io/badge/Package-julio101290%2Fboilerplate-light.svg"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/julio101290/boilerplate/downloads"</img></a>
+<a href="https://github.com/julio101290/boilerplate/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/julio101290/boilerplate"></a>
 </p>
 
 CodeIgniter 4 Application Boilerplate
