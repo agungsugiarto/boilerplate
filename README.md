@@ -1,5 +1,3 @@
-<p align="center"><img src="https://codeigniter.com/assets/images/codeigniter4logo.png" width="200"></p>
-
 <p align="center">
 <a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/version"></a>
 <a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg"></a>
@@ -99,6 +97,27 @@ public $aliases = [
 
 ```bash
 php spark boilerplate:install
+```
+Open `app\Config\validation.php`, find `$ruleSets` and add these lines below:
+
+```php
+public $$ruleSets = [
+    \Myth\Auth\Authentication\Passwords\ValidationRules::class,
+];
+```
+Open `app\entities\Users.php`, find `$casts` and add these lines below:
+
+```php
+
+    protected $casts = [
+        'username' => 'string',
+        'email' => 'string',
+        'firstname' => 'string',
+        'lastname' => 'string',
+        'active' => 'boolean',
+        'force_pass_reset' => 'boolean',
+    ];
+
 ```
 
 **5.** Run development server:
