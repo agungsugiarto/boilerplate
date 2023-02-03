@@ -22,6 +22,8 @@ This project is still early in its development... please feel free to contribute
 
 The original author is agungsugiarto/boilerplate https://github.com/agungsugiarto/boilerplate, we only made a fork to adapt it to new needs such as translating it into Spanish and making it functional in xampp/lampp
 
+![Dashboard](.github/dashboard.png?raw=true)
+
 ------------------------------------------------------------
 
 -------------------------------------------------------------------------------
