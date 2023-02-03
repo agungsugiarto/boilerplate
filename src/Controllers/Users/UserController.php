@@ -138,6 +138,8 @@ class UserController extends BaseController
             $id = $this->users->insert(new User([
                 'active'   => $this->request->getPost('active'),
                 'email'    => $this->request->getPost('email'),
+                'firstname'    => $this->request->getPost('firstname'),
+                'lastname'    => $this->request->getPost('lastname'),
                 'username' => $this->request->getPost('username'),
                 'password' => $this->request->getPost('password'),
             ]));
@@ -217,6 +219,8 @@ class UserController extends BaseController
             $user->active = $this->request->getPost('active');
             $user->email = $this->request->getPost('email');
             $user->username = $this->request->getPost('username');
+            $user->firstname = $this->request->getPost('firstname');
+            $user->lastname = $this->request->getPost('lastname');
 
             $this->users->skipValidation(true)->update($id, $user);
 

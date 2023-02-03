@@ -102,6 +102,8 @@ return [
         'edit'     => 'Editar usuario',
         'title'    => 'Administrar usuario',
         'subtitle' => 'Lista de usuarios',
+        'lastname' => 'Apellidos',
+        'firstname' => 'Nombres',
         'fields'   => [
             'active'          => 'Activo',
             'profile'         => 'Perfil',
