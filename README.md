@@ -25,7 +25,7 @@ The original author is agungsugiarto/boilerplate https://github.com/agungsugiart
 ------------------------------------------------------------
 
 -------------------------------------------------------------------------------
-![Dashboard](.github/dashboard.png?raw=true)
+
 
 Installation
 ------------
