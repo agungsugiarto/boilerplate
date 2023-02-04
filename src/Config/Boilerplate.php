@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Config;
+namespace julio101290\boilerplate\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
