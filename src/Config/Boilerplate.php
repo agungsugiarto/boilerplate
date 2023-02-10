@@ -37,7 +37,7 @@ class Boilerplate extends BaseConfig
     //
     // BG: blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan,
     //     gray, gray-dark, black
-    // Type: dark, light
+    // Type: dark, light, auto
     // Shadow: 0-4
     //
     //--------------------------------------------------------------------------
@@ -45,8 +45,8 @@ class Boilerplate extends BaseConfig
     public $theme = [
         'body-sm' => false,
         'navbar'  => [
-            'bg'     => 'white',
-            'type'   => 'light',
+            'bg'     => '',
+            'type'   => 'auto',
             'border' => true,
             'user'   => [
                 'visible' => true,

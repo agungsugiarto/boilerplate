@@ -1,5 +1,4 @@
-<nav
-    class="main-header navbar navbar-expand navbar-<?= config('Boilerplate')->theme['navbar']['bg'] ?> navbar-<?= config('Boilerplate')->theme['navbar']['type'] ?> <?= config('Boilerplate')->theme['navbar']['type'] ? '' : 'border-bottom-0' ?>">
+<nav class="main-header navbar navbar-expand <?= config('Boilerplate')->theme['navbar']['type']==='auto' ? 'navbar-dark': 'navbar-'.config('Boilerplate')->theme['navbar']['type']; ?> <?= config('Boilerplate')->theme['navbar']['bg'] ?? 'navbar-'.config('Boilerplate')->theme['navbar']['bg']; ?> <?= config('Boilerplate')->theme['navbar']['type'] ? '' : 'border-bottom-0' ?>">
     <ul class="nav navbar-nav">
         <li class="nav-item">
             <a class="nav-link sidebar-toggle" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
