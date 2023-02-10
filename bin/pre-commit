@@ -1,0 +1,52 @@
+#!/bin/sh
+
+PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
+STAGED_PHP_FILES=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php$`
+
+echo "Starting CodeIgniter precommit..."
+
+if [ "$STAGED_PHP_FILES" != "" ]; then
+    echo "Linting PHP code..."
+    for FILE in $STAGED_PHP_FILES; do
+        php -l -d display_errors=0 "$PROJECT/$FILE"
+
+        if [ $? != 0 ]; then
+            echo "Fix the error(s) before commit."
+            exit 1
+        fi
+
+        FILES="$FILES $FILE"
+    done
+fi
+
+if [ "$FILES" != "" ]; then
+    echo "Running PHPStan..."
+
+    if [ -d /proc/cygdrive ]; then
+        ./vendor/bin/phpstan analyse
+    else
+        php ./vendor/bin/phpstan analyse
+    fi
+
+    if [ $? != 0 ]; then
+        echo "Fix the phpstan error(s) before commit."
+        exit 1
+    fi
+fi
+
+if [ "$FILES" != "" ]; then
+    echo "Running PHP CS Fixer..."
+
+    if [ -d /proc/cygdrive ]; then
+        ./vendor/bin/php-cs-fixer fix --verbose --dry-run --diff
+    else
+        php ./vendor/bin/php-cs-fixer fix --verbose --dry-run --diff
+    fi
+
+    if [ $? != 0 ]; then
+        echo "Some files are not following the coding standards. Please fix them before commit (try 'composer style')."
+        exit 1
+    fi
+fi
+
+exit $?

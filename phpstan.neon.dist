@@ -1,0 +1,27 @@
+parameters:
+	tmpDir: build/phpstan
+	level: 5
+	paths:
+		- src/
+		- tests/
+	bootstrapFiles:
+		- vendor/codeigniter4/framework/system/Test/bootstrap.php
+	excludePaths:
+		- src/Config/Routes.php
+		- src/Views/*
+	ignoreErrors:
+		#- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::[A-Za-z].+\(\)#'
+		#- '#Call to an undefined method CodeIgniter\\Database\\ConnectionInterface::[A-Za-z].+\(\)#'
+		#- '#Cannot access property [\$a-z_]+ on (array|object)#'
+		#- '#Access to constant SORT_FULL on an unknown class Kint\\Renderer\\AbstractRenderer\.#'
+	universalObjectCratesClasses:
+		- CodeIgniter\Entity
+		- CodeIgniter\Entity\Entity
+		- Faker\Generator
+	scanDirectories:
+		- vendor/codeigniter4/framework/system/Helpers
+		- vendor/myth/auth/src/Helpers
+	dynamicConstantNames:
+		- APP_NAMESPACE
+		- CI_DEBUG
+		- ENVIRONMENT
