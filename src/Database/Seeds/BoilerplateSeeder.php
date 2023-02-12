@@ -2,9 +2,9 @@
 
 namespace agungsugiarto\boilerplate\Database\Seeds;
 
-use Myth\Auth\Config\Services;
 use CodeIgniter\Database\Seeder;
 use Config\Database;
+use Myth\Auth\Config\Services;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use ReflectionException;
@@ -15,14 +15,13 @@ use ReflectionException;
 class BoilerplateSeeder extends Seeder
 {
     protected $authorize;
-
     protected UserModel $users;
 
     public function __construct(Database $config)
     {
         parent::__construct($config);
         $this->authorize = Services::authorization();
-        $this->users = new UserModel();
+        $this->users     = new UserModel();
     }
 
     /**
@@ -186,6 +185,5 @@ class BoilerplateSeeder extends Seeder
 
     public function down()
     {
-        //
     }
 }

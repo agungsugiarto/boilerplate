@@ -1,16 +1,21 @@
 <?php
+
 namespace Tests;
+
 use ReflectionException;
 use Tests\Support\AuthTestCase;
 
-class UserTest extends AuthTestCase
+/**
+ * @internal
+ */
+final class UserTest extends AuthTestCase
 {
     /**
      * @throws ReflectionException
      */
     public function testGetPermissionsThroughUser()
     {
-        $user = $this->createUser();
+        $user        = $this->createUser();
         $permission1 = $this->createPermission(['name' => 'first']);
         $permission2 = $this->createPermission(['name' => 'second']);
 
@@ -29,7 +34,7 @@ class UserTest extends AuthTestCase
             $permission2->id => $permission2->name,
         ];
 
-        $this->assertEquals($expected, $user->permissions);
+        $this->assertSame($expected, $user->permissions);
     }
 
     /**
@@ -37,8 +42,8 @@ class UserTest extends AuthTestCase
      */
     public function testGetPermissionsThroughGroup()
     {
-        $user = $this->createUser();
-        $group = $this->createGroup();
+        $user       = $this->createUser();
+        $group      = $this->createGroup();
         $permission = $this->createPermission(['name' => 'first']);
 
         $this->hasInDatabase('auth_groups_permissions', [
@@ -55,7 +60,7 @@ class UserTest extends AuthTestCase
             $permission->id => $permission->name,
         ];
 
-        $this->assertEquals($expected, $user->permissions);
+        $this->assertSame($expected, $user->permissions);
     }
 
     /**
@@ -63,7 +68,7 @@ class UserTest extends AuthTestCase
      */
     public function testCan()
     {
-        $user = $this->createUser();
+        $user       = $this->createUser();
         $permission = $this->createPermission();
         $this->hasInDatabase('auth_users_permissions', [
             'user_id'       => $user->id,

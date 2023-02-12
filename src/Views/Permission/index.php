@@ -86,7 +86,7 @@
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
         var createForm = $('#form-create-permission');
-        
+
         $.ajax({
             url: '<?= route_to('admin/permission') ?>',
             method: 'post',
@@ -123,7 +123,7 @@
         $.ajax({
             url: `<?= route_to('admin/permission') ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
-            
+
         }).done((response) => {
             var editForm = $('#form-edit-permission');
             editForm.find('input[name="name"]').val(response.data.name);
@@ -147,7 +147,7 @@
             url: `<?= route_to('admin/permission') ?>/${ $('#permission_id').val() }`,
             method: 'PUT',
             data: editForm.serialize()
-            
+
         }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',
@@ -207,7 +207,7 @@
         $('.text-danger').remove();
         $('.is-invalid').removeClass('is-invalid');
     });
-    
+
     function slugify(text) {
         return text.toString().toLowerCase()
             .replace(/\s+/g, '-')           // Replace spaces with -

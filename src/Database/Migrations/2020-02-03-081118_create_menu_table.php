@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace agungsugiarto\boilerplate\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
@@ -40,7 +42,7 @@ class CreateMenuTable extends Migration
         $this->forge->createTable('groups_menu', true);
     }
 
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     public function down()
     {

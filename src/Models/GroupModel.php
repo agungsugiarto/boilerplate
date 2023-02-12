@@ -10,17 +10,13 @@ use Myth\Auth\Models\GroupModel as BaseModel;
  */
 class GroupModel extends BaseModel
 {
-    const ORDERABLE = [
+    public const ORDERABLE = [
         1 => 'name',
         2 => 'description',
     ];
 
     /**
      * Get resource data.
-     *
-     * @param string $search
-     *
-     * @return BaseBuilder
      */
     public function getResource(string $search = ''): BaseBuilder
     {
@@ -32,26 +28,23 @@ class GroupModel extends BaseModel
             : $builder->groupStart()
                 ->like('name', $search)
                 ->orLike('description', $search)
-            ->groupEnd();
+                ->groupEnd();
     }
 
     /**
      * Returns an array of all groups that a user is a member of.
-     *
-     * @param int $userId
-     *
-     * @return array
      */
-    public function getGroupsForUser(int $userId): array
+    public function getAllGroupsForUser(int $userId): array
     {
-        $group = $this->builder()
+        $groups = $this->builder()
+            ->select('auth_groups_users.*, auth_groups.name, auth_groups.description')
             ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')
             ->where('user_id', $userId)
-            ->get()
-            ->getResultObject();
+            ->get()->getResultObject();
 
         $found = [];
-        foreach ($group as $row) {
+
+        foreach ($groups as $row) {
             $found[$row->id] = strtolower($row->name);
         }
 

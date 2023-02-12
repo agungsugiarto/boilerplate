@@ -9,22 +9,20 @@ use CodeIgniter\Model;
  */
 class GroupMenuModel extends Model
 {
-    protected $table = 'groups_menu';
-    protected $primaryKey = 'id';
-    protected $returnType = 'array';
-    protected $allowedFields = ['group_id', 'menu_id'];
+    protected $table          = 'groups_menu';
+    protected $primaryKey     = 'id';
+    protected $returnType     = 'array';
+    protected $allowedFields  = ['group_id', 'menu_id'];
     protected $skipValidation = true;
 
     /**
      * Menu has role to check specific user can
-     * see accsess to the menu.
-     *
-     * @return array
+     * see access to the menu.
      */
-    public function menuHasRole(): array
+    public function menuHasRole()
     {
         // We need cache this menu ?
-        if (!$found = cache(user()->id.'_group_menu')) {
+        if (! $found = cache(user()->id . '_group_menu')) {
             $found = $this->db->table('menu')
                 ->select('menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route')
                 ->join('groups_menu', 'menu.id = groups_menu.menu_id', 'left')
@@ -37,7 +35,7 @@ class GroupMenuModel extends Model
                 ->get()
                 ->getResultObject();
 
-            cache()->save(user()->id.'_group_menu', $found, 300);
+            cache()->save(user()->id . '_group_menu', $found, 300);
         }
 
         return $found;

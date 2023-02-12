@@ -16,9 +16,9 @@
                 <p class="text-muted text-center"><i class="far fa-fw fa-envelope"></i><?= user()->email ?></p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b><?= lang('boilerplate.user.fields.join') ?></b> 
+                        <b><?= lang('boilerplate.user.fields.join') ?></b>
                         <a class="float-right">
-                            <?= user()->created_at->toLocalizedString('MMM d, yyyy').' '.user()->created_at->humanize() ?>
+                            <?= user()->created_at->toLocalizedString('MMM d, yyyy') . ' ' . user()->created_at->humanize() ?>
                         </a>
                     </li>
                 </ul>
@@ -42,13 +42,13 @@
                         <form action="<?= route_to('user-profile') ?>" method="post" class="form-horizontal">
                             <?= csrf_field() ?>
                             <div class="form-group row">
-                                <label for="inputName" class="col-sm-3 col-form-label"><?=lang('Auth.email')?></label>
+                                <label for="inputName" class="col-sm-3 col-form-label"><?= lang('Auth.email')?></label>
                                 <div class="col-sm-7">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                         </div>
-                                        <input type="email" name="email" class="form-control <?= session('error.email') ? 'is-invalid' : '' ?>" value="<?= user()->email ?>" placeholder="<?=lang('Auth.email')?>" autocomplete="off">
+                                        <input type="email" name="email" class="form-control <?= session('error.email') ? 'is-invalid' : '' ?>" value="<?= user()->email ?>" placeholder="<?= lang('Auth.email')?>" autocomplete="off">
                                         <?php if (session('error.email')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.email') ?></h6>
@@ -58,13 +58,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputName" class="col-sm-3 col-form-label"><?=lang('Auth.username')?></label>
+                                <label for="inputName" class="col-sm-3 col-form-label"><?= lang('Auth.username')?></label>
                                 <div class="col-sm-7">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input type="text" name="username" class="form-control <?= session('error.username') ? 'is-invalid' : '' ?>" value="<?= user()->username ?>" placeholder="<?=lang('Auth.username')?>" autocomplete="off">
+                                        <input type="text" name="username" class="form-control <?= session('error.username') ? 'is-invalid' : '' ?>" value="<?= user()->username ?>" placeholder="<?= lang('Auth.username')?>" autocomplete="off">
                                         <?php if (session('error.username')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.username') ?></h6>
@@ -74,13 +74,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputName2" class="col-sm-3 col-form-label"><?=lang('Auth.password')?></label>
+                                <label for="inputName2" class="col-sm-3 col-form-label"><?= lang('Auth.password')?></label>
                                 <div class="col-sm-7">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         </div>
-                                        <input type="password" name="password" class="form-control <?= session('error.password') ? 'is-invalid' : '' ?>" placeholder="<?=lang('Auth.password')?>" autocomplete="off">
+                                        <input type="password" name="password" class="form-control <?= session('error.password') ? 'is-invalid' : '' ?>" placeholder="<?= lang('Auth.password')?>" autocomplete="off">
                                         <?php if (session('error.password')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.password') ?></h6>
@@ -90,13 +90,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputName2" class="col-sm-3 col-form-label"><?=lang('Auth.repeatPassword')?></label>
+                                <label for="inputName2" class="col-sm-3 col-form-label"><?= lang('Auth.repeatPassword')?></label>
                                 <div class="col-sm-7">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         </div>
-                                        <input type="password" name="pass_confirm" class="form-control <?= session('error.pass_confirm') ? 'is-invalid' : '' ?>" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off">
+                                        <input type="password" name="pass_confirm" class="form-control <?= session('error.pass_confirm') ? 'is-invalid' : '' ?>" placeholder="<?= lang('Auth.repeatPassword')?>" autocomplete="off">
                                         <?php if (session('error.pass_confirm')) { ?>
                                         <div class="invalid-feedback">
                                             <h6><?= session('error.pass_confirm') ?></h6>

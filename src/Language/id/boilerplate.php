@@ -102,11 +102,11 @@ return [
         'title'    => 'Pengelolaan pengguna',
         'subtitle' => 'Daftar pengguna',
         'fields'   => [
-            'active'          => 'Aktif',
-            'profile'         => 'Profil',
-            'join'            => 'Anggota sejak',
-            'setting'         => 'Pengaturan',
-            'non_active'      => 'Tidak aktif',
+            'active'     => 'Aktif',
+            'profile'    => 'Profil',
+            'join'       => 'Anggota sejak',
+            'setting'    => 'Pengaturan',
+            'non_active' => 'Tidak aktif',
         ],
         'msg' => [
             'msg_insert'   => 'pengguna berhasil ditambahkan.',

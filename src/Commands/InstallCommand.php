@@ -4,6 +4,7 @@ namespace agungsugiarto\boilerplate\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use Config\Database;
+use Exception;
 
 /**
  * Class InstallCommand.
@@ -53,12 +54,10 @@ class InstallCommand extends BaseCommand
      */
     protected $options = [];
 
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     /**
      * Displays the help for the spark cli script itself.
-     *
-     * @param array $params
      */
     public function run(array $params)
     {
@@ -69,7 +68,7 @@ class InstallCommand extends BaseCommand
             // then seed data
             $seeder = Database::seeder();
             $seeder->call('agungsugiarto\boilerplate\Database\Seeds\BoilerplateSeeder');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->showError($e);
         }
     }

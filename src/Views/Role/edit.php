@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="<?= base_url('admin/role/'.$role->id) ?>/update" method="post">
+                <form action="<?= base_url('admin/role/' . $role->id) ?>/update" method="post">
                     <?= csrf_field() ?>
                     <input type="hidden" name="_method" value="put" />
                     <div class="col-md-10">
@@ -65,7 +65,7 @@
                                             <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                         <?php } ?>
                                     <?php } ?>
-                                    </select> 
+                                    </select>
                                     <?php if (session('error.permission')) { ?>
                                         <h6 class="text-danger"><?= session('error.permission') ?></h6>
                                     <?php } ?>

@@ -6,7 +6,10 @@ use App\Controllers\Home;
 use CodeIgniter\Test\ControllerTestTrait;
 use Tests\Support\AuthTestCase;
 
-class ExampleTest extends AuthTestCase
+/**
+ * @internal
+ */
+final class ExampleTest extends AuthTestCase
 {
     use ControllerTestTrait;
 

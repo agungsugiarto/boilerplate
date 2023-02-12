@@ -7,17 +7,13 @@ use Myth\Auth\Models\PermissionModel as BaseModel;
 
 class PermissionModel extends BaseModel
 {
-    const ORDERABLE = [
+    public const ORDERABLE = [
         1 => 'name',
         2 => 'description',
     ];
 
     /**
      * Get resource data.
-     *
-     * @param string $search
-     *
-     * @return BaseBuilder
      */
     public function getResource(string $search = ''): BaseBuilder
     {
@@ -29,6 +25,6 @@ class PermissionModel extends BaseModel
             : $builder->groupStart()
                 ->like('name', $search)
                 ->orLike('description', $search)
-            ->groupEnd();
+                ->groupEnd();
     }
 }

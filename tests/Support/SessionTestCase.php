@@ -9,16 +9,16 @@ use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\Mock\MockSession;
 use Config\Services;
 
-
-class SessionTestCase extends CIUnitTestCase
+/**
+ * @internal
+ */
+final class SessionTestCase extends CIUnitTestCase
 {
     use DatabaseTestTrait;
-    /**
-     * @var MockSession
-     */
+
     protected MockSession $mockSession;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,8 +32,8 @@ class SessionTestCase extends CIUnitTestCase
      */
     protected function mockSession()
     {
-        require_once SYSTEMPATH.'Test/Mock/MockSession.php';
-        $config = config('App');
+        require_once SYSTEMPATH . 'Test/Mock/MockSession.php';
+        $config            = config('App');
         $this->mockSession = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
         Services::injectMock('session', $this->mockSession);
     }

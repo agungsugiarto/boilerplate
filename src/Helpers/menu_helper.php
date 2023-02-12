@@ -4,11 +4,9 @@ use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
 use Config\Database;
 
-if (!function_exists('menu')) {
+if (! function_exists('menu')) {
     /**
      * Helpers for build menu.
-     *
-     * @return array
      */
     function menu(): array
     {
@@ -16,18 +14,18 @@ if (!function_exists('menu')) {
          * Function parse.
          *
          * @param array $item
-         * @param int $parent_id
+         * @param int   $parent_id
          *
          * @return array
          */
-      $parse =  function (array $item, int $parent_id) use (&$parse)
-        {
+        $parse = static function (array $item, int $parent_id) use (&$parse) {
             $data = [];
+
             foreach ($item as $value) {
-                if ($value->parent_id == $parent_id) {
-                    $child = $parse($item, $value->id);
+                if ($value->parent_id === $parent_id) {
+                    $child           = $parse($item, $value->id);
                     $value->children = $child ?: '';
-                    $data[] = $value;
+                    $data[]          = $value;
                 }
             }
             // cache()->delete('menu');
@@ -44,11 +42,9 @@ if (!function_exists('menu')) {
     }
 }
 
-if (!function_exists('nestable')) {
+if (! function_exists('nestable')) {
     /**
      * Helpers for build menu.
-     *
-     * @return array
      */
     function nestable(): array
     {
@@ -56,18 +52,18 @@ if (!function_exists('nestable')) {
          * Function parse.
          *
          * @param array $item
-         * @param int $parent_id
+         * @param int   $parent_id
          *
          * @return array
          */
-        $nest = function (array $item, int $parent_id) use (&$nest)
-        {
+        $nest = static function (array $item, int $parent_id) use (&$nest) {
             $data = [];
+
             foreach ($item as $value) {
-                if ($value->parent_id == $parent_id) {
-                    $child = $nest($item, $value->id);
+                if ($value->parent_id === $parent_id) {
+                    $child           = $nest($item, $value->id);
                     $value->children = $child ?: '';
-                    $data[] = $value;
+                    $data[]          = $value;
                 }
             }
             // cache()->delete('menu');
@@ -94,14 +90,15 @@ if (!function_exists('nestable')) {
  *
  * return string hrml
  */
-if (!function_exists('build')) {
+if (! function_exists('build')) {
     function build(): string
     {
         $html = '';
+
         foreach (menu() as $parent) {
-            $open = current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'menu-open' : '';
-            $active = current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'active' : '';
-            $link = base_url($parent->route);
+            $open   = current_url() === base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route'), true) ? 'menu-open' : '';
+            $active = current_url() === base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route'), true) ? 'active' : '';
+            $link   = base_url($parent->route);
 
             $html .= "<li class='nav-item has-treeview {$open}'>";
             $html .= "<a href='{$link}' class='nav-link {$active}'>";
@@ -115,9 +112,10 @@ if (!function_exists('build')) {
             $html .= '</a>';
             if (count($parent->children)) {
                 $html .= "<ul class='nav nav-treeview'>";
+
                 foreach ($parent->children as $child) {
-                    $link_child = base_url($child->route);
-                    $active_child = current_url() == base_url($child->route) ? 'active' : '';
+                    $link_child   = base_url($child->route);
+                    $active_child = current_url() === base_url($child->route) ? 'active' : '';
                     $html .= "<li class='nav-item has-treeview'>";
                     $html .= "<a href='{$link_child}'";
                     $html .= "class='nav-link {$active_child}'>";

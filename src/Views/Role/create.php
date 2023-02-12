@@ -58,7 +58,7 @@
                                 <div class="textarea-group">
                                     <select multiple="multiple" name="permission[]" title="permission[]">
                                         <?php foreach ($data as $permission) { ?>
-                                            <option <?= in_array($permission['id'], old('permission', [])) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
+                                            <option <?= in_array($permission['id'], old('permission', []), true) ? 'selected' : '' ?> value="<?= $permission['id'] ?>"><?= $permission['name'] ?></option>
                                         <?php } ?>
                                     </select>
                                     <?php if (session('error.permission')) { ?>

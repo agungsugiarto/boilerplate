@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support;
 
 use CodeIgniter\Session\Handlers\ArrayHandler;
@@ -15,7 +17,10 @@ use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use ReflectionException;
 
-class AuthTestCase extends CIUnitTestCase
+/**
+ * @internal
+ */
+abstract class AuthTestCase extends CIUnitTestCase
 {
     use DatabaseTestTrait;
     use ControllerTestTrait;
@@ -41,20 +46,11 @@ class AuthTestCase extends CIUnitTestCase
      */
     protected $namespace = ['Myth\Auth', 'agungsugiarto\boilerplate'];
 
-    /**
-     * @var UserModel
-     */
     protected UserModel $users;
-    /**
-     * @var Generator
-     */
     protected Generator $faker;
-    /**
-     * @var MockSession
-     */
     protected MockSession $mockSession;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -69,8 +65,8 @@ class AuthTestCase extends CIUnitTestCase
      */
     protected function mockSession()
     {
-        require_once SYSTEMPATH.'Test/Mock/MockSession.php';
-        $config = config('App');
+        require_once SYSTEMPATH . 'Test/Mock/MockSession.php';
+        $config            = config('App');
         $this->mockSession = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
         Services::injectMock('session', $this->mockSession);
         $_SESSION = [];
@@ -79,8 +75,6 @@ class AuthTestCase extends CIUnitTestCase
     /**
      * Creates a user on-the-fly.
      *
-     * @param array $info
-     * @return object|null
      * @throws ReflectionException
      */
     protected function createUser(array $info = []): ?object
@@ -94,7 +88,7 @@ class AuthTestCase extends CIUnitTestCase
         $user = new User($info);
 
         $userId = $this->users->insert($user);
-        $user = $this->users->find($userId);
+        $user   = $this->users->find($userId);
 
         // Delete any cached permissions
         cache()->delete("{$userId}_permissions");
@@ -104,8 +98,6 @@ class AuthTestCase extends CIUnitTestCase
 
     /**
      * Creates a group on the fly.
-     *
-     * @param array $info
      *
      * @return mixed
      */
@@ -124,8 +116,6 @@ class AuthTestCase extends CIUnitTestCase
 
     /**
      * Creates a new permission on the fly.
-     *
-     * @param array $info
      *
      * @return mixed
      */

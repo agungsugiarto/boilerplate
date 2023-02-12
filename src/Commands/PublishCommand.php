@@ -5,6 +5,7 @@ namespace agungsugiarto\boilerplate\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Config\Autoload;
+use Exception;
 
 /**
  * Class PublishCommand.
@@ -61,12 +62,10 @@ class PublishCommand extends BaseCommand
      */
     protected $sourcePath;
 
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     /**
      * Displays the help for the spark cli script itself.
-     *
-     * @param array $params
      */
     public function run(array $params)
     {
@@ -87,35 +86,29 @@ class PublishCommand extends BaseCommand
 
     protected function publishMigration()
     {
-        $map = directory_map($this->sourcePath.'/Database/Migrations');
+        $map = directory_map($this->sourcePath . '/Database/Migrations');
 
         foreach ($map as $file) {
             $content = file_get_contents("{$this->sourcePath}/Database/Migrations/{$file}");
-            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $content);
+            $content = str_replace('namespace agungsugiarto\boilerplate\Database\Migrations', 'namespace ' . APP_NAMESPACE . '\Database\Migrations', $content);
 
             $this->writeFile("Database/Migrations/{$file}", $content);
         }
     }
 
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
     // Utilities
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     /**
      * Replaces the Myth\Auth namespace in the published
      * file with the applications current namespace.
-     *
-     * @param string $contents
-     * @param string $originalNamespace
-     * @param string $newNamespace
-     *
-     * @return string
      */
     protected function replaceNamespace(string $contents, string $originalNamespace, string $newNamespace): string
     {
-        $appNamespace = APP_NAMESPACE;
+        $appNamespace      = APP_NAMESPACE;
         $originalNamespace = "namespace {$originalNamespace}";
-        $newNamespace = "namespace {$appNamespace}\\{$newNamespace}";
+        $newNamespace      = "namespace {$appNamespace}\\{$newNamespace}";
 
         return str_replace($originalNamespace, $newNamespace, $contents);
     }
@@ -125,10 +118,11 @@ class PublishCommand extends BaseCommand
      */
     protected function determineSourcePath()
     {
-        $this->sourcePath = realpath(__DIR__.'/../');
+        $this->sourcePath = realpath(__DIR__ . '/../');
 
-        if ($this->sourcePath == '/' || empty($this->sourcePath)) {
+        if ($this->sourcePath === '/' || empty($this->sourcePath)) {
             CLI::error('Unable to determine the correct source directory. Bailing.');
+
             exit();
         }
     }
@@ -136,30 +130,28 @@ class PublishCommand extends BaseCommand
     /**
      * Write a file, catching any exceptions and showing a
      * nicely formatted error.
-     *
-     * @param string $path
-     * @param string $content
      */
     protected function writeFile(string $path, string $content)
     {
-        $config = new Autoload();
+        $config  = new Autoload();
         $appPath = $config->psr4[APP_NAMESPACE];
 
-        $directory = dirname($appPath.$path);
+        $directory = dirname($appPath . $path);
 
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
 
         try {
-            write_file($appPath.$path, $content);
-        } catch (\Exception $e) {
+            write_file($appPath . $path, $content);
+        } catch (Exception $e) {
             $this->showError($e);
+
             exit();
         }
 
         $path = str_replace($appPath, '', $path);
 
-        CLI::write(CLI::color('  created: ', 'green').$path);
+        CLI::write(CLI::color('  created: ', 'green') . $path);
     }
 }

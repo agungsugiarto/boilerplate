@@ -10,22 +10,18 @@ use CodeIgniter\Model;
  */
 class MenuModel extends Model
 {
-    protected $table = 'menu';
-    protected $primaryKey = 'id';
-
-    protected $returnType = MenuEntity::class;
-
+    protected $table         = 'menu';
+    protected $primaryKey    = 'id';
+    protected $returnType    = MenuEntity::class;
     protected $allowedFields = ['parent_id', 'active', 'title', 'icon', 'route', 'sequence'];
-
     protected $useTimestamps = true;
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
     // trigger
-    protected $afterInsert = ['deleteCacheMenu'];
-    protected $afterUpdate = ['deleteCacheMenu'];
-    protected $afterDelete = ['deleteCacheMenu'];
-
+    protected $afterInsert     = ['deleteCacheMenu'];
+    protected $afterUpdate     = ['deleteCacheMenu'];
+    protected $afterDelete     = ['deleteCacheMenu'];
     protected $validationRules = [
         'title'       => 'required|min_length[10]|max_length[60]',
         'parent_id'   => 'required',
@@ -34,18 +30,13 @@ class MenuModel extends Model
         'route'       => 'required',
         'groups_menu' => 'required',
     ];
-
     protected $validationMessages = [];
-    protected $skipValidation = true;
+    protected $skipValidation     = true;
 
     /**
      * Find menu. By default, we need to detect driver,
      * because different function group_concat
      * between MySQLi and Postgres.
-     *
-     * @param int $id
-     *
-     * @return array
      */
     public function getMenuById(int $id): array
     {
@@ -56,8 +47,6 @@ class MenuModel extends Model
 
     /**
      * function getMenu for select2.
-     *
-     * @return array
      */
     public function getMenu(): array
     {
@@ -70,8 +59,6 @@ class MenuModel extends Model
 
     /**
      * Function getRole for select2.
-     *
-     * @return array
      */
     public function getRole(): array
     {
@@ -83,10 +70,6 @@ class MenuModel extends Model
 
     /**
      * Function getMenuDriverMySQLi.
-     *
-     * @param int $id
-     *
-     * @return array
      */
     private function getMenuDriverMySQLi(int $id): array
     {
@@ -101,10 +84,6 @@ class MenuModel extends Model
 
     /**
      * Function getMenuDRiverPostgre.
-     *
-     * @param int $id
-     *
-     * @return array
      */
     private function getMenuDRiverPostgre(int $id): array
     {
@@ -125,8 +104,8 @@ class MenuModel extends Model
      */
     protected function deleteCacheMenu()
     {
-        if (cache(user()->id.'_group_menu')) {
-            cache()->delete(user()->id.'_group_menu');
+        if (cache(user()->id . '_group_menu')) {
+            cache()->delete(user()->id . '_group_menu');
         }
     }
 }

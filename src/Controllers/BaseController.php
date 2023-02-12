@@ -2,7 +2,6 @@
 
 namespace agungsugiarto\boilerplate\Controllers;
 
-use Myth\Auth\Config\Services;
 use CodeIgniter\Controller;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\BaseConnection;
@@ -11,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
 use Myth\Auth\Authentication\LocalAuthenticator;
 use Myth\Auth\Authorization\FlatAuthorization;
+use Myth\Auth\Config\Services;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -18,18 +18,11 @@ use Psr\Log\LoggerInterface;
  */
 class BaseController extends Controller
 {
-    /**
-     * @var FlatAuthorization
-     */
     protected FlatAuthorization $authorize;
-
-    /**
-     * @var LocalAuthenticator
-     */
     protected LocalAuthenticator $auth;
 
     /**
-     * @var BaseConnection|BaseBuilder
+     * @var BaseBuilder|BaseConnection
      */
     protected $db;
 
@@ -50,11 +43,11 @@ class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        //--------------------------------------------------------------------
+        // --------------------------------------------------------------------
         // Preload any models, libraries, etc, here.
-        //--------------------------------------------------------------------
-        $this->auth = Services::authentication();
+        // --------------------------------------------------------------------
+        $this->auth      = Services::authentication();
         $this->authorize = Services::authorization();
-        $this->db = Database::connect();
+        $this->db        = Database::connect();
     }
 }

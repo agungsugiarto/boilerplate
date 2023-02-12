@@ -9,6 +9,7 @@ use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
 
 /**
  * Class MenuController.
@@ -22,7 +23,7 @@ class MenuController extends BaseController
 
     public function __construct()
     {
-        $this->menu = new MenuModel();
+        $this->menu       = new MenuModel();
         $this->groupsMenu = new GroupMenuModel();
     }
 
@@ -47,8 +48,6 @@ class MenuController extends BaseController
 
     /**
      * Update to sort menu.
-     *
-     * @return ResponseInterface
      */
     public function new(): ResponseInterface
     {
@@ -59,20 +58,21 @@ class MenuController extends BaseController
 
         try {
             $i = 1;
+
             foreach ($data as $item) {
                 if (isset($item->parent_id)) {
                     $menu->parent_id = $item->parent_id;
-                    $menu->sequence = $i++;
+                    $menu->sequence  = $i++;
                 } else {
                     $menu->parent_id = 0;
-                    $menu->sequence = $i++;
+                    $menu->sequence  = $i++;
                 }
 
                 $this->menu->update($item->id, $menu);
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return $this->fail(lang('boilerplate.menu.msg.msg_fail_order'));
@@ -83,8 +83,6 @@ class MenuController extends BaseController
 
     /**
      * Create a new resource object, from "posted" parameters.
-     *
-     * @return RedirectResponse
      */
     public function create(): RedirectResponse
     {
@@ -97,20 +95,20 @@ class MenuController extends BaseController
             'groups_menu' => 'required',
         ];
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
         $this->db->transBegin();
 
         try {
-            $menu = new MenuEntity();
+            $menu            = new MenuEntity();
             $menu->parent_id = $this->request->getPost('parent_id');
-            $menu->active = $this->request->getPost('active');
-            $menu->title = $this->request->getPost('title');
-            $menu->icon = $this->request->getPost('icon');
-            $menu->route = $this->request->getPost('route');
-            $menu->sequence = $menu->sequence() + 1;
+            $menu->active    = $this->request->getPost('active');
+            $menu->title     = $this->request->getPost('title');
+            $menu->icon      = $this->request->getPost('icon');
+            $menu->route     = $this->request->getPost('route');
+            $menu->sequence  = $menu->sequence() + 1;
 
             $id = $this->menu->insert($menu);
 
@@ -122,7 +120,7 @@ class MenuController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
@@ -133,10 +131,6 @@ class MenuController extends BaseController
 
     /**
      * Add or update a model resource, from "posted" properties.
-     *
-     * @param int $id
-     *
-     * @return ResponseInterface
      */
     public function update(int $id): ResponseInterface
     {
@@ -149,7 +143,7 @@ class MenuController extends BaseController
             'groups_menu' => 'required',
         ];
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return $this->fail($this->validator->getErrors());
         }
 
@@ -178,7 +172,7 @@ class MenuController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return $this->fail($e->getMessage());
@@ -190,8 +184,6 @@ class MenuController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int $id
-     *
      * @return ResponseInterface|void
      */
     public function edit(int $id)
@@ -199,7 +191,7 @@ class MenuController extends BaseController
         $found = $this->menu->getMenuById($id);
 
         if ($this->request->isAJAX()) {
-            if (!$found) {
+            if (! $found) {
                 return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
             }
 
@@ -213,16 +205,13 @@ class MenuController extends BaseController
 
     /**
      * Delete the designated resource object from the model.
-     *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      */
     public function delete(?int $id = null): ResponseInterface
     {
-        if (!$this->menu->delete($id)) {
+        if (! $this->menu->delete($id)) {
             return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
         }
+
         return $this->respondDeleted(['id' => $id], lang('boilerplate.menu.msg.msg_delete'));
     }
 }

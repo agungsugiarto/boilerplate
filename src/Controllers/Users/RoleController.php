@@ -8,6 +8,7 @@ use agungsugiarto\boilerplate\Models\GroupModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
 
 /**
  * Class RoleController.
@@ -16,7 +17,6 @@ class RoleController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var GroupModel */
     protected GroupModel $group;
 
     public function __construct()
@@ -32,11 +32,11 @@ class RoleController extends BaseController
     public function index()
     {
         if ($this->request->isAJAX()) {
-            $start = $this->request->getGet('start');
+            $start  = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $order = GroupModel::ORDERABLE[$this->request->getGet('order[0][column]')];
-            $dir = $this->request->getGet('order[0][dir]');
+            $order  = GroupModel::ORDERABLE[$this->request->getGet('order[0][column]')];
+            $dir    = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
                 $this->group->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
@@ -54,8 +54,6 @@ class RoleController extends BaseController
 
     /**
      * Return a new resource object, with default properties.
-     *
-     * @return string
      */
     public function new(): string
     {
@@ -70,8 +68,6 @@ class RoleController extends BaseController
 
     /**
      * Create a new resource object, from "posted" parameters.
-     *
-     * @return RedirectResponse
      */
     public function create(): RedirectResponse
     {
@@ -81,11 +77,11 @@ class RoleController extends BaseController
             'permission'  => 'required',
         ];
 
-        $name = $this->request->getPost('name');
+        $name        = $this->request->getPost('name');
         $description = $this->request->getPost('description');
-        $permission = $this->request->getPost('permission');
+        $permission  = $this->request->getPost('permission');
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
@@ -99,7 +95,7 @@ class RoleController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
@@ -111,22 +107,20 @@ class RoleController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int|null $id
-     *
      * @return RedirectResponse|string
      */
     public function edit(?int $id = null)
     {
-        if (is_null($this->authorize->group($id))) {
+        if (null === $this->authorize->group($id)) {
             return redirect()->back()->with('sweet-error', lang('boilerplate.role.msg.msg_get_fail', [$id]));
         }
 
         $data = [
-            'title'        => lang('boilerplate.role.title'),
-            'subtitle'     => lang('boilerplate.role.edit'),
-            'role'         => $this->authorize->group($id),
-            'permissions'  => $this->authorize->permissions(),
-            'permission'   => $this->authorize->groupPermissions($id),
+            'title'       => lang('boilerplate.role.title'),
+            'subtitle'    => lang('boilerplate.role.edit'),
+            'role'        => $this->authorize->group($id),
+            'permissions' => $this->authorize->permissions(),
+            'permission'  => $this->authorize->groupPermissions($id),
         ];
 
         return view('agungsugiarto\boilerplate\Views\Role\edit', $data);
@@ -135,11 +129,9 @@ class RoleController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int|null $id
-     *
      * @return RedirectResponse|string
      */
-    public function update(int $id = null)
+    public function update(?int $id = null)
     {
         $validationRules = [
             'name'        => 'required|min_length[5]|max_length[255]',
@@ -147,11 +139,11 @@ class RoleController extends BaseController
             'permission'  => 'required',
         ];
 
-        $name = $this->request->getPost('name');
+        $name        = $this->request->getPost('name');
         $description = $this->request->getPost('description');
-        $permission = $this->request->getPost('permission');
+        $permission  = $this->request->getPost('permission');
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
@@ -170,7 +162,7 @@ class RoleController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
@@ -181,14 +173,10 @@ class RoleController extends BaseController
 
     /**
      * Delete the designated resource object from the model.
-     *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      */
     public function delete(?int $id = null): ResponseInterface
     {
-        if (!$this->authorize->deleteGroup($id)) {
+        if (! $this->authorize->deleteGroup($id)) {
             return $this->failNotFound(lang('boilerplate.role.msg.msg_get_fail', [$id]));
         }
 

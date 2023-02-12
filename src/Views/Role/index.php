@@ -40,7 +40,7 @@
 
 <!-- Push section js -->
 <?= $this->section('js') ?>
-<script>    
+<script>
     var tableRole = $('#table-role').DataTable({
         processing: true,
         serverSide: true,
@@ -78,7 +78,7 @@
             cell.innerHTML = i + 1 + PageInfo.start;
         } );
     });
-    
+
     $(document).on('click', '.btn-delete', function (e) {
         Swal.fire({
             title: '<?= lang('boilerplate.global.sweet.title') ?>',

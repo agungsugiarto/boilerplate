@@ -5,10 +5,11 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
 use agungsugiarto\boilerplate\Models\GroupModel;
-use agungsugiarto\boilerplate\Models\UserModel;
 use agungsugiarto\boilerplate\Models\PermissionModel;
+use agungsugiarto\boilerplate\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
 use Myth\Auth\Entities\User;
 use ReflectionException;
 
@@ -19,7 +20,6 @@ class UserController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var UserModel */
     protected UserModel $users;
 
     public function __construct()
@@ -35,11 +35,11 @@ class UserController extends BaseController
     public function index()
     {
         if ($this->request->isAJAX()) {
-            $start = $this->request->getGet('start');
+            $start  = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $order = UserModel::ORDERABLE[$this->request->getGet('order[0][column]')];
-            $dir = $this->request->getGet('order[0][dir]');
+            $order  = UserModel::ORDERABLE[$this->request->getGet('order[0][column]')];
+            $dir    = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
                 $this->users->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
@@ -58,20 +58,21 @@ class UserController extends BaseController
      * Show profile user or update.
      *
      * @return mixed
+     *
      * @throws ReflectionException
      */
     public function profile()
     {
         if ($this->request->is('post')) {
-            $id = user()->id;
+            $id              = user()->id;
             $validationRules = [
-                'email'        => "required|valid_email|is_unique[users.email,id,$id]",
-                'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,$id]",
+                'email'        => "required|valid_email|is_unique[users.email,id,{$id}]",
+                'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,{$id}]",
                 'password'     => 'if_exist',
                 'pass_confirm' => 'matches[password]',
             ];
 
-            if (!$this->validate($validationRules)) {
+            if (! $this->validate($validationRules)) {
                 return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
             }
 
@@ -81,7 +82,7 @@ class UserController extends BaseController
                 $user->password = $this->request->getPost('password');
             }
 
-            $user->email = $this->request->getPost('email');
+            $user->email    = $this->request->getPost('email');
             $user->username = $this->request->getPost('username');
 
             if ($this->users->skipValidation(true)->update(user()->id, $user)) {
@@ -98,8 +99,6 @@ class UserController extends BaseController
 
     /**
      * Create a new resource object, from "posted" parameters.
-     *
-     * @return string
      */
     public function new(): string
     {
@@ -129,9 +128,9 @@ class UserController extends BaseController
         ];
 
         $permissions = $this->request->getPost('permission');
-        $roles = $this->request->getPost('role');
+        $roles       = $this->request->getPost('role');
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
@@ -154,7 +153,7 @@ class UserController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
@@ -165,10 +164,6 @@ class UserController extends BaseController
 
     /**
      * Return the editable properties of a resource object.
-     *
-     * @param int $id
-     *
-     * @return string
      */
     public function edit(int $id): string
     {
@@ -178,7 +173,7 @@ class UserController extends BaseController
             'permissions' => $this->authorize->permissions(),
             'permission'  => (new PermissionModel())->getPermissionsForUser($id),
             'roles'       => $this->authorize->groups(),
-            'role'        => (new GroupModel())->getGroupsForUser($id),
+            'role'        => (new GroupModel())->getAllGroupsForUser($id),
             'user'        => $this->users->asArray()->find($id),
         ];
 
@@ -188,23 +183,21 @@ class UserController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int $id
-     *
      * @return mixed
      */
     public function update(int $id)
     {
         $validationRules = [
             'active'       => 'required',
-            'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,$id]",
-            'email'        => "required|valid_email|is_unique[users.email,id,$id]",
+            'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,{$id}]",
+            'email'        => "required|valid_email|is_unique[users.email,id,{$id}]",
             'password'     => 'if_exist',
             'pass_confirm' => 'matches[password]',
             'permission'   => 'if_exist',
             'role'         => 'if_exist',
         ];
 
-        if (!$this->validate($validationRules)) {
+        if (! $this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
@@ -217,8 +210,8 @@ class UserController extends BaseController
                 $user->password = $this->request->getPost('password');
             }
 
-            $user->active = $this->request->getPost('active');
-            $user->email = $this->request->getPost('email');
+            $user->active   = $this->request->getPost('active');
+            $user->email    = $this->request->getPost('email');
             $user->username = $this->request->getPost('username');
 
             $this->users->skipValidation(true)->update($id, $user);
@@ -240,7 +233,7 @@ class UserController extends BaseController
             }
 
             $this->db->transCommit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->db->transRollback();
 
             return redirect()->back()->with('sweet-error', $e->getMessage());
@@ -251,14 +244,10 @@ class UserController extends BaseController
 
     /**
      * Delete the designated resource object from the model.
-     *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      */
     public function delete(?int $id = null): ResponseInterface
     {
-        if (!$this->users->delete($id)) {
+        if (! $this->users->delete($id)) {
             return $this->failNotFound(lang('boilerplate.user.msg.msg_get_fail', [$id]));
         }
 

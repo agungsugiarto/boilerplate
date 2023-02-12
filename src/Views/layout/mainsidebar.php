@@ -1,5 +1,5 @@
 <aside class="main-sidebar <?= config('Boilerplate')->theme['sidebar']['border'] ? 'border-right' : ''?> sidebar-<?= config('Boilerplate')->theme['sidebar']['type'] ?>-<?= config('Boilerplate')->theme['sidebar']['links']['bg'] ?> elevation-<?= config('Boilerplate')->theme['sidebar']['shadow'] ?>">
-    <a href="<?= route_to('/') ?>" class="brand-link <?= !empty(config('Boilerplate')->theme['sidebar']['brand']['bg']) ? 'bg-'.config('Boilerplate')->theme['sidebar']['brand']['bg'] : '' ?>">
+    <a href="<?= route_to('/') ?>" class="brand-link <?= ! empty(config('Boilerplate')->theme['sidebar']['brand']['bg']) ? 'bg-' . config('Boilerplate')->theme['sidebar']['brand']['bg'] : '' ?>">
         <img src="<?= base_url(config('Boilerplate')->theme['sidebar']['brand']['logo']['icon']) ?>" class="brand-image img-circle elevation-<?= config('Boilerplate')->theme['sidebar']['brand']['logo']['shadow'] ?>" style="opacity: .8">
         <span class="brand-text"><?= config('Boilerplate')->theme['sidebar']['brand']['logo']['text'] ?></span>
     </a>
@@ -19,8 +19,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent <?= config('Boilerplate')->theme['sidebar']['compact'] ? 'nav-compact' : '' ?>" data-widget="treeview"
                 role="menu" data-accordion="false">
                 <?php foreach (menu() as $parent) { ?>
-                <li class="nav-item has-treeview <?= current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'menu-open' : '' ?>">
-                    <a href="<?= base_url($parent->route) ?>" class="nav-link <?= current_url() == base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route')) ? 'active' : '' ?>">
+                <li class="nav-item has-treeview <?= current_url() === base_url($parent->route)                              || in_array(uri_string(), array_column($parent->children, 'route'), true) ? 'menu-open' : '' ?>">
+                    <a href="<?= base_url($parent->route) ?>" class="nav-link <?= current_url() === base_url($parent->route) || in_array(uri_string(), array_column($parent->children, 'route'), true) ? 'active' : '' ?>">
                         <i class="nav-icon <?= $parent->icon ?>"></i>
                         <p>
                             <?= $parent->title ?>
@@ -34,7 +34,7 @@
                         <?php foreach ($parent->children as $child) { ?>
                         <li class="nav-item has-treeview">
                             <a href="<?= base_url($child->route) ?>"
-                                class="nav-link <?= current_url() == base_url($child->route) ? 'active' : '' ?>">
+                                class="nav-link <?= current_url() === base_url($child->route) ? 'active' : '' ?>">
                                 <i class="nav-icon <?= $child->icon ?>"></i>
                                 <p><?= $child->title ?></p>
                             </a>

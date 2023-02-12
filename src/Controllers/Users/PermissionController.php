@@ -16,7 +16,6 @@ class PermissionController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var PermissionModel */
     protected PermissionModel $permission;
 
     /**
@@ -37,11 +36,11 @@ class PermissionController extends BaseController
     public function index()
     {
         if ($this->request->isAJAX()) {
-            $start = $this->request->getGet('start');
+            $start  = $this->request->getGet('start');
             $length = $this->request->getGet('length');
             $search = $this->request->getGet('search[value]');
-            $order = PermissionModel::ORDERABLE[$this->request->getGet('order[0][column]')];
-            $dir = $this->request->getGet('order[0][dir]');
+            $order  = PermissionModel::ORDERABLE[$this->request->getGet('order[0][column]')];
+            $dir    = $this->request->getGet('order[0][dir]');
 
             return $this->respond(Collection::datatable(
                 $this->permission->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
@@ -59,12 +58,11 @@ class PermissionController extends BaseController
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return ResponseInterface
      * @throws ReflectionException
      */
     public function create(): ResponseInterface
     {
-        if (!$this->permission->save($this->request->getPost())) {
+        if (! $this->permission->save($this->request->getPost())) {
             return $this->fail($this->permission->errors());
         }
 
@@ -73,14 +71,10 @@ class PermissionController extends BaseController
 
     /**
      * Return the editable properties of a resource object.
-     *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      */
     public function edit(?int $id = null): ResponseInterface
     {
-        if (!$found = $this->permission->find($id)) {
+        if (! $found = $this->permission->find($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
 
@@ -90,14 +84,11 @@ class PermissionController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      * @throws ReflectionException
      */
     public function update(?int $id = null): ResponseInterface
     {
-        if (!$this->permission->update($id, $this->request->getRawInput())) {
+        if (! $this->permission->update($id, $this->request->getRawInput())) {
             return $this->fail($this->permission->errors());
         }
 
@@ -106,14 +97,10 @@ class PermissionController extends BaseController
 
     /**
      * Delete the designated resource object from the model.
-     *
-     * @param int|null $id
-     *
-     * @return ResponseInterface
      */
     public function delete(?int $id = null): ResponseInterface
     {
-        if (!$this->permission->delete($id)) {
+        if (! $this->permission->delete($id)) {
             return $this->failNotFound(lang('boilerplate.permission.msg.msg_get_fail', [$id]));
         }
 

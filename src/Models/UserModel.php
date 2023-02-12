@@ -7,7 +7,7 @@ use Myth\Auth\Models\UserModel as BaseModel;
 
 class UserModel extends BaseModel
 {
-    const ORDERABLE = [
+    public const ORDERABLE = [
         1 => 'username',
         2 => 'email',
         4 => 'created_at',
@@ -15,10 +15,6 @@ class UserModel extends BaseModel
 
     /**
      * Get resource data.
-     *
-     * @param string $search
-     *
-     * @return BaseBuilder
      */
     public function getResource(string $search = ''): BaseBuilder
     {
@@ -30,7 +26,7 @@ class UserModel extends BaseModel
             : $builder->groupStart()
                 ->like('username', $search)
                 ->orLike('email', $search)
-            ->groupEnd();
+                ->groupEnd();
 
         return $condition->where('deleted_at', null);
     }

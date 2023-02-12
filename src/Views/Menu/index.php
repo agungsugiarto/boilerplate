@@ -50,7 +50,7 @@
                                 <select class="form-control parent" name="parent_id" style="width: 100%;">
                                     <option selcted value="0">ROOT</option>
                                     <?php foreach ($menus as $menu) { ?>
-                                        <option <?= ($menu->id == old('parent_id')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
+                                        <option <?= ($menu->id === old('parent_id')) ? 'selected' : '' ?> value="<?= $menu->id ?>"><?= $menu->title ?></option>
                                     <?php } ?>
                                 </select>
                                 <span class="help-block">
@@ -128,7 +128,7 @@
                             <div class="col-sm-10">
                                 <select multiple="multiple" class="form-control parent" name="groups_menu[]" data-placeholder="<?= lang('boilerplate.role.fields.plc_name') ?>" style="width: 100%;">
                                     <?php foreach ($roles as $role) { ?>
-                                        <option <?= in_array($role->id, old('groups_menu', [])) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
+                                        <option <?= in_array($role->id, old('groups_menu', []), true) ? 'selected' : '' ?> value="<?= $role->id ?>"><?= $role->name ?></option>
                                     <?php } ?>
                                 </select>
                                 <?php if (session('error.groups_menu')) { ?>
@@ -230,7 +230,7 @@ $(function () {
             url: `<?= route_to('admin/menu') ?>/${$(this).attr('data-id')}/edit`,
             method: 'GET',
             dataType: 'JSON',
-            
+
         }).done((response) => {
 
             $('#active').select2();
@@ -272,7 +272,7 @@ $(function () {
             url: `<?= route_to('admin/menu') ?>/${ $('#menu_id').val() }`,
             method: 'PUT',
             data: editForm.serialize()
-            
+
         }).done((data, textStatus, jqXHR) => {
             Toast.fire({
                 icon: 'success',

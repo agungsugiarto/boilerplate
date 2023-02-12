@@ -102,11 +102,11 @@ return [
         'title'    => 'User management',
         'subtitle' => 'User list',
         'fields'   => [
-            'active'          => 'Active',
-            'profile'         => 'Profile',
-            'join'            => 'Member since',
-            'setting'         => 'Setting',
-            'non_active'      => 'Non Active',
+            'active'     => 'Active',
+            'profile'    => 'Profile',
+            'join'       => 'Member since',
+            'setting'    => 'Setting',
+            'non_active' => 'Non Active',
         ],
         'msg' => [
             'msg_insert'   => 'The user has been correctly added.',
