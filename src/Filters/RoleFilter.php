@@ -6,7 +6,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
+use Myth\Auth\Config\Services;
 
 /**
  * Class RoleFilter.
@@ -15,7 +15,7 @@ class RoleFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
+     * By default, it should not return anything during
      * normal execution. However, when an abnormal state
      * is found, it should return an instance of
      * CodeIgniter\HTTP\Response. If it does, script
@@ -23,19 +23,18 @@ class RoleFilter implements FilterInterface
      * sent back to the client, allowing for error pages,
      * redirects, etc.
      *
-     * @param \CodeIgniter\HTTP\RequestInterface $request
-     * @param array|null                         $params
-     *
+     * @param RequestInterface $request
+     * @param array|null $arguments
      * @return mixed
      */
-    public function before(RequestInterface $request, $params = null)
+    public function before(RequestInterface $request, $arguments = null)
     {
         if (!function_exists('logged_in')) {
             helper('auth');
         }
 
-        if (empty($params)) {
-            return;
+        if (empty($arguments)) {
+            return null;
         }
 
         $authenticate = Services::authentication();
@@ -50,9 +49,9 @@ class RoleFilter implements FilterInterface
         $authorize = Services::authorization();
 
         // Check each requested permission
-        foreach ($params as $group) {
+        foreach ($arguments as $group) {
             if ($authorize->inGroup($group, $authenticate->id())) {
-                return;
+                return null;
             }
         }
 
@@ -66,22 +65,19 @@ class RoleFilter implements FilterInterface
         }
     }
 
-    //--------------------------------------------------------------------
-
     /**
      * Allows After filters to inspect and modify the response
      * object as needed. This method does not allow any way
      * to stop execution of other after filters, short of
      * throwing an Exception or Error.
      *
-     * @param \CodeIgniter\HTTP\RequestInterface  $request
-     * @param \CodeIgniter\HTTP\ResponseInterface $response
-     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param null $arguments
      * @return void
      */
-    public function after(RequestInterface $request, ResponseInterface $response, $arguements = null)
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
     }
 
-    //--------------------------------------------------------------------
 }

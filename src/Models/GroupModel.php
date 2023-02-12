@@ -2,7 +2,8 @@
 
 namespace agungsugiarto\boilerplate\Models;
 
-use Myth\Auth\Authorization\GroupModel as BaseModel;
+use CodeIgniter\Database\BaseBuilder;
+use Myth\Auth\Models\GroupModel as BaseModel;
 
 /**
  * Class Group.
@@ -19,9 +20,9 @@ class GroupModel extends BaseModel
      *
      * @param string $search
      *
-     * @return \CodeIgniter\Database\BaseBuilder
+     * @return BaseBuilder
      */
-    public function getResource(string $search = '')
+    public function getResource(string $search = ''): BaseBuilder
     {
         $builder = $this->builder()
             ->select('id, name, description');
@@ -37,11 +38,11 @@ class GroupModel extends BaseModel
     /**
      * Returns an array of all groups that a user is a member of.
      *
-     * @param $userId
+     * @param int $userId
      *
-     * @return object
+     * @return array
      */
-    public function getGroupsForUser(int $userId)
+    public function getGroupsForUser(int $userId): array
     {
         $group = $this->builder()
             ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')

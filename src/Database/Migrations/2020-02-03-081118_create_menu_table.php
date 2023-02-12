@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace agungsugiarto\boilerplate\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
@@ -35,8 +35,8 @@ class CreateMenuTable extends Migration
         ]);
 
         $this->forge->addKey(['id', 'group_id', 'menu_id']);
-        $this->forge->addForeignKey('menu_id', 'menu', 'id', false, 'CASCADE');
-        $this->forge->addForeignKey('group_id', 'auth_groups', 'id', false, 'CASCADE');
+        $this->forge->addForeignKey('menu_id', 'menu', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('group_id', 'auth_groups', 'id', '', 'CASCADE');
         $this->forge->createTable('groups_menu', true);
     }
 

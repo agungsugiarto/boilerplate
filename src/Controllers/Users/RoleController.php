@@ -6,6 +6,8 @@ use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
 use agungsugiarto\boilerplate\Models\GroupModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * Class RoleController.
@@ -14,8 +16,8 @@ class RoleController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var \agungsugiarto\boilerplate\Models\GroupModel */
-    protected $group;
+    /** @var GroupModel */
+    protected GroupModel $group;
 
     public function __construct()
     {
@@ -25,7 +27,7 @@ class RoleController extends BaseController
     /**
      * Return an array of resource objects, themselves in array format.
      *
-     * @return array an array
+     * @return ResponseInterface|string
      */
     public function index()
     {
@@ -53,9 +55,9 @@ class RoleController extends BaseController
     /**
      * Return a new resource object, with default properties.
      *
-     * @return array an array
+     * @return string
      */
-    public function new()
+    public function new(): string
     {
         $data = [
             'title'    => lang('boilerplate.role.title'),
@@ -69,9 +71,9 @@ class RoleController extends BaseController
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return array an array
+     * @return RedirectResponse
      */
-    public function create()
+    public function create(): RedirectResponse
     {
         $validationRules = [
             'name'        => 'required|min_length[5]|max_length[255]|is_unique[auth_groups.name]',
@@ -109,11 +111,11 @@ class RoleController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int $id
+     * @param int|null $id
      *
-     * @return array an array
+     * @return RedirectResponse|string
      */
-    public function edit($id = null)
+    public function edit(?int $id = null)
     {
         if (is_null($this->authorize->group($id))) {
             return redirect()->back()->with('sweet-error', lang('boilerplate.role.msg.msg_get_fail', [$id]));
@@ -133,11 +135,11 @@ class RoleController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int $id
+     * @param int|null $id
      *
-     * @return array an array
+     * @return RedirectResponse|string
      */
-    public function update($id = null)
+    public function update(int $id = null)
     {
         $validationRules = [
             'name'        => 'required|min_length[5]|max_length[255]',
@@ -180,16 +182,16 @@ class RoleController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @param int $id
+     * @param int|null $id
      *
-     * @return array an array
+     * @return ResponseInterface
      */
-    public function delete($id = null)
+    public function delete(?int $id = null): ResponseInterface
     {
-        if (!$found = $this->authorize->deleteGroup($id)) {
+        if (!$this->authorize->deleteGroup($id)) {
             return $this->failNotFound(lang('boilerplate.role.msg.msg_get_fail', [$id]));
         }
 
-        return $this->respondDeleted($found, lang('boilerplate.role.msg.msg_delete', [$id]));
+        return $this->respondDeleted(['id' => $id], lang('boilerplate.role.msg.msg_delete', [$id]));
     }
 }

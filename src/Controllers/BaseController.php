@@ -2,11 +2,15 @@
 
 namespace agungsugiarto\boilerplate\Controllers;
 
-use CodeIgniter\Config\Services;
+use Myth\Auth\Config\Services;
 use CodeIgniter\Controller;
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
+use Myth\Auth\Authentication\LocalAuthenticator;
+use Myth\Auth\Authorization\FlatAuthorization;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -15,17 +19,17 @@ use Psr\Log\LoggerInterface;
 class BaseController extends Controller
 {
     /**
-     * @var \Myth\Auth\Authorization\FlatAuthorization
+     * @var FlatAuthorization
      */
-    protected $authorize;
+    protected FlatAuthorization $authorize;
 
     /**
-     * @var \Myth\Auth\Authentication\LocalAuthenticator
+     * @var LocalAuthenticator
      */
-    protected $auth;
+    protected LocalAuthenticator $auth;
 
     /**
-     * @var \CodeIgniter\Database\BaseConnection|\CodeIgniter\Database\BaseBuilder
+     * @var BaseConnection|BaseBuilder
      */
     protected $db;
 

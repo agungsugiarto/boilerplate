@@ -7,7 +7,7 @@ namespace agungsugiarto\boilerplate\Controllers;
  */
 class DashboardController extends BaseController
 {
-    public function index()
+    public function index(): string
     {
         $data = [
             'title' => 'Dashboard',

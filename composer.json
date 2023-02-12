@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "myth/auth": "^1.0",
         "codeigniter4/framework": "^4.3.0",
         "codeigniter4/translations" : "^4.3.0"

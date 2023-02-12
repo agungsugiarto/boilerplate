@@ -7,6 +7,8 @@ use agungsugiarto\boilerplate\Entities\MenuEntity;
 use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * Class MenuController.
@@ -15,8 +17,8 @@ class MenuController extends BaseController
 {
     use ResponseTrait;
 
-    protected $menu;
-    protected $groupsMenu;
+    protected MenuModel $menu;
+    protected GroupMenuModel $groupsMenu;
 
     public function __construct()
     {
@@ -27,7 +29,7 @@ class MenuController extends BaseController
     /**
      * Return an array of resource objects, themselves in array format.
      *
-     * @return \CodeIgniter\View\View | \CodeIgniter\API\ResponseTrait
+     * @return ResponseInterface|string
      */
     public function index()
     {
@@ -46,9 +48,9 @@ class MenuController extends BaseController
     /**
      * Update to sort menu.
      *
-     * @return CodeIgniter\API\ResponseTrait
+     * @return ResponseInterface
      */
-    public function new()
+    public function new(): ResponseInterface
     {
         $data = $this->request->getJSON();
         $menu = new MenuEntity();
@@ -82,9 +84,9 @@ class MenuController extends BaseController
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return RedirectResponse
      */
-    public function create()
+    public function create(): RedirectResponse
     {
         $validationRules = [
             'parent_id'   => 'required|numeric',
@@ -132,11 +134,11 @@ class MenuController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int id
+     * @param int $id
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return ResponseInterface
      */
-    public function update($id)
+    public function update(int $id): ResponseInterface
     {
         $validationRules = [
             'parent_id'   => 'required|numeric',
@@ -156,7 +158,7 @@ class MenuController extends BaseController
         $this->db->transBegin();
 
         try {
-            $menu = $this->menu->update($id, [
+            $this->menu->update($id, [
                 'parent_id' => $data['parent_id'],
                 'active'    => $data['active'],
                 'title'     => $data['title'],
@@ -182,17 +184,17 @@ class MenuController extends BaseController
             return $this->fail($e->getMessage());
         }
 
-        return $this->respondUpdated($menu, lang('boilerplate.menu.msg.msg_update'));
+        return $this->respondUpdated(['id' => $id], lang('boilerplate.menu.msg.msg_update'));
     }
 
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int id
+     * @param int $id
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return ResponseInterface|void
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $found = $this->menu->getMenuById($id);
 
@@ -212,16 +214,15 @@ class MenuController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @param int id
+     * @param int|null $id
      *
-     * @return \CodeIgniter\API\ResponseTrait
+     * @return ResponseInterface
      */
-    public function delete($id)
+    public function delete(?int $id = null): ResponseInterface
     {
         if (!$this->menu->delete($id)) {
             return $this->failNotFound(lang('boilerplate.menu.msg.msg_get_fail'));
         }
-
         return $this->respondDeleted(['id' => $id], lang('boilerplate.menu.msg.msg_delete'));
     }
 }

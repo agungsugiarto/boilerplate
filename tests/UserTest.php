@@ -1,9 +1,13 @@
 <?php
-
+namespace Tests;
+use ReflectionException;
 use Tests\Support\AuthTestCase;
 
 class UserTest extends AuthTestCase
 {
+    /**
+     * @throws ReflectionException
+     */
     public function testGetPermissionsThroughUser()
     {
         $user = $this->createUser();
@@ -28,6 +32,9 @@ class UserTest extends AuthTestCase
         $this->assertEquals($expected, $user->permissions);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testGetPermissionsThroughGroup()
     {
         $user = $this->createUser();
@@ -51,6 +58,9 @@ class UserTest extends AuthTestCase
         $this->assertEquals($expected, $user->permissions);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testCan()
     {
         $user = $this->createUser();

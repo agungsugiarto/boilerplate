@@ -39,15 +39,15 @@ class MenuModel extends Model
     protected $skipValidation = true;
 
     /**
-     * Find menu. By default we need to detect driver,
+     * Find menu. By default, we need to detect driver,
      * because different function group_concat
      * between MySQLi and Postgres.
      *
-     * @param int id
+     * @param int $id
      *
      * @return array
      */
-    public function getMenuById($id)
+    public function getMenuById(int $id): array
     {
         return $this->db->DBDriver === 'Postgre'
             ? $this->getMenuDRiverPostgre($id)
@@ -59,7 +59,7 @@ class MenuModel extends Model
      *
      * @return array
      */
-    public function getMenu()
+    public function getMenu(): array
     {
         return $this->db->table('menu')
             ->select('id, title as text')
@@ -73,7 +73,7 @@ class MenuModel extends Model
      *
      * @return array
      */
-    public function getRole()
+    public function getRole(): array
     {
         return $this->db->table('auth_groups')
             ->select('id, name as text')
@@ -84,11 +84,11 @@ class MenuModel extends Model
     /**
      * Function getMenuDriverMySQLi.
      *
-     * @param int id
+     * @param int $id
      *
      * @return array
      */
-    private function getMenuDriverMySQLi($id)
+    private function getMenuDriverMySQLi(int $id): array
     {
         return $this->db->table('menu')
             ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, group_concat(groups_menu.group_id SEPARATOR '|') as group_id")
@@ -102,11 +102,11 @@ class MenuModel extends Model
     /**
      * Function getMenuDRiverPostgre.
      *
-     * @param int id
+     * @param int $id
      *
      * @return array
      */
-    private function getMenuDRiverPostgre($id)
+    private function getMenuDRiverPostgre(int $id): array
     {
         return $this->db->table('menu')
             ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, array_to_string(array_agg(groups_menu.group_id),'|') as group_id")

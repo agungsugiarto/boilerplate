@@ -2,6 +2,7 @@
 
 use agungsugiarto\boilerplate\Models\GroupMenuModel;
 use agungsugiarto\boilerplate\Models\MenuModel;
+use Config\Database;
 
 if (!function_exists('menu')) {
     /**
@@ -9,29 +10,29 @@ if (!function_exists('menu')) {
      *
      * @return array
      */
-    function menu()
+    function menu(): array
     {
         /**
          * Function parse.
          *
-         * @param item       array
-         * @param parent_id  int
+         * @param array $item
+         * @param int $parent_id
          *
          * @return array
          */
-        function parse($item, $parent_id)
+      $parse =  function (array $item, int $parent_id) use (&$parse)
         {
             $data = [];
             foreach ($item as $value) {
                 if ($value->parent_id == $parent_id) {
-                    $child = parse($item, $value->id);
-                    $value->children = $child ?: $child;
+                    $child = $parse($item, $value->id);
+                    $value->children = $child ?: '';
                     $data[] = $value;
                 }
             }
             // cache()->delete('menu');
             return $data;
-        }
+        };
 
         // TODO: cache the result
         // if (! $found = cache('menu')) {
@@ -39,7 +40,7 @@ if (!function_exists('menu')) {
         //     cache()->save('menu', $data, 300);
         // }
         // return $found;
-        return parse((new GroupMenuModel())->menuHasRole(), 0);
+        return $parse((new GroupMenuModel())->menuHasRole(), 0);
     }
 }
 
@@ -49,29 +50,29 @@ if (!function_exists('nestable')) {
      *
      * @return array
      */
-    function nestable()
+    function nestable(): array
     {
         /**
          * Function parse.
          *
-         * @param item       array
-         * @param parent_id  int
+         * @param array $item
+         * @param int $parent_id
          *
          * @return array
          */
-        function nest($item, $parent_id)
+        $nest = function (array $item, int $parent_id) use (&$nest)
         {
             $data = [];
             foreach ($item as $value) {
                 if ($value->parent_id == $parent_id) {
-                    $child = nest($item, $value->id);
-                    $value->children = $child ? $child : '';
+                    $child = $nest($item, $value->id);
+                    $value->children = $child ?: '';
                     $data[] = $value;
                 }
             }
             // cache()->delete('menu');
             return $data;
-        }
+        };
 
         // TODO: cache the result
         // if (! $found = cache('menu')) {
@@ -79,7 +80,12 @@ if (!function_exists('nestable')) {
         //     cache()->save('menu', $data, 300);
         // }
         // return $found;
-        return nest((new MenuModel())->orderBy('sequence', 'asc')->get()->getResultObject(), 0);
+        $db      = Database::connect();
+        $builder = $db->table('Menu');
+        $builder->orderBy('sequence', 'asc');
+        $query = $builder->get();
+
+        return $nest($query->getResultObject(), 0);
     }
 }
 
@@ -89,7 +95,7 @@ if (!function_exists('nestable')) {
  * return string hrml
  */
 if (!function_exists('build')) {
-    function build()
+    function build(): string
     {
         $html = '';
         foreach (menu() as $parent) {

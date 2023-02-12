@@ -21,7 +21,7 @@ class GroupMenuModel extends Model
      *
      * @return array
      */
-    public function menuHasRole()
+    public function menuHasRole(): array
     {
         // We need cache this menu ?
         if (!$found = cache(user()->id.'_group_menu')) {

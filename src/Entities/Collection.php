@@ -13,7 +13,7 @@ class Collection
      *
      * @return array
      */
-    public static function datatable(array $data, int $recordsTotal, int $recordsFiltered)
+    public static function datatable(array $data, int $recordsTotal, int $recordsFiltered): array
     {
         return [
             'draw'            => service('request')->getGet('draw'),

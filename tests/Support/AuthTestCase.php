@@ -3,15 +3,22 @@
 namespace Tests\Support;
 
 use CodeIgniter\Session\Handlers\ArrayHandler;
-use CodeIgniter\Test\CIDatabaseTestCase;
-use CodeIgniter\Test\ControllerTester;
+
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\ControllerTestTrait;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\Mock\MockSession;
+use Config\Services;
+use Faker\Factory;
+use Faker\Generator;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use ReflectionException;
 
-class AuthTestCase extends CIDatabaseTestCase
+class AuthTestCase extends CIUnitTestCase
 {
-    use ControllerTester;
+    use DatabaseTestTrait;
+    use ControllerTestTrait;
 
     /**
      * Should the database be refreshed before each test?
@@ -30,21 +37,22 @@ class AuthTestCase extends CIDatabaseTestCase
     /**
      * The namespace to help us find the migration classes.
      *
-     * @var string
+     * @var string[]
      */
     protected $namespace = ['Myth\Auth', 'agungsugiarto\boilerplate'];
 
     /**
-     * @var \Myth\Auth\Models\UserModel
+     * @var UserModel
      */
-    protected $users;
-
-    protected $faker;
-
+    protected UserModel $users;
     /**
-     * @var SessionHandler
+     * @var Generator
      */
-    protected $session;
+    protected Generator $faker;
+    /**
+     * @var MockSession
+     */
+    protected MockSession $mockSession;
 
     public function setUp(): void
     {
@@ -53,7 +61,7 @@ class AuthTestCase extends CIDatabaseTestCase
         $this->users = new UserModel();
         $this->mockSession();
 
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
     }
 
     /**
@@ -63,19 +71,19 @@ class AuthTestCase extends CIDatabaseTestCase
     {
         require_once SYSTEMPATH.'Test/Mock/MockSession.php';
         $config = config('App');
-        $this->session = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
-        \Config\Services::injectMock('session', $this->session);
+        $this->mockSession = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
+        Services::injectMock('session', $this->mockSession);
         $_SESSION = [];
     }
 
     /**
      * Creates a user on-the-fly.
      *
-     * @param string $reason
-     *
-     * @return $this
+     * @param array $info
+     * @return object|null
+     * @throws ReflectionException
      */
-    protected function createUser(array $info = [])
+    protected function createUser(array $info = []): ?object
     {
         $defaults = [
             'email'    => 'fred@example.com',

@@ -2,7 +2,8 @@
 
 namespace agungsugiarto\boilerplate\Models;
 
-use Myth\Auth\Authorization\PermissionModel as BaseModel;
+use CodeIgniter\Database\BaseBuilder;
+use Myth\Auth\Models\PermissionModel as BaseModel;
 
 class PermissionModel extends BaseModel
 {
@@ -16,9 +17,9 @@ class PermissionModel extends BaseModel
      *
      * @param string $search
      *
-     * @return \CodeIgniter\Database\BaseBuilder
+     * @return BaseBuilder
      */
-    public function getResource(string $search = '')
+    public function getResource(string $search = ''): BaseBuilder
     {
         $builder = $this->builder()
             ->select('id, name, description');

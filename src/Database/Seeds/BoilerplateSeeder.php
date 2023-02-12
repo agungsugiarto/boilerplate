@@ -2,38 +2,32 @@
 
 namespace agungsugiarto\boilerplate\Database\Seeds;
 
-use CodeIgniter\Config\Services;
+use Myth\Auth\Config\Services;
 use CodeIgniter\Database\Seeder;
+use Config\Database;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use ReflectionException;
 
 /**
  * Class BoilerplateSeeder.
  */
 class BoilerplateSeeder extends Seeder
 {
-    /**
-     * @var Authorize
-     */
     protected $authorize;
 
-    /**
-     * @var Db
-     */
-    protected $db;
+    protected UserModel $users;
 
-    /**
-     * @var Users
-     */
-    protected $users;
-
-    public function __construct()
+    public function __construct(Database $config)
     {
+        parent::__construct($config);
         $this->authorize = Services::authorization();
-        $this->db = \Config\Database::connect();
         $this->users = new UserModel();
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function run()
     {
         // User

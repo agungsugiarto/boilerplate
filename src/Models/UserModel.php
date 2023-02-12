@@ -2,6 +2,7 @@
 
 namespace agungsugiarto\boilerplate\Models;
 
+use CodeIgniter\Database\BaseBuilder;
 use Myth\Auth\Models\UserModel as BaseModel;
 
 class UserModel extends BaseModel
@@ -17,9 +18,9 @@ class UserModel extends BaseModel
      *
      * @param string $search
      *
-     * @return \CodeIgniter\Database\BaseBuilder
+     * @return BaseBuilder
      */
-    public function getResource(string $search = '')
+    public function getResource(string $search = ''): BaseBuilder
     {
         $builder = $this->builder()
             ->select('id, username, email, active, created_at');

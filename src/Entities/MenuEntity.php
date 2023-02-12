@@ -3,7 +3,8 @@
 namespace agungsugiarto\boilerplate\Entities;
 
 use agungsugiarto\boilerplate\Models\MenuModel;
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
+use Config\Database;
 
 /**
  * Class MenuEntity.
@@ -28,7 +29,7 @@ class MenuEntity extends Entity
      *
      * @return $this
      */
-    public function activate()
+    public function activate(): MenuEntity
     {
         $this->attributes['active'] = 1;
 
@@ -40,7 +41,7 @@ class MenuEntity extends Entity
      *
      * @return $this
      */
-    public function deactivate()
+    public function deactivate(): MenuEntity
     {
         $this->attributes['active'] = 0;
 
@@ -64,6 +65,10 @@ class MenuEntity extends Entity
      */
     public function sequence(): int
     {
-        return (new MenuModel())->selectMax('sequence')->get()->getRow()->sequence;
+        $db      = Database::connect();
+        $builder = $db->table('Menu');
+        $builder->selectMax('sequence');
+        $query = $builder->get();
+        return $query->getRow()->sequence;
     }
 }

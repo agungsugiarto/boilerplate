@@ -3,14 +3,20 @@
 namespace Tests\Support;
 
 use CodeIgniter\Session\Handlers\ArrayHandler;
+use CodeIgniter\Session\Session;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\Mock\MockSession;
+use Config\Services;
 
-class SessionTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
+
+class SessionTestCase extends CIUnitTestCase
 {
+    use DatabaseTestTrait;
     /**
-     * @var SessionHandler
+     * @var MockSession
      */
-    protected $session;
+    protected MockSession $mockSession;
 
     public function setUp(): void
     {
@@ -22,13 +28,13 @@ class SessionTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
     /**
      * Pre-loads the mock session driver into $this->session.
      *
-     * @var string
+     * @return void
      */
     protected function mockSession()
     {
         require_once SYSTEMPATH.'Test/Mock/MockSession.php';
         $config = config('App');
-        $this->session = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
-        \Config\Services::injectMock('session', $this->session);
+        $this->mockSession = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config);
+        Services::injectMock('session', $this->mockSession);
     }
 }

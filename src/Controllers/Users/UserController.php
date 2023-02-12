@@ -6,9 +6,11 @@ use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
 use agungsugiarto\boilerplate\Models\GroupModel;
 use agungsugiarto\boilerplate\Models\UserModel;
+use agungsugiarto\boilerplate\Models\PermissionModel;
 use CodeIgniter\API\ResponseTrait;
-use Myth\Auth\Authorization\PermissionModel;
+use CodeIgniter\HTTP\ResponseInterface;
 use Myth\Auth\Entities\User;
+use ReflectionException;
 
 /**
  * Class UserController.
@@ -17,8 +19,8 @@ class UserController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var \agungsugiarto\boilerplate\Models\UserModel */
-    protected $users;
+    /** @var UserModel */
+    protected UserModel $users;
 
     public function __construct()
     {
@@ -28,7 +30,7 @@ class UserController extends BaseController
     /**
      * Return an array of resource objects, themselves in array format.
      *
-     * @return mixed
+     * @return ResponseInterface|string
      */
     public function index()
     {
@@ -56,10 +58,11 @@ class UserController extends BaseController
      * Show profile user or update.
      *
      * @return mixed
+     * @throws ReflectionException
      */
     public function profile()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $id = user()->id;
             $validationRules = [
                 'email'        => "required|valid_email|is_unique[users.email,id,$id]",
@@ -96,9 +99,9 @@ class UserController extends BaseController
     /**
      * Create a new resource object, from "posted" parameters.
      *
-     * @return mixed
+     * @return string
      */
-    public function new()
+    public function new(): string
     {
         return view('agungsugiarto\boilerplate\Views\User\create', [
             'title'       => lang('boilerplate.user.title'),
@@ -163,11 +166,11 @@ class UserController extends BaseController
     /**
      * Return the editable properties of a resource object.
      *
-     * @param int id
+     * @param int $id
      *
-     * @return mixed
+     * @return string
      */
-    public function edit($id)
+    public function edit(int $id): string
     {
         $data = [
             'title'       => lang('boilerplate.user.title'),
@@ -185,11 +188,11 @@ class UserController extends BaseController
     /**
      * Add or update a model resource, from "posted" properties.
      *
-     * @param int id
+     * @param int $id
      *
      * @return mixed
      */
-    public function update($id)
+    public function update(int $id)
     {
         $validationRules = [
             'active'       => 'required',
@@ -249,16 +252,16 @@ class UserController extends BaseController
     /**
      * Delete the designated resource object from the model.
      *
-     * @param int id
+     * @param int|null $id
      *
-     * @return mixed
+     * @return ResponseInterface
      */
-    public function delete($id)
+    public function delete(?int $id = null): ResponseInterface
     {
-        if (!$found = $this->users->delete($id)) {
-            return $this->failNotFound(lang('boilerplate.user.msg.msg_get_fail'));
+        if (!$this->users->delete($id)) {
+            return $this->failNotFound(lang('boilerplate.user.msg.msg_get_fail', [$id]));
         }
 
-        return $this->respondDeleted($found, lang('boilerplate.user.msg.msg_delete'));
+        return $this->respondDeleted(['id' => $id], lang('boilerplate.user.msg.msg_delete', [$id]));
     }
 }

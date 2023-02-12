@@ -3,12 +3,12 @@
 namespace Tests\Controllers;
 
 use App\Controllers\Home;
-use CodeIgniter\Test\ControllerTester;
+use CodeIgniter\Test\ControllerTestTrait;
 use Tests\Support\AuthTestCase;
 
 class ExampleTest extends AuthTestCase
 {
-    use ControllerTester;
+    use ControllerTestTrait;
 
     public function testIndexHome()
     {
