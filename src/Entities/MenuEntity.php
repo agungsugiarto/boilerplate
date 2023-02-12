@@ -25,8 +25,6 @@ class MenuEntity extends Entity
 
     /**
      * Activate menu.
-     *
-     * @return $this
      */
     public function activate(): MenuEntity
     {
@@ -37,8 +35,6 @@ class MenuEntity extends Entity
 
     /**
      * Unactivate menu.
-     *
-     * @return $this
      */
     public function deactivate(): MenuEntity
     {

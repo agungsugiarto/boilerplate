@@ -105,12 +105,12 @@ if (! function_exists('build')) {
             $html .= "<i class='nav-icon {$parent->icon}'></i>";
             $html .= '<p>';
             $html .= $parent->title;
-            if (count($parent->children)) {
+            if (is_countable($parent->children) ? count($parent->children) : 0) {
                 $html .= "<i class='right fas fa-angle-left'></i>";
             }
             $html .= '</p>';
             $html .= '</a>';
-            if (count($parent->children)) {
+            if (is_countable($parent->children) ? count($parent->children) : 0) {
                 $html .= "<ul class='nav nav-treeview'>";
 
                 foreach ($parent->children as $child) {

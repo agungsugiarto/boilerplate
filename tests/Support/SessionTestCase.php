@@ -16,7 +16,7 @@ final class SessionTestCase extends CIUnitTestCase
 {
     use DatabaseTestTrait;
 
-    protected MockSession $mockSession;
+    private MockSession $mockSession;
 
     protected function setUp(): void
     {
