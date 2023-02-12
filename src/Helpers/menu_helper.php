@@ -24,7 +24,7 @@ if (! function_exists('menu')) {
             foreach ($item as $value) {
                 if ($value->parent_id === $parent_id) {
                     $child           = $parse($item, $value->id);
-                    $value->children = $child ?: '';
+                    $value->children = $child ?: $child;
                     $data[]          = $value;
                 }
             }
@@ -77,7 +77,7 @@ if (! function_exists('nestable')) {
         // }
         // return $found;
         $db      = Database::connect();
-        $builder = $db->table('Menu');
+        $builder = $db->table('menu');
         $builder->orderBy('sequence', 'asc');
         $query = $builder->get();
 
