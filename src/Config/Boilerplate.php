@@ -13,13 +13,13 @@ class Boilerplate extends BaseConfig
     // App name
     // --------------------------------------------------------------------------
 
-    public $appName = 'Boilerplate';
+    public string $appName = 'Boilerplate';
 
     // --------------------------------------------------------------------------
     // Dashboard controller
     // --------------------------------------------------------------------------
 
-    public $dashboard = [
+    public array $dashboard = [
         'namespace'  => 'agungsugiarto\boilerplate\Controllers',
         'controller' => 'DashboardController::index',
         'filter'     => 'permission:back-office',
@@ -30,23 +30,25 @@ class Boilerplate extends BaseConfig
     // pelase see https://cdn.datatables.net/plug-ins/1.10.20/i18n/
     // --------------------------------------------------------------------------
 
-    public $i18n = 'Indonesian';
+    public string $i18n = 'English';
 
     // --------------------------------------------------------------------------
     // Theme boilerplate
     //
+    // Auto switch Dark/Light mode: true,false
     // BG: blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan,
     //     gray, gray-dark, black
-    // Type: dark, light, auto
+    // Type: dark, light
     // Shadow: 0-4
     //
     // --------------------------------------------------------------------------
 
-    public $theme = [
-        'body-sm' => false,
-        'navbar'  => [
+    public array $theme = [
+        'dark-mode' => true,
+        'body-sm'   => false,
+        'navbar'    => [
             'bg'     => '',
-            'type'   => 'auto',
+            'type'   => '',
             'border' => true,
             'user'   => [
                 'visible' => true,
