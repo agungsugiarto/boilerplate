@@ -37,7 +37,6 @@ class GroupModel extends BaseModel
     public function getAllGroupsForUser(int $userId): array
     {
         $groups = $this->builder()
-            ->select('auth_groups_users.*, auth_groups.name, auth_groups.description')
             ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')
             ->where('user_id', $userId)
             ->get()->getResultObject();

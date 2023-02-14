@@ -38,7 +38,7 @@ class MenuModel extends Model
      * because different function group_concat
      * between MySQLi and Postgres.
      */
-    public function getMenuById(int $id): array
+    public function getMenuById(int $id)
     {
         return $this->db->DBDriver === 'Postgre'
             ? $this->getMenuDRiverPostgre($id)
@@ -71,7 +71,7 @@ class MenuModel extends Model
     /**
      * Function getMenuDriverMySQLi.
      */
-    private function getMenuDriverMySQLi(int $id): array
+    private function getMenuDriverMySQLi(int $id)
     {
         return $this->db->table('menu')
             ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, group_concat(groups_menu.group_id SEPARATOR '|') as group_id")
@@ -85,7 +85,7 @@ class MenuModel extends Model
     /**
      * Function getMenuDRiverPostgre.
      */
-    private function getMenuDRiverPostgre(int $id): array
+    private function getMenuDRiverPostgre(int $id)
     {
         return $this->db->table('menu')
             ->select("menu.id, menu.parent_id, menu.active, menu.title, menu.icon, menu.route, groups_menu.menu_id, array_to_string(array_agg(groups_menu.group_id),'|') as group_id")
