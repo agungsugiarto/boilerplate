@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th><?= lang('boilerplate.user.fields.name') ?></th>
                                 <th><?= lang('Auth.username') ?></th>
                                 <th><?= lang('Auth.email') ?></th>
                                 <th><?= lang('boilerplate.user.fields.active') ?></th>
@@ -60,6 +61,9 @@
         }],
         columns: [{
                 'data': null
+            },
+            {
+                'data': 'name'
             },
             {
                 'data': 'username'

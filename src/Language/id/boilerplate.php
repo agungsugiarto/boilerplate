@@ -102,6 +102,9 @@ return [
         'title'    => 'Pengelolaan pengguna',
         'subtitle' => 'Daftar pengguna',
         'fields'   => [
+            'name'       => 'Name',
+            'first_name' => 'First name',
+            'last_name'  => 'Last name',
             'active'     => 'Aktif',
             'profile'    => 'Profil',
             'join'       => 'Anggota sejak',

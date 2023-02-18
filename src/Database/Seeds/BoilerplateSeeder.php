@@ -2,10 +2,10 @@
 
 namespace agungsugiarto\boilerplate\Database\Seeds;
 
+use agungsugiarto\boilerplate\Entities\User;
 use CodeIgniter\Database\Seeder;
 use Config\Database;
 use Myth\Auth\Config\Services;
-use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use ReflectionException;
 
@@ -31,17 +31,21 @@ class BoilerplateSeeder extends Seeder
     {
         // User
         $this->users->save(new User([
-            'email'    => 'admin@admin.com',
-            'username' => 'admin',
-            'password' => 'super-admin',
-            'active'   => '1',
+            'first_name' => 'Admin',
+            'last_name'  => 'Admin',
+            'email'      => 'admin@admin.com',
+            'username'   => 'admin',
+            'password'   => 'super-admin',
+            'active'     => '1',
         ]));
 
         $this->users->save(new User([
-            'email'    => 'user@user.com',
-            'username' => 'user',
-            'password' => 'super-user',
-            'active'   => '1',
+            'first_name' => 'User',
+            'last_name'  => 'User',
+            'email'      => 'user@user.com',
+            'username'   => 'user',
+            'password'   => 'super-user',
+            'active'     => '1',
         ]));
 
         // Role

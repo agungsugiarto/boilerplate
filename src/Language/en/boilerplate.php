@@ -102,6 +102,9 @@ return [
         'title'    => 'User management',
         'subtitle' => 'User list',
         'fields'   => [
+            'name'       => 'Name',
+            'first_name' => 'First name',
+            'last_name'  => 'Last name',
             'active'     => 'Active',
             'profile'    => 'Profile',
             'join'       => 'Member since',

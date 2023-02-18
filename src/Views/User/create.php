@@ -29,6 +29,38 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="inputFirstName" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.first_name')?></label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" name="first_name" class="form-control <?= session('error.first_name') ? 'is-invalid' : '' ?>" value="<?= old('first_name') ?>" placeholder="<?= lang('boilerplate.user.fields.first_name')?>" autocomplete="off">
+                                <?php if (session('error.first_name')) { ?>
+                                    <div class="invalid-feedback">
+                                        <h6><?= session('error.first_name') ?></h6>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputLastName" class="col-sm-2 col-form-label"><?= lang('boilerplate.user.fields.last_name')?></label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" name="last_name" class="form-control <?= session('error.last_name') ? 'is-invalid' : '' ?>" value="<?= old('last_name') ?>" placeholder="<?= lang('boilerplate.user.fields.last_name')?>" autocomplete="off">
+                                <?php if (session('error.last_name')) { ?>
+                                    <div class="invalid-feedback">
+                                        <h6><?= session('error.last_name') ?></h6>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label"><?= lang('Auth.email')?></label>
                         <div class="col-sm-8">
                             <div class="input-group">

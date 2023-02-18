@@ -4,13 +4,13 @@ namespace agungsugiarto\boilerplate\Controllers\Users;
 
 use agungsugiarto\boilerplate\Controllers\BaseController;
 use agungsugiarto\boilerplate\Entities\Collection;
+use agungsugiarto\boilerplate\Entities\User;
 use agungsugiarto\boilerplate\Models\GroupModel;
 use agungsugiarto\boilerplate\Models\PermissionModel;
 use agungsugiarto\boilerplate\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
-use Myth\Auth\Entities\User;
 use ReflectionException;
 
 /**
@@ -66,6 +66,8 @@ class UserController extends BaseController
         if ($this->request->is('post')) {
             $id              = user()->id;
             $validationRules = [
+                'first_name'   => 'required',
+                'last_name'    => 'required',
                 'email'        => "required|valid_email|is_unique[users.email,id,{$id}]",
                 'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,{$id}]",
                 'password'     => 'if_exist',
@@ -82,8 +84,10 @@ class UserController extends BaseController
                 $user->password = $this->request->getPost('password');
             }
 
-            $user->email    = $this->request->getPost('email');
-            $user->username = $this->request->getPost('username');
+            $user->email      = $this->request->getPost('email');
+            $user->username   = $this->request->getPost('username');
+            $user->first_name = $this->request->getPost('first_name');
+            $user->last_name  = $this->request->getPost('last_name');
 
             if ($this->users->skipValidation(true)->update(user()->id, $user)) {
                 return redirect()->back()->with('sweet-success', lang('boilerplate.user.msg.msg_update'));
@@ -119,6 +123,8 @@ class UserController extends BaseController
     {
         $validationRules = [
             'active'       => 'required',
+            'first_name'   => 'required',
+            'last_name'    => 'required',
             'username'     => 'required|alpha_numeric_space|min_length[3]|is_unique[users.username]',
             'email'        => 'required|valid_email|is_unique[users.email]',
             'password'     => 'required|strong_password',
@@ -138,10 +144,12 @@ class UserController extends BaseController
 
         try {
             $id = $this->users->insert(new User([
-                'active'   => $this->request->getPost('active'),
-                'email'    => $this->request->getPost('email'),
-                'username' => $this->request->getPost('username'),
-                'password' => $this->request->getPost('password'),
+                'active'     => $this->request->getPost('active'),
+                'first_name' => $this->request->getPost('first_name'),
+                'last_name'  => $this->request->getPost('last_name'),
+                'email'      => $this->request->getPost('email'),
+                'username'   => $this->request->getPost('username'),
+                'password'   => $this->request->getPost('password'),
             ]));
 
             foreach ($permissions as $permission) {
@@ -189,6 +197,8 @@ class UserController extends BaseController
     {
         $validationRules = [
             'active'       => 'required',
+            'first_name'   => 'required',
+            'last_name'    => 'required',
             'username'     => "required|alpha_numeric_space|min_length[3]|is_unique[users.username,id,{$id}]",
             'email'        => "required|valid_email|is_unique[users.email,id,{$id}]",
             'password'     => 'if_exist',
@@ -210,9 +220,11 @@ class UserController extends BaseController
                 $user->password = $this->request->getPost('password');
             }
 
-            $user->active   = $this->request->getPost('active');
-            $user->email    = $this->request->getPost('email');
-            $user->username = $this->request->getPost('username');
+            $user->active     = $this->request->getPost('active');
+            $user->email      = $this->request->getPost('email');
+            $user->username   = $this->request->getPost('username');
+            $user->first_name = $this->request->getPost('first_name');
+            $user->last_name  = $this->request->getPost('last_name');
 
             $this->users->skipValidation(true)->update($id, $user);
 
