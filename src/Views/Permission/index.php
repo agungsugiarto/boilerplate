@@ -47,6 +47,7 @@
     var tablePermission = $('#table-permission').DataTable({
         processing: true,
         serverSide: true,
+        responsive: true,
         autoWidth: false,
         order: [[1, 'asc']],
 
