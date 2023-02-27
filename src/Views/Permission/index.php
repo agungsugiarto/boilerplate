@@ -219,7 +219,7 @@
     }
 
     $(function () {
-        $("#modal-create-permission").draggable();
+        $("#modal-edit-permission").draggable();
         $("#modal-create-permission").draggable();
     });
 
