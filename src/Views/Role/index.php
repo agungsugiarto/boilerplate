@@ -110,5 +110,8 @@
             }
         })
     })
+ $( function() {
+    $( "#modal-create-permission" ).draggable();
+  } );
 </script>
 <?= $this->endSection() ?>
