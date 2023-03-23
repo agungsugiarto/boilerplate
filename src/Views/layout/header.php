@@ -11,9 +11,7 @@
         <?php if (config('Boilerplate')->theme['navbar']['user']['visible']) { ?>
         <li class="nav-item">
             <a href="<?= route_to('user-profile') ?>" class="nav-link d-flex align-items-center">
-                <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png"
-                    class="avatar-img img-circle bg-gray mr-2 elevation-<?= config('Boilerplate')->theme['navbar']['user']['shadow'] ?>"
-                    alt="<?= user()->username ?>" height="32">
+                <img src="https://cdn.jsdelivr.net/npm/admin-lte@3.0.2/dist/img/avatar.png" class="avatar-img img-circle bg-gray mr-2 elevation-<?= config('Boilerplate')->theme['navbar']['user']['shadow'] ?>" alt="<?= user()->username ?>" height="32">
                 <?= user()->username ?>
             </a>
         </li>
