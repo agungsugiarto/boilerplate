@@ -2,7 +2,7 @@
 
 namespace julio101290\boilerplate\Models;
 
-use julio101290\Auth\Models\UserModel as BaseModel;
+use Myth\Auth\Models\UserModel as BaseModel;
 
 class UserModel extends BaseModel {
 

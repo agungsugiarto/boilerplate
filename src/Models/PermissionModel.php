@@ -2,7 +2,7 @@
 
 namespace julio101290\boilerplate\Models;
 
-use julio101290\Auth\Authorization\PermissionModel as BaseModel;
+use Myth\Auth\Authorization\PermissionModel as BaseModel;
 
 class PermissionModel extends BaseModel
 {

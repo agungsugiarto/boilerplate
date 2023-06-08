@@ -2,7 +2,7 @@
 
 namespace julio101290\boilerplate\Models;
 
-use julio101290\Auth\Authorization\GroupModel as BaseModel;
+use Myth\Auth\Authorization\GroupModel as BaseModel;
 
 /**
  * Class Group.
