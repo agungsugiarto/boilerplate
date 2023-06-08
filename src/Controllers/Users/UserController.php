@@ -7,8 +7,8 @@ use julio101290\boilerplate\Entities\Collection;
 use julio101290\boilerplate\Models\GroupModel;
 use julio101290\boilerplate\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
-use Myth\Auth\Authorization\PermissionModel;
-use Myth\Auth\Entities\User;
+use julio101290\Auth\Authorization\PermissionModel;
+use julio101290\Auth\Entities\User;
 
 /**
  * Class UserController.
