@@ -1,10 +1,8 @@
-<p align="center"><img src="https://codeigniter.com/assets/images/codeigniter4logo.png" width="200"></p>
-
 <p align="center">
-<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/version"></a>
-<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://img.shields.io/badge/Package-agungsugiarto%2Fboilerplate-light.svg"></a>
-<a href="https://packagist.org/packages/agungsugiarto/boilerplate"><img src="https://poser.pugx.org/agungsugiarto/boilerplate/downloads"</img></a>
-<a href="https://github.com/agungsugiarto/boilerplate/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/agungsugiarto/boilerplate"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/julio101290/boilerplate/version"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://img.shields.io/badge/Package-julio101290%2Fboilerplate-light.svg"></a>
+<a href="https://packagist.org/packages/julio101290/boilerplate"><img src="https://poser.pugx.org/julio101290/boilerplate/downloads"</img></a>
+<a href="https://github.com/julio101290/boilerplate/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/julio101290/boilerplate"></a>
 </p>
 
 CodeIgniter 4 Application Boilerplate
@@ -18,13 +16,18 @@ Feature
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions (RBAC) provided by [Myth/Auth](https://github.com/lonnieezell/myth-auth)
 * Dynamically-Generated Menu
-* Localized English / Indonesian
+* Localized English / Indonesian / Spanish
 
 This project is still early in its development... please feel free to contribute!
-------------------------------------------------------------
-Screenshoot | Demo On [Heroku](https://boilerplate-codeigniter4.herokuapp.com/)
--------------------------------------------------------------------------------
+
+The original author is agungsugiarto/boilerplate https://github.com/agungsugiarto/boilerplate, we only made a fork to adapt it to new needs such as translating it into Spanish and making it functional in xampp/lampp
+
 ![Dashboard](.github/dashboard.png?raw=true)
+
+------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
 
 Installation
 ------------
@@ -32,7 +35,7 @@ Installation
 **1.** Get The Module
 
 ```bash
-composer require agungsugiarto/boilerplate
+composer require julio101290/boilerplate
 ```
 
 **2.** Set CI_ENVIRONMENT, baseURL, index page, and database config in your `.env` file based on your existing database (If you don't have a `.env` file, you can copy first from `env` file: `cp env .env` first). If the database does not exist, create the database first.
@@ -74,12 +77,12 @@ Is it ready yet? Not so fast!! ;-) After publishing `Config/Auth.php` you need t
 `public $views` with these lines below:
 ```php
 public $views = [
-    'login'           => 'agungsugiarto\boilerplate\Views\Authentication\login',
-    'register'        => 'agungsugiarto\boilerplate\Views\Authentication\register',
-    'forgot'          => 'agungsugiarto\boilerplate\Views\Authentication\forgot',
-    'reset'           => 'agungsugiarto\boilerplate\Views\Authentication\reset',
-    'emailForgot'     => 'agungsugiarto\boilerplate\Views\Authentication\emails\forgot',
-    'emailActivation' => 'agungsugiarto\boilerplate\Views\Authentication\emails\activation',
+    'login'           => 'julio101290\boilerplate\Views\Authentication\login',
+    'register'        => 'julio101290\boilerplate\Views\Authentication\register',
+    'forgot'          => 'julio101290\boilerplate\Views\Authentication\forgot',
+    'reset'           => 'julio101290\boilerplate\Views\Authentication\reset',
+    'emailForgot'     => 'julio101290\boilerplate\Views\Authentication\emails\forgot',
+    'emailActivation' => 'julio101290\boilerplate\Views\Authentication\emails\activation',
 ];
 ```
 
@@ -87,8 +90,8 @@ Open `app\Config\Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
     'login'      => \Myth\Auth\Filters\LoginFilter::class,
-    'role'       => \agungsugiarto\boilerplate\Filters\RoleFilter::class,
-    'permission' => \agungsugiarto\boilerplate\Filters\PermissionFilter::class,
+    'role'       => \julio101290\boilerplate\Filters\RoleFilter::class,
+    'permission' => \julio101290\boilerplate\Filters\PermissionFilter::class,
 ];
 ```
 
@@ -96,6 +99,27 @@ public $aliases = [
 
 ```bash
 php spark boilerplate:install
+```
+Open `app\Config\validation.php`, find `$ruleSets` and add these lines below:
+
+```php
+public $$ruleSets = [
+    \Myth\Auth\Authentication\Passwords\ValidationRules::class,
+];
+```
+Open `app\entities\Users.php`, find `$casts` and add these lines below:
+
+```php
+
+    protected $casts = [
+        'username' => 'string',
+        'email' => 'string',
+        'firstname' => 'string',
+        'lastname' => 'string',
+        'active' => 'boolean',
+        'force_pass_reset' => 'boolean',
+    ];
+
 ```
 
 **5.** Run development server:
@@ -128,7 +152,7 @@ class Boilerplate extends BaseConfig
     public $appName = 'Boilerplate';
 
     public $dashboard = [
-        'namespace'  => 'agungsugiarto\boilerplate\Controllers',
+        'namespace'  => 'julio101290\boilerplate\Controllers',
         'controller' => 'DashboardController::index',
         'filter'     => 'permission:back-office',
     ];

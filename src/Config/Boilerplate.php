@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Config;
+namespace julio101290\boilerplate\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -20,7 +20,7 @@ class Boilerplate extends BaseConfig
     //--------------------------------------------------------------------------
 
     public $dashboard = [
-        'namespace'  => 'agungsugiarto\boilerplate\Controllers',
+        'namespace'  => 'julio101290\boilerplate\Controllers',
         'controller' => 'DashboardController::index',
         'filter'     => 'permission:back-office',
     ];

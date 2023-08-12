@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Models;
+namespace julio101290\boilerplate\Models;
 
 use CodeIgniter\Model;
 

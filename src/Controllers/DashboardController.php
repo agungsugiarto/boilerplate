@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Controllers;
+namespace julio101290\boilerplate\Controllers;
 
 /**
  * Class DashboardController.
@@ -13,6 +13,6 @@ class DashboardController extends BaseController
             'title' => 'Dashboard',
         ];
 
-        return view('agungsugiarto\boilerplate\Views\dashboard', $data);
+        return view('julio101290\boilerplate\Views\dashboard', $data);
     }
 }

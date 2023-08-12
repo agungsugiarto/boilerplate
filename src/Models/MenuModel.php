@@ -1,8 +1,8 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Models;
+namespace julio101290\boilerplate\Models;
 
-use agungsugiarto\boilerplate\Entities\MenuEntity;
+use julio101290\boilerplate\Entities\MenuEntity;
 use CodeIgniter\Model;
 
 /**

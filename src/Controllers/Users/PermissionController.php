@@ -1,10 +1,10 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Controllers\Users;
+namespace julio101290\boilerplate\Controllers\Users;
 
-use agungsugiarto\boilerplate\Controllers\BaseController;
-use agungsugiarto\boilerplate\Entities\Collection;
-use agungsugiarto\boilerplate\Models\PermissionModel;
+use julio101290\boilerplate\Controllers\BaseController;
+use julio101290\boilerplate\Entities\Collection;
+use julio101290\boilerplate\Models\PermissionModel;
 use CodeIgniter\API\ResponseTrait;
 
 /**
@@ -14,7 +14,7 @@ class PermissionController extends BaseController
 {
     use ResponseTrait;
 
-    /** @var \agungsugiarto\boilerplate\Models\PermissionModel */
+    /** @var \julio101290\boilerplate\Models\PermissionModel */
     protected $permission;
 
     /**
@@ -48,7 +48,7 @@ class PermissionController extends BaseController
             ));
         }
 
-        return view('agungsugiarto\boilerplate\Views\Permission\index', [
+        return view('julio101290\boilerplate\Views\Permission\index', [
             'title'    => lang('boilerplate.permission.title'),
             'subtitle' => lang('boilerplate.permission.subtitle'),
         ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Controllers;
+namespace julio101290\boilerplate\Controllers;
 
 use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;

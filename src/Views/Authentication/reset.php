@@ -1,12 +1,12 @@
-<?= $this->extend('agungsugiarto\boilerplate\Views\Authentication\index') ?>
+<?= $this->extend('julio101290\boilerplate\Views\Authentication\index') ?>
 <?= $this->section('content') ?>
 <!-- /.login-logo -->
 <div class="card">
   <div class="card-body login-card-body">
     <p class="login-box-msg"><?=lang('Auth.resetYourPassword')?></p>
     <p><?=lang('Auth.enterCodeEmailPassword')?></p>
-    <?= $this->include('agungsugiarto\boilerplate\Views\Authentication\message_block') ?>
-    <form action="<?= route_to('reset-password') ?>" method="post">
+    <?= $this->include('julio101290\boilerplate\Views\Authentication\message_block') ?>
+    <form action="<?= base_url(route_to('reset-password')) ?>" method="post">
       <?= csrf_field() ?>
 
       <div class="input-group mb-3">
@@ -77,7 +77,7 @@
     </form>
 
     <p class="mt-3 mb-1">
-      <a href="<?= route_to('login') ?>"><?=lang('Auth.signIn')?></a>
+      <a href="<?= base_url(route_to('login')) ?>"><?=lang('Auth.signIn')?></a>
     </p>
   </div>
   <!-- /.login-card-body -->

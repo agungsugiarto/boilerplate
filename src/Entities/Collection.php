@@ -1,6 +1,6 @@
 <?php
 
-namespace agungsugiarto\boilerplate\Entities;
+namespace julio101290\boilerplate\Entities;
 
 class Collection
 {

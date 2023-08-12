@@ -1,5 +1,5 @@
 <!-- Extend from layout index -->
-<?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
+<?= $this->extend('julio101290\boilerplate\Views\layout\index') ?>
 
 <!-- Section content -->
 <?= $this->section('content') ?>
@@ -39,7 +39,7 @@
                 <div class="tab-content">
                     <!-- /.tab-pane -->
                     <div class="tab-pane active" id="settings">
-                        <form action="<?= route_to('user-profile') ?>" method="post" class="form-horizontal">
+                        <form action="<?= base_url(route_to('user-profile')) ?>" method="post" class="form-horizontal">
                             <?= csrf_field() ?>
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-3 col-form-label"><?=lang('Auth.email')?></label>

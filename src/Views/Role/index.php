@@ -1,7 +1,7 @@
 <!-- Include datatables -->
-<?= $this->include('agungsugiarto\boilerplate\Views\load\datatables') ?>
+<?= $this->include('julio101290\boilerplate\Views\load\datatables') ?>
 <!-- Extend from layout index -->
-<?= $this->extend('agungsugiarto\boilerplate\Views\layout\index') ?>
+<?= $this->extend('julio101290\boilerplate\Views\layout\index') ?>
 
 <!-- Section content -->
 <?= $this->section('content') ?>
@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <div class="float-right">
                         <div class="btn-group">
-                            <a href="<?= route_to('admin/role/new') ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
+                            <a href="<?= base_url(route_to('admin/role/new')) ?>" class="btn btn-sm btn-block btn-primary"><i class="fa fa-plus"></i>
                                 <?= lang('boilerplate.role.add') ?>
                             </a>
                         </div>
@@ -44,11 +44,12 @@
     var tableRole = $('#table-role').DataTable({
         processing: true,
         serverSide: true,
+        responsive: true,
         autoWidth: false,
         order: [[1, 'asc']],
 
         ajax : {
-            url: '<?= route_to('admin/role') ?>',
+            url: '<?= base_url(route_to('admin/role')) ?>',
             method: 'GET'
         },
         columnDefs: [{
@@ -63,7 +64,7 @@
                 "data": function(data) {
                     return `<td class="text-right py-0 align-middle">
                             <div class="btn-group btn-group-sm">
-                                <a href="<?= route_to('admin/role') ?>/${data.id}/edit" class="btn btn-primary btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="<?= base_url(route_to('admin/role')) ?>/${data.id}/edit" class="btn btn-primary btn-edit"><i class="fas fa-pencil-alt"></i></a>
                                 <button class="btn btn-danger btn-delete" data-id="${data.id}"><i class="fas fa-trash"></i></button>
                             </div>
                             </td>`
@@ -92,7 +93,7 @@
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: `<?= route_to('admin/role') ?>/${$(this).attr('data-id')}`,
+                    url: `<?= base_url(route_to('admin/role')) ?>/${$(this).attr('data-id')}`,
                     method: 'DELETE',
                 }).done((data, textStatus, jqXHR) => {
                     Toast.fire({
@@ -109,5 +110,8 @@
             }
         })
     })
+ $( function() {
+    $( "#modal-create-permission" ).draggable();
+  } );
 </script>
 <?= $this->endSection() ?>
