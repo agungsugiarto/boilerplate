@@ -59,7 +59,7 @@
         },
         columnDefs: [{
                 orderable: false,
-                targets: [0, 3, 5]
+                targets: [0, 5, 7]
             }],
         columns: [{
                 'data': null

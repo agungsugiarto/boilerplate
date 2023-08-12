@@ -9,14 +9,16 @@ class UserModel extends BaseModel {
     protected $allowedFields = [
         'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash',
         'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
-        'firstname', 'lastname',
+        'firstname', 'lastname'
     ];
     
     
     const ORDERABLE = [
         1 => 'username',
-        2 => 'email',
-        4 => 'created_at',
+        2 => 'firstname',
+        3 => 'lastname',
+        4 => 'email',
+        6 => 'created_at',
     ];
 
     /**
