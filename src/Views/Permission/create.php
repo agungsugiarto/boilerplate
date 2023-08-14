@@ -10,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <form id="form-create-permission" enctype="multipart/form-data">
+                    <?= csrf_field() ?>
                     <div class="form-group">
                         <label><?= lang('boilerplate.permission.fields.name') ?></label>
                         <input type="text" class="form-control" name="name" placeholder="<?= lang('boilerplate.permission.fields.plc_name') ?>">

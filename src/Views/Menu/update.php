@@ -10,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <form id="form-edit" class="form-horizontal">
+                    <?= csrf_field() ?>
                     <input type="hidden" id="menu_id">
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label"><?= lang('boilerplate.menu.fields.parent') ?></label>
